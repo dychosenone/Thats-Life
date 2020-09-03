@@ -3,8 +3,6 @@ package Model;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-package Model;
-
 public class GameOfLife {
 	
 	private static final int MINPLAYERS = 2;
@@ -55,7 +53,7 @@ public class GameOfLife {
 		boolean run = true;
 		
 		do {
-			System.out.print("Enter Number of Model.Players: ");
+			System.out.print("Enter Number of Players: ");
 			num = Integer.parseInt (scan.nextLine());
 			
 			if (num >= MINPLAYERS && num <= MAXPLAYERS) {

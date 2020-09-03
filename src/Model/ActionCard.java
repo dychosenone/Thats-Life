@@ -1,4 +1,4 @@
-package Model.ActionCard;
+package Model;
 
 public class ActionCard {
 

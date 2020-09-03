@@ -1,6 +1,7 @@
+package Model;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Random;
 
 package Model;
 
@@ -20,7 +21,7 @@ public class GameOfLife {
 
 	
 	/**
-	 * When a new GameOfLife object is created, it generates a new ActionCardDeck.
+	 * When a new Model.GameOfLife object is created, it generates a new Model.ActionCardDeck.
 	 */
 	
 	GameOfLife (){
@@ -30,7 +31,7 @@ public class GameOfLife {
 	
 	/**
 	 * This function gets the number of players who will be playing then does a loop to add a new Player class to the
-	 * Players collection.
+	 * Model.Players collection.
 	 * @param numofPlayers number of players playing That's Life
 	 */
 	
@@ -54,7 +55,7 @@ public class GameOfLife {
 		boolean run = true;
 		
 		do {
-			System.out.print("Enter Number of Players: ");
+			System.out.print("Enter Number of Model.Players: ");
 			num = Integer.parseInt (scan.nextLine());
 			
 			if (num >= MINPLAYERS && num <= MAXPLAYERS) {

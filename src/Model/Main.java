@@ -1,3 +1,5 @@
+package Model;
+
 /**
  * @author Jacob Miguel Dy
  * @author Azriel Ortega

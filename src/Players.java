@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+package Model;
+
 public class Players {
 	
 	public static final int MAXPLAYERS = 3;

@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
 
+package Model;
+
 public class GameOfLife {
 	
 	private static final int MINPLAYERS = 2;

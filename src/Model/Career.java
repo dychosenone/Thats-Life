@@ -1,5 +1,6 @@
 package Model
 
+
 public class Career {
 	
 	private String position;

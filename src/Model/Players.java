@@ -1,7 +1,7 @@
+package Model;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-
-package Model;
 
 public class Players {
 	
@@ -10,7 +10,7 @@ public class Players {
 	private ArrayList <Player> players;
 
 	/**
-	 * When the Players object is initialized, the constructor creates a collection of players.
+	 * When the Model.Players object is initialized, the constructor creates a collection of players.
 	 */
 	Players (){
 		players = new ArrayList<Player>();

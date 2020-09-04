@@ -1,5 +1,5 @@
 package Model;
-
+import View.GUI;
 /**
  * @author Jacob Miguel Dy
  * @author Azriel Ortega
@@ -12,7 +12,8 @@ public class Main {
 	public static void main (String[] args) {
 		
 		GameOfLife game = new GameOfLife ();
-		
+		GUI gui = new GUI ();
+
 		game.enterPlayers (game.getNumberOfPlayers());
 		game.nextTurn();
 		int i = 0;

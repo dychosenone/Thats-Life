@@ -1,0 +1,7 @@
+Lawyer 5 8 true
+Accountant 4 7 true
+ComputerConsultant 3 7 true
+Doctor 5 8 true
+Server 1 4 false
+RacecarDriver 2 8 false
+Athlete 1 6 false

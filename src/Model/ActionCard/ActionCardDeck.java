@@ -24,7 +24,7 @@ public class ActionCardDeck {
         actionCards = new ArrayList<ActionCard>();
 
         try {
-            Scanner file = new Scanner(new File("../GameOfLifeActionCard/Config/ActionCards.txt"));
+            Scanner file = new Scanner(new File("../Thats-Life/src/Config/ActionCard.txt"));
 
             while (file.hasNextLine()) {
                 String input;

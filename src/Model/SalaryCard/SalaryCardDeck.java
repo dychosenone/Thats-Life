@@ -26,5 +26,5 @@ public class SalaryCardDeck {
     public void reshuffleCards () {
         Collections.shuffle (cards);
     }
-    
+
 }

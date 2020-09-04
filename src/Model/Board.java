@@ -8,5 +8,13 @@ public class Board {
 	
 	public Board () {
 		spaces = new ArrayList <>();
+		
+		for (int i = 0; i < SPACES; i++) {
+			spaces.add(new OrangeSpace("ActionCard"));
+		}
+	}
+	
+	public Space getSpace (int index) {
+		return spaces.get(index);
 	}
 }

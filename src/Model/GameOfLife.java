@@ -22,6 +22,8 @@ public class GameOfLife {
 
 	private boolean turn = false;	
 	private boolean gameOver = false;
+	
+	private Board board;
 
 	
 	/**
@@ -31,6 +33,8 @@ public class GameOfLife {
 	GameOfLife (){
 		players = new Players();
 		actionDeck = new ActionCardDeck();
+		
+		board = new Board();
 
 	}
 	
@@ -86,7 +90,15 @@ public class GameOfLife {
 		System.out.println("Model.Career: " + currentPlayer.getJob().getPosition());
 		wheel = spinWheel ();
 		System.out.println("You rolled a " + wheel);
+		
+		currentPlayer.move(wheel);
+		interactSpace(currentPlayer.getPosition());
+		
+		Scanner in = new Scanner (System.in);
+		System.out.print("Input to continue...");
+		String dump = in.next();
 	
+		/*
 		do {
 			
 			System.out.print("[1] Show All Action Cards\n"
@@ -122,7 +134,17 @@ public class GameOfLife {
 						System.out.println("You need to take an Action Card");
 					break;
 			}
-		}while(turn);
+		}while(turn);*/
+	}
+	
+	public void interactSpace (int position) {
+		
+		Space space =board.getSpace(position);
+		
+		if (space instanceof OrangeSpace) {
+			takeActionCard();
+		}
+				
 	}
 	
 	/**
@@ -131,7 +153,6 @@ public class GameOfLife {
 	
 	public void takeActionCard () {
 		int i;
-		ActionCard tempcard = actionDeck.getCard();
 		ActionCard card = actionDeck.takeCard();
 		
 		ArrayList <Player> temp = players.getPlayers();
@@ -139,18 +160,19 @@ public class GameOfLife {
 		Player target;
 		
 		System.out.println(card.toString());
-		System.out.println("CURRENT BALANCE " + players.getPlayer(currentPlayer).toString());
-
+		System.out.println("CURRENT BALANCE " + currentPlayer.toString());
+		
+		
 		switch (card.getCardType()) {
 		case 1:
 			// collects money from bank
 			players.AddBalance(card.getValue(), currentPlayer);
-			System.out.println("NEW BALANCE " + players.getPlayer(currentPlayer).toString());
+			System.out.println("NEW BALANCE " + currentPlayer.toString());
 			break;
 		case 2:
 			// give money to bank
 			players.SubtractBalance(card.getValue(), currentPlayer);
-			System.out.println("NEW BALANCE " + players.getPlayer(currentPlayer).toString());
+			System.out.println("NEW BALANCE " + currentPlayer.toString());
 			break;
 		case 3:
 			
@@ -160,7 +182,7 @@ public class GameOfLife {
 				target = choosePlayer();
 				players.SubtractBalance(card.getValue(), currentPlayer);
 				players.AddBalance(card.getValue(), target);
-				System.out.println("NEW BALANCE " + players.getPlayer(currentPlayer).toString());
+				System.out.println("NEW BALANCE " + currentPlayer.toString());
 				System.out.println("NEW BALANCE " + players.getPlayer(target).toString());
 			}
 			// give money to all players
@@ -169,7 +191,7 @@ public class GameOfLife {
 					if(!temp.get(i).equals(currentPlayer)) {
 						players.SubtractBalance(card.getValue(), currentPlayer);
 						players.getPlayer(temp.get(i)).addBalance(card.getValue());
-						System.out.println("NEW BALANCE " + players.getPlayer(currentPlayer).toString());
+						System.out.println("NEW BALANCE " + currentPlayer.toString());
 						System.out.println("NEW BALANCE " + players.getPlayer(temp.get(i)).toString());
 					}
 				}
@@ -183,7 +205,7 @@ public class GameOfLife {
 				target = choosePlayer();
 				players.AddBalance(card.getValue(), currentPlayer);
 				players.SubtractBalance(card.getValue(), target);
-				System.out.println("NEW BALANCE " + players.getPlayer(currentPlayer).toString());
+				System.out.println("NEW BALANCE " + currentPlayer.toString());
 				System.out.println("NEW BALANCE " + players.getPlayer(target).toString());
 			}
 			//collect money from all players
@@ -192,7 +214,7 @@ public class GameOfLife {
 					if(!temp.get(i).equals(currentPlayer)) {
 						players.AddBalance(card.getValue(), currentPlayer);
 						players.getPlayer(temp.get(i)).subtractBalance(card.getValue());
-						System.out.println("NEW BALANCE " + players.getPlayer(currentPlayer).toString());
+						System.out.println("NEW BALANCE " + currentPlayer.toString());
 						System.out.println("NEW BALANCE " + players.getPlayer(temp.get(i)).toString());
 					}
 				}

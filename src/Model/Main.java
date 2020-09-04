@@ -12,7 +12,7 @@ public class Main {
 	public static void main (String[] args) {
 		
 		GameOfLife game = new GameOfLife ();
-		GUI gui = new GUI ();
+		//GUI gui = new GUI ();
 
 		game.enterPlayers (game.getNumberOfPlayers());
 		game.nextTurn();

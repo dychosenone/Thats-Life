@@ -35,6 +35,10 @@ public class Player {
 		position = 0;
 	}
 	
+	public void move (int spaces) {
+		position += spaces;
+	}
+	
 	/**
 	 * Function returns name of the player
 	 * @return name
@@ -49,6 +53,10 @@ public class Player {
 	 */
 	public int getBalance () {
 		return balance;
+	}
+	
+	public int getPosition () {
+		return position;
 	}
 	
 	/**
@@ -100,7 +108,7 @@ public class Player {
 	 */
 	@Override
 	public String toString() {
-		return name + ":" + balance;
+		return name + ":" + balance + ": POSITION: " + position;
 	}
 	
 	@Override

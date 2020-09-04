@@ -1,5 +1,10 @@
 package Model;
 
+import Model.ActionCard.ActionCard;
+import Model.ActionCard.ActionCardDeck;
+import Model.Player.Player;
+import Model.Player.Players;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,26 +15,28 @@ public class GameOfLife {
 	
 	private ActionCardDeck actionDeck;
 	
-	private Players players = new Players ();
-	private Player currentPlayer = new Player();
+	private Players players;
+	private Player currentPlayer;
 	private int wheel;
+	private Player target = new Player();
 
 	private boolean turn = false;	
 	private boolean gameOver = false;
 
 	
 	/**
-	 * When a new Model.GameOfLife object is created, it generates a new Model.ActionCardDeck.
+	 * When a new Model.GameOfLife object is created, it generates a new Model.ActionCard.ActionCardDeck.
 	 */
 	
 	GameOfLife (){
+		players = new Players();
 		actionDeck = new ActionCardDeck();
 
 	}
 	
 	/**
 	 * This function gets the number of players who will be playing then does a loop to add a new Player class to the
-	 * Model.Players collection.
+	 * Model.Player.Players collection.
 	 * @param numofPlayers number of players playing That's Life
 	 */
 	
@@ -221,7 +228,7 @@ public class GameOfLife {
 		int i;
 		int ctr = 1;
 		boolean run = true;
-		Player target = new Player ();
+		Player target = new Player();
 		Scanner scan = new Scanner(System.in);
 		ArrayList <Player> temp = players.getPlayers();
 		

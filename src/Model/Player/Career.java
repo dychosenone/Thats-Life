@@ -1,5 +1,4 @@
-package Model;
-
+package Model.Player;
 
 public class Career {
 	

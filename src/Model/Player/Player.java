@@ -1,4 +1,4 @@
-package Model;
+package Model.Player;
 
 public class Player {
 
@@ -15,7 +15,7 @@ public class Player {
 	 * 
 	 */
 	
-	Player (){
+	public Player (){
 
 	}
 	

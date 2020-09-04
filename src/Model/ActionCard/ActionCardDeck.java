@@ -1,9 +1,6 @@
-package Model;
+package Model.ActionCard;
 
-import javax.swing.*;
 import java.io.File;
-import java.lang.reflect.Array;
-import java.lang.Object;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -15,13 +12,13 @@ public class ActionCardDeck {
     private ArrayList<ActionCard> actionCards;
 
     /**
-     * Generates ActionCards to be placed in the Model.ActionCardDeck. The details of the actionCard are all listed in ../config/ActionCards.txt
+     * Generates ActionCards to be placed in the Model.ActionCard.ActionCardDeck. The details of the actionCard are all listed in ../config/ActionCards.txt
      * First config parameter is the number of cards to be generated, 2nd parameter of config is the name of the card and last is the
      * type of ActionCard to be generated.
      * 1 - Get from the Bank
      * 2 - Pay the Bank
-     * 3 - Get from Model.Players
-     * 4 - Pay the Model.Players
+     * 3 - Get from Model.Player.Players
+     * 4 - Pay the Model.Player.Players
      */
     public ActionCardDeck () {
         actionCards = new ArrayList<ActionCard>();

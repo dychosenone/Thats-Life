@@ -2,5 +2,10 @@ import javax.swing.*;
 
 public class GUI extends JFrame{
 
-    //testin
+    public GUI () {
+        setTitle("That's Life");
+        setSize(800, 600);
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
 }

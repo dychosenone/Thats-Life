@@ -83,7 +83,7 @@ public class GameOfLife {
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.println(currentPlayer.getName() + " is Now Playing");
-		System.out.println("Career: " + currentPlayer.getJob().getPosition());
+		System.out.println("Model.Career: " + currentPlayer.getJob().getPosition());
 		wheel = spinWheel ();
 		System.out.println("You rolled a " + wheel);
 	

@@ -89,7 +89,7 @@ public class Player {
 
 
 	/**
-	 * When called, will return the Career class of the player selected.
+	 * When called, will return the Model.Career class of the player selected.
 	 * @return the career fof player
 	 */
 	public Career getJob () {return job; }

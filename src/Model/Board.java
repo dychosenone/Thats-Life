@@ -10,7 +10,20 @@ public class Board {
 		spaces = new ArrayList <>();
 		
 		for (int i = 0; i < SPACES; i++) {
-			spaces.add(new OrangeSpace("ActionCard"));
+			boolean add = false;
+			
+			if(i == 3) {
+				add = true;
+				spaces.add(new MagentaSpace("Get Married"));
+			}
+			
+			else if(i == 12) {
+				add = true;
+				spaces.add(new MagentaSpace("Job Search"));
+			}
+			
+			if (!add)
+				spaces.add(new OrangeSpace("ActionCard"));
 		}
 	}
 	

@@ -91,7 +91,18 @@ public class GameOfLife {
 		wheel = spinWheel ();
 		System.out.println("You rolled a " + wheel);
 		
-		currentPlayer.move(wheel);
+		for (int i = 0; i < wheel; i++) {
+			
+			currentPlayer.move();
+			
+			Space space = board.getSpace(currentPlayer.getPosition());
+			
+			System.out.println(currentPlayer.getPosition());
+			
+			if (isMagenta(space))
+				interactSpace(currentPlayer.getPosition());
+		}
+		
 		interactSpace(currentPlayer.getPosition());
 		
 		Scanner in = new Scanner (System.in);
@@ -140,11 +151,25 @@ public class GameOfLife {
 	public void interactSpace (int position) {
 		
 		Space space =board.getSpace(position);
-		
+			
 		if (space instanceof OrangeSpace) {
+			System.out.println("You landed On " + space.getName());
 			takeActionCard();
 		}
-				
+		
+		else if (space instanceof MagentaSpace) {			
+			System.out.println("You landed On " + space.getName());
+		}
+	}
+	
+	public boolean isMagenta (Space space) {
+		boolean check = false;
+		
+		if (space instanceof MagentaSpace) {
+			check = true;
+		}
+		
+		return check;
 	}
 	
 	/**

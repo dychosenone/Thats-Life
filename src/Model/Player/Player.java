@@ -35,8 +35,8 @@ public class Player {
 		position = 0;
 	}
 	
-	public void move (int spaces) {
-		position += spaces;
+	public void move () {
+		position ++;
 	}
 	
 	/**

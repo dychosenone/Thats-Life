@@ -41,6 +41,8 @@ public class GameOfLife {
 	GameOfLife (){
 		players = new Players();
 		actionDeck = new ActionCardDeck();
+		careerDeck = new CareerCardDeck();
+		salaryDeck = new SalaryCardDeck();
 		
 		board = new Board();
 

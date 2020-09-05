@@ -11,7 +11,7 @@ public class CareerCardDeck {
 
     private final int NUM_CAREER = 7;
     private ArrayList <CareerCard> careerCard;
-    private int counter = 1;
+    private int counter = 0;
 
     public CareerCardDeck () {
 
@@ -27,7 +27,7 @@ public class CareerCardDeck {
                 int max = Integer.parseInt(split[2]);
                 boolean college = Boolean.parseBoolean(split[3]);
 
-                for(int i = 0; i < 7; i++){
+                for(int i = 0; i < NUM_CAREER; i++){
                     careerCard.add(new CareerCard(split[0], min, max, college));
                 }
 

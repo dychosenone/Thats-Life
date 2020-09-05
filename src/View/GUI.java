@@ -24,7 +24,7 @@ public class GUI extends JFrame{
         console = new JTextArea();
         panelEast.add(console);
 
-        add (panelEast, );
+        // add (panelEast, );
 
     }
 }

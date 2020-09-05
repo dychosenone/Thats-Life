@@ -2,8 +2,13 @@ package Model;
 
 import Model.ActionCard.ActionCard;
 import Model.ActionCard.ActionCardDeck;
+import Model.Career.CareerCard;
+import Model.Career.CareerCardDeck;
+import Model.Player.Career;
 import Model.Player.Player;
 import Model.Player.Players;
+import Model.SalaryCard.SalaryCard;
+import Model.SalaryCard.SalaryCardDeck;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,8 +17,11 @@ public class GameOfLife {
 	
 	private static final int MINPLAYERS = 2;
 	private static final int MAXPLAYERS = 3;
+	private static final Career NULL = null;
 	
 	private ActionCardDeck actionDeck;
+	private CareerCardDeck careerDeck;
+	private SalaryCardDeck salaryDeck;
 	
 	private Players players;
 	private Player currentPlayer;
@@ -25,7 +33,7 @@ public class GameOfLife {
 	
 	private Board board;
 
-	
+//INITIALIZING FUNCTIONS / GAME STARTING FUNCTIONS
 	/**
 	 * When a new Model.GameOfLife object is created, it generates a new Model.ActionCard.ActionCardDeck.
 	 */
@@ -75,23 +83,30 @@ public class GameOfLife {
 		
 		return num;
 	}
+
+//PLAYER TURN FUNCTIONS
 	
 	/**
 	 * Function sets all actions of players.
 	 */
-	
+
 	public void processTurn (){
 		turn = true;
 		int option;
 		boolean done = false;
 		Scanner scan = new Scanner(System.in);
 		
+		if(currentPlayer.getJob() == NULL) {
+			jobSearch();
+		}
+		
 		System.out.println(currentPlayer.getName() + " is Now Playing");
 		System.out.println("Model.Career: " + currentPlayer.getJob().getPosition());
+		
 		wheel = spinWheel ();
 		System.out.println("You rolled a " + wheel);
 		
-		for (int i = 0; i < wheel; i++) {
+		for (int i = 1; i <= wheel; i++) {
 			
 			currentPlayer.move();
 			
@@ -99,7 +114,7 @@ public class GameOfLife {
 			
 			System.out.println(currentPlayer.getPosition());
 			
-			if (isMagenta(space))
+			if (isMagenta(space) && i != wheel )
 				interactSpace(currentPlayer.getPosition());
 		}
 		
@@ -108,44 +123,6 @@ public class GameOfLife {
 		Scanner in = new Scanner (System.in);
 		System.out.print("Input to continue...");
 		String dump = in.next();
-	
-		/*
-		do {
-			
-			System.out.print("[1] Show All Action Cards\n"
-					+ "[2] Take an action Card\n"
-					+ "[3] End Turn\n");
-			
-			System.out.print("Input Option 1 or 2 or 3: ");
-			option = Integer.parseInt(scan.next());
-			
-			switch (option) {
-				
-				case 1:
-					System.out.println("You pressed Option 1");
-					actionDeck.showAllCards();
-					break;
-				case 2:
-					
-					if (!done) {
-						System.out.println("You pressed Option 2");
-						takeActionCard ();
-						done = true;
-					}
-					else
-						System.out.println("You've taken an Action Card Already");
-					break;
-				case 3:
-					System.out.println("You pressed Option 3");
-					
-					if (done)
-						turn = false;
-					
-					else
-						System.out.println("You need to take an Action Card");
-					break;
-			}
-		}while(turn);*/
 	}
 	
 	public void interactSpace (int position) {
@@ -158,10 +135,21 @@ public class GameOfLife {
 		}
 		
 		else if (space instanceof MagentaSpace) {			
-			System.out.println("You landed On " + space.getName());
+			
+			switch (space.getName()){
+				case "Job Search":
+					System.out.println("You landed On " + space.getName());
+					jobSearch();
+					break;
+					
+				case "Get Married":
+					System.out.println("You landed On " + space.getName());
+					break;
+			}
 		}
 	}
-	
+
+//MAGENTA SPACES FUNCTIONS
 	public boolean isMagenta (Space space) {
 		boolean check = false;
 		
@@ -172,10 +160,18 @@ public class GameOfLife {
 		return check;
 	}
 	
+	public void jobSearch() {
+		CareerCard career = careerDeck.takeCard();
+		SalaryCard salary = salaryDeck.takeCard();
+		
+		currentPlayer.setNewCareer(career, salary);
+	}
+	
+//ORANGE SPACES FUNCTION
+	
 	/**
 	 * Function takes an Action Card if current player lands on Orange Space.
 	 */
-	
 	public void takeActionCard () {
 		int i;
 		ActionCard card = actionDeck.takeCard();
@@ -191,12 +187,12 @@ public class GameOfLife {
 		switch (card.getCardType()) {
 		case 1:
 			// collects money from bank
-			players.AddBalance(card.getValue(), currentPlayer);
+			currentPlayer.addBalance(card.getValue());
 			System.out.println("NEW BALANCE " + currentPlayer.toString());
 			break;
 		case 2:
 			// give money to bank
-			players.SubtractBalance(card.getValue(), currentPlayer);
+			currentPlayer.subtractBalance(card.getValue());
 			System.out.println("NEW BALANCE " + currentPlayer.toString());
 			break;
 		case 3:
@@ -205,7 +201,7 @@ public class GameOfLife {
 			if (card.getCardName().equalsIgnoreCase("Lawsuit")) {
 				
 				target = choosePlayer();
-				players.SubtractBalance(card.getValue(), currentPlayer);
+				currentPlayer.subtractBalance(card.getValue());
 				players.AddBalance(card.getValue(), target);
 				System.out.println("NEW BALANCE " + currentPlayer.toString());
 				System.out.println("NEW BALANCE " + players.getPlayer(target).toString());
@@ -214,7 +210,7 @@ public class GameOfLife {
 			else {
 				for (i = 0; i < players.getSize(); i++) {
 					if(!temp.get(i).equals(currentPlayer)) {
-						players.SubtractBalance(card.getValue(), currentPlayer);
+						currentPlayer.subtractBalance(card.getValue());
 						players.getPlayer(temp.get(i)).addBalance(card.getValue());
 						System.out.println("NEW BALANCE " + currentPlayer.toString());
 						System.out.println("NEW BALANCE " + players.getPlayer(temp.get(i)).toString());
@@ -228,7 +224,7 @@ public class GameOfLife {
 			if (card.getCardName().equalsIgnoreCase("FileLawsuit")) {
 				
 				target = choosePlayer();
-				players.AddBalance(card.getValue(), currentPlayer);
+				currentPlayer.addBalance(card.getValue());
 				players.SubtractBalance(card.getValue(), target);
 				System.out.println("NEW BALANCE " + currentPlayer.toString());
 				System.out.println("NEW BALANCE " + players.getPlayer(target).toString());
@@ -237,7 +233,7 @@ public class GameOfLife {
 			else {
 				for (i = 0; i < players.getSize(); i++) {
 					if(!temp.get(i).equals(currentPlayer)) {
-						players.AddBalance(card.getValue(), currentPlayer);
+						currentPlayer.addBalance(card.getValue());
 						players.getPlayer(temp.get(i)).subtractBalance(card.getValue());
 						System.out.println("NEW BALANCE " + currentPlayer.toString());
 						System.out.println("NEW BALANCE " + players.getPlayer(temp.get(i)).toString());
@@ -250,6 +246,8 @@ public class GameOfLife {
 	}
 
 
+//PLAYER FUNCTIONS
+	
 	/**
 	* Function finishes turn of current player and gets next player
 	*/

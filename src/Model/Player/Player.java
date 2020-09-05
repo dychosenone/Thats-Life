@@ -1,5 +1,8 @@
 package Model.Player;
 
+import Model.Career.CareerCard;
+import Model.SalaryCard.SalaryCard;
+
 public class Player {
 	
 	private String name;
@@ -83,8 +86,8 @@ public class Player {
 	 * @param salary is the salary of the job
 	 * @param tax is the tax of the job
 	 */
-	public void setNewCareer (String position, int salary, int tax) {
-		job = new Career(position, salary, tax);
+	public void setNewCareer (CareerCard c, SalaryCard s) {
+		job = new Career(c, s);
 	}
 	
 	/**

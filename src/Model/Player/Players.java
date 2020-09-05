@@ -23,7 +23,7 @@ public class Players {
 	public void AddPlayer (int i) {
 		String name = setPlayerName(i);
 		players.add(new Player (name));
-		switch (i){
+		/*switch (i){
 			case 0:
 				players.get(i).setNewCareer("Lawyer", 100000, 10000);
 				break;
@@ -32,7 +32,7 @@ public class Players {
 				break;
 			case 2:
 				players.get(i).setNewCareer("Server", 30000, 3000);
-		}
+		}*/
 	}
 	
 	/**

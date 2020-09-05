@@ -19,7 +19,10 @@ public class SalaryCardDeck {
     public SalaryCard takeCard () {
 
         SalaryCard tempCard = cards.get(counter);
-        counter++;
+        reshuffleCards ();
+        
+        //counter++;
+        
         return tempCard;
 
     }

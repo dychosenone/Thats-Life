@@ -1,12 +1,14 @@
 package Model.Player;
 
+import Model.Career.CareerCard;
+import Model.SalaryCard.SalaryCard;
+
 public class Career {
 	
 	private String position;
 	private int salary;
 	private int tax;
-	
-	private int min;
+
 	private int max;
 
 	/**
@@ -16,10 +18,12 @@ public class Career {
 	 * @param tax is the tax of the job
 	 */
 	
-	public Career (String position, int salary, int tax) {
-		this.position = position;
-		this.salary = salary;
-		this.tax = tax;
+	public Career (CareerCard c, SalaryCard s) {
+		position = c.getCareerName();
+		salary = s.getSalary();
+		tax = s.getTaxDue();
+		
+		max = c.getPayRaise();
 	}
 	
 	/**

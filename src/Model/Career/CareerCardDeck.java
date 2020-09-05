@@ -2,13 +2,16 @@ package Model.Career;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
+
+import Model.ActionCard.ActionCard;
 
 public class CareerCardDeck {
 
     private final int NUM_CAREER = 7;
     private ArrayList <CareerCard> careerCard;
-    private int counter;
+    private int counter = 1;
 
     public CareerCardDeck () {
 
@@ -36,6 +39,20 @@ public class CareerCardDeck {
             e.printStackTrace();
         }
 
+    }
+    
+    public CareerCard takeCard (){
+   
+        CareerCard card = careerCard.get(counter);
+        reshuffleCards ();
+        
+        this.counter++;
+
+        return card;
+    }
+
+    public void reshuffleCards () {
+        Collections.shuffle (careerCard);
     }
 
 }

@@ -21,6 +21,10 @@ public class CareerCard {
     	return this.needsCollegeDegree; 
     	}
     
+    public String getCareerName () {
+    	return careerName;
+    }
+    
     
     public int getPayRaise () { 
     	return this.payRaise; 

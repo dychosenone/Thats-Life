@@ -66,10 +66,11 @@ public class GUI extends JFrame{;
     	taConsole.append(">> " + text + "\n");
     }
     
-    public void getInput (){
+    public String getInput (){
 		String text = tfInput.getText();
 		tfInput.selectAll();
 		displayText(text);
 		tfInput.setText("");
+		return text;
 	}
 }

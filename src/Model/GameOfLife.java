@@ -9,9 +9,12 @@ import Model.Player.Player;
 import Model.Player.Players;
 import Model.SalaryCard.SalaryCard;
 import Model.SalaryCard.SalaryCardDeck;
+import View.GUI;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import Controller.Controller;
 
 public class GameOfLife {
 	
@@ -32,6 +35,9 @@ public class GameOfLife {
 	private boolean gameOver = false;
 	
 	private Board board;
+	
+	private GUI ui;
+	private Controller cont;
 
 //INITIALIZING FUNCTIONS / GAME STARTING FUNCTIONS
 	/**
@@ -45,6 +51,11 @@ public class GameOfLife {
 		salaryDeck = new SalaryCardDeck();
 		
 		board = new Board();
+		
+		ui = new GUI();
+		cont = new Controller (ui, this);
+		
+		
 
 	}
 	
@@ -74,7 +85,8 @@ public class GameOfLife {
 		boolean run = true;
 		
 		do {
-			System.out.print("Enter Number of Players: ");
+			ui.displayText("Enter Number of Players: ");
+			
 			num = Integer.parseInt (scan.nextLine());
 			
 			if (num >= MINPLAYERS && num <= MAXPLAYERS) {

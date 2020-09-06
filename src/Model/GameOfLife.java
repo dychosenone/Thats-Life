@@ -87,6 +87,7 @@ public class GameOfLife {
 		do {
 			ui.displayText("Enter Number of Players: ");
 			
+			
 			num = Integer.parseInt (scan.nextLine());
 			
 			if (num >= MINPLAYERS && num <= MAXPLAYERS) {

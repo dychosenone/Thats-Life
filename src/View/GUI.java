@@ -36,6 +36,7 @@ public class GUI extends JFrame{;
     	
     	tfInput = new JTextField();
     	tfInput.setBounds(792, 585, 462, 31);
+    	tfInput.setEditable(false);
     	getContentPane().add(tfInput);
     	
     	tfInput.setColumns(10);
@@ -62,6 +63,10 @@ public class GUI extends JFrame{;
     	btnEnter.addActionListener(listener);
     }
     
+    public void setKeyListener (KeyListener listener) {
+    	tfInput.addKeyListener(listener);
+    }
+    
     public void displayText (String text) {
     	taConsole.append(">> " + text + "\n");
     }
@@ -73,4 +78,12 @@ public class GUI extends JFrame{;
 		tfInput.setText("");
 		return text;
 	}
+    
+    public void getNumberOfPlayers () {
+    	String input;
+    	
+    	tfInput.setEditable(true);
+    	
+    	displayText("Enter Number of Players: ");
+    }
 }

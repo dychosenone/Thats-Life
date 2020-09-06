@@ -4,7 +4,7 @@ import Model.GameOfLife;
 
 import View.GUI;
 
-public class Controller implements ActionListener{
+public class Controller implements ActionListener, KeyListener{
 	
 	GameOfLife gml;
 	GUI gui;
@@ -14,6 +14,7 @@ public class Controller implements ActionListener{
 		this.gml = gml;
 		
 		gui.setListener(this);
+		gui.setKeyListener(this);
 	}
 	
 	@Override
@@ -30,5 +31,22 @@ public class Controller implements ActionListener{
 			break;
 		}
 	}
+	
+    @Override
+	public void keyPressed(KeyEvent e) {
+    	int code = e.getKeyCode();
+    	
+    	if (code == 10) {
+    		gui.getInput();
+    	}
+	}
+    
+    public void keyTyped (KeyEvent e) {
+    	
+    }
+    
+    public void keyReleased (KeyEvent e) {
+    	
+    }
 }
 

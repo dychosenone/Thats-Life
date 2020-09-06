@@ -1,4 +1,5 @@
 package Model;
+import Controller.Controller;
 import View.GUI;
 /**
  * @author Jacob Miguel Dy
@@ -12,7 +13,9 @@ public class Main {
 	public static void main (String[] args) {
 		
 		GameOfLife game = new GameOfLife ();
-		//GUI gui = new GUI ();
+		GUI gui = new GUI ();
+		
+		Controller cont = new Controller (gui, game);
 
 		game.enterPlayers (game.getNumberOfPlayers());
 		game.nextTurn();

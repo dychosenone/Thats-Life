@@ -13,18 +13,10 @@ public class Main {
 	public static void main (String[] args) {
 		
 		GameOfLife game = new GameOfLife ();	
-		game.enterPlayers (game.getNumberOfPlayers());
-		game.nextTurn();
-		int i = 0;
+		GUI gui = new GUI();
 		
-		do {
-			
-			game.processTurn();
-			game.nextTurn();
+		Controller cont = new Controller (gui, game);
 		
-			i++;
-		}while (i < 50);
-
-		
+		cont.startGame();		
 	}
 }

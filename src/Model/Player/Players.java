@@ -20,19 +20,8 @@ public class Players {
 	 * Function adds players then sets the player's career.
 	 * @param i - index of player
 	 */
-	public void AddPlayer (int i) {
-		String name = setPlayerName(i);
+	public void AddPlayer (String name) {
 		players.add(new Player (name));
-		/*switch (i){
-			case 0:
-				players.get(i).setNewCareer("Lawyer", 100000, 10000);
-				break;
-			case 1:
-				players.get(i).setNewCareer("RaceCarDriver", 50000, 5000);
-				break;
-			case 2:
-				players.get(i).setNewCareer("Server", 30000, 3000);
-		}*/
 	}
 	
 	/**
@@ -134,7 +123,7 @@ public class Players {
 	
 	/**
 	 * Function clones ArrayList of Player
-	 * @return clone - ArrayList of players
+	 * @return clone - reference to the ArrayList of players
 	 */
 	
 	public ArrayList<Player> getPlayers () {

@@ -116,10 +116,10 @@ public class Player {
 	
 	@Override
 	public boolean equals (Object obj) {
-
+		
 		if (obj == null)
 			return false;
-		System.out.println(((Player) obj).getName() + " " + this.name);
+		
 		return ((Player) obj).name.equalsIgnoreCase(name);
 	}
 }

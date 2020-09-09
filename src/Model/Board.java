@@ -12,11 +12,6 @@ public class Board {
 		for (int i = 0; i < SPACES; i++) {
 			boolean add = false;
 			
-			if (i == 1 || i == 20) {
-				add = true;
-				spaces.add(new MagentaSpace("Choose Path"));
-			}
-			
 			if(i == 3) {
 				add = true;
 				spaces.add(new MagentaSpace("Get Married"));

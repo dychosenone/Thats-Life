@@ -38,8 +38,6 @@ public class CareerCardDeck {
             System.out.println("An Error Occurred.");
             e.printStackTrace();
         }
-        
-        reshuffleCards();
 
     }
     

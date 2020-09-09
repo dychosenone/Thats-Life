@@ -13,7 +13,7 @@ public class ActionCard {
      * @param cardType is the type of Action Card
      * @param cardName name of Action Card
      */
-    public ActionCard (int cardType, String cardName){
+    ActionCard (int cardType, String cardName){
         this.cardName = cardName;
         this.cardType = cardType;
 

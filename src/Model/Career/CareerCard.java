@@ -17,7 +17,7 @@ public class CareerCard {
         this.payRaise = generatePayRaise();
     }
 
-    public boolean getNeedDegree () { 
+    public boolean getNeedsCollegeDegree () { 
     	return this.needsCollegeDegree; 
     	}
     

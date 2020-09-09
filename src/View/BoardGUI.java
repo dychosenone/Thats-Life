@@ -6,9 +6,6 @@ import java.awt.event.ActionListener;
 
 public class BoardGUI extends JPanel {
 
-
-
-
     public BoardGUI (){
 
     }

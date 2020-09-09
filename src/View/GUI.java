@@ -56,6 +56,9 @@ public class GUI extends JFrame{;
     	pConsole.setBounds(792, 11, 462, 563);
     	getContentPane().add(pConsole);
     	pConsole.add(console, BorderLayout.CENTER);*/
+
+		JPanel board = new JPanel();
+		
     }
     
     public void setListener (ActionListener listener) {

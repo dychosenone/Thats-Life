@@ -9,7 +9,11 @@ public class ActionCardDeck {
 
     private int counter = 0;
     private final int MAX_CARDS = 50;
+    private final int NUM_CARD_TYPES = 4;
     private ArrayList<ActionCard> actionCards;
+
+    private int numCards;
+    private double cardTypePercent[];
 
     /**
      * Generates ActionCards to be placed in the Model.ActionCard.ActionCardDeck. The details of the actionCard are all listed in ../config/ActionCards.txt
@@ -25,20 +29,126 @@ public class ActionCardDeck {
 
         try {
             Scanner file = new Scanner(new File("../Thats-Life/src/Config/ActionCard.txt"));
+            String firstLine = file.nextLine();
+            String configSplit[] = firstLine.split(" ");
 
-            while (file.hasNextLine()) {
-                String input;
-                input = file.nextLine();
+            String cards[] =new String[50];
 
-                String split[] = input.split(" ");
+            int cardTypeNumber[] = new int[4];
 
-                int j = Integer.parseInt(split[0]);
+            this.numCards = Integer.parseInt(configSplit[0]);
+            this.cardTypePercent = new double[4];
 
-                for (; 0 < j; j--) {
-                    actionCards.add(new ActionCard(Integer.parseInt(split[2]), split[1]));
-                }
 
+            for(int i = 0; i < NUM_CARD_TYPES; i++ ){
+                cardTypePercent[i] = Double.parseDouble(configSplit[i+1]);
             }
+            int j = 0;
+            for(int i = 5; i < NUM_CARD_TYPES; i++){
+                cardTypeNumber[j] = Integer.parseInt(configSplit[i]);
+                j++;
+            }
+
+            int i = 0;
+            while (file.hasNextLine()) {
+                cards[i] = file.nextLine();
+                i++;
+            }
+            int k = 0;
+            for(i = 0; i < NUM_CARD_TYPES; i++){
+                for(j = 0; j < cardTypePercent[i] * numCards; j++){
+
+
+                    switch(i){
+                        case 0:
+                            if(k == cardTypeNumber[i]){
+                                k = 0;
+                                String inputSplit[] = new String[2];
+                                inputSplit = cards[k].split(" ");
+
+                            }
+                            else {
+                                String inputSplit[] = new String[2];
+                                inputSplit = cards[k].split(" ");
+                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
+                                k++;
+                            }
+                            break;
+                        case 1:
+                            if(k == cardTypeNumber[i]){
+                                k = 0 + cardTypeNumber[0];
+                                String inputSplit[] = new String[2];
+                                inputSplit = cards[k].split(" ");
+
+                            }
+                            else if(k == 0){
+                                k = 0 + cardTypeNumber[i];
+                                String inputSplit[] = new String[2];
+                                inputSplit = cards[k].split(" ");
+                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
+                                k++;
+
+                            }
+                            else {
+                                String inputSplit[] = new String[2];
+                                inputSplit = cards[k].split(" ");
+                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
+                                k++;
+                            }
+                            break;
+                        case 2:
+                            if(k == cardTypeNumber[i]){
+                                k = 0 + cardTypeNumber[0] + cardTypeNumber[1];
+                                String inputSplit[] = new String[2];
+                                inputSplit = cards[k].split(" ");
+
+                            }
+                            else if(k == 0){
+                                k += cardTypeNumber[0] + cardTypeNumber[1];
+                                String inputSplit[] = new String[2];
+                                inputSplit = cards[k].split(" ");
+                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
+                                k++;
+
+                            }
+                            else {
+                                String inputSplit[] = new String[2];
+                                inputSplit = cards[k].split(" ");
+                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
+                                k++;
+                            }
+                            break;
+                        case 3:
+                            if(k == cardTypeNumber[i]){
+                                k = 0 + cardTypeNumber[0] + cardTypeNumber[1] + cardTypeNumber[2];
+                                String inputSplit[] = new String[2];
+                                inputSplit = cards[k].split(" ");
+
+                            }
+                            else if(k == 0){
+                                k += cardTypeNumber[0] + cardTypeNumber[1] + cardTypeNumber[2];
+                                String inputSplit[] = new String[2];
+                                inputSplit = cards[k].split(" ");
+                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
+                                k++;
+
+                            }
+                            else {
+                                String inputSplit[] = new String[2];
+                                inputSplit = cards[k].split(" ");
+                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
+                                k++;
+                            }
+                            break;
+
+
+                    }
+
+                }
+                k = 0;
+            }
+
+
             file.close();
         }
         catch (Exception e) {

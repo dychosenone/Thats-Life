@@ -1,3 +1,4 @@
+/*
 package View;
 
 import javax.swing.*;
@@ -17,3 +18,4 @@ public class BoardGUI extends JPanel {
         graphics.drawImage(board, 0, 0, );
     }
 }
+*/

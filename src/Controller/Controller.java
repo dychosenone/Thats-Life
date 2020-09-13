@@ -18,8 +18,7 @@ public class Controller implements ActionListener, KeyListener{
 	
 	private boolean done = false;
 	private boolean spin = false;
-	private boolean pay = false;
-	private boolean collect =  false;
+	private boolean turn = true;
 	
 	public Controller (GUI gui, GameOfLife gml) {
 		this.gui = gui;
@@ -43,14 +42,26 @@ public class Controller implements ActionListener, KeyListener{
 		getPlayers();
 		
 		int i = 0;
+		boolean finish = false;
 		
 		gui.disableInputs();
 		gml.nextTurn();
-		
+		gui.updatePlayerInfo(gml.getPlayers(), currentPlayer);
 		do {
+			finish = false;
+			turn = true; //start turn
 			
-			gui.updatePlayerInfo(gml.getPlayers(), currentPlayer);
-			processTurn();
+			do {
+				System.out.print("");
+				
+				if(!finish) {
+					processTurn();
+					gui.updatePlayerInfo(gml.getPlayers(), currentPlayer);
+					finish = true;
+				}
+				
+			}while (turn);
+			
 			gml.nextTurn();
 			
 		}while (i < 50);
@@ -162,8 +173,6 @@ public class Controller implements ActionListener, KeyListener{
 	}
 	
 	public void takeActionCard (ActionCard card) {
-		pay = false;
-		collect = false;
 		System.out.println("TAKEACTIONCARD CONTROLLER ENTERED");
 		switch (card.getCardType()) {
 		
@@ -171,40 +180,16 @@ public class Controller implements ActionListener, KeyListener{
 			gui.displayText("YOU GOT " + card.getCardName());
 			gui.displayText("COLLECT " + card.getValue() + " FROM THE BANK");
 			
-			do {
-				System.out.print("");
-				
-				if (collect) {
-					gml.addBalance(currentPlayer, card.getValue());
-					gui.displayText(currentPlayer.getName() + "'s NEW BALANCE : " + currentPlayer.getBalance());
-				}
-				
-				if (pay) {
-					gui.displayText("INVALID OPTION, COLLECT FROM BANK");
-					pay = false;
-				}
-				
-			}while (!collect);
+			gml.addBalance(currentPlayer, card.getValue());
+			
 			
 			break;
 		case 2: //PAY BANK
 			gui.displayText("YOU GOT " + card.getCardName());
 			gui.displayText("PAY " + card.getValue() + " TO THE BANK");
 			
-			do {
-				System.out.print("");
-				
-				if (pay) {
-					currentPlayer.subtractBalance(card.getValue());
-					gui.displayText(currentPlayer.getName() + "'s NEW BALANCE : " + currentPlayer.getBalance());
-				}
-				
-				if (collect) {
-					gui.displayText("INVALID OPTION, PAY THE BANK");
-					collect = false;
-				}
-					
-			}while (!pay);
+			currentPlayer.subtractBalance(card.getValue());
+			
 			break;
 		case 3:
 			gui.displayText("YOU GOT " + card.getCardName());
@@ -215,48 +200,27 @@ public class Controller implements ActionListener, KeyListener{
 				
 				gui.displayText("PAY " + card.getValue() + " TO " + target.getName());
 				
-				do {
-					System.out.print("");
-					if(pay) {
-						currentPlayer.subtractBalance(card.getValue());					
-						target.addBalance(card.getValue());				
-						gui.displayText("NEW BALANCE " + target.getBalance());
-					}
-					
-					if (collect) {
-						gui.displayText("INVALID OPTION, PAY " +target.getName());
-						collect = false;
-					}
-				
-				}while(!pay);
+				currentPlayer.subtractBalance(card.getValue());					
+				target.addBalance(card.getValue());				
 			}
 			
 			else if(card.getCardName().equalsIgnoreCase("Bonus")) {
 				
+				int i;
+				ArrayList<Player> players = gml.getPlayers();
+				
 				gui.displayText("PAY " + card.getValue() + " TO EVERYONE");
-				
-				do {
-					System.out.print("");
-					if(pay) {	
-						ArrayList<Player> players = gml.getPlayers();
-						for (int i = 0; i < players.size(); i++) {
-							
-							if (!players.get(i).equals(currentPlayer)) {
-								currentPlayer.subtractBalance(card.getValue());
-								players.get(i).addBalance(card.getValue());
-							}
-						}
+
+				for (i = 0; i < players.size(); i++) {	
+
+					if (!players.get(i).equals(currentPlayer)) {
+						currentPlayer.subtractBalance(card.getValue());
+						players.get(i).addBalance(card.getValue());
 					}
-					
-					if (collect) {
-						gui.displayText("INVALID OPTION, PAY TO EVERYONE" );
-						collect = false;
-					}
-				
-				}while(!pay);
-				
+				}
 			}
-			break;
+				break;
+		
 		case 4:
 			if (card.getCardName().equalsIgnoreCase("FileLawsuit")) {
 				
@@ -264,49 +228,25 @@ public class Controller implements ActionListener, KeyListener{
 				
 				gui.displayText("COLLECT " + card.getValue() + " TO " + target.getName());
 				
-				do {
-					System.out.print("");
-					if(collect) {
-						currentPlayer.addBalance(card.getValue());					
-						target.subtractBalance(card.getValue());				
-						gui.displayText("NEW BALANCE " + target.getBalance());
-					}
-					
-					if (pay) {
-						gui.displayText("INVALID OPTION, PAY " +target.getName());
-						pay = false;
-					}
-				
-				}while(!collect);
+				currentPlayer.addBalance(card.getValue());					
+				target.subtractBalance(card.getValue());				
+				gui.displayText("NEW BALANCE " + target.getBalance());
 			}
 			
 			else if(card.getCardName().equalsIgnoreCase("Birthday")) {
 				
 				gui.displayText("COLLECT " + card.getValue() + " TO EVERYONE");
+				ArrayList<Player> players = gml.getPlayers();
 				
-				do {
-					System.out.print("");
-					if(collect) {	
-						ArrayList<Player> players = gml.getPlayers();
-						for (int i = 0; i < players.size(); i++) {
-							
-							if (!players.get(i).equals(currentPlayer)) {
-								currentPlayer.addBalance(card.getValue());
-								players.get(i).subtractBalance(card.getValue());
-							}
-						}
-					}
+				for (int i = 0; i < players.size(); i++) {
 					
-					if (pay) {
-						gui.displayText("INVALID OPTION, PAY TO EVERYONE" );
-						pay = false;
+					if (!players.get(i).equals(currentPlayer)) {
+						currentPlayer.addBalance(card.getValue());
+						players.get(i).subtractBalance(card.getValue());
 					}
-				
-				}while(!collect);
-				
+				}	
 			}
 			break;
-		
 		}
 	}
 	
@@ -348,17 +288,29 @@ public class Controller implements ActionListener, KeyListener{
 	
 	@Override
 	public void actionPerformed (ActionEvent e) {
-		
+		ArrayList <Player> players = gml.getPlayers();
 		switch (e.getActionCommand()) {
 		
 		case "SPIN WHEEL":
 			spin = gml.spinWheel();
 			break;
-		case "PAY":
-			pay = true;
+		case "GET LOAN":
+			gui.displayText("YOU BORROWED 20K FROM BANK");
+			gml.getLoan();
+			gui.updatePlayerInfo(players, currentPlayer);
 			break;
-		case "COLLECT":
-			collect = true;
+		case "PAY LOAN":
+			if (gml.payLoan()) {
+				gui.displayText("YOU PAID DEBT!");
+				gui.updatePlayerInfo(players, currentPlayer);
+			}
+			
+			else {
+				gui.displayText("YOU HAVE NO DEBT!");
+			}
+			break;
+		case "END TURN":
+			turn = false;
 			break;
 		}
 	}
@@ -391,8 +343,6 @@ public class Controller implements ActionListener, KeyListener{
     
     public void startTurn () {
     	spin = false;
-    	collect = false;
-    	pay = false;
     }
 }
 

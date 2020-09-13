@@ -5,8 +5,11 @@ import Model.SalaryCard.SalaryCard;
 
 public class Player {
 	
+	private static final int LOAN_PAYMENT_MULTIPLE = 25000;
+	
 	private String name;
 	private int balance;
+	private int debt;
 	private boolean degree;
 	private boolean married;
 	private int baby;
@@ -71,13 +74,20 @@ public class Player {
 		balance += num;
 	}
 	
-	
 	/**
 	 * Function subtracts balance of player
 	 * @param num - amount to be subtracted
 	 */
 	public void subtractBalance (int num) {
 		balance -= num;
+	}
+	
+	public void getLoan (int num) {
+		debt += num;
+	}
+	
+	public void payLoan (int num) {
+		debt -= num;
 	}
 	
 	/**
@@ -109,6 +119,11 @@ public class Player {
 	 * Function returns name and balance as a string
 	 * @return text
 	 */
+	
+	public boolean hasDebt () {
+		return debt != 0;
+	}
+	
 	@Override
 	public String toString() {
 		return name + ":" + balance + ": POSITION: " + position;

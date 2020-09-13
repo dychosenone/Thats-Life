@@ -35,6 +35,7 @@ public class GameOfLife {
 	private boolean gameOver = false;
 	
 	private Board board;
+	private Bank bank;
 
 //INITIALIZING FUNCTIONS / GAME STARTING FUNCTIONS
 	
@@ -50,6 +51,7 @@ public class GameOfLife {
 		salaryDeck = new SalaryCardDeck();
 		
 		board = new Board();
+		bank = new Bank();
 	}
 	
 	/**
@@ -226,6 +228,19 @@ public class GameOfLife {
 	
 	public void subtractBalance (Player player, int value) {
 		player.subtractBalance(value);
+	}
+	
+	public void getLoan (){
+		bank.takeLoan (currentPlayer);
+	}
+	
+	public boolean payLoan() {
+		if (currentPlayer.hasDebt()) {		
+			bank.payLoan(currentPlayer);
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public Player getCurrentPlayer () {

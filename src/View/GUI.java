@@ -11,13 +11,12 @@ import java.util.ArrayList;
 
 public class GUI extends JFrame{;
     private JButton btnWheel;
-    private JButton btnCollect;
-    private JButton btnPay;
+    private JButton btnPayLoan;
+    private JButton btnGetLoan;
+    private JButton btnEndTurn;
     
     
     private JTextField tfInput;
-    
-    private ConsolePanel console = new ConsolePanel ();
     
     private JScrollPane scroll;
     
@@ -52,15 +51,39 @@ public class GUI extends JFrame{;
     	btnWheel.setBackground(new Color(255, 235, 205));
     	//btnWheel.setOpaque(true);
     	btnWheel.setFont(new Font("Courier New", Font.PLAIN, 18));
-    	btnWheel.setBounds(792, 627, 153, 54);
+    	btnWheel.setBounds(22, 627, 180, 54);
     	 	 	 	 	 	 
     	getContentPane().add (btnWheel);
     	//getContentPane().add(console);
     	
+    	btnPayLoan = new JButton ("PAY LOAN");
+    	btnPayLoan.setForeground(new Color(105, 105, 105));
+    	btnPayLoan.setBackground(new Color(255, 235, 205));
+    	btnPayLoan.setFont(new Font("Courier New", Font.PLAIN, 18));
+    	btnPayLoan.setBounds(402, 627, 180, 54);
+    	
+    	getContentPane().add (btnPayLoan);
+    	
+    	btnGetLoan = new JButton ("GET LOAN");
+    	btnGetLoan.setForeground(new Color(105, 105, 105));
+    	btnGetLoan.setBackground(new Color(255, 235, 205));
+    	btnGetLoan.setFont(new Font("Courier New", Font.PLAIN, 18));
+    	btnGetLoan.setBounds(212, 627, 180, 54);
+    	
+    	getContentPane().add (btnGetLoan);
+    	
+    	btnEndTurn = new JButton ("END TURN");
+    	btnEndTurn.setForeground(new Color(105, 105, 105));
+    	btnEndTurn.setBackground(new Color(255, 235, 205));
+    	btnEndTurn.setFont(new Font("Courier New", Font.PLAIN, 18));
+    	btnEndTurn.setBounds(592, 627, 180, 54);
+    	
+    	getContentPane().add (btnEndTurn);
+    	
     	tfInput = new JTextField();
     	tfInput.setForeground(new Color(248, 248, 255));
     	tfInput.setBackground(new Color(69, 69, 69));
-    	tfInput.setBounds(792, 585, 462, 31);
+    	tfInput.setBounds(792, 649, 462, 31);
     	tfInput.setEditable(true);
     	getContentPane().add(tfInput);
     	
@@ -73,7 +96,7 @@ public class GUI extends JFrame{;
     	taPlayerInfo.setFont(new Font("Courier New", Font.PLAIN, 20));
     	taPlayerInfo.setWrapStyleWord(true);
     	taPlayerInfo.setEditable(false);
-    	taPlayerInfo.setBounds(792, 35, 462, 87);
+    	taPlayerInfo.setBounds(792, 45, 462, 508);
     	
     	getContentPane().add(taPlayerInfo);
     	
@@ -88,37 +111,24 @@ public class GUI extends JFrame{;
     	caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
     	
     	scroll = new JScrollPane (taConsole);
-    	scroll.setBounds(792, 125, 462, 450);
+    	scroll.setBounds(792, 565, 462, 75);
     	
     	getContentPane().add(scroll);
-    	
-    	btnCollect = new JButton("COLLECT");
-    	btnCollect.setForeground(new Color(105, 105, 105));
-    	btnCollect.setBackground(new Color(255, 235, 205));
-    	btnCollect.setFont(new Font("Courier New", Font.PLAIN, 20));
-    	btnCollect.setBounds(947, 627, 152, 54);
-    	getContentPane().add(btnCollect);
-    	
-    	btnPay = new JButton("PAY");
-    	btnPay.setForeground(new Color(105, 105, 105));
-    	btnPay.setBackground(new Color(255, 235, 205));
-    	btnPay.setFont(new Font("Courier New", Font.PLAIN, 20));
-    	btnPay.setBounds(1101, 627, 153, 54);
-    	getContentPane().add(btnPay);
     	
     	JLabel lblPlayerData = new JLabel("PLAYER DATA");
     	lblPlayerData.setForeground(new Color(69, 69, 69));
     	lblPlayerData.setFont(new Font("Times New Roman", Font.BOLD, 19));
     	lblPlayerData.setHorizontalAlignment(SwingConstants.CENTER);
-    	lblPlayerData.setBounds(901, 8, 250, 16);
+    	lblPlayerData.setBounds(901, 11, 250, 16);
     	getContentPane().add(lblPlayerData);
     	
     }
     
     public void setListener (ActionListener listener) {
     	btnWheel.addActionListener(listener);
-    	btnCollect.addActionListener (listener);
-    	btnPay.addActionListener (listener);
+    	btnPayLoan.addActionListener(listener);
+    	btnGetLoan.addActionListener(listener);
+    	btnEndTurn.addActionListener(listener);
     }
     
     public void setKeyListener (KeyListener listener) {

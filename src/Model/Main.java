@@ -12,7 +12,8 @@ public class Main {
 
 	public static void main (String[] args) {
 		
-		GameOfLife game = new GameOfLife ();	
+		GameOfLife game = new GameOfLife ();
+
 		GUI gui = new GUI();
 		
 		Controller cont = new Controller (gui, game);

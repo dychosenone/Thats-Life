@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import java.lang.String;
 
 public class ActionCardDeck {
 
@@ -11,9 +12,6 @@ public class ActionCardDeck {
     private final int MAX_CARDS = 50;
     private final int NUM_CARD_TYPES = 4;
     private ArrayList<ActionCard> actionCards;
-
-    private int numCards;
-    private double cardTypePercent[];
 
     /**
      * Generates ActionCards to be placed in the Model.ActionCard.ActionCardDeck. The details of the actionCard are all listed in ../config/ActionCards.txt
@@ -25,136 +23,62 @@ public class ActionCardDeck {
      * 4 - Pay the Model.Player.Players
      */
     public ActionCardDeck () {
-        actionCards = new ArrayList<ActionCard>();
+        
+    	int i = 0;
+    	String tempCard[] = new String[15];
+    	
+    	actionCards = new ArrayList<ActionCard>();
+    	String configSplit[] = new String[5];
+        
 
         try {
             Scanner file = new Scanner(new File("../Thats-Life/src/Config/ActionCard.txt"));
             String firstLine = file.nextLine();
-            String configSplit[] = firstLine.split(" ");
-
-            String cards[] =new String[50];
-
-            int cardTypeNumber[] = new int[4];
-
-            this.numCards = Integer.parseInt(configSplit[0]);
-            this.cardTypePercent = new double[4];
-
-
-            for(int i = 0; i < NUM_CARD_TYPES; i++ ){
-                cardTypePercent[i] = Double.parseDouble(configSplit[i+1]);
+            configSplit = firstLine.split(" ");
+            
+            //Places files inside array
+            while(file.hasNextLine()) {
+            	tempCard[i] = file.nextLine();
+            	i++;
             }
-            int j = 0;
-            for(int i = 5; i < NUM_CARD_TYPES; i++){
-                cardTypeNumber[j] = Integer.parseInt(configSplit[i]);
-                j++;
-            }
-
-            int i = 0;
-            while (file.hasNextLine()) {
-                cards[i] = file.nextLine();
-                i++;
-            }
-            int k = 0;
-            for(i = 0; i < NUM_CARD_TYPES; i++){
-                for(j = 0; j < cardTypePercent[i] * numCards; j++){
-
-
-                    switch(i){
-                        case 0:
-                            if(k == cardTypeNumber[i]){
-                                k = 0;
-                                String inputSplit[] = new String[2];
-                                inputSplit = cards[k].split(" ");
-
-                            }
-                            else {
-                                String inputSplit[] = new String[2];
-                                inputSplit = cards[k].split(" ");
-                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
-                                k++;
-                            }
-                            break;
-                        case 1:
-                            if(k == cardTypeNumber[i]){
-                                k = 0 + cardTypeNumber[0];
-                                String inputSplit[] = new String[2];
-                                inputSplit = cards[k].split(" ");
-
-                            }
-                            else if(k == 0){
-                                k = 0 + cardTypeNumber[i];
-                                String inputSplit[] = new String[2];
-                                inputSplit = cards[k].split(" ");
-                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
-                                k++;
-
-                            }
-                            else {
-                                String inputSplit[] = new String[2];
-                                inputSplit = cards[k].split(" ");
-                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
-                                k++;
-                            }
-                            break;
-                        case 2:
-                            if(k == cardTypeNumber[i]){
-                                k = 0 + cardTypeNumber[0] + cardTypeNumber[1];
-                                String inputSplit[] = new String[2];
-                                inputSplit = cards[k].split(" ");
-
-                            }
-                            else if(k == 0){
-                                k += cardTypeNumber[0] + cardTypeNumber[1];
-                                String inputSplit[] = new String[2];
-                                inputSplit = cards[k].split(" ");
-                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
-                                k++;
-
-                            }
-                            else {
-                                String inputSplit[] = new String[2];
-                                inputSplit = cards[k].split(" ");
-                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
-                                k++;
-                            }
-                            break;
-                        case 3:
-                            if(k == cardTypeNumber[i]){
-                                k = 0 + cardTypeNumber[0] + cardTypeNumber[1] + cardTypeNumber[2];
-                                String inputSplit[] = new String[2];
-                                inputSplit = cards[k].split(" ");
-
-                            }
-                            else if(k == 0){
-                                k += cardTypeNumber[0] + cardTypeNumber[1] + cardTypeNumber[2];
-                                String inputSplit[] = new String[2];
-                                inputSplit = cards[k].split(" ");
-                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
-                                k++;
-
-                            }
-                            else {
-                                String inputSplit[] = new String[2];
-                                inputSplit = cards[k].split(" ");
-                                actionCards.add(new ActionCard(Integer.parseInt(inputSplit[1]), inputSplit[0]));
-                                k++;
-                            }
-                            break;
-
-
-                    }
-
-                }
-                k = 0;
-            }
-
-
+           
             file.close();
         }
         catch (Exception e) {
             System.out.println("An Error Occurred.");
             e.printStackTrace();
         }
+
+        for(int k = 0; k < NUM_CARD_TYPES; k++) {
+
+        	//temp double to be converted to int
+        	double generateNum = Double.parseDouble(configSplit[k+1]) * Integer.parseInt(configSplit[0]);
+        	int numCardsGenerate = (int) generateNum;
+
+        	int tempCardLength = tempCard.length;
+
+        	//Counter Values for While Loop
+            i = 0;
+        	int j = 0;
+        	while(j < numCardsGenerate) {
+        	    String tempCardSplit[] = tempCard[i].split(" ");
+
+        		String cardName = tempCardSplit[0];
+        		int cardType = Integer.parseInt(tempCardSplit[1]);
+
+        		if(cardType == k+1) {
+        			actionCards.add(new ActionCard(cardType, cardName));
+        			j++;
+        			i++;
+        		}
+        		else i++;
+
+        		if(i == tempCardLength - 1)
+        			i = 0;
+
+        	}
+        }
+
         Collections.shuffle(actionCards);
     }
 

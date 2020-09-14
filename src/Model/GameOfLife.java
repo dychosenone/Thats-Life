@@ -49,6 +49,8 @@ public class GameOfLife {
 		actionDeck = new ActionCardDeck();
 		careerDeck = new CareerCardDeck();
 		salaryDeck = new SalaryCardDeck();
+
+		actionDeck.showAllCards();
 		
 		board = new Board();
 		bank = new Bank();

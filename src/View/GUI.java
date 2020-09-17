@@ -2,6 +2,7 @@ package View;
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
 
+import Model.Player.Career;
 import Model.Player.Player;
 import Model.Player.Players;
 
@@ -10,7 +11,8 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class GUI extends JFrame{;
-    private JButton btnWheel;
+    private static final Career NULL = null;
+	private JButton btnWheel;
     private JButton btnPayLoan;
     private JButton btnGetLoan;
     private JButton btnEndTurn;
@@ -153,9 +155,17 @@ public class GUI extends JFrame{;
     public void updatePlayerInfo (ArrayList<Player> players, Player currentPlayer) {
     	
     	taPlayerInfo.setText("");
-    	int i= 0;
+    	String newLine = "\n";
+    	int i;
+    	
     	for (i = 0; i < players.size(); i++){     
-    		taPlayerInfo.append(players.get(i).getName() + " : " +  players.get(i).getBalance() + "\n");
+    		taPlayerInfo.append(players.get(i).getName() + " : " +  players.get(i).getBalance() + newLine);
+    		
+    		if (players.get(i).getJob() != NULL) {
+	    		taPlayerInfo.append("CAREER POSITION: " + players.get(i).getJob().getPosition() + newLine);
+	    		taPlayerInfo.append("CAREER SALARY  : " + players.get(i).getJob().getSalary() + newLine);
+	    		taPlayerInfo.append("CAREER TAX     : " + players.get(i).getJob().getTax() + newLine);
+    		}
     	}
     }
     
@@ -186,7 +196,8 @@ public class GUI extends JFrame{;
     public void interactSpace (int spaceType) {                    //INDEX
     	String text[] = {  "YOU LANDED ON ACTION CARD TILE",       //0
     					   "YOU LANDED ON JOB SEARCH TILE",        //1
-    					   "YOU LANDED ON GET MARRIED TILE",};     //2
+    					   "YOU LANDED ON GET MARRIED TILE",	   //2
+    					   "YOU LANDED ON CHOOSE PATH TILE"};      //3
     	
     	
     	displayText(text[spaceType]);

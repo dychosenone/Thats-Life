@@ -6,6 +6,7 @@ import Model.GameOfLife;
 import Model.Player.Player;
 import Model.Space;
 import Model.ActionCard.ActionCard;
+import View.ChoosePath;
 import View.GUI;
 
 public class Controller implements ActionListener, KeyListener{
@@ -19,6 +20,9 @@ public class Controller implements ActionListener, KeyListener{
 	private boolean done = false;
 	private boolean spin = false;
 	private boolean turn = true;
+	private boolean move = true;
+	
+	private int path = 0;
 	
 	public Controller (GUI gui, GameOfLife gml) {
 		this.gui = gui;
@@ -120,6 +124,7 @@ public class Controller implements ActionListener, KeyListener{
 		
 		gui.displayText("IT IS " + currentPlayer.getName() +"'S TURN");
 		gui.displayText("SPIN THE WHEEL");
+		
 		do {
 			System.out.print("");
 			if (spin) {
@@ -128,7 +133,6 @@ public class Controller implements ActionListener, KeyListener{
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
 				for (int i = 1; i <= gml.getWheel(); i++) {
-					
 					currentPlayer.move();
 					
 					Space space = gml.getSpace();
@@ -168,6 +172,37 @@ public class Controller implements ActionListener, KeyListener{
 			break;
 		case 2:
 			gui.displayText("YOU ARE NOW MARRIED");
+			break;
+		case 3:
+			ChoosePathController cCont;
+			ChoosePath cUI = new ChoosePath("START CAREER", "START COLLEGE");
+			
+			if (currentPlayer.getPosition() == 1) {
+				cCont = new ChoosePathController ("START CAREER", "START COLLEGE", cUI);
+				boolean run = true;
+				
+				do {
+					
+					System.out.print(cCont.getChoice());
+					
+					switch (cCont.getChoice()) {
+					case 0:
+						run = true;
+						break;
+					case 1:
+						run = false;
+						break;
+					case 2:
+						run = false;
+						break;
+					}
+					
+				}while(run);
+				
+				//cCont.closeWindow();
+				path = cCont.getChoice();
+				System.out.println(path);
+			}
 			break;
 		}
 	}

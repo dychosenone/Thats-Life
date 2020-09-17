@@ -49,8 +49,6 @@ public class GameOfLife {
 		actionDeck = new ActionCardDeck();
 		careerDeck = new CareerCardDeck();
 		salaryDeck = new SalaryCardDeck();
-
-		actionDeck.showAllCards();
 		
 		board = new Board();
 		bank = new Bank();
@@ -64,7 +62,6 @@ public class GameOfLife {
 	
 	public void enterPlayers (String name) {
 		System.out.println("enterPlayers Function entered");
-		
 		players.AddPlayer(name);
 			
 	}

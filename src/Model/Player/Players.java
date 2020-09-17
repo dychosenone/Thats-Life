@@ -25,50 +25,6 @@ public class Players {
 	}
 	
 	/**
-	 * Function sets name of Player
-	 * @param i - index of player
-	 * @return name - name of player
-	 */
-	public String setPlayerName (int i) {
-
-        String name;
-        Scanner in = new Scanner (System.in);
-        Player temp;
-        int ctr;
-        
-        boolean unique = false;
-        
-        do {
-        	
-        	System.out.print ("Set Name of Player " + (i+1) + ": ");
-        	name = in.next();
-        	temp = new Player (name);
-        	unique = false;
-        	
-        	if (players.size() >= 1) {
-	        	for (ctr = 0; ctr < players.size(); ctr++) {
-	        		
-	        		if (players.get(ctr).equals(temp)) {
-	        			System.out.println("Name is already taken");
-	        		}
-	        		
-	        		else {
-	        			unique = true;
-	        		}
-	        		
-	        	}
-        	}
-        	
-        	else {
-        		unique = true;
-        	}
-        }while (!unique);
-        
-        //in.close();
-        return name;
-    }
-	
-	/**
 	 * The function returns if it has exceed the maximum number of players.
 	 * @return TRUE - if there are 3 players, FALSE - there are 2 or less players
 	 */

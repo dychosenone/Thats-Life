@@ -129,7 +129,9 @@ public class GameOfLife {
 	}
 
 //MAGENTA SPACES FUNCTIONS
-	public boolean isMagenta (Space space) {
+	public boolean isMagenta () {
+		Space space = board.getSpace(currentPlayer.getPosition());
+		
 		boolean check = false;
 		
 		if (space instanceof MagentaSpace) {

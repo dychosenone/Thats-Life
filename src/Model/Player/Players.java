@@ -32,26 +32,7 @@ public class Players {
 	public boolean isMaxPlayers () {
 		return players.size() < MAXPLAYERS;
 	}
-	
-	/**
-	 * Function adds balance of player
-	 * @param amt amount of balance
-	 * @param currentPlayer The current player taking a turn
-	 */
-	
-	public void AddBalance (int amt, Player currentPlayer){
-		players.get(players.indexOf(currentPlayer)).addBalance(amt);
-	}
-	
-	/**
-	 * Function subtracts balance of player
-	 * @param amt the amount of balance to be subtracted
-	 * @param currentPlayer the current player whose balance will be subtracted
-	 */
-	
-	public void SubtractBalance (int amt, Player currentPlayer) {
-		players.get(players.indexOf(currentPlayer)).subtractBalance(amt);
-	}
+
 	
 	/**
 	 * Function gets object of Player

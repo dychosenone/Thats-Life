@@ -83,8 +83,8 @@ public class Controller implements ActionListener, KeyListener{
 				temp = Integer.parseInt(input);
 				
 				if(temp >= 2 && temp <= 3) {
-					gml.getNumberOfPlayers(maxPlayers);
 					maxPlayers = temp;
+					gml.getNumberOfPlayers(maxPlayers);
 				}
 				
 				else {
@@ -116,6 +116,40 @@ public class Controller implements ActionListener, KeyListener{
 		}
 	}
 	
+	public Player choosePlayer() {
+		gui.enableInputs();
+		int option;
+		int index = -1;
+		
+		ArrayList <Player> players = gml.getPlayers();
+		
+		gui.choosePlayer(players, currentPlayer);
+		
+		do {
+			System.out.print("");
+			
+			if (done) {
+				option = Integer.parseInt(input);
+				
+				index  = gml.choosePlayer (option);
+				
+				switch (index) {
+				
+				case -1:
+					gui.displayText("INVALID PLAYER / INVALID INPUT, TRY AGAIN");
+					done = false;
+					break;
+				case 0: case 1: case 2: 
+					break;
+				}
+				
+			}
+		}while (!done);
+		
+		pauseGUI();
+		return players.get(index);
+	}
+	
 //MAIN GAME METHODS
 	
 	public void processTurn () {
@@ -133,11 +167,10 @@ public class Controller implements ActionListener, KeyListener{
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
 				for (int i = 1; i <= gml.getWheel(); i++) {
+					
 					currentPlayer.move();
 					
-					Space space = gml.getSpace();
-					
-					if (gml.isMagenta(space) && i != gml.getWheel() ) {
+					if (gml.isMagenta() && i != gml.getWheel() ) {
 						
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						System.out.println(spaceType);
@@ -148,9 +181,6 @@ public class Controller implements ActionListener, KeyListener{
 				
 				gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
 				interactSpace (gml.interactSpace(currentPlayer.getPosition()));
-				
-				gui.displayText(currentPlayer.getName() + "'s FINAL POSITION : " + currentPlayer.getPosition());
-				gui.displayText("");
 				
 			}
 			
@@ -174,66 +204,39 @@ public class Controller implements ActionListener, KeyListener{
 			gui.displayText("YOU ARE NOW MARRIED");
 			break;
 		case 3:
-			ChoosePathController cCont;
-			ChoosePath cUI = new ChoosePath("START CAREER", "START COLLEGE");
-			
-			if (currentPlayer.getPosition() == 1) {
-				cCont = new ChoosePathController ("START CAREER", "START COLLEGE", cUI);
-				boolean run = true;
-				
-				do {
-					
-					System.out.print(cCont.getChoice());
-					
-					switch (cCont.getChoice()) {
-					case 0:
-						run = true;
-						break;
-					case 1:
-						run = false;
-						break;
-					case 2:
-						run = false;
-						break;
-					}
-					
-				}while(run);
-				
-				//cCont.closeWindow();
-				path = cCont.getChoice();
-				System.out.println(path);
-			}
+			choosePath();
 			break;
 		}
 	}
-	
+
+//ORANGE SPACE
 	public void takeActionCard (ActionCard card) {
 		System.out.println("TAKEACTIONCARD CONTROLLER ENTERED");
+		gui.displayText("YOU GOT " + card.getCardName());
 		switch (card.getCardType()) {
 		
 		case 1: //COLLECT MONEY FROM THE BANK
-			gui.displayText("YOU GOT " + card.getCardName());
-			gui.displayText("COLLECT " + card.getValue() + " FROM THE BANK");
+			
+			gui.displayText(currentPlayer.getName() + ": +" + card.getValue());
 			
 			gml.addBalance(currentPlayer, card.getValue());
 			
-			
 			break;
 		case 2: //PAY BANK
-			gui.displayText("YOU GOT " + card.getCardName());
-			gui.displayText("PAY " + card.getValue() + " TO THE BANK");
 			
-			currentPlayer.subtractBalance(card.getValue());
+			gui.displayText(currentPlayer.getName() + ": -" + card.getValue());
+			
+			gml.subtractBalance(currentPlayer, card.getValue());
 			
 			break;
 		case 3:
-			gui.displayText("YOU GOT " + card.getCardName());
 			
 			if (card.getCardName().equalsIgnoreCase("Lawsuit")) {
 				
 				Player target = choosePlayer();
 				
-				gui.displayText("PAY " + card.getValue() + " TO " + target.getName());
+				gui.displayText(target.getName() + ": + " + card.getValue());
+				gui.displayText(currentPlayer.getName() + ": -" + card.getValue());
 				
 				currentPlayer.subtractBalance(card.getValue());					
 				target.addBalance(card.getValue());				
@@ -243,8 +246,6 @@ public class Controller implements ActionListener, KeyListener{
 				
 				int i;
 				ArrayList<Player> players = gml.getPlayers();
-				
-				gui.displayText("PAY " + card.getValue() + " TO EVERYONE");
 
 				for (i = 0; i < players.size(); i++) {	
 
@@ -285,38 +286,38 @@ public class Controller implements ActionListener, KeyListener{
 		}
 	}
 	
-	public Player choosePlayer() {
-		gui.enableInputs();
-		int option;
-		int index = -1;
+//MAGENTS SPACES
+	
+	public void choosePath () {
+		ChoosePathController cCont;
+		ChoosePath cUI = new ChoosePath("START CAREER", "START COLLEGE");
 		
-		ArrayList <Player> players = gml.getPlayers();
-		
-		gui.choosePlayer(players, currentPlayer);
-		
-		do {
-			System.out.print("");
+		if (currentPlayer.getPosition() == 1) {
+			cCont = new ChoosePathController ("START CAREER", "START COLLEGE", cUI);
+			boolean run = true;
 			
-			if (done) {
-				option = Integer.parseInt(input);
+			do {
 				
-				index  = gml.choosePlayer (option);
+				System.out.print(cCont.getChoice());
 				
-				switch (index) {
-				
-				case -1:
-					gui.displayText("INVALID PLAYER / INVALID INPUT, TRY AGAIN");
-					done = false;
+				switch (cCont.getChoice()) {
+				case 0:
+					run = true;
 					break;
-				case 0: case 1: case 2: 
+				case 1:
+					run = false;
+					break;
+				case 2:
+					run = false;
 					break;
 				}
 				
-			}
-		}while (!done);
-		
-		pauseGUI();
-		return players.get(index);
+			}while(run);
+			
+			//cCont.closeWindow();
+			path = cCont.getChoice();
+			System.out.println(path);
+		}
 	}
 	
 //ACTION LISTENERS	

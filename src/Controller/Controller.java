@@ -20,7 +20,8 @@ public class Controller implements ActionListener, KeyListener{
 	private boolean done = false;
 	private boolean spin = false;
 	private boolean turn = true;
-	private boolean move = true;
+	private boolean access = false;
+	private boolean finish = false;
 	
 	private int path = 0;
 	
@@ -46,12 +47,12 @@ public class Controller implements ActionListener, KeyListener{
 		getPlayers();
 		
 		int i = 0;
-		boolean finish = false;
 		
 		gui.disableInputs();
 		gml.nextTurn();
 		gui.updatePlayerInfo(gml.getPlayers(), currentPlayer);
 		do {
+			closeLoan ();
 			finish = false;
 			turn = true; //start turn
 			
@@ -61,6 +62,7 @@ public class Controller implements ActionListener, KeyListener{
 				if(!finish) {
 					processTurn();
 					gui.updatePlayerInfo(gml.getPlayers(), currentPlayer);
+					accessLoan ();
 					finish = true;
 				}
 				
@@ -156,8 +158,8 @@ public class Controller implements ActionListener, KeyListener{
 		startTurn();
 		currentPlayer = gml.getCurrentPlayer();
 		
-		gui.displayText("IT IS " + currentPlayer.getName() +"'S TURN");
-		gui.displayText("SPIN THE WHEEL");
+		gui.displayText("IT IS " + currentPlayer.getName() +"'S TURN" + "\n" + 
+		"SPIN THE WHEEL");
 		
 		do {
 			System.out.print("");
@@ -212,7 +214,6 @@ public class Controller implements ActionListener, KeyListener{
 //ORANGE SPACE
 	public void takeActionCard (ActionCard card) {
 		System.out.println("TAKEACTIONCARD CONTROLLER ENTERED");
-		gui.displayText("YOU GOT " + card.getCardName());
 		switch (card.getCardType()) {
 		
 		case 1: //COLLECT MONEY FROM THE BANK
@@ -235,8 +236,8 @@ public class Controller implements ActionListener, KeyListener{
 				
 				Player target = choosePlayer();
 				
-				gui.displayText(target.getName() + ": + " + card.getValue());
-				gui.displayText(currentPlayer.getName() + ": -" + card.getValue());
+				gui.displayText(currentPlayer.getName() + ": -" + card.getValue() + "\n"
+						+ target.getName() + ": + " + card.getValue());
 				
 				currentPlayer.subtractBalance(card.getValue());					
 				target.addBalance(card.getValue());				
@@ -254,6 +255,9 @@ public class Controller implements ActionListener, KeyListener{
 						players.get(i).addBalance(card.getValue());
 					}
 				}
+				
+				gui.displayText(currentPlayer.getName() + ": -" + (card.getValue() * players.size()) + "\n"
+						+ "Everyone : +" + card.getValue());
 			}
 				break;
 		
@@ -262,16 +266,15 @@ public class Controller implements ActionListener, KeyListener{
 				
 				Player target = choosePlayer();
 				
-				gui.displayText("COLLECT " + card.getValue() + " TO " + target.getName());
+				gui.displayText(currentPlayer.getName() + ": +" + card.getValue() + "\n"
+						 + target.getName() + ": - " + card.getValue());
 				
 				currentPlayer.addBalance(card.getValue());					
 				target.subtractBalance(card.getValue());				
-				gui.displayText("NEW BALANCE " + target.getBalance());
 			}
 			
 			else if(card.getCardName().equalsIgnoreCase("Birthday")) {
 				
-				gui.displayText("COLLECT " + card.getValue() + " TO EVERYONE");
 				ArrayList<Player> players = gml.getPlayers();
 				
 				for (int i = 0; i < players.size(); i++) {
@@ -280,7 +283,9 @@ public class Controller implements ActionListener, KeyListener{
 						currentPlayer.addBalance(card.getValue());
 						players.get(i).subtractBalance(card.getValue());
 					}
-				}	
+				}
+				gui.displayText(currentPlayer.getName() + ": +" + (card.getValue() * players.size()) + "\n"
+						+ "Everyone : -" + card.getValue());
 			}
 			break;
 		}
@@ -331,22 +336,33 @@ public class Controller implements ActionListener, KeyListener{
 			spin = gml.spinWheel();
 			break;
 		case "GET LOAN":
-			gui.displayText("YOU BORROWED 20K FROM BANK");
-			gml.getLoan();
-			gui.updatePlayerInfo(players, currentPlayer);
+			if (access) {
+				gui.displayText("YOU BORROWED 20K FROM BANK");
+				gml.getLoan();
+				gui.updatePlayerInfo(players, currentPlayer);
+			}
+			else {
+				gui.displayText("SPIN WHEEL FIRST");
+			}
 			break;
 		case "PAY LOAN":
-			if (gml.payLoan()) {
-				gui.displayText("YOU PAID DEBT!");
-				gui.updatePlayerInfo(players, currentPlayer);
+			if (access) {
+				if (gml.payLoan()) {
+					gui.displayText("YOU PAID DEBT!");
+					gui.updatePlayerInfo(players, currentPlayer);
+				}
+				else {
+					gui.displayText("YOU HAVE NO DEBT!");
+				}
 			}
 			
 			else {
-				gui.displayText("YOU HAVE NO DEBT!");
+				gui.displayText("FINISH TURN FIRST");
 			}
 			break;
 		case "END TURN":
-			turn = false;
+			if (finish)
+				turn = false;
 			break;
 		}
 	}
@@ -379,6 +395,14 @@ public class Controller implements ActionListener, KeyListener{
     
     public void startTurn () {
     	spin = false;
+    }
+    
+    public void accessLoan () {
+    	access = true;
+    }
+    
+    public void closeLoan () {
+    	access = false;
     }
 }
 

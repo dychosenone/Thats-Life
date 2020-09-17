@@ -138,7 +138,8 @@ public class GUI extends JFrame{;
     }
     
     public void displayText (String text) {
-    	taConsole.append(">> " + text + "\n");
+    	taConsole.setText("");
+    	taConsole.append(text + "\n");
     }
     
     public String getInput (){
@@ -204,10 +205,12 @@ public class GUI extends JFrame{;
     }
     
     public void choosePlayer (ArrayList<Player> players, Player currentPlayer) {
+    	taConsole.setText("CHOOSE A PLAYER: " + "\n");
     	for (int i = 0; i < players.size(); i++) {
     		
     		if (!players.get(i).equals(currentPlayer))
-    			displayText("[" + (i+1) + "] " + players.get(i).getName());
+    			taConsole.append("[" + (i+1) + "] " + players.get(i).getName() + "\n");
+    			
     	}
     }
 }

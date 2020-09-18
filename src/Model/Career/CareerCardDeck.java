@@ -17,7 +17,7 @@ public class CareerCardDeck {
 
         careerCard = new ArrayList<CareerCard>();
         try {
-            Scanner file = new Scanner(new File("../Thats-Life/src/Config/CareerCards.txt"));
+            Scanner file = new Scanner(new File("D:\\Documents\\DLSU Files\\TERM 3\\CCPROG3\\Thats-Life - Copy\\src\\Config/CareerCards.txt"));
 
             while (file.hasNextLine()) {
                 String input = file.nextLine();
@@ -38,6 +38,8 @@ public class CareerCardDeck {
             System.out.println("An Error Occurred.");
             e.printStackTrace();
         }
+        
+        reshuffleCards();
 
     }
     

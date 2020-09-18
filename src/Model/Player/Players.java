@@ -25,50 +25,6 @@ public class Players {
 	}
 	
 	/**
-	 * Function sets name of Player
-	 * @param i - index of player
-	 * @return name - name of player
-	 */
-	public String setPlayerName (int i) {
-
-        String name;
-        Scanner in = new Scanner (System.in);
-        Player temp;
-        int ctr;
-        
-        boolean unique = false;
-        
-        do {
-        	
-        	System.out.print ("Set Name of Player " + (i+1) + ": ");
-        	name = in.next();
-        	temp = new Player (name);
-        	unique = false;
-        	
-        	if (players.size() >= 1) {
-	        	for (ctr = 0; ctr < players.size(); ctr++) {
-	        		
-	        		if (players.get(ctr).equals(temp)) {
-	        			System.out.println("Name is already taken");
-	        		}
-	        		
-	        		else {
-	        			unique = true;
-	        		}
-	        		
-	        	}
-        	}
-        	
-        	else {
-        		unique = true;
-        	}
-        }while (!unique);
-        
-        //in.close();
-        return name;
-    }
-	
-	/**
 	 * The function returns if it has exceed the maximum number of players.
 	 * @return TRUE - if there are 3 players, FALSE - there are 2 or less players
 	 */
@@ -76,26 +32,7 @@ public class Players {
 	public boolean isMaxPlayers () {
 		return players.size() < MAXPLAYERS;
 	}
-	
-	/**
-	 * Function adds balance of player
-	 * @param amt amount of balance
-	 * @param currentPlayer The current player taking a turn
-	 */
-	
-	public void AddBalance (int amt, Player currentPlayer){
-		players.get(players.indexOf(currentPlayer)).addBalance(amt);
-	}
-	
-	/**
-	 * Function subtracts balance of player
-	 * @param amt the amount of balance to be subtracted
-	 * @param currentPlayer the current player whose balance will be subtracted
-	 */
-	
-	public void SubtractBalance (int amt, Player currentPlayer) {
-		players.get(players.indexOf(currentPlayer)).subtractBalance(amt);
-	}
+
 	
 	/**
 	 * Function gets object of Player

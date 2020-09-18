@@ -6,6 +6,7 @@ import Model.GameOfLife;
 import Model.Player.Player;
 import Model.Space;
 import Model.ActionCard.ActionCard;
+import View.ChoosePath;
 import View.GUI;
 
 public class Controller implements ActionListener, KeyListener{
@@ -19,6 +20,10 @@ public class Controller implements ActionListener, KeyListener{
 	private boolean done = false;
 	private boolean spin = false;
 	private boolean turn = true;
+	private boolean access = false;
+	private boolean finish = false;
+	
+	private int path = 0;
 	
 	public Controller (GUI gui, GameOfLife gml) {
 		this.gui = gui;
@@ -42,12 +47,12 @@ public class Controller implements ActionListener, KeyListener{
 		getPlayers();
 		
 		int i = 0;
-		boolean finish = false;
 		
 		gui.disableInputs();
 		gml.nextTurn();
 		gui.updatePlayerInfo(gml.getPlayers(), currentPlayer);
 		do {
+			closeLoan ();
 			finish = false;
 			turn = true; //start turn
 			
@@ -57,6 +62,7 @@ public class Controller implements ActionListener, KeyListener{
 				if(!finish) {
 					processTurn();
 					gui.updatePlayerInfo(gml.getPlayers(), currentPlayer);
+					accessLoan ();
 					finish = true;
 				}
 				
@@ -79,8 +85,8 @@ public class Controller implements ActionListener, KeyListener{
 				temp = Integer.parseInt(input);
 				
 				if(temp >= 2 && temp <= 3) {
-					gml.getNumberOfPlayers(maxPlayers);
 					maxPlayers = temp;
+					gml.getNumberOfPlayers(maxPlayers);
 				}
 				
 				else {
@@ -109,144 +115,6 @@ public class Controller implements ActionListener, KeyListener{
 			}while (!done);
 			
 			pauseGUI();
-		}
-	}
-	
-//MAIN GAME METHODS
-	
-	public void processTurn () {
-		startTurn();
-		currentPlayer = gml.getCurrentPlayer();
-		
-		gui.displayText("IT IS " + currentPlayer.getName() +"'S TURN");
-		gui.displayText("SPIN THE WHEEL");
-		do {
-			System.out.print("");
-			if (spin) {
-				gml.processTurn();
-				
-				gui.displayText("You Rolled a " + gml.getWheel());
-				
-				for (int i = 1; i <= gml.getWheel(); i++) {
-					
-					currentPlayer.move();
-					
-					Space space = gml.getSpace();
-					
-					if (gml.isMagenta(space) && i != gml.getWheel() ) {
-						
-						int spaceType = gml.interactSpace(currentPlayer.getPosition());
-						System.out.println(spaceType);
-						gui.interactSpace(spaceType);
-						interactSpace (spaceType);
-					}
-				}			
-				
-				gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
-				interactSpace (gml.interactSpace(currentPlayer.getPosition()));
-				
-				gui.displayText(currentPlayer.getName() + "'s FINAL POSITION : " + currentPlayer.getPosition());
-				gui.displayText("");
-				
-			}
-			
-		}while (!spin);
-	}
-	
-	
-	public void interactSpace (int spaceType) {
-		//ORANGESPACES
-		switch (spaceType) {
-		case 0: //COLLECT ACTION CARD
-			ActionCard card = gml.takeActionCard();
-			
-			takeActionCard (card);
-			
-			break;
-		case 1:
-			gml.jobSearch();
-			break;
-		case 2:
-			gui.displayText("YOU ARE NOW MARRIED");
-			break;
-		}
-	}
-	
-	public void takeActionCard (ActionCard card) {
-		System.out.println("TAKEACTIONCARD CONTROLLER ENTERED");
-		switch (card.getCardType()) {
-		
-		case 1: //COLLECT MONEY FROM THE BANK
-			gui.displayText("YOU GOT " + card.getCardName());
-			gui.displayText("COLLECT " + card.getValue() + " FROM THE BANK");
-			
-			gml.addBalance(currentPlayer, card.getValue());
-			
-			
-			break;
-		case 2: //PAY BANK
-			gui.displayText("YOU GOT " + card.getCardName());
-			gui.displayText("PAY " + card.getValue() + " TO THE BANK");
-			
-			currentPlayer.subtractBalance(card.getValue());
-			
-			break;
-		case 3:
-			gui.displayText("YOU GOT " + card.getCardName());
-			
-			if (card.getCardName().equalsIgnoreCase("Lawsuit")) {
-				
-				Player target = choosePlayer();
-				
-				gui.displayText("PAY " + card.getValue() + " TO " + target.getName());
-				
-				currentPlayer.subtractBalance(card.getValue());					
-				target.addBalance(card.getValue());				
-			}
-			
-			else if(card.getCardName().equalsIgnoreCase("Bonus")) {
-				
-				int i;
-				ArrayList<Player> players = gml.getPlayers();
-				
-				gui.displayText("PAY " + card.getValue() + " TO EVERYONE");
-
-				for (i = 0; i < players.size(); i++) {	
-
-					if (!players.get(i).equals(currentPlayer)) {
-						currentPlayer.subtractBalance(card.getValue());
-						players.get(i).addBalance(card.getValue());
-					}
-				}
-			}
-				break;
-		
-		case 4:
-			if (card.getCardName().equalsIgnoreCase("FileLawsuit")) {
-				
-				Player target = choosePlayer();
-				
-				gui.displayText("COLLECT " + card.getValue() + " TO " + target.getName());
-				
-				currentPlayer.addBalance(card.getValue());					
-				target.subtractBalance(card.getValue());				
-				gui.displayText("NEW BALANCE " + target.getBalance());
-			}
-			
-			else if(card.getCardName().equalsIgnoreCase("Birthday")) {
-				
-				gui.displayText("COLLECT " + card.getValue() + " TO EVERYONE");
-				ArrayList<Player> players = gml.getPlayers();
-				
-				for (int i = 0; i < players.size(); i++) {
-					
-					if (!players.get(i).equals(currentPlayer)) {
-						currentPlayer.addBalance(card.getValue());
-						players.get(i).subtractBalance(card.getValue());
-					}
-				}	
-			}
-			break;
 		}
 	}
 	
@@ -284,6 +152,185 @@ public class Controller implements ActionListener, KeyListener{
 		return players.get(index);
 	}
 	
+//MAIN GAME METHODS
+	
+	public void processTurn () {
+		startTurn();
+		currentPlayer = gml.getCurrentPlayer();
+		
+		gui.displayText("IT IS " + currentPlayer.getName() +"'S TURN" + "\n" + 
+		"SPIN THE WHEEL");
+		
+		do {
+			System.out.print("");
+			if (spin) {
+				gml.processTurn();
+				
+				gui.displayText("You Rolled a " + gml.getWheel());
+				
+				for (int i = 1; i <= gml.getWheel(); i++) {
+					
+					currentPlayer.move();
+					
+					if (gml.isMagenta() && i != gml.getWheel() ) {
+						
+						int spaceType = gml.interactSpace(currentPlayer.getPosition());
+						System.out.println(spaceType);
+						gui.interactSpace(spaceType);
+						interactSpace (spaceType);
+					}
+				}			
+				
+				gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
+				interactSpace (gml.interactSpace(currentPlayer.getPosition()));
+				
+			}
+			
+		}while (!spin);
+	}
+	
+	
+	public void interactSpace (int spaceType) {
+		//ORANGESPACES
+		switch (spaceType) {
+		case 0: //COLLECT ACTION CARD
+			ActionCard card = gml.takeActionCard();
+			
+			takeActionCard (card);
+			
+			break;
+		case 1:
+			gml.jobSearch();
+			break;
+		case 2:
+			gui.displayText("YOU ARE NOW MARRIED");
+			break;
+		case 3:
+			choosePath();
+			break;
+		}
+	}
+
+//ORANGE SPACE
+	public void takeActionCard (ActionCard card) {
+		System.out.println("TAKEACTIONCARD CONTROLLER ENTERED");
+		switch (card.getCardType()) {
+		
+		case 1: //COLLECT MONEY FROM THE BANK
+			
+			gui.displayText("YOU GOT " + card.getCardName() + "\n" 
+							+ currentPlayer.getName() + ": +" + card.getValue());
+			
+			gml.addBalance(currentPlayer, card.getValue());
+			
+			break;
+		case 2: //PAY BANK
+			
+			gui.displayText("YOU GOT " + card.getCardName() + "\n" 
+							+ currentPlayer.getName() + ": -" + card.getValue());
+			
+			gml.subtractBalance(currentPlayer, card.getValue());
+			
+			break;
+		case 3:
+			
+			if (card.getCardName().equalsIgnoreCase("Lawsuit")) {
+				
+				Player target = choosePlayer();
+				
+				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
+						+	currentPlayer.getName() + ": -" + card.getValue() + "\n"
+						+ target.getName() + ": + " + card.getValue());
+				
+				currentPlayer.subtractBalance(card.getValue());					
+				target.addBalance(card.getValue());				
+			}
+			
+			else if(card.getCardName().equalsIgnoreCase("Bonus")) {
+				
+				int i;
+				ArrayList<Player> players = gml.getPlayers();
+
+				for (i = 0; i < players.size(); i++) {	
+
+					if (!players.get(i).equals(currentPlayer)) {
+						currentPlayer.subtractBalance(card.getValue());
+						players.get(i).addBalance(card.getValue());
+					}
+				}
+				
+				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
+						+ currentPlayer.getName() + ": -" + (card.getValue() * players.size()) + "\n"
+						+ "Everyone : +" + card.getValue());
+			}
+				break;
+		
+		case 4:
+			if (card.getCardName().equalsIgnoreCase("FileLawsuit")) {
+				
+				Player target = choosePlayer();
+				
+				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
+						 + currentPlayer.getName() + ": +" + card.getValue() + "\n"
+						 + target.getName() + ": - " + card.getValue());
+				
+				currentPlayer.addBalance(card.getValue());					
+				target.subtractBalance(card.getValue());				
+			}
+			
+			else if(card.getCardName().equalsIgnoreCase("Birthday")) {
+				
+				ArrayList<Player> players = gml.getPlayers();
+				
+				for (int i = 0; i < players.size(); i++) {
+					
+					if (!players.get(i).equals(currentPlayer)) {
+						currentPlayer.addBalance(card.getValue());
+						players.get(i).subtractBalance(card.getValue());
+					}
+				}
+				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
+						+ currentPlayer.getName() + ": +" + (card.getValue() * players.size()) + "\n"
+						+ "Everyone : -" + card.getValue());
+			}
+			break;
+		}
+	}
+	
+//MAGENTS SPACES
+	
+	public void choosePath () {
+		ChoosePathController cCont;
+		ChoosePath cUI = new ChoosePath("START CAREER", "START COLLEGE");
+		
+		if (currentPlayer.getPosition() == 1) {
+			cCont = new ChoosePathController ("START CAREER", "START COLLEGE", cUI);
+			boolean run = true;
+			
+			do {
+				
+				System.out.print(cCont.getChoice());
+				
+				switch (cCont.getChoice()) {
+				case 0:
+					run = true;
+					break;
+				case 1:
+					run = false;
+					break;
+				case 2:
+					run = false;
+					break;
+				}
+				
+			}while(run);
+			
+			//cCont.closeWindow();
+			path = cCont.getChoice();
+			System.out.println(path);
+		}
+	}
+	
 //ACTION LISTENERS	
 	
 	@Override
@@ -295,22 +342,33 @@ public class Controller implements ActionListener, KeyListener{
 			spin = gml.spinWheel();
 			break;
 		case "GET LOAN":
-			gui.displayText("YOU BORROWED 20K FROM BANK");
-			gml.getLoan();
-			gui.updatePlayerInfo(players, currentPlayer);
+			if (access) {
+				gui.displayText("YOU BORROWED 20K FROM BANK");
+				gml.getLoan();
+				gui.updatePlayerInfo(players, currentPlayer);
+			}
+			else {
+				gui.displayText("SPIN WHEEL FIRST");
+			}
 			break;
 		case "PAY LOAN":
-			if (gml.payLoan()) {
-				gui.displayText("YOU PAID DEBT!");
-				gui.updatePlayerInfo(players, currentPlayer);
+			if (access) {
+				if (gml.payLoan()) {
+					gui.displayText("YOU PAID DEBT!");
+					gui.updatePlayerInfo(players, currentPlayer);
+				}
+				else {
+					gui.displayText("YOU HAVE NO DEBT!");
+				}
 			}
 			
 			else {
-				gui.displayText("YOU HAVE NO DEBT!");
+				gui.displayText("FINISH TURN FIRST");
 			}
 			break;
 		case "END TURN":
-			turn = false;
+			if (finish)
+				turn = false;
 			break;
 		}
 	}
@@ -343,6 +401,14 @@ public class Controller implements ActionListener, KeyListener{
     
     public void startTurn () {
     	spin = false;
+    }
+    
+    public void accessLoan () {
+    	access = true;
+    }
+    
+    public void closeLoan () {
+    	access = false;
     }
 }
 

@@ -1,7 +1,5 @@
 package Model;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Board {
 	
@@ -9,19 +7,15 @@ public class Board {
 	private ArrayList <Space> spaces;
 	
 	public Board () {
-		spaces = new ArrayList<Space>();
-
-
-		try {
-			Scanner file = new Scanner(new File("../Thats-Life/src/Config/Board.txt"));
-
-		} catch(Exception e){
-			System.out.println("An Error Occurred.");
-			e.printStackTrace();
-		}
+		spaces = new ArrayList <>();
 		
 		for (int i = 0; i < SPACES; i++) {
 			boolean add = false;
+			
+			if (i == 1 || i == 20) {
+				add = true;
+				spaces.add(new MagentaSpace("Choose Path"));
+			}
 			
 			if(i == 3) {
 				add = true;

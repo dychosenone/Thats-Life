@@ -49,8 +49,6 @@ public class GameOfLife {
 		actionDeck = new ActionCardDeck();
 		careerDeck = new CareerCardDeck();
 		salaryDeck = new SalaryCardDeck();
-
-		actionDeck.showAllCards();
 		
 		board = new Board();
 		bank = new Bank();
@@ -64,7 +62,6 @@ public class GameOfLife {
 	
 	public void enterPlayers (String name) {
 		System.out.println("enterPlayers Function entered");
-		
 		players.AddPlayer(name);
 			
 	}
@@ -132,7 +129,9 @@ public class GameOfLife {
 	}
 
 //MAGENTA SPACES FUNCTIONS
-	public boolean isMagenta (Space space) {
+	public boolean isMagenta () {
+		Space space = board.getSpace(currentPlayer.getPosition());
+		
 		boolean check = false;
 		
 		if (space instanceof MagentaSpace) {

@@ -34,6 +34,10 @@ public class Career {
 		return salary;
 	}
 	
+	public int getTax () {
+		return tax;
+	}
+	
 	/**
 	 * Function returns position of player
 	 * @return position

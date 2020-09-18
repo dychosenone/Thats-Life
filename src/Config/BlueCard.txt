@@ -1,0 +1,7 @@
+Lawsuit
+SalaryTaxDue
+SkiAccident
+ComputerRepair
+WorldCup
+F1Race
+TipTheServer

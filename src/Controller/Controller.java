@@ -218,14 +218,16 @@ public class Controller implements ActionListener, KeyListener{
 		
 		case 1: //COLLECT MONEY FROM THE BANK
 			
-			gui.displayText(currentPlayer.getName() + ": +" + card.getValue());
+			gui.displayText("YOU GOT " + card.getCardName() + "\n" 
+							+ currentPlayer.getName() + ": +" + card.getValue());
 			
 			gml.addBalance(currentPlayer, card.getValue());
 			
 			break;
 		case 2: //PAY BANK
 			
-			gui.displayText(currentPlayer.getName() + ": -" + card.getValue());
+			gui.displayText("YOU GOT " + card.getCardName() + "\n" 
+							+ currentPlayer.getName() + ": -" + card.getValue());
 			
 			gml.subtractBalance(currentPlayer, card.getValue());
 			
@@ -236,7 +238,8 @@ public class Controller implements ActionListener, KeyListener{
 				
 				Player target = choosePlayer();
 				
-				gui.displayText(currentPlayer.getName() + ": -" + card.getValue() + "\n"
+				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
+						+	currentPlayer.getName() + ": -" + card.getValue() + "\n"
 						+ target.getName() + ": + " + card.getValue());
 				
 				currentPlayer.subtractBalance(card.getValue());					
@@ -256,7 +259,8 @@ public class Controller implements ActionListener, KeyListener{
 					}
 				}
 				
-				gui.displayText(currentPlayer.getName() + ": -" + (card.getValue() * players.size()) + "\n"
+				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
+						+ currentPlayer.getName() + ": -" + (card.getValue() * players.size()) + "\n"
 						+ "Everyone : +" + card.getValue());
 			}
 				break;
@@ -266,7 +270,8 @@ public class Controller implements ActionListener, KeyListener{
 				
 				Player target = choosePlayer();
 				
-				gui.displayText(currentPlayer.getName() + ": +" + card.getValue() + "\n"
+				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
+						 + currentPlayer.getName() + ": +" + card.getValue() + "\n"
 						 + target.getName() + ": - " + card.getValue());
 				
 				currentPlayer.addBalance(card.getValue());					
@@ -284,7 +289,8 @@ public class Controller implements ActionListener, KeyListener{
 						players.get(i).subtractBalance(card.getValue());
 					}
 				}
-				gui.displayText(currentPlayer.getName() + ": +" + (card.getValue() * players.size()) + "\n"
+				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
+						+ currentPlayer.getName() + ": +" + (card.getValue() * players.size()) + "\n"
 						+ "Everyone : -" + card.getValue());
 			}
 			break;

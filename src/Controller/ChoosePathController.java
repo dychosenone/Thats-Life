@@ -34,10 +34,12 @@ public class ChoosePathController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(path1)) {
+			ui.dispose();
 			choice = 1;
 		}
 		
 		else if (e.getActionCommand().equalsIgnoreCase(path2)) {
+			ui.dispose();
 			choice = 2;
 		}
 		

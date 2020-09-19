@@ -15,6 +15,8 @@ public abstract class BlueCard {
         this.career = career;
 
     }
+    
+    
     public boolean checkPlayerCareer (Career career) {
     	
     	if(career.getPosition() == this.career) {

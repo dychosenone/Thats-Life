@@ -1,38 +1,84 @@
 package Model;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Board {
 	
-	private static final int SPACES = 84;
+	private final int SPACES = 84;
 	private ArrayList <Space> spaces;
 	
 	public Board () {
-		spaces = new ArrayList <>();
+		spaces = new ArrayList <Space>();
 		
-		for (int i = 0; i < SPACES; i++) {
-			boolean add = false;
+		String input[] = new String[SPACES];
+		int i = 0;
+		
+		try {
+			Scanner file = new Scanner ("../src/Config/board.txt");
 			
-			if (i == 1 || i == 20) {
-				add = true;
-				spaces.add(new MagentaSpace("Choose Path"));
+			while(file.hasNextLine()) {
+				
+				input[i] = file.nextLine();
+				i++;
+				
 			}
+			file.close();
 			
-			if(i == 3) {
-				add = true;
-				spaces.add(new MagentaSpace("Get Married"));
+		} catch (Exception e) {
+			System.out.println("An Error Occured.");
+			e.printStackTrace();
+		}
+		
+		
+		for (i = 1; i <= SPACES; i++) {
+			
+			String split[] = input[i].split(" ");
+			int boardNumber = Integer.parseInt(split[0]);
+			String cardName = split[1];
+			boolean hasJump = Boolean.parseBoolean(split[2]);
+			int cardJumpSpace = Integer.parseInt(split[3]);
+					
+					
+			switch(split[0]){
+				case "Magenta":
+		
+					switch(boardNumber) {
+						case 13:
+						case 48:
+						case 59:
+							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "careerChoice"));
+							break;
+						case 16:
+							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "careerChoice"));
+							break;
+						case 26:
+							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "jobSearch"));
+							break;
+						case 46:
+							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "choosePath"));
+							break;
+						case 52:
+						case 95:
+							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "buyHouse"));
+							break;
+						case 62:
+							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "haveChild"));
+							break;
+					}
+				
+					break;
+				case "Blue":
+				case "Green":
+				case "Orange":
+					spaces.add(new Space(boardNumber, cardName, hasJump, cardJumpSpace));
+					break;
+			
 			}
-			
-			else if(i == 12) {
-				add = true;
-				spaces.add(new MagentaSpace("Job Search"));
-			}
-			
-			if (!add)
-				spaces.add(new OrangeSpace("ActionCard"));
+
 		}
 	}
 	
 	public Space getSpace (int index) {
-		return spaces.get(index);
+		return spaces.get(index-1);
 	}
 }

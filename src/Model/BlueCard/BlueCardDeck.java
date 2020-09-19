@@ -46,6 +46,7 @@ public class BlueCardDeck {
         	
         	}
         }
+        Collections.shuffle(deck);
 
     }
     public BlueCard takeCard (){

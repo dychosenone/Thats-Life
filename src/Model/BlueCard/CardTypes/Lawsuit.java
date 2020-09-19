@@ -1,8 +1,8 @@
 package Model.BlueCard.CardTypes;
 
-import Model.BlueCard.BlueCard;
+import Model.BlueCard.*;
 
-public class Lawsuit extends BlueCard{
+public class Lawsuit extends BlueCard {
 	
 	private int amount;
 	

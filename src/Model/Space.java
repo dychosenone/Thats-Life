@@ -2,13 +2,32 @@ package Model;
 
 public class Space {
 	
-	private String name;
+	private int spaceNumber;
+	private String spaceName;
+	private boolean isChoosePath;
+	private int pathJump;
 	
-	public Space (String name) {
-		this.name = name;
+	
+	
+	public Space (int number, String spaceName, boolean isChoosePath, int pathJump) {
+		this.spaceNumber = number;
+		this.spaceName = spaceName;
+		this.isChoosePath = isChoosePath;
+		this.pathJump = pathJump;
+		
 	}
 	
 	public String getName () {
-		return name;
+		return this.spaceName;
+	}
+	public int getSpaceNumber () {
+		return this.spaceNumber;
+	}
+	
+	public boolean isChoosePath () {
+		return this.isChoosePath;
+	}
+	public int pathhJump () {
+		return this.pathJump;
 	}
 }

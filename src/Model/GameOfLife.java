@@ -1,14 +1,18 @@
 package Model;
 
 import Model.ActionCard.ActionCard;
+import Model.BlueCard.*;
 import Model.ActionCard.ActionCardDeck;
 import Model.Career.CareerCard;
 import Model.Career.CareerCardDeck;
+
 import Model.Player.Career;
 import Model.Player.Player;
 import Model.Player.Players;
+
 import Model.SalaryCard.SalaryCard;
 import Model.SalaryCard.SalaryCardDeck;
+
 import View.GUI;
 
 import java.util.ArrayList;
@@ -25,6 +29,7 @@ public class GameOfLife {
 	private ActionCardDeck actionDeck;
 	private CareerCardDeck careerDeck;
 	private SalaryCardDeck salaryDeck;
+	private BlueCardDeck blueCardDeck;
 	
 	private Players players;
 	private Player currentPlayer;
@@ -49,6 +54,7 @@ public class GameOfLife {
 		actionDeck = new ActionCardDeck();
 		careerDeck = new CareerCardDeck();
 		salaryDeck = new SalaryCardDeck();
+		blueCardDeck = new BlueCardDeck();
 		
 		board = new Board();
 		bank = new Bank();
@@ -127,7 +133,10 @@ public class GameOfLife {
 		
 		return -1;
 	}
+//BLUE SPACES FUNCTIONS
 
+	
+	
 //MAGENTA SPACES FUNCTIONS
 	public boolean isMagenta () {
 		Space space = board.getSpace(currentPlayer.getPosition());

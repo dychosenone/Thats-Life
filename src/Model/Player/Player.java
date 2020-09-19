@@ -107,6 +107,10 @@ public class Player {
 	public boolean isMarried () {
 		return married;
 	}
+	
+	public void getMarried () {
+		married = true;
+	}
 
 
 	/**

@@ -28,7 +28,7 @@ public class GameOfLife {
 	
 	private Players players;
 	private Player currentPlayer;
-	private int wheel;
+	public int wheel;
 	private Player target = new Player();
 
 	private boolean turn = false;	
@@ -148,6 +148,24 @@ public class GameOfLife {
 		currentPlayer.setNewCareer(career, salary);
 	}
 	
+	public void getMarried (int tempWheel) {
+		int i;
+		ArrayList <Player> temp = getPlayers();
+		if (tempWheel % 2 == 0) {
+			for (i = 0; i < temp.size(); i++) {
+				currentPlayer.addBalance(10000);
+				temp.get(i).subtractBalance(10000);
+			}
+			
+		}
+		else {
+			for (i = 0; i < temp.size(); i++) {
+				currentPlayer.addBalance(5000);
+				temp.get(i).subtractBalance(5000);
+			}
+		}
+	}
+	
 //ORANGE SPACES FUNCTION
 	
 	/**
@@ -178,11 +196,9 @@ public class GameOfLife {
 	 * 
 	 * @return Wheel - number of spaces player will move
 	 */
-	public boolean spinWheel () {
+	public int spinWheel () {
 		
-		wheel = 1 + (int)(Math.random() * 10);
-		
-		return true;
+		return 1 + (int)(Math.random() * 10);
 	}
 	
 	/**

@@ -24,6 +24,7 @@ public class Controller implements ActionListener, KeyListener{
 	private boolean finish = false;
 	
 	private int path = 0;
+	private int tempWheel;
 	
 	public Controller (GUI gui, GameOfLife gml) {
 		this.gui = gui;
@@ -63,11 +64,14 @@ public class Controller implements ActionListener, KeyListener{
 					processTurn();
 					gui.updatePlayerInfo(gml.getPlayers(), currentPlayer);
 					accessLoan ();
+					gui.displayText("FINISH TURN");
+					
 					finish = true;
+
 				}
 				
 			}while (turn);
-			
+			gui.nextTurn();
 			gml.nextTurn();
 			
 		}while (i < 50);
@@ -164,8 +168,8 @@ public class Controller implements ActionListener, KeyListener{
 		do {
 			System.out.print("");
 			if (spin) {
+				gml.wheel = tempWheel;
 				gml.processTurn();
-				
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
 				for (int i = 1; i <= gml.getWheel(); i++) {
@@ -176,13 +180,15 @@ public class Controller implements ActionListener, KeyListener{
 						
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						System.out.println(spaceType);
+						gui.displayText("1" + currentPlayer.getPosition());
 						gui.interactSpace(spaceType);
 						interactSpace (spaceType);
 					}
 				}			
-				
+				gui.displayText("2" + currentPlayer.getPosition());
 				gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
 				interactSpace (gml.interactSpace(currentPlayer.getPosition()));
+				
 				
 			}
 			
@@ -203,7 +209,13 @@ public class Controller implements ActionListener, KeyListener{
 			gml.jobSearch();
 			break;
 		case 2:
-			gui.displayText("YOU ARE NOW MARRIED");
+			if (!currentPlayer.isMarried()) {
+				getMarried ();
+				gui.displayText("YOU ARE NOW MARRIED");
+			}
+			else {
+				gui.displayText("YOU ARE CURRENTLY MARRIED");
+			}
 			break;
 		case 3:
 			choosePath();
@@ -299,6 +311,27 @@ public class Controller implements ActionListener, KeyListener{
 	
 //MAGENTS SPACES
 	
+	public void getMarried () {
+		spin = false;
+		gui.displayText("SPIN WHEEL1");
+		
+		do {
+			System.out.print("");
+			if (spin) {
+				if (tempWheel  % 2 == 0) {// if wheel is even
+					gui.displayText("YOU ROLLED A " + tempWheel + " COLLECT 10000 FROM EVERYONE" );
+					gml.getMarried(tempWheel);
+				}
+				
+				else {
+					gui.displayText("YOU ROLLED A " + tempWheel + " COLLECT 5000 FROM EVERYONE" );
+					gml.getMarried(tempWheel);
+				}
+			}
+			
+		}while (!spin);
+	}
+	
 	public void choosePath () {
 		ChoosePathController cCont;
 		ChoosePath cUI = new ChoosePath("START CAREER", "START COLLEGE");
@@ -324,8 +357,31 @@ public class Controller implements ActionListener, KeyListener{
 				}
 				
 			}while(run);
+			path = cCont.getChoice();
+			System.out.println(path);
+		}
+		
+		else if (currentPlayer.getPosition() == 20) {
+			cCont = new ChoosePathController ("FAMILY PATH", "CAREER PATH", cUI);
+			boolean run = true;
 			
-			//cCont.closeWindow();
+			do {
+				
+				System.out.print(cCont.getChoice());
+				
+				switch (cCont.getChoice()) {
+				case 0:
+					run = true;
+					break;
+				case 1:
+					run = false;
+					break;
+				case 2:
+					run = false;
+					break;
+				}
+				
+			}while(run);
 			path = cCont.getChoice();
 			System.out.println(path);
 		}
@@ -339,7 +395,8 @@ public class Controller implements ActionListener, KeyListener{
 		switch (e.getActionCommand()) {
 		
 		case "SPIN WHEEL":
-			spin = gml.spinWheel();
+			tempWheel = gml.spinWheel();
+			spin = true;
 			break;
 		case "GET LOAN":
 			if (access) {

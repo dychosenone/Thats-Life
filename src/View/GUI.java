@@ -138,8 +138,11 @@ public class GUI extends JFrame{;
     }
     
     public void displayText (String text) {
-    	taConsole.setText("");
     	taConsole.append(text + "\n");
+    }
+    
+    public void nextTurn () {
+    	taConsole.setText("");
     }
     
     public String getInput (){
@@ -161,6 +164,7 @@ public class GUI extends JFrame{;
     	
     	for (i = 0; i < players.size(); i++){     
     		taPlayerInfo.append(players.get(i).getName() + " : " +  players.get(i).getBalance() + newLine);
+    		taPlayerInfo.append("POSITION " + players.get(i).getPosition() + newLine);
     		
     		if (players.get(i).getJob() != NULL) {
 	    		taPlayerInfo.append("CAREER POSITION: " + players.get(i).getJob().getPosition() + newLine);

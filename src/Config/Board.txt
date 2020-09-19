@@ -1,128 +1,128 @@
-1 Orange
-2 Orange
-3 Orange
-4 Orange
-5 Orange
-6 Orange
-7 Orange
-8 Orange
-9 Orange
-10 Orange 16
-11 Orange Career
-12 Orange
-13 Orange
-14 Orange
-15 Green Career
-16 Magenta
-17 Green
-18 Orange
-19 Orange
-20 Orange
-21 Orange
-22 Orange
-23 Green
-24 Orange
-25 Orange
-26 Magenta
-27 Orange
-28 Orange
-29 Orange
-30 Orange
-31 Blue
-32 Orange
-33 Orange
-34 Orange
-35 Orange
-36 Orange
-37 Orange
-38 Green
-39 Orange
-40 Orange
-41 Blue
-42 Magenta
-43 Orange
-44 Orange
-45 Orange
-46 Magenta
-47 Orange
-48 Orange
-49 Orange
-50 Orange
-51 Green
-52 Orange
-53 Orange
-54 Orange
-55 Orange 62
-56 Orange
-57 Orange
-58 Orange
-59 Orange
-60 Orange
-61 Orange End path
-62 Orange
-63 Orange
-64 Orange
-65 Blue
-66 Orange
-67 Orange
-68 Green
-69 Orange
-70 Blue
-71 Orange
-72 Orange
-73 Magenta
-74 Orange
-75 Green
-76 Orange
-77 Blue
-78 Orange
-79 Orange
-80 Orange
-81 Green
-82 Orange
-83 Orange
-84 Orange
-85 Blue
-86 Orange
-87 Orange
-88 Orange
-89 Blue
-90 Orange
-91 Orange
-92 Orange
-93 Orange
-94 Orange
-95 Orange
-96 Orange
-97 Green
-98 Orange
-99 Orange
-100 Orange
-101 Orange
-102 Blue
-103 Orange
-104 Orange
-105 Orange
-106 Orange
-107 Orange
-108 Green
-109 Orange
-110 Blue
-111 Orange
-112 Orange
-113 Orange
-114 Orange
-115 Orange
-116 Orange
-117 Orange
-118 Orange
-119 Orange
-120 Orange
-121 Green
-122 Orange
-123 Orange
-124 Orange
-125 Blue
-126 Orange
-127 Orange
-128 Orange
+1 Orange false NULL
+2 Orange false NULL
+3 Orange false NULL
+4 Orange false NULL
+5 Orange false NULL
+6 Orange false NULL
+7 Orange false NULL
+8 Orange false NULL
+9 Orange false NULL
+10 Orange true 17
+11 Orange fasle NULL //career
+12 Orange false NULL
+13 Magenta false NULL //get married
+14 Orange false NULL
+15 Green End false NULL
+16 Magenta false NULL //College Career Choice
+17 Green false NULL
+18 Orange false NULL
+19 Orange false NULL
+20 Orange false NULL
+21 Orange false NULL
+22 Orange false NULL
+23 Green false NULL
+24 Orange false NULL
+25 Orange false NULL
+26 Magenta false NULL //job search
+27 Orange false NULL 
+28 Orange false NULL
+29 Green false NULL
+30 Orange false NULL
+31 Blue false NULL
+32 Orange false NULL
+33 Orange false NULL
+34 Orange false NULL
+35 Orange false NULL
+36 Orange false NULL
+37 Orange false NULL
+38 Green false NULL
+39 Orange false NULL
+40 Orange false NULL
+41 Blue false NULL
+42 Green false NULL
+43 Orange false NULL
+44 Orange false NULL
+45 Orange false NULL
+46 Magenta false NULL //which path
+47 Orange false NULL
+48 Magenta false NULL //get married
+49 Orange false NULL
+50 Orange false NULL
+51 Blue false NULL
+52 Magenta false NULL //get house
+53 Orange false NULL
+54 Magenta true 62 // have twins
+55 Green false NULL
+56 Orange false NULL
+57 Orange false NULL
+58 Green false NULL
+59 Magenta false NULL //Career Change
+60 Blue false NULL
+61 Orange End path NULL
+62 Orange false NULL
+63 Orange false NULL
+64 Orange false NULL
+65 Blue false NULL
+66 Orange false NULL
+67 Orange false NULL
+68 Green false NULL
+69 Orange false NULL
+70 Blue false NULL
+71 Orange false NULL
+72 Orange false NULL
+73 Orange false NULL
+74 Orange false NULL
+75 Green false NULL
+76 Orange false NULL
+77 Blue false NULL
+78 Orange false NULL
+79 Orange false NULL
+80 Orange false NULL
+81 Green false NULL
+82 Orange false NULL
+83 Orange false NULL
+84 Orange false NULL
+85 Blue false NULL
+86 Orange false NULL
+87 Orange false NULL 
+88 Orange false NULL 
+89 Blue false NULL
+90 Orange false NULL
+91 Orange false NULL
+92 Orange false NULL
+93 Orange false NULL
+94 Orange false NULL
+95 Magenta false NULL //buy house
+96 Orange false NULL
+97 Green false NULL
+98 Orange false NULL
+99 Orange false NULL
+100 Orange false NULL
+101 Orange false NULL
+102 Blue false NULL
+103 Orange false NULL
+104 Orange false NULL
+105 Orange false NULL
+106 Orange false NULL
+107 Orange false NULL
+108 Green false NULL
+109 Orange false NULL
+110 Blue false NULL
+111 Orange false NULL
+112 Orange false NULL
+113 Orange false NULL
+114 Orange false NULL
+115 Orange false NULL
+116 Orange false NULL
+117 Orange false NULL
+118 Orange false NULL
+119 Orange false NULL
+120 Orange false NULL
+121 Green false NULL
+122 Orange false NULL
+123 Orange false NULL
+124 Orange false NULL
+125 Blue false NULL
+126 Orange false NULL
+127 Orange false NULL
+128 Orange false NULL

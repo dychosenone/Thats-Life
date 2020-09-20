@@ -17,7 +17,6 @@ public class Board {
 			Scanner file = new Scanner ("../src/Config/board.txt");
 			
 			while(file.hasNextLine()) {
-				
 				input[i] = file.nextLine();
 				i++;
 				
@@ -44,6 +43,7 @@ public class Board {
 		
 					switch(boardNumber) {
 						case 13:
+							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "getMarried"));
 						case 48:
 						case 59:
 							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "careerChoice"));

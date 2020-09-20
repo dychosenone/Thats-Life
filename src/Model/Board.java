@@ -41,7 +41,7 @@ public class Board {
 			int cardJumpSpace = Integer.parseInt(split[3]);
 					
 					
-			switch(split[0]){
+			switch(split[1]){
 				case "Magenta":
 		
 					switch(boardNumber) {
@@ -81,6 +81,6 @@ public class Board {
 	}
 	
 	public Space getSpace (int index) {
-		return spaces.get(index-1);
+		return spaces.get(index);
 	}
 }

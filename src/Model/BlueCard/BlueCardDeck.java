@@ -1,5 +1,6 @@
 package Model.BlueCard;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class BlueCardDeck {
         int i = 0;
 
         try {
-            Scanner file = new Scanner ("../src/Config/BlueCard.txt");
+            Scanner file = new Scanner (new File ("../Thats-Life/src/Config/BlueCard.txt"));
             
             this.numCards = Integer.parseInt(file.nextLine());
 

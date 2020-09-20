@@ -1,10 +1,12 @@
 package Model;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Board {
 	
-	private final int SPACES = 84;
+	private final int SPACES = 128;
 	private ArrayList <Space> spaces;
 	
 	public Board () {
@@ -14,7 +16,7 @@ public class Board {
 		int i = 0;
 		
 		try {
-			Scanner file = new Scanner ("../src/Config/board.txt");
+			Scanner file = new Scanner (new File("../Thats-Life/src/Config/board.txt"));
 			
 			while(file.hasNextLine()) {
 				
@@ -30,7 +32,7 @@ public class Board {
 		}
 		
 		
-		for (i = 1; i <= SPACES; i++) {
+		for (i = 0; i < SPACES; i++) {
 			
 			String split[] = input[i].split(" ");
 			int boardNumber = Integer.parseInt(split[0]);

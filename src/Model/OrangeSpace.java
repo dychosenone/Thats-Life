@@ -1,3 +1,4 @@
+/*
 package Model;
 
 public class OrangeSpace extends Space{
@@ -7,3 +8,4 @@ public class OrangeSpace extends Space{
 		
 	}
 }
+*/

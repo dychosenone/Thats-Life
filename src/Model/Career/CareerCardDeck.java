@@ -17,18 +17,17 @@ public class CareerCardDeck {
 
         careerCard = new ArrayList<CareerCard>();
         try {
-            Scanner file = new Scanner(new File("D:\\Documents\\DLSU Files\\TERM 3\\CCPROG3\\Thats-Life - Copy\\src\\Config/CareerCards.txt"));
+            Scanner file = new Scanner(("../src/Config/CareerCards.txt"));
 
             while (file.hasNextLine()) {
                 String input = file.nextLine();
 
                 String split[] = input.split(" ");
-                int min = Integer.parseInt(split[1]);
                 int max = Integer.parseInt(split[2]);
                 boolean college = Boolean.parseBoolean(split[3]);
 
                 for(int i = 0; i < NUM_CAREER; i++){
-                    careerCard.add(new CareerCard(split[0], min, max, college));
+                    careerCard.add(new CareerCard(split[0], Integer.parseInt(split[1]), max, college));
                 }
 
             }

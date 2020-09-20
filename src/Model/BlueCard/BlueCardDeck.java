@@ -3,9 +3,6 @@ package Model.BlueCard;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import Model.BlueCard.CardTypes.*;
-
-
 
 public class BlueCardDeck {
 
@@ -38,13 +35,10 @@ public class BlueCardDeck {
         
         for(i = 0; i < numCards; i++) {
         	String cardSplit[] = cardTemp[i].split(" ");
-        	switch(cardSplit[0]) {
+        	String cardName = cardSplit[0];
+        	String career = cardSplit[1];
+        	deck.add(new BlueCard(cardName, career));
         	
-        	case "Lawsuit":
-        		deck.add(new Lawsuit());
-        		break;
-        	
-        	}
         }
         Collections.shuffle(deck);
 

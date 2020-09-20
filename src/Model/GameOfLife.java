@@ -133,8 +133,19 @@ public class GameOfLife {
 		
 		return -1;
 	}
+	
 //BLUE SPACES FUNCTIONS
-
+	public void takeBlueCard () {
+		
+		BlueCard card = blueCardDeck.takeCard();
+		int amount = card.cardAction(currentPlayer, currentPlayer.getJob(), players.getSize());
+		
+		if(card.checkPlayerCareer(currentPlayer.getJob()) == true) {
+			addBalance (currentPlayer, amount);
+		} else {
+			subtractBalance (currentPlayer, amount);
+		}
+	}
 	
 	
 //MAGENTA SPACES FUNCTIONS
@@ -205,7 +216,7 @@ public class GameOfLife {
 	 * 
 	 * @return Wheel - number of spaces player will move
 	 */
-	public int spinWheel () {
+	public static int spinWheel () {
 		
 		return 1 + (int)(Math.random() * 10);
 	}

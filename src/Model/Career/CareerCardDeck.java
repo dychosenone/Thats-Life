@@ -16,20 +16,15 @@ public class CareerCardDeck {
     public CareerCardDeck () {
 
         careerCard = new ArrayList<CareerCard>();
+        String input[] = new String[NUM_CAREER];
+        int i = 0;
+        
         try {
-            Scanner file = new Scanner(new File("D:\\Documents\\DLSU Files\\TERM 3\\CCPROG3\\Thats-Life - Copy\\src\\Config/CareerCards.txt"));
-
+            Scanner file = new Scanner(new File ("../Thats-Life/src/Config/CareerCards.txt"));
+            
             while (file.hasNextLine()) {
-                String input = file.nextLine();
-
-                String split[] = input.split(" ");
-                int min = Integer.parseInt(split[1]);
-                int max = Integer.parseInt(split[2]);
-                boolean college = Boolean.parseBoolean(split[3]);
-
-                for(int i = 0; i < NUM_CAREER; i++){
-                    careerCard.add(new CareerCard(split[0], min, max, college));
-                }
+                input[i] = file.nextLine();
+                i++;	
 
             }
             file.close();
@@ -39,7 +34,19 @@ public class CareerCardDeck {
             e.printStackTrace();
         }
         
-        reshuffleCards();
+        for(i = 0; i < NUM_CAREER; i++){
+
+        	String split[] = input[i].split(" ");
+            
+            String cardName = split[0];
+            int min = Integer.parseInt(split[1]);
+            int max = Integer.parseInt(split[2]);
+            boolean college = Boolean.parseBoolean(split[3]);
+            
+            careerCard.add(new CareerCard(cardName, min, max, college));
+        }
+        
+        Collections.shuffle(careerCard);
 
     }
     

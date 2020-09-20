@@ -113,20 +113,20 @@ public class GameOfLife {
 		
 		Space space =board.getSpace(position);
 			
-		if (space instanceof OrangeSpace) {
+		if (space.getName().equalsIgnoreCase("Orange")) {
 			return 0;
 		}
 		
 		else if (space instanceof MagentaSpace) {			
 			
 			switch (space.getName()){
-				case "Job Search":
+				case "jobSearch":
 					return 1;
 					
-				case "Get Married":
+				case "getMarried":
 					return 2;
 				
-				case "Choose Path":
+				case "choosePath":
 					return 3;
 			}
 		}

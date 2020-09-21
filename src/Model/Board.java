@@ -83,4 +83,12 @@ public class Board {
 	public Space getSpace (int index) {
 		return spaces.get(index);
 	}
+	
+	public void printSpaces () {
+		int i;
+		
+		for (i = 0; i < spaces.size(); i++) {
+			System.out.println(spaces.get(i).getName());
+		}
+	}
 }

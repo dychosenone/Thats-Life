@@ -204,7 +204,7 @@ public class GUI extends JFrame{;
     					   "YOU LANDED ON GET MARRIED TILE",	   //2
     					   "YOU LANDED ON CHOOSE PATH TILE"};      //3
     	
-    	
+    	System.out.println(spaceType);
     	displayText(text[spaceType]);
     }
     

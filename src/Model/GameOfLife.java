@@ -112,6 +112,7 @@ public class GameOfLife {
 	public int interactSpace (int position) {
 		
 		Space space =board.getSpace(position);
+		System.out.println(space.getName());
 			
 		if (space.getName().equalsIgnoreCase("Orange")) {
 			return 0;
@@ -119,7 +120,7 @@ public class GameOfLife {
 		
 		else if (space instanceof MagentaSpace) {			
 			
-			switch (space.getName()){
+			switch (((MagentaSpace) space).getMagentaType()){
 				case "jobSearch":
 					return 1;
 					
@@ -151,7 +152,6 @@ public class GameOfLife {
 //MAGENTA SPACES FUNCTIONS
 	public boolean isMagenta () {
 		Space space = board.getSpace(currentPlayer.getPosition());
-		
 		boolean check = false;
 		
 		if (space instanceof MagentaSpace) {
@@ -286,6 +286,10 @@ public class GameOfLife {
 	
 	public ArrayList <Player> getPlayers(){
 		return players.getPlayers();
+	}
+	
+	public void printSpaces () {
+		board.printSpaces();
 	}
 	
 	public int getWheel () {

@@ -41,6 +41,7 @@ public class Controller implements ActionListener, KeyListener{
 //GAME INTIIALIZING
 	public void startGame () {
 		//gets number of players
+		gml.printSpaces();
 		System.out.println("CONTROLLER STARTS");
 		getNumberOfPlayers();
 		
@@ -160,6 +161,7 @@ public class Controller implements ActionListener, KeyListener{
 	
 	public void processTurn () {
 		startTurn();
+		int i;
 		currentPlayer = gml.getCurrentPlayer();
 		
 		gui.displayText("IT IS " + currentPlayer.getName() +"'S TURN" + "\n" + 
@@ -172,20 +174,19 @@ public class Controller implements ActionListener, KeyListener{
 				gml.processTurn();
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
-				for (int i = 1; i <= gml.getWheel(); i++) {
+				for (i = 1; i <= gml.getWheel(); i++) {
 					
 					currentPlayer.move();
-					
+					System.out.println(gml.isMagenta());
 					if (gml.isMagenta() && i != gml.getWheel() ) {
-						
+						System.out.println(gml.isMagenta() + "2:" + gml.getWheel() + " " + i + ":" +gml.getWheel());
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						System.out.println(spaceType);
-						gui.displayText("1" + currentPlayer.getPosition());
 						gui.interactSpace(spaceType);
 						interactSpace (spaceType);
 					}
-				}			
-				gui.displayText("2" + currentPlayer.getPosition());
+				}		
+				System.out.println(gml.isMagenta() + "1:" + gml.getWheel() + " " + i + ":" +gml.getWheel());
 				gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
 				interactSpace (gml.interactSpace(currentPlayer.getPosition()));
 				

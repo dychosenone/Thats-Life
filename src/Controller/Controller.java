@@ -87,17 +87,25 @@ public class Controller implements ActionListener, KeyListener{
 		while (!done) {
 			System.out.print("");
 			if (done) {
-				temp = Integer.parseInt(input);
 				
-				if(temp >= 2 && temp <= 3) {
-					maxPlayers = temp;
-					gml.getNumberOfPlayers(maxPlayers);
+				try {
+					
+					temp = Integer.parseInt(input);
+					if(temp >= 2 && temp <= 3) {
+						maxPlayers = temp;
+						gml.getNumberOfPlayers(maxPlayers);
+					}
+					
+					else {
+						gui.displayText("INVALID INPUT, ONLY 2 TO 3 PLAYERS ARE ALLOWED");
+						gui.getNumberOfPlayers();
+						pauseGUI();
+					}
 				}
 				
-				else {
-					gui.displayText("INVALID INPUT, ONLY 2 TO 3 PLAYERS ARE ALLOWED");
-					gui.getNumberOfPlayers();
-					pauseGUI();
+				catch(Exception e){
+					done = false;
+					gui.displayText("INVALID INPUT");
 				}
 				
 			}
@@ -113,48 +121,22 @@ public class Controller implements ActionListener, KeyListener{
 			do {
 				System.out.print("");
 				if(done) {
-					gui.displayText(input + " has Entered the Game");
-					gml.enterPlayers(input);
+					
+					if (!input.equalsIgnoreCase("")) {
+						gui.displayText(input + " has Entered the Game");
+						gml.enterPlayers(input);
+					}
+					
+					else {
+						gui.displayText("INVALID INPUT");
+						done = false;
+					}
 				}
 				
 			}while (!done);
 			
 			pauseGUI();
 		}
-	}
-	
-	public Player choosePlayer() {
-		gui.enableInputs();
-		int option;
-		int index = -1;
-		
-		ArrayList <Player> players = gml.getPlayers();
-		
-		gui.choosePlayer(players, currentPlayer);
-		
-		do {
-			System.out.print("");
-			
-			if (done) {
-				option = Integer.parseInt(input);
-				
-				index  = gml.choosePlayer (option);
-				
-				switch (index) {
-				
-				case -1:
-					gui.displayText("INVALID PLAYER / INVALID INPUT, TRY AGAIN");
-					done = false;
-					break;
-				case 0: case 1: case 2: 
-					break;
-				}
-				
-			}
-		}while (!done);
-		
-		pauseGUI();
-		return players.get(index);
 	}
 	
 //MAIN GAME METHODS
@@ -310,6 +292,46 @@ public class Controller implements ActionListener, KeyListener{
 		}
 		
 		gui.disableInputs();
+	}
+	
+	public Player choosePlayer() {
+		gui.enableInputs();
+		int option;
+		int index = -1;
+		
+		ArrayList <Player> players = gml.getPlayers();
+		
+		gui.choosePlayer(players, currentPlayer);
+		
+		do {
+			System.out.print("");
+			
+			if (done) {
+				
+				try {
+					option = Integer.parseInt(input);
+					
+					index  = gml.choosePlayer (option);
+					
+					switch (index) {
+					
+					case -1:
+						gui.displayText("INVALID PLAYER / INVALID INPUT, TRY AGAIN");
+						done = false;
+						break;
+					case 0: case 1: case 2: 
+						break;
+					}
+				}catch(Exception e) {
+					done = false;
+					gui.displayText("INVALID OPTION");
+				}
+				
+			}
+		}while (!done);
+		
+		pauseGUI();
+		return players.get(index);
 	}
 	
 //MAGENTS SPACES

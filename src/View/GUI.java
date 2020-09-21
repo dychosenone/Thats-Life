@@ -203,9 +203,13 @@ public class GUI extends JFrame{;
     					   "YOU LANDED ON JOB SEARCH TILE",        //1
     					   "YOU LANDED ON GET MARRIED TILE",	   //2
     					   "YOU LANDED ON CHOOSE PATH TILE"};      //3
-    	
-    	System.out.println(spaceType);
-    	displayText(text[spaceType]);
+    	if (spaceType != -1) {
+	    	System.out.println(spaceType);
+	    	displayText(text[spaceType]);
+    	}
+    	else {
+    		displayText("YOU LANDED ON NA");
+    	}
     }
     
     public void choosePlayer (ArrayList<Player> players, Player currentPlayer) {

@@ -308,6 +308,8 @@ public class Controller implements ActionListener, KeyListener{
 			}
 			break;
 		}
+		
+		gui.disableInputs();
 	}
 	
 //MAGENTS SPACES

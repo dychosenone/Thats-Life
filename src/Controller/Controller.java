@@ -162,22 +162,23 @@ public class Controller implements ActionListener, KeyListener{
 					
 					currentPlayer.move();
 					
+					//CHECK IF CURRENT SPACE IS MAGENTA
+					
+					if (gml.isMagenta() && i != gml.getWheel() ) {
+						int spaceType = gml.interactSpace(currentPlayer.getPosition());
+						System.out.println(spaceType);
+						gui.interactSpace(spaceType);
+						interactSpace (spaceType);
+					}
+					
 					//Check if space has a jump
 					if(gml.isJump() == true){
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						System.out.println("Jumped to space number: " + gml.getJump());
 						gui.interactSpace(spaceType);
 						interactSpace(spaceType);
-						currentPlayer.jumpTo(gml.getJump());
+						currentPlayer.jumpTo(gml.getJump() - 1);
 					}
-					//CHECK IF CURRENT SPACE IS MAGENTA
-					/*
-					if (gml.isMagenta() && i != gml.getWheel() ) {
-						int spaceType = gml.interactSpace(currentPlayer.getPosition());
-						System.out.println(spaceType);
-						gui.interactSpace(spaceType);
-						interactSpace (spaceType);
-					}*/
 				}		
 				gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
 				interactSpace (gml.interactSpace(currentPlayer.getPosition()));

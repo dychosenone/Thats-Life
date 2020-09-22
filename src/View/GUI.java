@@ -224,7 +224,7 @@ public class GUI extends JFrame{;
     }
     
     public void choosePlayer (ArrayList<Player> players, Player currentPlayer) {
-    	taConsole.setText("CHOOSE A PLAYER: " + "\n");
+    	taConsole.append("CHOOSE A PLAYER: " + "\n");
     	for (int i = 0; i < players.size(); i++) {
     		
     		if (!players.get(i).equals(currentPlayer))

@@ -90,7 +90,13 @@ public class Board {
 		int i;
 		
 		for (i = 0; i < spaces.size(); i++) {
-			System.out.println(spaces.get(i).getName());
+			if (spaces.get(i).getName().equalsIgnoreCase("Magenta")) {
+				MagentaSpace temp = (MagentaSpace) spaces.get(i);
+				System.out.println(i + temp.getMagentaType());
+			}
+			else {
+				System.out.println(i + " " + spaces.get(i).getName());
+			}
 		}
 	}
 }

@@ -263,7 +263,6 @@ public class GameOfLife {
 	 */
 	public int choosePlayer(int option) {
 		
-		Player target = new Player();
 		ArrayList <Player> temp = players.getPlayers();
 					
 		switch (option) {

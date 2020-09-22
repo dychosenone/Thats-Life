@@ -6,6 +6,7 @@ import Model.SalaryCard.SalaryCard;
 public class Player {
 	
 	private static final int LOAN_PAYMENT_MULTIPLE = 25000;
+	private static final int MAX_BABIES = 4;
 	
 	private String name;
 	private int balance;
@@ -116,6 +117,14 @@ public class Player {
 		married = true;
 	}
 
+	public boolean haveBabies (int num) {
+		if (isMarried() || baby < MAX_BABIES) {
+			baby += num;
+			return true;
+		}
+		else
+			return false;
+	}
 
 	/**
 	 * When called, will return the Model.Career class of the player selected.

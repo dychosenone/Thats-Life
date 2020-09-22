@@ -42,6 +42,7 @@ public class Controller implements ActionListener, KeyListener{
 //GAME INTIIALIZING
 	public void startGame () {
 		//gets number of players
+		gml.printSpaces();
 		System.out.println("CONTROLLER STARTS");
 		getNumberOfPlayers();
 		
@@ -153,6 +154,7 @@ public class Controller implements ActionListener, KeyListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
+				//gml.wheel = 60; //FOR TESTING
 				gml.processTurn();
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
@@ -174,6 +176,8 @@ public class Controller implements ActionListener, KeyListener{
 				
 				
 			}
+			
+			//currentPlayer.position = 0; //FOR TESTING
 			
 		}while (!spin);
 	}
@@ -358,7 +362,6 @@ public class Controller implements ActionListener, KeyListener{
 		}
 	}
 //GREEN SPACES
-	
 	public void greenSpaceEffect() {
 		int temp = 1 + (int)(Math.random() * 10);
 		
@@ -390,16 +393,17 @@ public class Controller implements ActionListener, KeyListener{
 			if (spin) {
 				if (tempWheel  % 2 == 0) {// if wheel is even
 					gui.displayText("YOU ROLLED A " + tempWheel + " COLLECT 10000 FROM EVERYONE" );
-					gml.getMarried(tempWheel);
 				}
 				
 				else {
 					gui.displayText("YOU ROLLED A " + tempWheel + " COLLECT 5000 FROM EVERYONE" );
-					gml.getMarried(tempWheel);
 				}
 			}
 			
+			
 		}while (!spin);
+		gml.getMarried(tempWheel);
+		currentPlayer.getMarried();
 	}
 	
 	public void choosePath () {
@@ -458,7 +462,24 @@ public class Controller implements ActionListener, KeyListener{
 	}
 	
 	public void haveChild () {
+		int tempChance = GameOfLife.spinWheel();
 		
+		if (tempChance > 6) {// have twins
+			if(currentPlayer.haveBabies(2)) {
+				gui.displayText("YOU HAVE TWINS!");
+			}
+			else {
+				gui.displayText("YOU CAN'T HAVE ANYMORE BABIES");
+			}
+		}
+		else {// have baby
+			if(currentPlayer.haveBabies(1)) {
+				gui.displayText("YOU HAVE A BABY!");
+			}
+			else {
+				gui.displayText("YOU CAN'T HAVE ANYMORE BABIES");
+			}
+		}
 	}
 
 	
@@ -470,7 +491,7 @@ public class Controller implements ActionListener, KeyListener{
 		switch (e.getActionCommand()) {
 		
 		case "SPIN WHEEL":
-			tempWheel = gml.spinWheel();
+			tempWheel = GameOfLife.spinWheel();
 			spin = true;
 			break;
 		case "GET LOAN":

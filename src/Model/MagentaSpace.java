@@ -8,11 +8,9 @@ public class MagentaSpace extends Space {
 	public MagentaSpace (int number, String spaceName, boolean isChoosePath, int pathJumpString, String magentaType) {
 		super (number, spaceName, isChoosePath, pathJumpString);
 		this.magentaType = magentaType;
-		
-		if(this.magentaType == "haveChild")
-			changeChildTo();
+
 	}
-	
+	/*
 	public void changeChildTo () {
 		
 		int value = (int) (Math.random() * (2 - 1 + 1) + 1);
@@ -23,7 +21,7 @@ public class MagentaSpace extends Space {
 			this.magentaType = "haveTwin";
 		
 	}
-	
+	*/
 	public String getMagentaType () {
 		return this.magentaType;
 	}

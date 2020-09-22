@@ -83,7 +83,7 @@ public class Board {
 	}
 
 	public Space getSpace (int index) {
-		return spaces.get(index+1);
+		return spaces.get(index-1);
 	}
 	
 	public void printSpaces () {

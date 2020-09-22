@@ -69,6 +69,7 @@ public class Board {
 				
 					break;
 				case "Blue":
+					spaces.add(new Space(boardNumber, cardName, hasJump, cardJumpSpace));
 				case "Green":
 				case "Orange":
 					spaces.add(new Space(boardNumber, cardName, hasJump, cardJumpSpace));

@@ -202,7 +202,8 @@ public class GUI extends JFrame{;
     	String text[] = {  "YOU LANDED ON ACTION CARD TILE",       //0
     					   "YOU LANDED ON JOB SEARCH TILE",        //1
     					   "YOU LANDED ON GET MARRIED TILE",	   //2
-    					   "YOU LANDED ON CHOOSE PATH TILE"};      //3
+    					   "YOU LANDED ON CHOOSE PATH TILE",		   //3
+    					   "YOU LANDED ON BLUE CARD TILE"};        //4
     	if (spaceType != -1) {
 	    	System.out.println(spaceType);
 	    	displayText(text[spaceType]);

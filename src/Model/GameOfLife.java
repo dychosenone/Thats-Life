@@ -113,11 +113,11 @@ public class GameOfLife {
 		
 		Space space =board.getSpace(position);
 		System.out.println(space.getName());
-			
+		//ORANGE SPACE	
 		if (space.getName().equalsIgnoreCase("Orange")) {
 			return 0;
 		}
-		
+		//MAGENTA SPACE
 		else if (space instanceof MagentaSpace) {			
 			
 			switch (((MagentaSpace) space).getMagentaType()){
@@ -131,20 +131,32 @@ public class GameOfLife {
 					return 3;
 			}
 		}
+		//BLUE SPACE
+		else if(space.getName().equalsIgnoreCase("Blue")) {
+			return 4;
+		}
 		
 		return -1;
 	}
 	
 //BLUE SPACES FUNCTIONS
-	public void takeBlueCard () {
+	public BlueCard takeBlueCard () {
 		
 		BlueCard card = blueCardDeck.takeCard();
+		return card;
+		
+	}
+	
+	public int blueCardEffect (BlueCard card) {
 		int amount = card.cardAction(currentPlayer, currentPlayer.getJob(), players.getSize());
 		
 		if(card.checkPlayerCareer(currentPlayer.getJob()) == true) {
 			addBalance (currentPlayer, amount);
-		} else {
+			return amount;
+		} 
+		else {
 			subtractBalance (currentPlayer, amount);
+			return amount;
 		}
 	}
 	
@@ -193,10 +205,6 @@ public class GameOfLife {
 	 */
 	public ActionCard takeActionCard () {
 		ActionCard card = actionDeck.takeCard();
-		
-		
-		System.out.println(card.toString());
-		System.out.println("CURRENT BALANCE " + currentPlayer.toString());
 		
 		return card;
 	}

@@ -20,11 +20,7 @@ public class BlueCard {
     
     
     public boolean checkPlayerCareer (Career career) {
-    	
-    	if(career.getPosition() == this.career) {
-    		return true;
-    	}
-    	return false;
+    	return career.getPosition().equalsIgnoreCase(this.career);
     }
     
     public int cardAction(Player p, Career career, int numPlayers) {
@@ -66,6 +62,10 @@ public class BlueCard {
     
     public void changeAvailability (Boolean b) {
     	this.cardOpen = b;
+    }
+    
+    public String getCardName () {
+    	return cardName;
     }
     
 

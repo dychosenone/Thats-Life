@@ -6,6 +6,7 @@ import Model.GameOfLife;
 import Model.Player.Player;
 import Model.Space;
 import Model.ActionCard.ActionCard;
+import Model.BlueCard.BlueCard;
 import View.ChoosePath;
 import View.GUI;
 
@@ -153,6 +154,7 @@ public class Controller implements ActionListener, KeyListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
+				gml.wheel = 31;
 				gml.processTurn();
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
@@ -160,15 +162,13 @@ public class Controller implements ActionListener, KeyListener{
 					
 					currentPlayer.move();
 					System.out.println(gml.isMagenta());
-					if (gml.isMagenta() && i != gml.getWheel() ) {
-						System.out.println(gml.isMagenta() + "2:" + gml.getWheel() + " " + i + ":" +gml.getWheel());
+					/*if (gml.isMagenta() && i != gml.getWheel() ) {
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						System.out.println(spaceType);
 						gui.interactSpace(spaceType);
 						interactSpace (spaceType);
-					}
+					}*/
 				}		
-				System.out.println(gml.isMagenta() + "1:" + gml.getWheel() + " " + i + ":" +gml.getWheel());
 				gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
 				interactSpace (gml.interactSpace(currentPlayer.getPosition()));
 				
@@ -202,6 +202,10 @@ public class Controller implements ActionListener, KeyListener{
 			break;
 		case 3:
 			choosePath();
+			break;
+			
+		case 4:
+			takeBlueCard();
 			break;
 		}
 	}
@@ -334,7 +338,7 @@ public class Controller implements ActionListener, KeyListener{
 		return players.get(index);
 	}
 	
-//MAGENTS SPACES
+//MAGENTA SPACES
 	
 	public void getMarried () {
 		spin = false;
@@ -409,6 +413,22 @@ public class Controller implements ActionListener, KeyListener{
 			}while(run);
 			path = cCont.getChoice();
 			System.out.println(path);
+		}
+	}
+	
+//BLUE SPACES
+	
+	public void takeBlueCard(){
+		BlueCard card = gml.takeBlueCard();
+		int amount = gml.blueCardEffect(card);
+		
+		
+		if(card.checkPlayerCareer(currentPlayer.getJob()) == true) {
+			gml.addBalance(currentPlayer, amount);
+			gui.displayText("YOU GOT " + card.getCardName() + ": +" + amount);
+		} 
+		else {
+			gui.displayText("YOU GOT " + card.getCardName() + ": -" + amount);
 		}
 	}
 	

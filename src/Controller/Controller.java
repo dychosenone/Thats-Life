@@ -154,7 +154,7 @@ public class Controller implements ActionListener, KeyListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-				gml.wheel = 55; //FOR TESTING
+				//gml.wheel = 53; //FOR TESTING
 				gml.processTurn();
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
@@ -186,7 +186,7 @@ public class Controller implements ActionListener, KeyListener{
 				
 			}
 			
-			currentPlayer.position = 0; //FOR TESTING
+			//currentPlayer.position = 0; //FOR TESTING
 			
 		}while (!spin);
 	}

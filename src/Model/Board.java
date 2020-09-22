@@ -31,7 +31,7 @@ public class Board {
 		}
 		
 		
-		for (i = 0; i < SPACES; i++) {
+		for (i = 1; i <= SPACES; i++) {
 			
 			String split[] = input[i].split(" ");
 			int boardNumber = Integer.parseInt(split[0]);
@@ -73,7 +73,6 @@ public class Board {
 				
 					break;
 				case "Blue":
-					spaces.add(new Space(boardNumber, cardName, hasJump, cardJumpSpace));
 				case "Green":
 				case "Orange":
 					spaces.add(new Space(boardNumber, cardName, hasJump, cardJumpSpace));

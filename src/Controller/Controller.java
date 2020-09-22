@@ -163,7 +163,6 @@ public class Controller implements ActionListener, KeyListener{
 					currentPlayer.move();
 					
 					//CHECK IF CURRENT SPACE IS MAGENTA
-					
 					if (gml.isMagenta() && i != gml.getWheel() ) {
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						System.out.println(spaceType);

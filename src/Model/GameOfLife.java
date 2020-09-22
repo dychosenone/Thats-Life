@@ -248,7 +248,22 @@ public class GameOfLife {
 
 
 	}
-	
+
+	// Checks if Space has a jump
+	public boolean isJump (){
+		Space s = getSpace();
+		if(s.pathJump() != -1)
+			return true;
+		else return false;
+	}
+
+	// Gets the jump
+	public int getJump (){
+
+		Space s = getSpace();
+		return s.pathJump();
+
+	}
 	
 
 //PLAYER FUNCTIONS

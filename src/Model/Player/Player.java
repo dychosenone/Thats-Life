@@ -45,6 +45,12 @@ public class Player {
 	public void move () {
 		position ++;
 	}
+
+	public void jumpTo (int position){
+
+		this.position = position;
+
+	}
 	
 	/**
 	 * Function returns name of the player

@@ -221,18 +221,11 @@ public class GameOfLife {
 		int i;
 		ArrayList <Player> temp = getPlayers();
 		if (tempWheel % 2 == 0) {
-			for (i = 0; i < temp.size(); i++) {
-				currentPlayer.addBalance(10000);
-				temp.get(i).subtractBalance(10000);
-				currentPlayer.getMarried();
-			}
+			collectFromEveryone(10000);
 			
 		}
 		else {
-			for (i = 0; i < temp.size(); i++) {
-				currentPlayer.addBalance(5000);
-				temp.get(i).subtractBalance(5000);
-			}
+			collectFromEveryone(5000);
 		}
 	}
 	public void buyHouse () {
@@ -328,6 +321,32 @@ public class GameOfLife {
 	
 	public void subtractBalance (Player player, int value) {
 		player.subtractBalance(value);
+	}
+	
+	public void collectFromEveryone (int amt) {
+		ArrayList <Player> temp = players.getPlayers();
+		currentPlayer.addBalance(amt * (players.getSize() - 1));
+		int i;
+		
+		for (i = 0; i < temp.size(); i++){     
+			if (!temp.get(i).equals(currentPlayer)) {
+				temp.get(i).subtractBalance(amt);
+			}
+    	}
+ 
+	}
+	
+	public void payEveryone (int amt) {
+		ArrayList <Player> temp = players.getPlayers();
+		currentPlayer.subtractBalance(amt * (players.getSize() - 1));
+		int i;
+		
+		for (i = 0; i < temp.size(); i++){     
+			if (!temp.get(i).equals(currentPlayer)) {
+				temp.get(i).addBalance(amt);
+			}
+    	}
+ 
 	}
 	
 	public void getLoan (){

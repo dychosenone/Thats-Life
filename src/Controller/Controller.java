@@ -154,11 +154,17 @@ public class Controller implements ActionListener, KeyListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-				//gml.wheel = 53; //FOR TESTING
+				gml.wheel = 10; //FOR TESTING
 				gml.processTurn();
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
 				for (i = 1; i <= gml.getWheel(); i++) {
+					
+					//DOUBLE CHECKING IF PLAYER LANDED ON HAS JUMP BUT SPACE IS LAST SPOT INTERACTED ON
+					if (i == 1 && currentPlayer.getPosition() != 0) {
+						if (gml.isJump())
+							currentPlayer.jumpTo(gml.getJump() - 1);
+					}	
 					
 					currentPlayer.move();
 					
@@ -171,13 +177,16 @@ public class Controller implements ActionListener, KeyListener{
 						interactSpace (spaceType);
 					}
 					
-					//Check if space has a jump
-					if(gml.isJump() == true){
+					
+					//CHECK IF SPACE HAS JUMP
+					if(gml.isJump()){
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						System.out.println("Jumped to space number: " + gml.getJump());
 						gui.interactSpace(spaceType);
 						interactSpace(spaceType);
-						currentPlayer.jumpTo(gml.getJump() - 1);
+						if (i != gml.getWheel()) {
+							currentPlayer.jumpTo(gml.getJump() - 1);
+						}
 					}
 				}		
 				gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
@@ -264,17 +273,9 @@ public class Controller implements ActionListener, KeyListener{
 			}
 			
 			else if(card.getCardName().equalsIgnoreCase("Bonus")) {
-				
-				int i;
 				ArrayList<Player> players = gml.getPlayers();
 
-				for (i = 0; i < players.size(); i++) {	
-
-					if (!players.get(i).equals(currentPlayer)) {
-						currentPlayer.subtractBalance(card.getValue());
-						players.get(i).addBalance(card.getValue());
-					}
-				}
+				gml.payEveryone(card.getValue());
 				
 				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
 						+ currentPlayer.getName() + ": -" + (card.getValue() * players.size()) + "\n"
@@ -296,16 +297,10 @@ public class Controller implements ActionListener, KeyListener{
 			}
 			
 			else if(card.getCardName().equalsIgnoreCase("Birthday")) {
-				
 				ArrayList<Player> players = gml.getPlayers();
 				
-				for (int i = 0; i < players.size(); i++) {
-					
-					if (!players.get(i).equals(currentPlayer)) {
-						currentPlayer.addBalance(card.getValue());
-						players.get(i).subtractBalance(card.getValue());
-					}
-				}
+				gml.collectFromEveryone(10000);
+				
 				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
 						+ currentPlayer.getName() + ": +" + (card.getValue() * players.size()) + "\n"
 						+ "Everyone : -" + card.getValue());
@@ -406,6 +401,7 @@ public class Controller implements ActionListener, KeyListener{
 				
 				else {
 					gui.displayText("YOU ROLLED A " + tempWheel + " COLLECT 5000 FROM EVERYONE" );
+					gml.collectFromEveryone(5000);
 				}
 			}
 			
@@ -472,22 +468,28 @@ public class Controller implements ActionListener, KeyListener{
 	
 	public void haveChild () {
 		int tempChance = GameOfLife.spinWheel();
-		
-		if (tempChance > 6) {// have twins
-			if(currentPlayer.haveBabies(2)) {
-				gui.displayText("YOU HAVE TWINS!");
+		if (!currentPlayer.isMarried()) {
+			if (tempChance > 6) {// have twins
+				if(currentPlayer.haveBabies(2)) {
+					gui.displayText("YOU HAVE TWINS!");
+					gml.collectFromEveryone(10000);
+				}
+				else {
+					gui.displayText("YOU CAN'T HAVE ANYMORE BABIES");
+				}
 			}
-			else {
-				gui.displayText("YOU CAN'T HAVE ANYMORE BABIES");
+			else {// have baby
+				if(currentPlayer.haveBabies(1)) {
+					gui.displayText("YOU HAVE A BABY!");
+					gml.collectFromEveryone(5000);
+				}
+				else {
+					gui.displayText("YOU CAN'T HAVE ANYMORE BABIES");
+				}
 			}
 		}
-		else {// have baby
-			if(currentPlayer.haveBabies(1)) {
-				gui.displayText("YOU HAVE A BABY!");
-			}
-			else {
-				gui.displayText("YOU CAN'T HAVE ANYMORE BABIES");
-			}
+		else {
+			gui.displayText("YOU ARE NOT MARRIED");
 		}
 	}
 

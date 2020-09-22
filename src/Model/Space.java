@@ -27,7 +27,7 @@ public class Space {
 	public boolean isChoosePath () {
 		return this.isChoosePath;
 	}
-	public int pathhJump () {
+	public int pathJump () {
 		return this.pathJump;
 	}
 }

@@ -31,7 +31,7 @@ public class Board {
 		}
 		
 		
-		for (i = 1; i <= SPACES; i++) {
+		for (i = 0; i < SPACES; i++) {
 			
 			String split[] = input[i].split(" ");
 			int boardNumber = Integer.parseInt(split[0]);
@@ -83,7 +83,7 @@ public class Board {
 	}
 	
 	public Space getSpace (int index) {
-		return spaces.get(index);
+		return spaces.get(index+1);
 	}
 	
 	public void printSpaces () {

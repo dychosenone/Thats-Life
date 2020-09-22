@@ -235,6 +235,19 @@ public class GameOfLife {
 			}
 		}
 	}
+	public void buyHouse () {
+
+	}
+
+	public void collegeCareerChoice () {
+		CareerCard careerChoiceOne = careerDeck.takeCard();
+		CareerCard careerChoiceTWo = careerDeck.takeCard();
+
+		SalaryCard salaryChoiceOne = salaryDeck.takeCard();
+		SalaryCard salaryChoiceTwo = salaryDeck.takeCard();
+
+
+	}
 	
 	
 

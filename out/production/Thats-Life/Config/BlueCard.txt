@@ -1,0 +1,8 @@
+7
+Lawsuit Lawyer
+SalaryTaxDue Accountant
+SkiAccident Doctor
+ComputerRepair ComputerConsultant
+WorldCup Athlete
+F1Race RaceCarDriver
+TipTheServer Waiter

@@ -39,7 +39,7 @@ public class Player {
 		married = false;
 		baby = 0;
 		
-		position = 0;
+		position = -1;
 	}
 	
 	public void move () {

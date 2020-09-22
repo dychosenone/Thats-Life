@@ -154,7 +154,7 @@ public class Controller implements ActionListener, KeyListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-				//gml.wheel = 60; //FOR TESTING
+				gml.wheel = 55; //FOR TESTING
 				gml.processTurn();
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
@@ -172,12 +172,13 @@ public class Controller implements ActionListener, KeyListener{
 						interactSpace(spaceType);
 					}
 					//CHECK IF CURRENT SPACE IS MAGENTA
+					/*
 					if (gml.isMagenta() && i != gml.getWheel() ) {
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						System.out.println(spaceType);
 						gui.interactSpace(spaceType);
 						interactSpace (spaceType);
-					}
+					}*/
 				}		
 				gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
 				interactSpace (gml.interactSpace(currentPlayer.getPosition()));
@@ -185,7 +186,7 @@ public class Controller implements ActionListener, KeyListener{
 				
 			}
 			
-			//currentPlayer.position = 0; //FOR TESTING
+			currentPlayer.position = 0; //FOR TESTING
 			
 		}while (!spin);
 	}

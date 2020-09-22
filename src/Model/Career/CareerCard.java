@@ -30,7 +30,7 @@ public class CareerCard {
     	return this.payRaise; 
     	}
     
-    public int generatePayRaise () {
+    private int generatePayRaise () {
         return this.minRaise + (int)(Math.random() * this.maxRaise);
     }
 }

@@ -129,15 +129,52 @@ public class GameOfLife {
 				
 				case "choosePath":
 					return 3;
+				
+				case "haveChild" :
+					return 4;
 			}
 		}
 		//BLUE SPACE
 		else if(space.getName().equalsIgnoreCase("Blue")) {
-			return 4;
+			return 5;
+		}
+		
+		else if (space.getName().equalsIgnoreCase("Green")) {
+			return 6;
 		}
 		
 		return -1;
 	}
+	
+//ORANGE SPACES FUNCTION
+	
+	/**
+	 * Function takes an Action Card if current player lands on Orange Space.
+	 */
+	public ActionCard takeActionCard () {
+		ActionCard card = actionDeck.takeCard();
+			
+		return card;
+	}
+	
+//GREEN SPACES FUNCTION
+	
+	public int payRaise () {
+		int raise = 1 + (int)(Math.random() * 10);
+		raise *= 10000;
+		
+		if (currentPlayer.getJob().raiseSalary(raise)) {
+			return raise;
+		}
+		else {
+			return -1;
+		}
+	}
+	
+	public void payDay () {
+		currentPlayer.addBalance(currentPlayer.getJob().getSalary() - currentPlayer.getJob().getTax());
+	}
+
 	
 //BLUE SPACES FUNCTIONS
 	public BlueCard takeBlueCard () {
@@ -187,6 +224,7 @@ public class GameOfLife {
 			for (i = 0; i < temp.size(); i++) {
 				currentPlayer.addBalance(10000);
 				temp.get(i).subtractBalance(10000);
+				currentPlayer.getMarried();
 			}
 			
 		}
@@ -198,17 +236,7 @@ public class GameOfLife {
 		}
 	}
 	
-//ORANGE SPACES FUNCTION
 	
-	/**
-	 * Function takes an Action Card if current player lands on Orange Space.
-	 */
-	public ActionCard takeActionCard () {
-		ActionCard card = actionDeck.takeCard();
-		
-		return card;
-	}
-
 
 //PLAYER FUNCTIONS
 	

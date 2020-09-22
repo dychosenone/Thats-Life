@@ -42,7 +42,6 @@ public class Controller implements ActionListener, KeyListener{
 //GAME INTIIALIZING
 	public void startGame () {
 		//gets number of players
-		gml.printSpaces();
 		System.out.println("CONTROLLER STARTS");
 		getNumberOfPlayers();
 		
@@ -154,20 +153,21 @@ public class Controller implements ActionListener, KeyListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-				gml.wheel = 31;
 				gml.processTurn();
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
 				for (i = 1; i <= gml.getWheel(); i++) {
 					
 					currentPlayer.move();
-					System.out.println(gml.isMagenta());
-					/*if (gml.isMagenta() && i != gml.getWheel() ) {
+					
+					//CHECK IF CURRENT SPACE IS MAGENTA
+					
+					if (gml.isMagenta() && i != gml.getWheel() ) {
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						System.out.println(spaceType);
 						gui.interactSpace(spaceType);
 						interactSpace (spaceType);
-					}*/
+					}
 				}		
 				gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
 				interactSpace (gml.interactSpace(currentPlayer.getPosition()));
@@ -203,14 +203,19 @@ public class Controller implements ActionListener, KeyListener{
 		case 3:
 			choosePath();
 			break;
-			
 		case 4:
+			haveChild ();
+			break;
+		case 5:
 			takeBlueCard();
+			break;
+		case 6:
+			greenSpaceEffect ();
 			break;
 		}
 	}
 
-//ORANGE SPACE
+//ORANGE SPACES
 	public void takeActionCard (ActionCard card) {
 		System.out.println("TAKEACTIONCARD CONTROLLER ENTERED");
 		switch (card.getCardType()) {
@@ -338,6 +343,42 @@ public class Controller implements ActionListener, KeyListener{
 		return players.get(index);
 	}
 	
+//BLUE SPACES
+	public void takeBlueCard(){
+		BlueCard card = gml.takeBlueCard();
+		int amount = gml.blueCardEffect(card);
+		
+		
+		if(card.checkPlayerCareer(currentPlayer.getJob()) == true) {
+			gml.addBalance(currentPlayer, amount);
+			gui.displayText("YOU GOT " + card.getCardName() + ": +" + amount);
+		} 
+		else {
+			gui.displayText("YOU GOT " + card.getCardName() + ": -" + amount);
+		}
+	}
+//GREEN SPACES
+	
+	public void greenSpaceEffect() {
+		int temp = 1 + (int)(Math.random() * 10);
+		
+		if (temp > 6) {
+			int raise = gml.payRaise();
+			switch (raise) {
+			case -1:
+				gui.displayText("REACHED MAXIMUM NUMBER OF PAY RAISES");
+				gml.payDay();
+				break;
+			default:
+				gui.displayText("SALARY IS INCREASED BY " + raise);
+				break;
+			}
+		}
+		else {
+			gml.payDay();
+			gui.displayText("PAYDAY! : +" + (currentPlayer.getJob().getSalary() - currentPlayer.getJob().getTax()));
+		}
+	}
 //MAGENTA SPACES
 	
 	public void getMarried () {
@@ -416,21 +457,10 @@ public class Controller implements ActionListener, KeyListener{
 		}
 	}
 	
-//BLUE SPACES
-	
-	public void takeBlueCard(){
-		BlueCard card = gml.takeBlueCard();
-		int amount = gml.blueCardEffect(card);
+	public void haveChild () {
 		
-		
-		if(card.checkPlayerCareer(currentPlayer.getJob()) == true) {
-			gml.addBalance(currentPlayer, amount);
-			gui.displayText("YOU GOT " + card.getCardName() + ": +" + amount);
-		} 
-		else {
-			gui.displayText("YOU GOT " + card.getCardName() + ": -" + amount);
-		}
 	}
+
 	
 //ACTION LISTENERS	
 	

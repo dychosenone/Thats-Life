@@ -95,7 +95,7 @@ public class GUI extends JFrame{;
     	taPlayerInfo.setLineWrap(true);
     	taPlayerInfo.setForeground(new Color(255, 255, 255));
     	taPlayerInfo.setBackground(new Color(92, 64, 51));
-    	taPlayerInfo.setFont(new Font("Courier New", Font.PLAIN, 20));
+    	taPlayerInfo.setFont(new Font("Courier New", Font.PLAIN, 18));
     	taPlayerInfo.setWrapStyleWord(true);
     	taPlayerInfo.setEditable(false);
     	taPlayerInfo.setBounds(792, 45, 462, 508);
@@ -164,12 +164,19 @@ public class GUI extends JFrame{;
     	
     	for (i = 0; i < players.size(); i++){     
     		taPlayerInfo.append(players.get(i).getName() + " : " +  players.get(i).getBalance() + newLine);
-    		taPlayerInfo.append("POSITION " + players.get(i).getPosition() + newLine);
+    		taPlayerInfo.append("POSITION       : " + players.get(i).getPosition() + newLine);
+    		taPlayerInfo.append("MARRIED        : " + players.get(i).isMarried() + newLine);
+    		taPlayerInfo.append("BABIES         : " + players.get(i).getBabies() + newLine);
     		
     		if (players.get(i).getJob() != NULL) {
 	    		taPlayerInfo.append("CAREER POSITION: " + players.get(i).getJob().getPosition() + newLine);
 	    		taPlayerInfo.append("CAREER SALARY  : " + players.get(i).getJob().getSalary() + newLine);
 	    		taPlayerInfo.append("CAREER TAX     : " + players.get(i).getJob().getTax() + newLine);
+    		}
+    		else {
+    			taPlayerInfo.append("CAREER POSITION: " + "NONE" + newLine);
+	    		taPlayerInfo.append("CAREER SALARY  : " + "NONE" + newLine);
+	    		taPlayerInfo.append("CAREER TAX     : " + "NONE" + newLine);
     		}
     	}
     }
@@ -202,8 +209,11 @@ public class GUI extends JFrame{;
     	String text[] = {  "YOU LANDED ON ACTION CARD TILE",       //0
     					   "YOU LANDED ON JOB SEARCH TILE",        //1
     					   "YOU LANDED ON GET MARRIED TILE",	   //2
-    					   "YOU LANDED ON CHOOSE PATH TILE",		   //3
-    					   "YOU LANDED ON BLUE CARD TILE"};        //4
+    					   "YOU LANDED ON CHOOSE PATH TILE",	   //3
+    					   "YOU LANDED ON HAVE CHILD TILE",		   //4	
+    					   "YOU LANDED ON BLUE CARD TILE",		   //5
+    					   "YOU LANDED ON GREEN TILE"};            //6
+    						
     	if (spaceType != -1) {
 	    	System.out.println(spaceType);
 	    	displayText(text[spaceType]);

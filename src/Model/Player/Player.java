@@ -15,7 +15,7 @@ public class Player {
 	private int baby;
 	private Career job;
 
-	private int position;
+	public int position;
 	
 	/**
 	 * 
@@ -63,6 +63,10 @@ public class Player {
 	
 	public int getPosition () {
 		return position;
+	}
+	
+	public int getBabies () {
+		return baby;
 	}
 	
 	/**
@@ -117,7 +121,9 @@ public class Player {
 	 * When called, will return the Model.Career class of the player selected.
 	 * @return the career fof player
 	 */
-	public Career getJob () {return job; }
+	public Career getJob () {
+		return job; 
+	}
 
 	/**
 	 * Function returns name and balance as a string

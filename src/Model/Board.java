@@ -45,6 +45,8 @@ public class Board {
 		
 					switch(boardNumber) {
 						case 13:
+							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "getMarried"));
+							break;
 						case 48:
 							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "getMarried"));
 							break;

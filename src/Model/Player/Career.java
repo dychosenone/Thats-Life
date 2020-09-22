@@ -5,11 +5,14 @@ import Model.SalaryCard.SalaryCard;
 
 public class Career {
 	
+	private final int TAX_MULTIPLE = 2000;
+	
 	private String position;
 	private int salary;
 	private int tax;
 
 	private int max;
+	private int ctr = 1;
 
 	/**
 	 * Function returns name of the player
@@ -46,12 +49,17 @@ public class Career {
 		return position;
 	}
 	
-	/**
-	 * Function sets new salary of job
-	 * @param newSalary - new salary of job
-	 */
-	public void setSalary (int newSalary) {
-		this.salary = newSalary;
+	public boolean raiseSalary (int raise) {
+		System.out.println(ctr + ":" + max);
+		if (ctr <= max) {
+			salary += raise;
+			tax += TAX_MULTIPLE;
+			ctr++;
+			return true;
+		}
+		
+		else
+			return false;
 	}
 	
 	/**

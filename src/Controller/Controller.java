@@ -180,6 +180,7 @@ public class Controller implements ActionListener, KeyListener{
 					//CHECK IF LAST TILE
 					if (gml.isEnd() && i != gml.getWheel()) {
 						gui.displayText (currentPlayer.getName() + " is now RETIRED");
+						
 						i = gml.getWheel();
 					}	
 					

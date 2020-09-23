@@ -24,6 +24,14 @@ public class GameOfLife {
 	
 	private static final int MINPLAYERS = 2;
 	private static final int MAXPLAYERS = 3;
+	
+	private final int FIRST_PLACE = 1000000;
+	private final int SECOND_PLACE = 500000;
+	private final int THIRD_PLACE = 200000;
+	private int place = 1;
+	
+	private final int RETIRE_BABY_MULTIPLE = 100000;
+	
 	private static final Career NULL = null;
 	
 	private ActionCardDeck actionDeck;
@@ -363,11 +371,26 @@ public class GameOfLife {
 	
 	public boolean isEnd () {
 		if(board.isEnd(currentPlayer.getPosition())) {
-			currentPlayer.retire ();
+			switch (place) {
+			case 1:
+				currentPlayer.retire (FIRST_PLACE, RETIRE_BABY_MULTIPLE);
+				break;
+			case 2:
+				currentPlayer.retire (SECOND_PLACE, RETIRE_BABY_MULTIPLE);
+				break;
+			case 3:
+				currentPlayer.retire (THIRD_PLACE, RETIRE_BABY_MULTIPLE);
+				break;
+			}
+			place ++;
 			return true;
 		}
 		else
 			return false;
+	}
+	
+	public int getPlace () {
+		return place;
 	}
 	
 	

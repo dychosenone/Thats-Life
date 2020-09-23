@@ -151,8 +151,10 @@ public class Player {
 		return debt != 0;
 	}
 	
-	public void retire () {
+	public void retire (int prize, int babyMultiple) {
 		finish = true;
+		addBalance (prize);
+		addBalance (baby * babyMultiple);
 	}
 	
 	public boolean isFinish () {

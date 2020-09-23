@@ -116,7 +116,7 @@ public class GameOfLife {
 		
 		return space;
 	}
-	
+
 	public int interactSpace (int position) {
 		
 		Space space =board.getSpace(position);

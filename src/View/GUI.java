@@ -24,7 +24,12 @@ public class GUI extends JFrame{;
 
     private JTextArea taConsole;
     private JTextArea taPlayerInfo;
+<<<<<<< Updated upstream
 
+=======
+    private BoardGUI board;
+    
+>>>>>>> Stashed changes
     private boolean done = false;
 
     //GridBagConstraints c = new GridBagConstraints ();
@@ -123,7 +128,21 @@ public class GUI extends JFrame{;
     	lblPlayerData.setHorizontalAlignment(SwingConstants.CENTER);
     	lblPlayerData.setBounds(901, 11, 250, 16);
     	getContentPane().add(lblPlayerData);
+<<<<<<< Updated upstream
 
+=======
+    	
+    	board = new BoardGUI();
+    	board.setBounds(16, 20, 764, 595);
+    	board.setVisible(true);
+    	getContentPane().add(board);
+    	
+    	
+    }
+
+    public BoardGUI getBoard () {
+    	return this.board;
+>>>>>>> Stashed changes
     }
 
     public void setListener (ActionListener listener) {

@@ -95,8 +95,15 @@ public class Board {
 				System.out.println(i + temp.getMagentaType());
 			}
 			else {
-				System.out.println(i + " " + spaces.get(i).getName());
+				System.out.println(spaces.get(i).getSpaceNumber() + " " + spaces.get(i).getName());
 			}
 		}
+	}
+	
+	public boolean isEnd(int position) {
+		if (position == 0) {
+			return false;
+		}
+		return getSpace(position).getSpaceNumber() == SPACES;
 	}
 }

@@ -52,9 +52,11 @@ public class Controller implements ActionListener, KeyListener{
 		int i = 0;
 		
 		gui.disableInputs();
-		gml.nextTurn();
+		gml.getStarter();
+		currentPlayer = gml.getCurrentPlayer();
 		gui.updatePlayerInfo(gml.getPlayers(), currentPlayer);
 		do {
+			System.out.println(currentPlayer.getName());
 			closeLoan ();
 			finish = false;
 			turn = true; //start turn
@@ -63,8 +65,10 @@ public class Controller implements ActionListener, KeyListener{
 				System.out.print("");
 				
 				if(!finish) {
+					
 					processTurn();
 					gui.updatePlayerInfo(gml.getPlayers(), currentPlayer);
+					
 					accessLoan ();
 					gui.displayText("FINISH TURN");
 					
@@ -73,11 +77,24 @@ public class Controller implements ActionListener, KeyListener{
 				}
 				
 			}while (turn);
-			gui.nextTurn();
-			gml.nextTurn();
 			
-		}while (i < 50);
+			
+			if(!gml.gameOver()) {
+				do {
+					
+					gml.nextTurn();
+					currentPlayer = gml.getCurrentPlayer();
+					
+					System.out.println(currentPlayer.getName());
+				}while(currentPlayer.isFinish());
+				
+				gui.nextTurn();
+			}
+			
+		}while (!gml.gameOver());
 		
+		
+		gui.displayText("GAME OVER");
 	}
 	
 	public void getNumberOfPlayers () {
@@ -143,9 +160,9 @@ public class Controller implements ActionListener, KeyListener{
 //MAIN GAME METHODS
 	
 	public void processTurn () {
+		System.out.println(currentPlayer.getName() + currentPlayer.isFinish());
 		startTurn();
 		int i;
-		currentPlayer = gml.getCurrentPlayer();
 		
 		gui.displayText("IT IS " + currentPlayer.getName() +"'S TURN" + "\n" + 
 		"SPIN THE WHEEL");
@@ -154,22 +171,30 @@ public class Controller implements ActionListener, KeyListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-				gml.wheel = 10; //FOR TESTING
+				gml.wheel = 128; //FOR TESTING
 				gml.processTurn();
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
 				for (i = 1; i <= gml.getWheel(); i++) {
 					
+					//CHECK IF LAST TILE
+					if (gml.isEnd() && i != gml.getWheel()) {
+						gui.displayText (currentPlayer.getName() + " is now RETIRED");
+						i = gml.getWheel();
+					}	
+					
+					if (!currentPlayer.isFinish())
+						currentPlayer.move();
+					
+					/*
 					//DOUBLE CHECKING IF PLAYER LANDED ON HAS JUMP BUT SPACE IS LAST SPOT INTERACTED ON
 					if (i == 1 && currentPlayer.getPosition() != 0) {
 						if (gml.isJump())
 							currentPlayer.jumpTo(gml.getJump() - 1);
-					}	
+					}*/
 					
-					currentPlayer.move();
-					
+					/*
 					//CHECK IF CURRENT SPACE IS MAGENTA
-					
 					if (gml.isMagenta() && i != gml.getWheel() ) {
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						System.out.println(spaceType);
@@ -184,13 +209,17 @@ public class Controller implements ActionListener, KeyListener{
 						System.out.println("Jumped to space number: " + gml.getJump());
 						gui.interactSpace(spaceType);
 						interactSpace(spaceType);
-						if (i != gml.getWheel()) {
+						if (i != gml.getWheel()) 
 							currentPlayer.jumpTo(gml.getJump() - 1);
-						}
-					}
-				}		
-				gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
-				interactSpace (gml.interactSpace(currentPlayer.getPosition()));
+					}*/
+
+					//CHECK IF LAST TILE
+				}
+				
+				if(!currentPlayer.isFinish()) {
+					gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
+					interactSpace (gml.interactSpace(currentPlayer.getPosition()));
+				}
 				
 				
 			}

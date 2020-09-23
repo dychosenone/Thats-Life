@@ -335,7 +335,6 @@ public class GameOfLife {
     	}
  
 	}
-	
 	public void payEveryone (int amt) {
 		ArrayList <Player> temp = players.getPlayers();
 		currentPlayer.subtractBalance(amt * (players.getSize() - 1));
@@ -362,6 +361,16 @@ public class GameOfLife {
 		return false;
 	}
 	
+	public boolean isEnd () {
+		if(board.isEnd(currentPlayer.getPosition())) {
+			currentPlayer.retire ();
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	
 	public Player getCurrentPlayer () {
 		return currentPlayer;
 	}
@@ -376,5 +385,22 @@ public class GameOfLife {
 	
 	public int getWheel () {
 		return wheel;
+	}
+	
+	public void getStarter() {
+		currentPlayer = players.getPlayers().get(0);
+	}
+	
+	public boolean gameOver () {
+		int ctr = 0;
+		int i;
+		
+		for (i = 0; i < getPlayers().size(); i++) {
+			
+			if(getPlayers().get(i).isFinish())
+				ctr++;
+		}
+		
+		return ctr == getPlayers().size();
 	}
 }

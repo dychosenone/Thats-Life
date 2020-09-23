@@ -18,6 +18,8 @@ public class Player {
 
 	public int position;
 	
+	public boolean finish = false;
+	
 	/**
 	 * 
 	 */
@@ -147,6 +149,14 @@ public class Player {
 	
 	public boolean hasDebt () {
 		return debt != 0;
+	}
+	
+	public void retire () {
+		finish = true;
+	}
+	
+	public boolean isFinish () {
+		return finish;
 	}
 	
 	@Override

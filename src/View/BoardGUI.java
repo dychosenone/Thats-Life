@@ -41,13 +41,13 @@ public class BoardGUI extends JPanel {
     	
     	switch(num) {
     		case 1:
-    			graphic.setColor(Color.WHITE);
+    			graphic.setColor(new Color(249, 211, 66));
     			break;
     		case 2:
-    			graphic.setColor(Color.CYAN);
+    			graphic.setColor(new Color(240, 160, 124));
     			break;
     		case 3:
-    			graphic.setColor(Color.BLACK);
+    			graphic.setColor(new Color(251, 234, 235));
     			break;
     	}
     	

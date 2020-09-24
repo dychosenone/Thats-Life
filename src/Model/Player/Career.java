@@ -41,6 +41,14 @@ public class Career {
 		return tax;
 	}
 	
+	public int getCtr () {
+		return ctr;
+	}
+	
+	public int getMax () {
+		return max;
+	}
+	
 	/**
 	 * Function returns position of player
 	 * @return position

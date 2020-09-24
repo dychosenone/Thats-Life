@@ -4,8 +4,6 @@ import javax.swing.text.DefaultCaret;
 
 import Model.Player.Career;
 import Model.Player.Player;
-import Model.Player.Players;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -17,13 +15,15 @@ public class GUI extends JFrame{;
     private JButton btnGetLoan;
     private JButton btnEndTurn;
 
-
+    private PlayerInfoUI playerOneInfo;
+    private PlayerInfoUI playerTwoInfo;
+    private PlayerInfoUI playerThreeInfo;
+    
     private JTextField tfInput;
 
     private JScrollPane scroll;
 
     private JTextArea taConsole;
-    private JTextArea taPlayerInfo;
 
     private BoardGUI board;
     
@@ -49,6 +49,27 @@ public class GUI extends JFrame{;
     private void init () {
 
     	getContentPane().setLayout(null);
+    	
+    	board = new BoardGUI();
+    	board.setBounds(16, 20, 764, 595);
+    	board.setVisible(true);
+    	getContentPane().add(board);
+    	
+    	playerOneInfo = new PlayerInfoUI (new Color(41, 40, 38), new Color (249, 211, 66));
+    	playerOneInfo.setBounds(790, 38, 462, 160);
+    	playerOneInfo.setVisible(true);
+    	
+    	playerTwoInfo = new PlayerInfoUI (new Color(74, 39, 79), new Color (240, 160, 124));
+    	playerTwoInfo.setBounds(790, 209, 462, 160);
+    	playerTwoInfo.setVisible(true);
+    	
+    	playerThreeInfo = new PlayerInfoUI (new Color(47, 60, 126), new Color (251, 234, 235));
+    	playerThreeInfo.setBounds(790, 380, 462, 160);
+    	playerThreeInfo.setVisible(true);
+    	
+    	getContentPane().add(playerOneInfo);
+    	getContentPane().add(playerTwoInfo);
+    	getContentPane().add(playerThreeInfo);
 
     	btnWheel = new JButton ("SPIN WHEEL");
     	btnWheel.setForeground(new Color(105, 105, 105));
@@ -93,17 +114,6 @@ public class GUI extends JFrame{;
 
     	tfInput.setColumns(10);
 
-    	taPlayerInfo = new JTextArea();
-    	taPlayerInfo.setLineWrap(true);
-    	taPlayerInfo.setForeground(new Color(255, 255, 255));
-    	taPlayerInfo.setBackground(new Color(92, 64, 51));
-    	taPlayerInfo.setFont(new Font("Arial Black", Font.PLAIN, 14));
-    	taPlayerInfo.setWrapStyleWord(true);
-    	taPlayerInfo.setEditable(false);
-    	taPlayerInfo.setBounds(792, 38, 462, 508);
-
-    	getContentPane().add(taPlayerInfo);
-
     	taConsole = new JTextArea();
     	taConsole.setFont(new Font("Courier New", Font.PLAIN, 16));
     	taConsole.setForeground(new Color(255, 255, 255));
@@ -125,11 +135,6 @@ public class GUI extends JFrame{;
     	lblPlayerData.setHorizontalAlignment(SwingConstants.CENTER);
     	lblPlayerData.setBounds(901, 11, 250, 16);
     	getContentPane().add(lblPlayerData);
-
-    	board = new BoardGUI();
-    	board.setBounds(16, 20, 764, 595);
-    	board.setVisible(true);
-    	getContentPane().add(board);
     	
     	
     }
@@ -169,33 +174,22 @@ public class GUI extends JFrame{;
 		return text;
 	}
 
-    public void updatePlayerInfo (ArrayList<Player> players, Player currentPlayer) {
+    public void updatePlayerInfo (ArrayList<Player> players) {
 
-    	taPlayerInfo.setText("");
-    	String newLine = "\n";
     	int i;
 
-    	for (i = 0; i < players.size(); i++){
-    		taPlayerInfo.append(players.get(i).getName() + " : " +  players.get(i).getBalance() + newLine);
-    		taPlayerInfo.append("POSITION       : " + players.get(i).getPosition() + newLine);
-    		taPlayerInfo.append("MARRIED        : " + players.get(i).isMarried() + newLine);
-    		taPlayerInfo.append("BABIES         : " + players.get(i).getBabies() + newLine);
+    	for (i = 1; i <= players.size(); i++){
     		
-    		if (!players.get(i).isFinish()) {
-
-	    		if (players.get(i).getJob() != NULL) {
-		    		taPlayerInfo.append("CAREER POSITION: " + players.get(i).getJob().getPosition() + newLine);
-		    		taPlayerInfo.append("CAREER SALARY  : " + players.get(i).getJob().getSalary() + newLine);
-		    		taPlayerInfo.append("CAREER TAX     : " + players.get(i).getJob().getTax() + newLine);
-	    		}
-	    		else {
-	    			taPlayerInfo.append("CAREER POSITION: " + "NONE" + newLine);
-		    		taPlayerInfo.append("CAREER SALARY  : " + "NONE" + newLine);
-		    		taPlayerInfo.append("CAREER TAX     : " + "NONE" + newLine);
-	    		}
-    		}
-    		else {
-    			taPlayerInfo.append("RETIRED" + newLine);
+    		switch (i) {
+    		case 1:
+    			playerOneInfo.updateUserInfo(players.get(i-1));
+    			break;
+    		case 2:
+    			playerTwoInfo.updateUserInfo(players.get(i-1));
+    			break;
+    		case 3:
+    			playerThreeInfo.updateUserInfo(players.get(i-1));
+    			break;
     		}
     	}
     }

@@ -61,7 +61,7 @@ public class Controller implements ActionListener, KeyListener{
 		gui.disableInputs();
 		gml.getStarter();
 		currentPlayer = gml.getCurrentPlayer();
-		gui.updatePlayerInfo(gml.getPlayers(), currentPlayer);
+		gui.updatePlayerInfo(gml.getPlayers());
 
 
 		
@@ -80,7 +80,7 @@ public class Controller implements ActionListener, KeyListener{
 				if(!finish) {
 					
 					processTurn();
-					gui.updatePlayerInfo(gml.getPlayers(), currentPlayer);
+					gui.updatePlayerInfo(gml.getPlayers());
 					
 					accessLoan ();
 					gui.displayText("FINISH TURN");
@@ -582,7 +582,7 @@ public class Controller implements ActionListener, KeyListener{
 			if (access) {
 				gui.displayText("YOU BORROWED 20K FROM BANK");
 				gml.getLoan();
-				gui.updatePlayerInfo(players, currentPlayer);
+				gui.updatePlayerInfo(players);
 			}
 			else {
 				gui.displayText("SPIN WHEEL FIRST");
@@ -592,7 +592,7 @@ public class Controller implements ActionListener, KeyListener{
 			if (access) {
 				if (gml.payLoan()) {
 					gui.displayText("YOU PAID DEBT!");
-					gui.updatePlayerInfo(players, currentPlayer);
+					gui.updatePlayerInfo(players);
 				}
 				else {
 					gui.displayText("YOU HAVE NO DEBT!");

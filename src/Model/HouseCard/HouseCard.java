@@ -22,7 +22,7 @@ public class HouseCard {
 	public int getValue () {
 		return this.value;
 	}
-	public boolean setAvailable (boolean b) {
+	public void setAvailable (boolean b) {
 		
 		this.available = b;
 	}

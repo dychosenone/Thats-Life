@@ -1,0 +1,7 @@
+Mansion 280000
+ModernHome 120000
+ContemporaryHome 90000
+Bungalow 100000
+Castle 500000
+Apartment 55000
+CondoUnit 70000

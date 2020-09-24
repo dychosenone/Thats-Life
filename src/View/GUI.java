@@ -95,10 +95,10 @@ public class GUI extends JFrame{;
     	taPlayerInfo.setLineWrap(true);
     	taPlayerInfo.setForeground(new Color(255, 255, 255));
     	taPlayerInfo.setBackground(new Color(92, 64, 51));
-    	taPlayerInfo.setFont(new Font("Courier New", Font.PLAIN, 18));
+    	taPlayerInfo.setFont(new Font("Arial Black", Font.PLAIN, 14));
     	taPlayerInfo.setWrapStyleWord(true);
     	taPlayerInfo.setEditable(false);
-    	taPlayerInfo.setBounds(792, 45, 462, 508);
+    	taPlayerInfo.setBounds(792, 38, 462, 508);
 
     	getContentPane().add(taPlayerInfo);
 

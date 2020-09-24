@@ -1,5 +1,6 @@
 package Controller;
 import java.awt.event.*;
+
 import java.util.ArrayList;
 
 import Model.GameOfLife;
@@ -7,8 +8,10 @@ import Model.Player.Player;
 import Model.Space;
 import Model.ActionCard.ActionCard;
 import Model.BlueCard.BlueCard;
+import View.BoardGUI;
 import View.ChoosePath;
 import View.GUI;
+import Controller.SpaceController;
 
 public class Controller implements ActionListener, KeyListener{
 	
@@ -27,7 +30,11 @@ public class Controller implements ActionListener, KeyListener{
 	private int path = 0;
 	private int tempWheel;
 	
+	private BoardController board;
+	
 	public Controller (GUI gui, GameOfLife gml) {
+		board = new BoardController();
+		
 		this.gui = gui;
 		this.gml = gml;
 		
@@ -55,6 +62,12 @@ public class Controller implements ActionListener, KeyListener{
 		gml.getStarter();
 		currentPlayer = gml.getCurrentPlayer();
 		gui.updatePlayerInfo(gml.getPlayers(), currentPlayer);
+
+
+		
+		
+		setStartDraw();
+		
 		do {
 			System.out.println(currentPlayer.getName());
 			closeLoan ();
@@ -523,6 +536,36 @@ public class Controller implements ActionListener, KeyListener{
 		}
 	}
 
+
+// BoardGUI Draw
+	public void setStartDraw () {
+		
+		int numPlayers = gml.getPlayers().size();
+		SpaceController space;
+		BoardGUI playingBoard;
+		
+		for(int i = 1; i <= numPlayers; i++) {
+			switch(i) {
+				case 1:
+					space = board.getPlayerSpacePosition(1, 0);
+					playingBoard = gui.getBoard();
+					playingBoard.showPlayer(playingBoard.getGraphics(), space.getX(), space.getY(), 1);
+					break;
+				case 2:
+					space = board.getPlayerSpacePosition(2, 0);
+					playingBoard = gui.getBoard();
+					playingBoard.showPlayer(playingBoard.getGraphics(),space.getX(), space.getY(), 2);
+					break;
+				case 3:
+					space = board.getPlayerSpacePosition(3, 0);
+					playingBoard = gui.getBoard();
+					playingBoard.showPlayer(playingBoard.getGraphics(), space.getX(), space.getY(), 3);
+					break;
+			}
+		}
+		
+	}
+	
 	
 //ACTION LISTENERS	
 	

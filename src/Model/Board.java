@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Board {
 	
-	private final int SPACES = 128;
+	private final int SPACES = 132;
 	private ArrayList <Space> spaces;
 	
 	public Board () {

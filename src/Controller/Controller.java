@@ -49,14 +49,16 @@ public class Controller implements ActionListener, KeyListener{
 //GAME INTIIALIZING
 	public void startGame () {
 		//gets number of players
+		
 		gml.printSpaces();
-		System.out.println("CONTROLLER STARTS");
+		System.out.println("1");
 		getNumberOfPlayers();
+		System.out.println("1");
 		
 		pauseGUI();
+		System.out.println("1");
 		getPlayers();
-		
-		int i = 0;
+		System.out.println("1");
 		
 		gui.disableInputs();
 		gml.getStarter();

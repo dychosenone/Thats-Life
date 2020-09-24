@@ -38,7 +38,7 @@ public class PlayerInfoUI extends JPanel{
 		playerName.setForeground(secondaryColor);
 		playerName.setFont(new Font("Courier New", Font.PLAIN, 30));
 		playerName.setBackground(primaryColor);
-		playerName.setBounds(0, 11, 462, 38);
+		playerName.setBounds(0, 0, 462, 38);
 		add(playerName);
 		
 		playerInfo1 = new JTextArea();
@@ -47,7 +47,7 @@ public class PlayerInfoUI extends JPanel{
 		playerInfo1.setLineWrap(true);
 		playerInfo1.setFont(new Font("Courier New", Font.PLAIN, 14));
 		playerInfo1.setBackground(secondaryColor);
-		playerInfo1.setBounds(0, 49, 230, 52);
+		playerInfo1.setBounds(0, 38, 230, 63);
 		add(playerInfo1);
 		
 		playerInfo2 = new JTextArea();
@@ -56,7 +56,7 @@ public class PlayerInfoUI extends JPanel{
 		playerInfo2.setLineWrap(true);
 		playerInfo2.setFont(new Font("Courier New", Font.PLAIN, 14));
 		playerInfo2.setBackground(secondaryColor);
-		playerInfo2.setBounds(230, 49, 232, 52);
+		playerInfo2.setBounds(230, 38, 232, 63);
 		add(playerInfo2);
 		
 		careerInfo = new JTextArea();
@@ -108,6 +108,13 @@ public class PlayerInfoUI extends JPanel{
 			salaryInfo.setText("SALARY" + newLine  + job.getSalary() + newLine
 					         + "TAX     : " + job.getTax());
 		}
+		else {
+			careerInfo.setText("CAREER" + newLine +  "N/A" + newLine
+					 + "RAISES  : " + "N/A");
+	
+			salaryInfo.setText("SALARY" + newLine  + "N/A" + newLine
+			         + "TAX     : " + "N/A");
+}
 		
 		
 	}

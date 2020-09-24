@@ -22,7 +22,6 @@ public class GUI extends JFrame{;
     private JTextField tfInput;
 
     private JScrollPane scroll;
-
     private JTextArea taConsole;
 
     private BoardGUI board;
@@ -32,8 +31,11 @@ public class GUI extends JFrame{;
     //GridBagConstraints c = new GridBagConstraints ();
 
     public GUI () {
-
+	
         super ("That's Life");
+        
+        System.out.println("GUI START");
+        
         getContentPane().setBackground(new Color(211, 211, 211));
         getContentPane().setForeground(new Color(119, 136, 153));
         getContentPane().setFont(new Font("Times New Roman", Font.BOLD, 18));
@@ -44,6 +46,8 @@ public class GUI extends JFrame{;
         setSize (1280, 720);
         setResizable(false);
         setVisible (true);
+        
+        System.out.println("GUI LOADED");
     }
 
     private void init () {
@@ -74,12 +78,10 @@ public class GUI extends JFrame{;
     	btnWheel = new JButton ("SPIN WHEEL");
     	btnWheel.setForeground(new Color(105, 105, 105));
     	btnWheel.setBackground(new Color(255, 235, 205));
-    	//btnWheel.setOpaque(true);
     	btnWheel.setFont(new Font("Courier New", Font.PLAIN, 18));
     	btnWheel.setBounds(22, 627, 180, 54);
 
     	getContentPane().add (btnWheel);
-    	//getContentPane().add(console);
 
     	btnPayLoan = new JButton ("PAY LOAN");
     	btnPayLoan.setForeground(new Color(105, 105, 105));

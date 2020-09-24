@@ -57,7 +57,7 @@ public class GameOfLife {
 	 * When a new Model.GameOfLife object is created, it generates a new Model.ActionCard.ActionCardDeck.
 	 */
 	
-	GameOfLife (){
+	public GameOfLife (){
 		players = new Players();
 		actionDeck = new ActionCardDeck();
 		careerDeck = new CareerCardDeck();

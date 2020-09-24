@@ -10,6 +10,7 @@ import Model.ActionCard.ActionCard;
 import Model.BlueCard.BlueCard;
 import View.BoardGUI;
 import View.ChoosePath;
+import View.ChoosePlayerUI;
 import View.GUI;
 import Controller.SpaceController;
 
@@ -186,7 +187,7 @@ public class Controller implements ActionListener, KeyListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-				gml.wheel = 128; //FOR TESTING
+				//gml.wheel = 128; //FOR TESTING
 				gml.processTurn();
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
@@ -202,14 +203,14 @@ public class Controller implements ActionListener, KeyListener{
 					if (!currentPlayer.isFinish())
 						currentPlayer.move();
 					
-					/*
+					
 					//DOUBLE CHECKING IF PLAYER LANDED ON HAS JUMP BUT SPACE IS LAST SPOT INTERACTED ON
 					if (i == 1 && currentPlayer.getPosition() != 0) {
 						if (gml.isJump())
 							currentPlayer.jumpTo(gml.getJump() - 1);
-					}*/
+					}
 					
-					/*
+					
 					//CHECK IF CURRENT SPACE IS MAGENTA
 					if (gml.isMagenta() && i != gml.getWheel() ) {
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
@@ -227,7 +228,7 @@ public class Controller implements ActionListener, KeyListener{
 						interactSpace(spaceType);
 						if (i != gml.getWheel()) 
 							currentPlayer.jumpTo(gml.getJump() - 1);
-					}*/
+					}
 
 					//CHECK IF LAST TILE
 				}
@@ -307,7 +308,7 @@ public class Controller implements ActionListener, KeyListener{
 			
 			if (card.getCardName().equalsIgnoreCase("Lawsuit")) {
 				
-				Player target = choosePlayer();
+				Player target = choosePlayer(1);
 				
 				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
 						+	currentPlayer.getName() + ": -" + card.getValue() + "\n"
@@ -331,7 +332,7 @@ public class Controller implements ActionListener, KeyListener{
 		case 4:
 			if (card.getCardName().equalsIgnoreCase("FileLawsuit")) {
 				
-				Player target = choosePlayer();
+				Player target = choosePlayer(2);
 				
 				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
 						 + currentPlayer.getName() + ": +" + card.getValue() + "\n"
@@ -356,7 +357,37 @@ public class Controller implements ActionListener, KeyListener{
 		gui.disableInputs();
 	}
 	
-	public Player choosePlayer() {
+	public Player choosePlayer(int situation) {
+		int index = 0;
+		ChoosePlayerUI chooseUI = new ChoosePlayerUI(situation);
+		ChoosePlayerController chooseCont = new ChoosePlayerController (chooseUI, gml.getPlayers(), currentPlayer);
+		
+		boolean run = true;
+		
+		do {
+			System.out.print("");
+			
+			switch (chooseCont.getChoice()) {
+			case 0:
+				index = 0;
+				run = false;
+				break;
+			case 1:
+				index = 1;
+				run = false;
+				break;
+			case 2:
+				index = 2;
+				run = false;
+				break;
+			default:
+				run = true;
+				
+			}
+		}while (run);
+		
+		return gml.getPlayers().get(index);
+		/*
 		gui.enableInputs();
 		int option;
 		int index = -1;
@@ -393,7 +424,8 @@ public class Controller implements ActionListener, KeyListener{
 		}while (!done);
 		
 		pauseGUI();
-		return players.get(index);
+		return players.get(index);*/
+		
 	}
 	
 //BLUE SPACES

@@ -226,8 +226,9 @@ public class GUI extends JFrame{;
     					   "YOU LANDED ON GET MARRIED TILE",	   //2
     					   "YOU LANDED ON CHOOSE PATH TILE",	   //3
     					   "YOU LANDED ON HAVE CHILD TILE",		   //4
-    					   "YOU LANDED ON BLUE CARD TILE",		   //5
-    					   "YOU LANDED ON GREEN TILE"};            //6
+    					   "YOU LANDED ON BUY A HOUSE TILE",	   //5
+    					   "YOU LANDED ON BLUE CARD TILE",		   //6
+    					   "YOU LANDED ON GREEN TILE"};            //7
 
     	if (spaceType != -1) {
 	    	System.out.println(spaceType);

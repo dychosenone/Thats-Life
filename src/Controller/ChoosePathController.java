@@ -1,7 +1,7 @@
 package Controller;
 import java.awt.event.*;
 
-import View.ChoosePath;
+import View.ChoosePathUI;
 
 public class ChoosePathController implements ActionListener, WindowListener {
 	
@@ -9,9 +9,9 @@ public class ChoosePathController implements ActionListener, WindowListener {
 	private String path1;
 	private String path2;
 	
-	private ChoosePath ui;
+	private ChoosePathUI ui;
 
-	public ChoosePathController (String path1, String path2, ChoosePath ui) {
+	public ChoosePathController (String path1, String path2, ChoosePathUI ui) {
 		
 		this.path1 = path1;
 		this.path2 = path2;

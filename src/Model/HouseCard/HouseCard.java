@@ -26,4 +26,8 @@ public class HouseCard {
 		
 		this.available = b;
 	}
+	
+	public boolean isAvailable () {
+		return available;
+	}
 }

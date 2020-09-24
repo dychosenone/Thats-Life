@@ -6,8 +6,6 @@ import Model.Player.Player;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.Font;
 import java.awt.Color;

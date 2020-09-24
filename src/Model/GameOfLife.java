@@ -5,7 +5,8 @@ import Model.BlueCard.*;
 import Model.ActionCard.ActionCardDeck;
 import Model.Career.CareerCard;
 import Model.Career.CareerCardDeck;
-
+import Model.HouseCard.HouseCard;
+import Model.HouseCard.HouseCardDeck;
 import Model.Player.Career;
 import Model.Player.Player;
 import Model.Player.Players;
@@ -13,12 +14,7 @@ import Model.Player.Players;
 import Model.SalaryCard.SalaryCard;
 import Model.SalaryCard.SalaryCardDeck;
 
-import View.GUI;
-
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import Controller.Controller;
 
 public class GameOfLife {
 	
@@ -38,6 +34,7 @@ public class GameOfLife {
 	private CareerCardDeck careerDeck;
 	private SalaryCardDeck salaryDeck;
 	private BlueCardDeck blueCardDeck;
+	private HouseCardDeck houseCardDeck;
 	
 	private Players players;
 	private Player currentPlayer;
@@ -63,6 +60,7 @@ public class GameOfLife {
 		careerDeck = new CareerCardDeck();
 		salaryDeck = new SalaryCardDeck();
 		blueCardDeck = new BlueCardDeck();
+		houseCardDeck = new HouseCardDeck ();
 		
 		board = new Board();
 		bank = new Bank();
@@ -226,8 +224,6 @@ public class GameOfLife {
 	}
 	
 	public void getMarried (int tempWheel) {
-		int i;
-		ArrayList <Player> temp = getPlayers();
 		if (tempWheel % 2 == 0) {
 			collectFromEveryone(10000);
 			
@@ -236,8 +232,14 @@ public class GameOfLife {
 			collectFromEveryone(5000);
 		}
 	}
-	public void buyHouse () {
-
+	
+	public void buyHouse (int option) {
+		HouseCard house = houseCardDeck.getCard(option);
+		currentPlayer.buyHouse(house);
+	}
+	
+	public ArrayList <HouseCard> getHouseCards () {
+		return houseCardDeck.getHouseCards();
 	}
 
 	public void collegeCareerChoice () {

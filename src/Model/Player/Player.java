@@ -1,6 +1,7 @@
 package Model.Player;
 
 import Model.Career.CareerCard;
+import Model.HouseCard.HouseCard;
 import Model.SalaryCard.SalaryCard;
 
 public class Player {
@@ -15,6 +16,7 @@ public class Player {
 	private boolean married;
 	private int baby;
 	private Career job;
+	private House house;
 
 	public int position;
 	
@@ -111,6 +113,19 @@ public class Player {
 	 */
 	public void setNewCareer (CareerCard c, SalaryCard s) {
 		job = new Career(c, s);
+	}
+	
+	public void buyHouse (HouseCard h) {
+		house = new House (h);
+		balance -= h.getValue();
+	}
+	
+	public House getHouse () {
+		return house;
+	}
+	
+	public boolean hasHouse () {
+		return house != null;
 	}
 	
 	/**

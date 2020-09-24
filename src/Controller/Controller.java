@@ -5,14 +5,13 @@ import java.util.ArrayList;
 
 import Model.GameOfLife;
 import Model.Player.Player;
-import Model.Space;
 import Model.ActionCard.ActionCard;
 import Model.BlueCard.BlueCard;
 import View.BoardGUI;
-import View.ChoosePath;
+import View.ChooseHouseUI;
+import View.ChoosePathUI;
 import View.ChoosePlayerUI;
 import View.GUI;
-import Controller.SpaceController;
 
 public class Controller implements ActionListener, KeyListener{
 	
@@ -187,12 +186,13 @@ public class Controller implements ActionListener, KeyListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-				//gml.wheel = 128; //FOR TESTING
+				gml.wheel = 50; //FOR TESTING
 				gml.processTurn();
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
 				for (i = 1; i <= gml.getWheel(); i++) {
 					
+					/*
 					//CHECK IF LAST TILE
 					if (gml.isEnd() && i != gml.getWheel()) {
 						gui.displayText (currentPlayer.getName() + " is now RETIRED");
@@ -200,26 +200,26 @@ public class Controller implements ActionListener, KeyListener{
 						i = gml.getWheel();
 					}	
 					
-					if (!currentPlayer.isFinish())
+					if (!currentPlayer.isFinish())*/
 						currentPlayer.move();
 					
-					
+					/*
 					//DOUBLE CHECKING IF PLAYER LANDED ON HAS JUMP BUT SPACE IS LAST SPOT INTERACTED ON
 					if (i == 1 && currentPlayer.getPosition() != 0) {
 						if (gml.isJump())
 							currentPlayer.jumpTo(gml.getJump() - 1);
-					}
+					}*/
 					
-					
+					/*
 					//CHECK IF CURRENT SPACE IS MAGENTA
 					if (gml.isMagenta() && i != gml.getWheel() ) {
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						System.out.println(spaceType);
 						gui.interactSpace(spaceType);
 						interactSpace (spaceType);
-					}
+					}*/
 					
-					
+					/*
 					//CHECK IF SPACE HAS JUMP
 					if(gml.isJump()){
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
@@ -228,7 +228,7 @@ public class Controller implements ActionListener, KeyListener{
 						interactSpace(spaceType);
 						if (i != gml.getWheel()) 
 							currentPlayer.jumpTo(gml.getJump() - 1);
-					}
+					}*/
 
 					//CHECK IF LAST TILE
 				}
@@ -275,9 +275,12 @@ public class Controller implements ActionListener, KeyListener{
 			haveChild ();
 			break;
 		case 5:
-			takeBlueCard();
+			buyHouse();
 			break;
 		case 6:
+			takeBlueCard();
+			break;
+		case 7:
 			greenSpaceEffect ();
 			break;
 		}
@@ -387,45 +390,6 @@ public class Controller implements ActionListener, KeyListener{
 		}while (run);
 		
 		return gml.getPlayers().get(index);
-		/*
-		gui.enableInputs();
-		int option;
-		int index = -1;
-		
-		ArrayList <Player> players = gml.getPlayers();
-		
-		gui.choosePlayer(players, currentPlayer);
-		
-		do {
-			System.out.print("");
-			
-			if (done) {
-				
-				try {
-					option = Integer.parseInt(input);
-					
-					index  = gml.choosePlayer (option);
-					
-					switch (index) {
-					
-					case -1:
-						gui.displayText("INVALID PLAYER / INVALID INPUT, TRY AGAIN");
-						done = false;
-						break;
-					case 0: case 1: case 2: 
-						break;
-					}
-				}catch(Exception e) {
-					done = false;
-					gui.displayText("INVALID OPTION");
-				}
-				
-			}
-		}while (!done);
-		
-		pauseGUI();
-		return players.get(index);*/
-		
 	}
 	
 //BLUE SPACES
@@ -490,7 +454,7 @@ public class Controller implements ActionListener, KeyListener{
 	
 	public void choosePath () {
 		ChoosePathController cCont;
-		ChoosePath cUI = new ChoosePath("START CAREER", "START COLLEGE");
+		ChoosePathUI cUI = new ChoosePathUI("START CAREER", "START COLLEGE");
 		
 		if (currentPlayer.getPosition() == 1) {
 			cCont = new ChoosePathController ("START CAREER", "START COLLEGE", cUI);
@@ -568,6 +532,27 @@ public class Controller implements ActionListener, KeyListener{
 		else {
 			gui.displayText("YOU ARE NOT MARRIED");
 		}
+	}
+	
+	public void buyHouse () {
+		ChooseHouseUI houseUI = new ChooseHouseUI ();
+		ChooseHouseController houseCont = new ChooseHouseController (houseUI, gml.getHouseCards());
+		
+		boolean run = true;
+		int index = -1;
+		
+		do {
+			System.out.print("");
+			
+			switch (houseCont.getOption()){
+				case 0: case 1: case 2: case 3: case 4: case 5:
+					index = houseCont.getOption();
+					run = false;
+					break;
+			}
+		}while (run);
+		
+		gml.buyHouse(index);
 	}
 
 

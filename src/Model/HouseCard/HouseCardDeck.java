@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class HouseCardDeck {
 
 	private ArrayList<HouseCard> deck;
-	private final int NUM_HOUSES = 7;
+	private final int NUM_HOUSES = 6;
 	private int counter = 0;
 	
 	public HouseCardDeck () {
@@ -38,6 +38,7 @@ public class HouseCardDeck {
 		
 		for(i = 0; i < NUM_HOUSES; i++) {
 			String tempSplit[] = temp[i].split(" ");
+			System.out.println("");
 			String houseName = tempSplit[0];
 			int value = Integer.parseInt(tempSplit[1]);
 			
@@ -46,20 +47,23 @@ public class HouseCardDeck {
 			
 		}
 		
-		Collections.shuffle(deck);
+		//Collections.shuffle(deck);
 		
 	}
 	
-	public HouseCard getCard () {
+	public HouseCard getCard (int option) {
 		
 		if(counter >= NUM_HOUSES)
 			reShuffleCards();
 			
-		HouseCard card = deck.get(counter);
-		this.deck.get(counter).setAvailable(false);
+		HouseCard card = deck.get(option);
+		this.deck.get(option).setAvailable(false);
 		counter++;
 		return card;
-		
+	}
+	
+	public ArrayList <HouseCard> getHouseCards (){
+		return deck;
 	}
     public int checkCardsAvail () {
 

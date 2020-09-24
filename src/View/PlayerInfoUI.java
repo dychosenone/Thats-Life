@@ -3,6 +3,7 @@ import javax.swing.*;
 
 import Model.SalaryCard.SalaryCard;
 import Model.Player.Career;
+import Model.Player.House;
 import Model.Player.Player;
 import java.awt.Color;
 import java.awt.Font;
@@ -115,7 +116,17 @@ public class PlayerInfoUI extends JPanel{
 			salaryInfo.setText("SALARY" + newLine  + "N/A" + newLine
 			         + "TAX     : " + "N/A");
 }
+		House h = player.getHouse();
 		
+		if(h != null) {
+			houseInfo.setText("HOUSE : " + newLine + h.getName() + newLine
+							+ "VALUE : " + h.getValue());
+		}
+		
+		else {
+			houseInfo.setText("HOUSE : " + newLine + "N/A" + newLine
+					+ "VALUE : " + "N/A");
+		}
 		
 	}
 }

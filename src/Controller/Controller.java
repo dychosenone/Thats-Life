@@ -7,6 +7,7 @@ import Model.GameOfLife;
 import Model.Player.Player;
 import Model.ActionCard.ActionCard;
 import Model.BlueCard.BlueCard;
+import View.ActionCardUI;
 import View.BoardGUI;
 import View.ChooseHouseUI;
 import View.ChoosePathUI;
@@ -249,7 +250,6 @@ public class Controller implements ActionListener, KeyListener{
 		switch (spaceType) {
 		case 0: //COLLECT ACTION CARD
 			ActionCard card = gml.takeActionCard();
-			
 			takeActionCard (card);
 			
 			break;
@@ -317,6 +317,8 @@ public class Controller implements ActionListener, KeyListener{
 		
 		case 1: //COLLECT MONEY FROM THE BANK
 			
+			displayCard(card, "COLLECT FROM THE BANK");
+			
 			gui.displayText("YOU GOT " + card.getCardName() + "\n" 
 							+ currentPlayer.getName() + ": +" + card.getValue());
 			
@@ -324,6 +326,8 @@ public class Controller implements ActionListener, KeyListener{
 			
 			break;
 		case 2: //PAY BANK
+			
+			displayCard(card, "PAY THE BANK");
 			
 			gui.displayText("YOU GOT " + card.getCardName() + "\n" 
 							+ currentPlayer.getName() + ": -" + card.getValue());
@@ -334,6 +338,8 @@ public class Controller implements ActionListener, KeyListener{
 		case 3:
 			
 			if (card.getCardName().equalsIgnoreCase("Lawsuit")) {
+				
+				displayCard(card, "PAY TO A PLAYER");
 				
 				Player target = choosePlayer(1);
 				
@@ -347,6 +353,8 @@ public class Controller implements ActionListener, KeyListener{
 			
 			else if(card.getCardName().equalsIgnoreCase("Bonus")) {
 				ArrayList<Player> players = gml.getPlayers();
+				
+				displayCard(card, "PAY TO EVERYONE");
 
 				gml.payEveryone(card.getValue());
 				
@@ -361,6 +369,8 @@ public class Controller implements ActionListener, KeyListener{
 				
 				Player target = choosePlayer(2);
 				
+				displayCard(card, "COLLECT FROM A PLAYER");
+				
 				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
 						 + currentPlayer.getName() + ": +" + card.getValue() + "\n"
 						 + target.getName() + ": - " + card.getValue());
@@ -371,6 +381,8 @@ public class Controller implements ActionListener, KeyListener{
 			
 			else if(card.getCardName().equalsIgnoreCase("Birthday")) {
 				ArrayList<Player> players = gml.getPlayers();
+				
+				displayCard(card, "COLLECT FROM EVERYONE");
 				
 				gml.collectFromEveryone(10000);
 				
@@ -408,6 +420,16 @@ public class Controller implements ActionListener, KeyListener{
 		}while (run);
 		
 		return gml.getPlayers().get(index);
+	}
+	
+	public void displayCard(ActionCard c, String instructions) {
+		ActionCardUI tempUI = new ActionCardUI();
+		ActionCardController tempCont = new ActionCardController (tempUI, c, instructions);
+		
+		do {
+			System.out.print("");
+		}while (!tempCont.isClosed());
+		
 	}
 	
 //BLUE SPACES
@@ -449,13 +471,13 @@ public class Controller implements ActionListener, KeyListener{
 	
 	public void getMarried () {
 		spin = false;
-		gui.displayText("SPIN WHEEL1");
+		gui.displayText("YOU ARE GETTING MARRIED\nSPIN WHEEL");
 		
 		do {
 			System.out.print("");
 			if (spin) {
 				if (tempWheel  % 2 == 0) {// if wheel is even
-					gui.displayText("YOU ROLLED A " + tempWheel + " COLLECT 10000 FROM EVERYONE" );
+					gui.displayText("YOU ROLLED A " + tempWheel + "\n COLLECT 10000 FROM EVERYONE" );
 				}
 				
 				else {

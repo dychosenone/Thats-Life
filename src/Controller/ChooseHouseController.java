@@ -2,12 +2,14 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 import Model.HouseCard.HouseCard;
 import View.ChooseHouseUI;
 
-public class ChooseHouseController implements ActionListener{
+public class ChooseHouseController implements ActionListener, WindowListener{
 	
 	private ChooseHouseUI ui;
 	
@@ -22,6 +24,7 @@ public class ChooseHouseController implements ActionListener{
 		ui.chooseHouse(houses);
 		
 		ui.setActionListeners(this);
+		ui.setWindowListeners(this);
 	}
 	
 	public int getOption () {
@@ -60,5 +63,46 @@ public class ChooseHouseController implements ActionListener{
 			option = 5;
 			ui.dispose();
 		}
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		option = -2;
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

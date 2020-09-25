@@ -171,51 +171,53 @@ public class Controller implements ActionListener, KeyListener{
 //MAIN GAME METHODS
 	
 	public void processTurn () {
-		System.out.println(currentPlayer.getName() + currentPlayer.isFinish());
 		startTurn();
 		int i;
 		
 		gui.displayText("IT IS " + currentPlayer.getName() +"'S TURN" + "\n" + 
 		"SPIN THE WHEEL");
 		
+		if (currentPlayer.getPosition() == 0) {
+			choosePath();
+		}
+		
 		do {
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-				gml.wheel = 50; //FOR TESTING
+				//gml.wheel = 1; //FOR TESTING
 				gml.processTurn();
 				gui.displayText("You Rolled a " + gml.getWheel());
 				
 				for (i = 1; i <= gml.getWheel(); i++) {
 					
-					/*
 					//CHECK IF LAST TILE
 					if (gml.isEnd() && i != gml.getWheel()) {
 						gui.displayText (currentPlayer.getName() + " is now RETIRED");
 						
 						i = gml.getWheel();
-					}	*/
+					}	
 					
 					if (!currentPlayer.isFinish())
 						currentPlayer.move();
 					
-					/*
+					
 					//DOUBLE CHECKING IF PLAYER LANDED ON HAS JUMP BUT SPACE IS LAST SPOT INTERACTED ON
 					if (i == 1 && currentPlayer.getPosition() != 0) {
 						if (gml.isJump())
 							currentPlayer.jumpTo(gml.getJump() - 1);
-					}*/
+					}
 					
-					/*
+					
 					//CHECK IF CURRENT SPACE IS MAGENTA
 					if (gml.isMagenta() && i != gml.getWheel() ) {
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						System.out.println(spaceType);
 						gui.interactSpace(spaceType);
 						interactSpace (spaceType);
-					}*/
+					}
 					
-					/*
+					
 					//CHECK IF SPACE HAS JUMP
 					if(gml.isJump()){
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
@@ -224,7 +226,7 @@ public class Controller implements ActionListener, KeyListener{
 						interactSpace(spaceType);
 						if (i != gml.getWheel()) 
 							currentPlayer.jumpTo(gml.getJump() - 1);
-					}*/
+					}
 
 				}
 				
@@ -245,6 +247,7 @@ public class Controller implements ActionListener, KeyListener{
 	
 	public void interactSpace (int spaceType) {
 		//ORANGESPACES
+		gui.updatePlayerInfo(gml.getPlayers());
 		switch (spaceType) {
 		case 0: //COLLECT ACTION CARD
 			ActionCard card = gml.takeActionCard();
@@ -367,20 +370,14 @@ public class Controller implements ActionListener, KeyListener{
 			System.out.print("");
 			
 			switch (chooseCont.getChoice()) {
-			case 0:
-				index = 0;
+			case 0: case 1: case 2:
+				index = chooseCont.getChoice();
 				run = false;
 				break;
-			case 1:
-				index = 1;
-				run = false;
+			case -2:
+				chooseUI = new ChoosePlayerUI(situation);
+				chooseCont = new ChoosePlayerController (chooseUI, gml.getPlayers(), currentPlayer);
 				break;
-			case 2:
-				index = 2;
-				run = false;
-				break;
-			default:
-				run = true;
 				
 			}
 		}while (run);
@@ -449,10 +446,12 @@ public class Controller implements ActionListener, KeyListener{
 	}
 	
 	public void choosePath () {
+		int path = 0;
 		ChoosePathController cCont;
-		ChoosePathUI cUI = new ChoosePathUI("START CAREER", "START COLLEGE");
 		
-		if (currentPlayer.getPosition() == 1) {
+		if (currentPlayer.getPosition() == 0) {
+			
+			ChoosePathUI cUI = new ChoosePathUI();
 			cCont = new ChoosePathController ("START CAREER", "START COLLEGE", cUI);
 			boolean run = true;
 			
@@ -461,23 +460,22 @@ public class Controller implements ActionListener, KeyListener{
 				System.out.print(cCont.getChoice());
 				
 				switch (cCont.getChoice()) {
-				case 0:
-					run = true;
-					break;
-				case 1:
+				case 1: case 2:
+					path = cCont.getChoice();
 					run = false;
 					break;
-				case 2:
-					run = false;
+				case -2:
+					cUI = new ChoosePathUI();
+					cCont = new ChoosePathController ("START CAREER", "START COLLEGE", cUI);
 					break;
 				}
 				
 			}while(run);
-			path = cCont.getChoice();
-			System.out.println(path);
+			
 		}
 		
-		else if (currentPlayer.getPosition() == 20) {
+		else if (currentPlayer.getPosition() == 46) {
+			ChoosePathUI cUI = new ChoosePathUI();
 			cCont = new ChoosePathController ("FAMILY PATH", "CAREER PATH", cUI);
 			boolean run = true;
 			
@@ -486,21 +484,21 @@ public class Controller implements ActionListener, KeyListener{
 				System.out.print(cCont.getChoice());
 				
 				switch (cCont.getChoice()) {
-				case 0:
-					run = true;
-					break;
-				case 1:
+				case 1: case 2:
+					path = cCont.getChoice();
 					run = false;
 					break;
-				case 2:
-					run = false;
+				case -2:
+					cUI = new ChoosePathUI();
+					cCont = new ChoosePathController ("FAMILY PATH", "CAREER PATH", cUI);
 					break;
 				}
 				
 			}while(run);
-			path = cCont.getChoice();
-			System.out.println(path);
+			
 		}
+		
+		gml.choosePath(path);
 	}
 	
 	public void haveChild () {
@@ -552,6 +550,11 @@ public class Controller implements ActionListener, KeyListener{
 						houseUI = new ChooseHouseUI ();
 						houseCont = new ChooseHouseController (houseUI, gml.getHouseCards());
 					}
+					break;
+				
+				case -2:
+					houseUI = new ChooseHouseUI ();
+					houseCont = new ChooseHouseController (houseUI, gml.getHouseCards());
 					break;
 			}
 		}while (run);

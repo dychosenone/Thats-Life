@@ -13,8 +13,11 @@ import Model.Player.Players;
 
 import Model.SalaryCard.SalaryCard;
 import Model.SalaryCard.SalaryCardDeck;
+import View.ChoosePathUI;
 
 import java.util.ArrayList;
+
+import Controller.ChoosePathController;
 
 public class GameOfLife {
 	
@@ -97,14 +100,10 @@ public class GameOfLife {
 	public void processTurn (){
 		turn = true;
 		
+		/*
 		if(currentPlayer.getJob() == NULL) {
 			jobSearch();
-		}
-		
-		System.out.println(currentPlayer.getName() + " is Now Playing");
-		System.out.println("Model.Career: " + currentPlayer.getJob().getPosition());
-		
-		System.out.println("You rolled a " + wheel);
+		}*/
 		
 		
 	}
@@ -138,15 +137,17 @@ public class GameOfLife {
 				
 				case "haveChild" :
 					return 4;
+				case "buyHouse":
+					return 5;
 			}
 		}
 		//BLUE SPACE
 		else if(space.getName().equalsIgnoreCase("Blue")) {
-			return 5;
+			return 6;
 		}
 		
 		else if (space.getName().equalsIgnoreCase("Green")) {
-			return 6;
+			return 7;
 		}
 		
 		return -1;
@@ -261,6 +262,35 @@ public class GameOfLife {
 		SalaryCard salaryChoiceTwo = salaryDeck.takeCard();
 
 
+	}
+	
+	public void choosePath (int path) {
+		
+		
+		if (currentPlayer.getPosition() == 0) {		
+			switch (path) {
+			case 1: //START CAREER
+				jobSearch ();
+				currentPlayer.setPosition(11);
+				break;
+			case 2://START COLLEGE
+				jobSearch();
+				System.out.println("COLLEGE");
+				break;
+			}
+		}
+		
+		else if (currentPlayer.getPosition() == 46) {
+			switch (path) {
+			case 1://FAMILY PATH
+				break;
+			case 2://CAREER PATH
+				currentPlayer.setPosition(54);
+				break;
+			}
+		}
+		
+		System.out.println(currentPlayer.getPosition());
 	}
 
 	// Checks if Space has a jump

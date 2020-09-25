@@ -80,6 +80,10 @@ public class Player {
 		return baby;
 	}
 	
+	public void setPosition (int p) {
+		position = p;
+	}
+	
 	/**
 	 * Function adds balance of player
 	 * @param num - amount to be added

@@ -38,20 +38,22 @@ public class Board {
 			String cardName = split[1];
 			boolean hasJump = Boolean.parseBoolean(split[2]);
 			int cardJumpSpace = Integer.parseInt(split[3]);
-					
+				
+			System.out.println(boardNumber);
 					
 			switch(split[1]){
 				case "Magenta":
 		
 					switch(boardNumber) {
-						case 13:
+						case 9:
+							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "Graduation"));
+							break;
+						case 11:
+							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "collegeCareerChoice"));
+							break;
+						case 14: case 48:
 							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "getMarried"));
 							break;
-
-						case 48:
-							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "getMarried"));
-							break;
-						case 16:
 						case 59:
 							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "careerChoice"));
 							break;
@@ -61,11 +63,10 @@ public class Board {
 						case 46:
 							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "choosePath"));
 							break;
-						case 52:
-						case 95:
+						case 52: case 95:
 							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "buyHouse"));
 							break;
-						case 54:
+						case 42: case 54:
 							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "haveChild"));
 							break;
 					}
@@ -92,7 +93,7 @@ public class Board {
 		for (i = 0; i < spaces.size(); i++) {
 			if (spaces.get(i).getName().equalsIgnoreCase("Magenta")) {
 				MagentaSpace temp = (MagentaSpace) spaces.get(i);
-				System.out.println(i + temp.getMagentaType());
+				System.out.println(temp.getSpaceNumber() + temp.getMagentaType());
 			}
 			else {
 				System.out.println(spaces.get(i).getSpaceNumber() + " " + spaces.get(i).getName());

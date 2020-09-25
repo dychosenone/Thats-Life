@@ -17,17 +17,17 @@ public class ChoosePathController implements ActionListener, WindowListener {
 		this.path2 = path2;
 		
 		this.ui = ui;
-		//System.out.println("ChoosePathController Created");
-		ui.setListener(this);
+		
+		ui.setActionListener(this);
+		ui.setWindowListener(this);
+		
+		ui.choosePath(path1, path2);
 	}
 	
 	public int getChoice () {
 		return choice;
 	}
 	
-	public void closeWindow () {
-		System.exit(0);
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -51,7 +51,7 @@ public class ChoosePathController implements ActionListener, WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		System.exit(0);
+		choice = -2;
 		
 	}
 

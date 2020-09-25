@@ -5,12 +5,14 @@ import java.awt.Color;
 import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JRootPane;
 import javax.swing.SwingConstants;
 
 import Model.HouseCard.HouseCard;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 public class ChooseHouseUI {
@@ -210,6 +212,10 @@ public class ChooseHouseUI {
 	    btnProperty4.addActionListener(l);
 	    btnProperty5.addActionListener(l);
 	    btnProperty6.addActionListener(l);
+	}
+	
+	public void setWindowListeners (WindowListener l) {
+		main.addWindowListener(l);
 	}
 	 
 	public void dispose () {

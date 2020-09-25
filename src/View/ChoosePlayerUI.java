@@ -84,18 +84,24 @@ public class ChoosePlayerUI{
     		switch (i) {
     		case 1:
     			if(!currentPlayer.equals(players.get(i-1))) {
+    				main.revalidate();
+    				main.repaint();
     				btnPlayer1.setText(players.get(i-1).getName());
     				main.getContentPane().add(btnPlayer1);
     			}
     			break;
     		case 2:
     			if(!currentPlayer.equals(players.get(i-1))) {
+    				main.revalidate();
+    				main.repaint();
 	    			btnPlayer2.setText(players.get(i-1).getName());
 	    			main.getContentPane().add(btnPlayer2);
     			}
     			break;
     		case 3:
     			if(!currentPlayer.equals(players.get(i-1))) {
+    				main.revalidate();
+    				main.repaint();
 	    			btnPlayer3.setText(players.get(i-1).getName());
 	    			main.getContentPane().add(btnPlayer3);
     			}

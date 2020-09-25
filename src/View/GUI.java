@@ -8,8 +8,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class GUI extends JFrame{;
+public class GUI{;
     private static final Career NULL = null;
+    
+    private JFrame main;
+    
 	private JButton btnWheel;
     private JButton btnPayLoan;
     private JButton btnGetLoan;
@@ -31,33 +34,36 @@ public class GUI extends JFrame{;
     //GridBagConstraints c = new GridBagConstraints ();
 
     public GUI () {
-	
-        super ("That's Life");
         
         System.out.println("GUI START");
         
-        getContentPane().setBackground(Color.white);
-        getContentPane().setForeground(new Color(119, 136, 153));
-        getContentPane().setFont(new Font("Times New Roman", Font.BOLD, 18));
+        main = new JFrame ("That's Life");
+        
+        main.revalidate();
+        main.repaint();
+        
+        main.getContentPane().setBackground(Color.white);
+        main.getContentPane().setForeground(new Color(119, 136, 153));
+        main.getContentPane().setFont(new Font("Times New Roman", Font.BOLD, 18));
 
         init();
 
-        setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        setSize (1280, 720);
-        setResizable(false);
-        setVisible (true);
+        main.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+        main.setSize (1280, 720);
+        main.setResizable(false);
+        main.setVisible (true);
         
         System.out.println("GUI LOADED");
     }
 
     private void init () {
 
-    	getContentPane().setLayout(null);
+    	main.getContentPane().setLayout(null);
     	
     	board = new BoardGUI();
     	board.setBounds(16, 20, 764, 595);
     	board.setVisible(true);
-    	getContentPane().add(board);
+    	main.getContentPane().add(board);
     	
     	playerOneInfo = new PlayerInfoUI (new Color(41, 40, 38), new Color (249, 211, 66));
     	playerOneInfo.setBounds(790, 20, 470, 181);
@@ -71,9 +77,9 @@ public class GUI extends JFrame{;
     	playerThreeInfo.setBounds(790, 391, 470, 181);
     	playerThreeInfo.setVisible(true);
     	
-    	getContentPane().add(playerOneInfo);
-    	getContentPane().add(playerTwoInfo);
-    	getContentPane().add(playerThreeInfo);
+    	main.getContentPane().add(playerOneInfo);
+    	main.getContentPane().add(playerTwoInfo);
+    	main.getContentPane().add(playerThreeInfo);
 
     	btnWheel = new JButton ("SPIN WHEEL");
     	btnWheel.setForeground(new Color(105, 105, 105));
@@ -81,7 +87,7 @@ public class GUI extends JFrame{;
     	btnWheel.setFont(new Font("Courier New", Font.PLAIN, 18));
     	btnWheel.setBounds(22, 627, 180, 54);
 
-    	getContentPane().add (btnWheel);
+    	main.getContentPane().add (btnWheel);
 
     	btnPayLoan = new JButton ("PAY LOAN");
     	btnPayLoan.setForeground(new Color(105, 105, 105));
@@ -89,7 +95,7 @@ public class GUI extends JFrame{;
     	btnPayLoan.setFont(new Font("Courier New", Font.PLAIN, 18));
     	btnPayLoan.setBounds(402, 627, 180, 54);
 
-    	getContentPane().add (btnPayLoan);
+    	main.getContentPane().add (btnPayLoan);
 
     	btnGetLoan = new JButton ("GET LOAN");
     	btnGetLoan.setForeground(new Color(105, 105, 105));
@@ -97,7 +103,7 @@ public class GUI extends JFrame{;
     	btnGetLoan.setFont(new Font("Courier New", Font.PLAIN, 18));
     	btnGetLoan.setBounds(212, 627, 180, 54);
 
-    	getContentPane().add (btnGetLoan);
+    	main.getContentPane().add (btnGetLoan);
 
     	btnEndTurn = new JButton ("END TURN");
     	btnEndTurn.setForeground(new Color(105, 105, 105));
@@ -105,14 +111,14 @@ public class GUI extends JFrame{;
     	btnEndTurn.setFont(new Font("Courier New", Font.PLAIN, 18));
     	btnEndTurn.setBounds(592, 627, 180, 54);
 
-    	getContentPane().add (btnEndTurn);
+    	main.getContentPane().add (btnEndTurn);
 
     	tfInput = new JTextField();
     	tfInput.setForeground(new Color(248, 248, 255));
     	tfInput.setBackground(new Color(69, 69, 69));
     	tfInput.setBounds(792, 649, 462, 31);
     	tfInput.setEditable(true);
-    	getContentPane().add(tfInput);
+    	main.getContentPane().add(tfInput);
 
     	tfInput.setColumns(10);
 
@@ -129,7 +135,7 @@ public class GUI extends JFrame{;
     	scroll = new JScrollPane (taConsole);
     	scroll.setBounds(792, 575, 462, 75);
 
-    	getContentPane().add(scroll);
+    	main.getContentPane().add(scroll);
     	
     	
     }
@@ -137,6 +143,10 @@ public class GUI extends JFrame{;
     public BoardGUI getBoard () {
     	return this.board;
 
+    }
+    
+    public void dispose () {
+    	main.dispose();
     }
 
     public void setListener (ActionListener listener) {

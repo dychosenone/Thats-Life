@@ -284,6 +284,11 @@ public class Controller implements ActionListener, KeyListener{
 			break;
 		}
 	}
+	
+	public int endGame () {
+		gui.dispose();
+		return 1;
+	}
 
 //ORANGE SPACES
 	public void takeActionCard (ActionCard card) {

@@ -2,12 +2,18 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 import Model.GameOfLife;
 import View.GUI;
 import View.MainMenu;
 
 public class MainMenuController implements ActionListener{
+	
+	private ExecutorService e = Executors.newSingleThreadExecutor();
+	private Future<?> task;
 	
 	private MainMenu ui;
 	private boolean run = true;
@@ -20,24 +26,41 @@ public class MainMenuController implements ActionListener{
 		
 	}
 	
-	public void run () {
-		GameOfLife game = new GameOfLife ();	
-		GUI gui = new GUI();
-			
-		Controller cont = new Controller (gui, game);
-		System.out.println("MAIN GAME START");
-		cont.startGame();
+	public void runGame () {
+		
+		if (task != null)
+			task.cancel(true);
+		
+		task = e.submit(new Runnable (){
+			@Override
+			public void run() {
+				startGame();
+			}
+		});
 	}
 	
 	public boolean getRun () {
 		return run;
 	}
 	
+	public void startGame () {
+		int run = 0;
+		
+		while (run == 0) {
+			GameOfLife game = new GameOfLife ();	
+			GUI gui = new GUI();
+				
+			Controller cont = new Controller (gui, game);
+			System.out.println("MAIN GAME START");
+			cont.startGame();
+		}
+	}
+	
 	@Override
 	public void actionPerformed (ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "START GAME":
-			System.out.println("RUNNING");
+			runGame();
 			break;
 		case "INSTRUCTIONS":
 			break;

@@ -14,18 +14,8 @@ public class Main {
 
 	public static void main (String[] args) {
 		
-		/*
+		
 		MainMenu ui = new MainMenu ();
 		MainMenuController main = new MainMenuController(ui);
-		main.run();*/
-		
-		
-		GameOfLife game = new GameOfLife ();	
-		GUI gui = new GUI();
-		
-		Controller cont = new Controller (gui, game);
-		cont.startGame();
-		
-		
 	}
 }

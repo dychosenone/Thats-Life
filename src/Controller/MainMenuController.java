@@ -47,6 +47,7 @@ public class MainMenuController implements ActionListener{
 		int run = 0;
 		
 		while (run == 0) {
+			ui.dispose();
 			GameOfLife game = new GameOfLife ();	
 			GUI gui = new GUI();
 				

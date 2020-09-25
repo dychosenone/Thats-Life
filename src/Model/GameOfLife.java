@@ -469,4 +469,32 @@ public class GameOfLife {
 		
 		return ctr == getPlayers().size();
 	}
+	
+	public Player decideWinner () {
+
+		ArrayList <Player> temp = getPlayers();
+
+		Player a = temp.get(0);
+		Player b = temp.get(1);
+		Player c = temp.get(2);
+		
+		if (a.getBalance() > b.getBalance()) {
+			
+		    if (a.getBalance() > c.getBalance())
+		      return a;
+		    
+		    else
+		      return c;
+		    
+		  } 
+		
+		else {
+			
+		    if (b.getBalance() > c.getBalance())
+		      return b;
+		    
+		    else
+		      return c;
+		  }
+	}
 }

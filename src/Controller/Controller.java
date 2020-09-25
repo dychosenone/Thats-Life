@@ -12,6 +12,7 @@ import View.ChooseHouseUI;
 import View.ChoosePathUI;
 import View.ChoosePlayerUI;
 import View.GUI;
+import View.consoleUI;
 
 public class Controller implements ActionListener, KeyListener{
 	
@@ -67,7 +68,6 @@ public class Controller implements ActionListener, KeyListener{
 		movePlayer(2, 5);
 		
 		do {
-			System.out.println(currentPlayer.getName());
 			closeLoan ();
 			finish = false;
 			turn = true; //start turn
@@ -96,7 +96,6 @@ public class Controller implements ActionListener, KeyListener{
 					gml.nextTurn();
 					currentPlayer = gml.getCurrentPlayer();
 					
-					System.out.println(currentPlayer.getName());
 				}while(currentPlayer.isFinish());
 				
 				gui.nextTurn();
@@ -106,6 +105,7 @@ public class Controller implements ActionListener, KeyListener{
 		
 		
 		gui.displayText("GAME OVER");
+		decideWinner (gml.decideWinner());
 	}
 	
 	public void getNumberOfPlayers () {
@@ -212,7 +212,6 @@ public class Controller implements ActionListener, KeyListener{
 					//CHECK IF CURRENT SPACE IS MAGENTA
 					if (gml.isMagenta() && i != gml.getWheel() ) {
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
-						System.out.println(spaceType);
 						gui.interactSpace(spaceType);
 						interactSpace (spaceType);
 					}
@@ -221,7 +220,6 @@ public class Controller implements ActionListener, KeyListener{
 					//CHECK IF SPACE HAS JUMP
 					if(gml.isJump()){
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
-						System.out.println("Jumped to space number: " + gml.getJump());
 						gui.interactSpace(spaceType);
 						interactSpace(spaceType);
 						if (i != gml.getWheel()) 
@@ -262,10 +260,23 @@ public class Controller implements ActionListener, KeyListener{
 		case 2:
 			if (!currentPlayer.isMarried()) {
 				getMarried ();
-				gui.displayText("YOU ARE NOW MARRIED");
+				
+				consoleUI tempUI = new consoleUI ();
+				consoleController tempCont = new consoleController (tempUI, "YOU ARE NOW MARRIED");
+
+				do {
+					System.out.print("");
+				}while (!tempCont.isClosed());
+				
 			}
 			else {
-				gui.displayText("YOU ARE CURRENTLY MARRIED");
+				consoleUI tempUI = new consoleUI ();
+				consoleController tempCont = new consoleController (tempUI, "YOU ARE CURRENTLY MARRIED");
+				
+				do {
+					System.out.print("");
+				}while (!tempCont.isClosed());
+				
 			}
 			break;
 		case 3:
@@ -289,6 +300,11 @@ public class Controller implements ActionListener, KeyListener{
 	public int endGame () {
 		gui.dispose();
 		return 1;
+	}
+	
+	public void decideWinner (Player winner) {
+		gui.decideWinner (winner);
+		gui.dispose();
 	}
 
 //ORANGE SPACES
@@ -441,7 +457,6 @@ public class Controller implements ActionListener, KeyListener{
 				
 				else {
 					gui.displayText("YOU ROLLED A " + tempWheel + " COLLECT 5000 FROM EVERYONE" );
-					gml.collectFromEveryone(5000);
 				}
 			}
 			
@@ -463,7 +478,7 @@ public class Controller implements ActionListener, KeyListener{
 			
 			do {
 				
-				System.out.print(cCont.getChoice());
+				System.out.print("");
 				
 				switch (cCont.getChoice()) {
 				case 1: case 2:
@@ -487,7 +502,7 @@ public class Controller implements ActionListener, KeyListener{
 			
 			do {
 				
-				System.out.print(cCont.getChoice());
+				System.out.print("");
 				
 				switch (cCont.getChoice()) {
 				case 1: case 2:

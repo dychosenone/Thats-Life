@@ -226,6 +226,10 @@ public class GUI{;
     public void disableInputs () {
     	tfInput.setEditable(false);
     }
+    
+    public void decideWinner (Player winner) {
+    	
+    }
 
     public void interactSpace (int spaceType) {                    //INDEX
     	String text[] = {  "YOU LANDED ON ACTION CARD TILE",       //0

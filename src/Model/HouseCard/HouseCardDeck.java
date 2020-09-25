@@ -53,12 +53,14 @@ public class HouseCardDeck {
 	
 	public HouseCard getCard (int option) {
 		
+		/*
 		if(counter >= NUM_HOUSES)
 			reShuffleCards();
-			
+		*/
+		
 		HouseCard card = deck.get(option);
 		this.deck.get(option).setAvailable(false);
-		counter++;
+		//counter++;
 		return card;
 	}
 	
@@ -69,6 +71,10 @@ public class HouseCardDeck {
 
         return (NUM_HOUSES - this.counter - 1);
 
+    }
+    
+    public void returnCard (int index) {
+    	deck.get(index).setAvailable(true);
     }
 
 	

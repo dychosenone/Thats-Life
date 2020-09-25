@@ -24,8 +24,7 @@ public class ChoosePlayerUI{
     	situation = s;
     	
     	main = new JDialog ();
-    	main.setBackground(Color.WHITE);
-    	main.getContentPane().setBackground(Color.GRAY);
+    	main.getContentPane().setBackground(Color.white);
     	
     	init();
     	

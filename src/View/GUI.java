@@ -36,7 +36,7 @@ public class GUI extends JFrame{;
         
         System.out.println("GUI START");
         
-        getContentPane().setBackground(new Color(211, 211, 211));
+        getContentPane().setBackground(Color.white);
         getContentPane().setForeground(new Color(119, 136, 153));
         getContentPane().setFont(new Font("Times New Roman", Font.BOLD, 18));
 

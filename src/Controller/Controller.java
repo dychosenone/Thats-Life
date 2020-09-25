@@ -51,14 +51,10 @@ public class Controller implements ActionListener, KeyListener{
 		//gets number of players
 		
 		gml.printSpaces();
-		System.out.println("1");
 		getNumberOfPlayers();
-		System.out.println("1");
 		
 		pauseGUI();
-		System.out.println("1");
 		getPlayers();
-		System.out.println("1");
 		
 		gui.disableInputs();
 		gml.getStarter();
@@ -198,9 +194,9 @@ public class Controller implements ActionListener, KeyListener{
 						gui.displayText (currentPlayer.getName() + " is now RETIRED");
 						
 						i = gml.getWheel();
-					}	
+					}	*/
 					
-					if (!currentPlayer.isFinish())*/
+					if (!currentPlayer.isFinish())
 						currentPlayer.move();
 					
 					/*
@@ -230,9 +226,9 @@ public class Controller implements ActionListener, KeyListener{
 							currentPlayer.jumpTo(gml.getJump() - 1);
 					}*/
 
-					//CHECK IF LAST TILE
 				}
 				
+				//CHECK IF LAST TILE
 				if(!currentPlayer.isFinish()) {
 					gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
 					interactSpace (gml.interactSpace(currentPlayer.getPosition()));
@@ -535,6 +531,7 @@ public class Controller implements ActionListener, KeyListener{
 	}
 	
 	public void buyHouse () {
+		accessLoan();
 		ChooseHouseUI houseUI = new ChooseHouseUI ();
 		ChooseHouseController houseCont = new ChooseHouseController (houseUI, gml.getHouseCards());
 		
@@ -547,16 +544,23 @@ public class Controller implements ActionListener, KeyListener{
 			switch (houseCont.getOption()){
 				case 0: case 1: case 2: case 3: case 4: case 5:
 					index = houseCont.getOption();
-					run = false;
+					if (gml.buyHouse(index)) {
+						run = false;
+					}
+					else {
+						gui.displayText("NOT ENOUGH MONEY");
+						houseUI = new ChooseHouseUI ();
+						houseCont = new ChooseHouseController (houseUI, gml.getHouseCards());
+					}
 					break;
 			}
 		}while (run);
 		
-		gml.buyHouse(index);
+		closeLoan();
 	}
 
 
-// BoardGUI Draw
+// BOARD GUI DRAW
 	public void setStartDraw () {
 		
 		int numPlayers = gml.getPlayers().size();

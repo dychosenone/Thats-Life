@@ -233,9 +233,20 @@ public class GameOfLife {
 		}
 	}
 	
-	public void buyHouse (int option) {
+	public boolean buyHouse (int option) {
 		HouseCard house = houseCardDeck.getCard(option);
-		currentPlayer.buyHouse(house);
+		
+		if (currentPlayer.getBalance() >= house.getValue()) {
+			currentPlayer.buyHouse(house);
+			return true;
+		}
+		
+		else {
+			houseCardDeck.returnCard(option);
+			return false;
+		}
+		
+		
 	}
 	
 	public ArrayList <HouseCard> getHouseCards () {

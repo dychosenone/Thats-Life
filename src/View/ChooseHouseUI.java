@@ -137,6 +137,8 @@ public class ChooseHouseUI {
 						btnProperty1.setText(houses.get(i).getHouseName());
 						lblPropertyPrice1.setText("PRICE : " + houses.get(i).getValue());
 						
+						main.revalidate();
+						main.repaint();
 						main.getContentPane().add(btnProperty1);
 						main.getContentPane().add(lblPropertyPrice1);
 						
@@ -147,6 +149,8 @@ public class ChooseHouseUI {
 						btnProperty2.setText(houses.get(i).getHouseName());
 						lblPropertyPrice2.setText("PRICE : " + houses.get(i).getValue());
 						
+						main.revalidate();
+						main.repaint();
 						main.getContentPane().add(btnProperty2);
 						main.getContentPane().add(lblPropertyPrice2);
 					}
@@ -156,6 +160,8 @@ public class ChooseHouseUI {
 						btnProperty3.setText(houses.get(i).getHouseName());
 						lblPropertyPrice3.setText("PRICE : " + houses.get(i).getValue());
 						
+						main.revalidate();
+						main.repaint();
 						main.getContentPane().add(btnProperty3);
 						main.getContentPane().add(lblPropertyPrice3);
 					}
@@ -165,6 +171,8 @@ public class ChooseHouseUI {
 						btnProperty4.setText(houses.get(i).getHouseName());
 						lblPropertyPrice4.setText("PRICE : " + houses.get(i).getValue());
 						
+						main.revalidate();
+						main.repaint();
 						main.getContentPane().add(btnProperty4);
 						main.getContentPane().add(lblPropertyPrice4);
 					}
@@ -174,6 +182,8 @@ public class ChooseHouseUI {
 						btnProperty5.setText(houses.get(i).getHouseName());
 						lblPropertyPrice5.setText("PRICE : " + houses.get(i).getValue());
 						
+						main.revalidate();
+						main.repaint();
 						main.getContentPane().add(btnProperty5);
 						main.getContentPane().add(lblPropertyPrice5);
 					}
@@ -183,6 +193,8 @@ public class ChooseHouseUI {
 						btnProperty6.setText(houses.get(i).getHouseName());
 						lblPropertyPrice6.setText("PRICE : " + houses.get(i).getValue());
 						
+						main.revalidate();
+						main.repaint();
 						main.getContentPane().add(btnProperty6);
 						main.getContentPane().add(lblPropertyPrice6);
 					}

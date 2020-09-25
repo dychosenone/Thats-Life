@@ -11,8 +11,8 @@ import View.BoardGUI;
 import View.ChooseHouseUI;
 import View.ChoosePathUI;
 import View.ChoosePlayerUI;
+import View.ConsoleUI;
 import View.GUI;
-import View.consoleUI;
 
 public class Controller implements ActionListener, KeyListener{
 	
@@ -258,23 +258,12 @@ public class Controller implements ActionListener, KeyListener{
 			break;
 		case 2:
 			if (!currentPlayer.isMarried()) {
-				getMarried ();
-				
-				consoleUI tempUI = new consoleUI ();
-				consoleController tempCont = new consoleController (tempUI, "YOU ARE NOW MARRIED");
-
-				do {
-					System.out.print("");
-				}while (!tempCont.isClosed());
+				getMarried ();				
+				displayConsole ("YOU ARE NOW MARRIED");
 				
 			}
 			else {
-				consoleUI tempUI = new consoleUI ();
-				consoleController tempCont = new consoleController (tempUI, "YOU ARE CURRENTLY MARRIED");
-				
-				do {
-					System.out.print("");
-				}while (!tempCont.isClosed());
+				displayConsole ("YOU ARE CURRENTLY MARRIED");
 				
 			}
 			break;
@@ -288,9 +277,12 @@ public class Controller implements ActionListener, KeyListener{
 			buyHouse();
 			break;
 		case 6:
-			takeBlueCard();
+			graduate ();
 			break;
 		case 7:
+			takeBlueCard();
+			break;
+		case 8:
 			greenSpaceEffect ();
 			break;
 		}
@@ -302,8 +294,20 @@ public class Controller implements ActionListener, KeyListener{
 	}
 	
 	public void decideWinner (Player winner) {
-		gui.decideWinner (winner);
+		
+		displayConsole ("WINNER IS " + winner.getName());
+		
 		gui.dispose();
+	}
+	
+	public void displayConsole (String message) {
+		
+		ConsoleUI tempUI = new ConsoleUI ();
+		ConsoleController tempCont = new ConsoleController (tempUI, message);
+		
+		do {
+			System.out.print("");		
+		}while (!tempCont.isClosed());
 	}
 
 //ORANGE SPACES
@@ -526,25 +530,27 @@ public class Controller implements ActionListener, KeyListener{
 		if (!currentPlayer.isMarried()) {
 			if (tempChance > 6) {// have twins
 				if(currentPlayer.haveBabies(2)) {
-					gui.displayText("YOU HAVE TWINS!");
+					
+					displayConsole ("YOU HAVE TWINS");
+					
 					gml.collectFromEveryone(10000);
 				}
 				else {
-					gui.displayText("YOU CAN'T HAVE ANYMORE BABIES");
+					displayConsole ("YOU CAN'T HAVE ANYMORE BABIES");
 				}
 			}
 			else {// have baby
 				if(currentPlayer.haveBabies(1)) {
-					gui.displayText("YOU HAVE A BABY!");
+					displayConsole ("YOU HAVE A BABY");
 					gml.collectFromEveryone(5000);
 				}
 				else {
-					gui.displayText("YOU CAN'T HAVE ANYMORE BABIES");
+					displayConsole ("YOU CAN'T HAVE ANYMORE BABIES");
 				}
 			}
 		}
 		else {
-			gui.displayText("YOU ARE NOT MARRIED");
+			displayConsole ("YOU CAN'T HAVE BABIES");
 		}
 	}
 	
@@ -580,6 +586,12 @@ public class Controller implements ActionListener, KeyListener{
 		}while (run);
 		
 		closeLoan();
+	}
+	
+	public void graduate () {
+		gml.graduate();
+		
+		displayConsole(currentPlayer.getName() + " GRADUATED");
 	}
 
 

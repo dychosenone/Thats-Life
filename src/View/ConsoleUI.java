@@ -4,39 +4,42 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.Dialog;
+
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.WindowListener;
 
-public class consoleUI {
+public class ConsoleUI {
 	
 	private JDialog main;
 	private JLabel message;
 	
-	public consoleUI(){
+	public ConsoleUI(){
 		
-		System.out.println("CONSOLE UI");
 		
 		main = new JDialog ();
-		System.out.println("CONSOLE UI");
-		main.getContentPane().setBackground(Color.WHITE);
-		System.out.println("CONSOLE UI");
+		main.getContentPane().setBackground(new Color (42, 54, 59));
 		main.getContentPane().setLayout(null);
-		System.out.println("CONSOLE UI");
+		main.setLocationRelativeTo(null);
+		
+		
 		init();
 
 		main.setSize (400, 155);
 		main.setVisible (true);
 		main.setResizable (false);
+		main.setModal(true);
+		main.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 	}
 	
 	public void init() {
 		
-		message = new JLabel("New label");
-		message.setFont(new Font("Courier New", Font.PLAIN, 25));
+		message = new JLabel("New Text");
+		message.setFont(new Font("Courier New", Font.PLAIN, 20));
+		message.setForeground(Color.WHITE);
 		message.setHorizontalAlignment(SwingConstants.CENTER);
-		message.setBounds(10, 35, 364, 45);
-		
+		message.setBounds(10, 11, 374, 104);
 	}
 	
 	public void displayMessage (String m) {

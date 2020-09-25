@@ -5,14 +5,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import View.consoleUI;
+import View.ConsoleUI;
 
-public class consoleController implements WindowListener{
+public class ConsoleController implements WindowListener{
 	
 	int option = 0;
-	consoleUI gui;
+	ConsoleUI gui;
 	
-	public consoleController (consoleUI ui, String message) {
+	public ConsoleController (ConsoleUI ui, String message) {
 		
 		System.out.println("CONSOLE controller");
 		

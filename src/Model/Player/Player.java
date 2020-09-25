@@ -124,6 +124,11 @@ public class Player {
 		balance -= h.getValue();
 	}
 	
+	public void sellHouse () {
+		balance += house.getValue();
+		house = null;
+	}
+	
 	public House getHouse () {
 		return house;
 	}
@@ -160,6 +165,14 @@ public class Player {
 	public Career getJob () {
 		return job; 
 	}
+	
+	public void graduate () {
+		degree = true;
+	}
+	
+	public boolean hasDegree () {
+		return degree;
+	}
 
 	/**
 	 * Function returns name and balance as a string
@@ -178,6 +191,10 @@ public class Player {
 		finish = true;
 		addBalance (prize);
 		addBalance (baby * babyMultiple);
+		
+		if(house != null) {
+			sellHouse();
+		}
 	}
 	
 	public boolean isFinish () {

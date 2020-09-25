@@ -23,6 +23,7 @@ public class ChoosePathUI{
 		main.setSize (400, 200);
 		main.setResizable(false);
 		main.getContentPane().setLayout(null);
+		main.setModal(true);
 		
 	}
 	

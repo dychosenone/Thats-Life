@@ -234,8 +234,9 @@ public class GUI{;
     					   "YOU LANDED ON CHOOSE PATH TILE",	   //3
     					   "YOU LANDED ON HAVE CHILD TILE",		   //4
     					   "YOU LANDED ON BUY A HOUSE TILE",	   //5
-    					   "YOU LANDED ON BLUE CARD TILE",		   //6
-    					   "YOU LANDED ON GREEN TILE"};            //7
+    					   "YOU LANDED ON GRADUATION TILE",		   //6
+    					   "YOU LANDED ON BLUE CARD TILE",		   //7
+    					   "YOU LANDED ON GREEN TILE"};            //8
 
     	if (spaceType != -1) {
 	    	System.out.println(spaceType);

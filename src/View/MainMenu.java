@@ -58,4 +58,8 @@ public class MainMenu{
 		btnInstructions.addActionListener(l);
 		btnExit.addActionListener(l);
 	}
+	
+	public void dispose () {
+		mainFrame.dispose();
+	}
 }

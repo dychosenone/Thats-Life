@@ -28,13 +28,14 @@ public class GUI{;
     private JTextArea taConsole;
 
     private BoardGUI board;
+
     
     private boolean done = false;
 
     //GridBagConstraints c = new GridBagConstraints ();
 
     public GUI () {
-        
+
         System.out.println("GUI START");
         
         main = new JFrame ("That's Life");
@@ -142,12 +143,15 @@ public class GUI{;
 
     public BoardGUI getBoard () {
     	return this.board;
-
     }
     
     public void dispose () {
     	main.dispose();
     }
+
+    public void movePlayer(int num, int x, int y){
+    	board.movePlayer(num, x, y);
+	}
 
     public void setListener (ActionListener listener) {
     	btnWheel.addActionListener(listener);

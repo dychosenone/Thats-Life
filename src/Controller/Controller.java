@@ -61,10 +61,10 @@ public class Controller implements ActionListener, KeyListener{
 		currentPlayer = gml.getCurrentPlayer();
 		gui.updatePlayerInfo(gml.getPlayers());
 
-
-		
-		
+		// Function sets position of Player to 0
 		setStartDraw();
+		movePlayer(1, 5);
+		movePlayer(2, 5);
 		
 		do {
 			System.out.println(currentPlayer.getName());
@@ -242,6 +242,7 @@ public class Controller implements ActionListener, KeyListener{
 			//currentPlayer.position = 0; //FOR TESTING
 			
 		}while (!spin);
+
 	}
 	
 	
@@ -570,33 +571,19 @@ public class Controller implements ActionListener, KeyListener{
 
 // BOARD GUI DRAW
 	public void setStartDraw () {
-		
 		int numPlayers = gml.getPlayers().size();
-		SpaceController space;
-		BoardGUI playingBoard;
-		
+
 		for(int i = 1; i <= numPlayers; i++) {
-			switch(i) {
-				case 1:
-					space = board.getPlayerSpacePosition(1, 0);
-					playingBoard = gui.getBoard();
-					playingBoard.showPlayer(playingBoard.getGraphics(), space.getX(), space.getY(), 1);
-					break;
-				case 2:
-					space = board.getPlayerSpacePosition(2, 0);
-					playingBoard = gui.getBoard();
-					playingBoard.showPlayer(playingBoard.getGraphics(),space.getX(), space.getY(), 2);
-					break;
-				case 3:
-					space = board.getPlayerSpacePosition(3, 0);
-					playingBoard = gui.getBoard();
-					playingBoard.showPlayer(playingBoard.getGraphics(), space.getX(), space.getY(), 3);
-					break;
-			}
+			movePlayer(i, 0);
 		}
 		
 	}
-	
+	public void movePlayer (int player, int position){
+		SpaceController space = board.getPlayerSpacePosition(player, position);
+		int x = space.getX();
+		int y = space.getY();
+		gui.movePlayer(player, x, y);
+	}
 	
 //ACTION LISTENERS	
 	

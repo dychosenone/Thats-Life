@@ -1,5 +1,8 @@
 package View;
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import Model.SalaryCard.SalaryCard;
 import Model.Player.Career;
@@ -17,13 +20,13 @@ public class PlayerInfoUI extends JPanel{
 	
 	private JTextArea playerInfo1;
 	private JTextArea playerInfo2;
-	private JTextArea playerName;
-	private JTextArea careerInfo;
-	private JTextArea salaryInfo;
-	private JTextArea houseInfo;
+	private JTextPane playerName;
+	private JTextPane careerInfo;
+	private JTextPane salaryInfo;
+	private JTextPane houseInfo;
 	
 	public PlayerInfoUI (Color pc, Color sc) {
-		setBackground(new Color(255, 255, 255));
+		setBackground(sc);
 		primaryColor = pc;
 		secondaryColor = sc;
 		
@@ -34,12 +37,18 @@ public class PlayerInfoUI extends JPanel{
 	
 	public void init () {
 		
-		playerName = new JTextArea();
+		StyledDocument doc;
+		SimpleAttributeSet center = new SimpleAttributeSet();
+		
+		playerName = new JTextPane();
 		playerName.setEditable(false);
 		playerName.setForeground(secondaryColor);
 		playerName.setFont(new Font("Courier New", Font.PLAIN, 30));
 		playerName.setBackground(primaryColor);
-		playerName.setBounds(0, 0, 462, 38);
+		playerName.setBounds(0, 0, 469, 38);
+		doc = playerName.getStyledDocument();
+		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+		doc.setParagraphAttributes(0, doc.getLength(), center, false);
 		add(playerName);
 		
 		playerInfo1 = new JTextArea();
@@ -48,7 +57,7 @@ public class PlayerInfoUI extends JPanel{
 		playerInfo1.setLineWrap(true);
 		playerInfo1.setFont(new Font("Courier New", Font.PLAIN, 14));
 		playerInfo1.setBackground(secondaryColor);
-		playerInfo1.setBounds(0, 38, 230, 63);
+		playerInfo1.setBounds(0, 38, 232, 63);
 		add(playerInfo1);
 		
 		playerInfo2 = new JTextArea();
@@ -57,31 +66,40 @@ public class PlayerInfoUI extends JPanel{
 		playerInfo2.setLineWrap(true);
 		playerInfo2.setFont(new Font("Courier New", Font.PLAIN, 14));
 		playerInfo2.setBackground(secondaryColor);
-		playerInfo2.setBounds(230, 38, 232, 63);
+		playerInfo2.setBounds(231, 38, 238, 63);
 		add(playerInfo2);
 		
-		careerInfo = new JTextArea();
+		careerInfo = new JTextPane();
 		careerInfo.setEditable(false);
-		careerInfo.setForeground(new Color(255, 255, 255));
+		careerInfo.setForeground(secondaryColor);
 		careerInfo.setFont(new Font("Courier New", Font.BOLD, 12));
-		careerInfo.setBackground(new Color(183, 166, 173));
-		careerInfo.setBounds(0, 101, 154, 59);
+		careerInfo.setBackground(primaryColor);
+		careerInfo.setBounds(11, 112, 144, 59);
+		doc = careerInfo.getStyledDocument();
+		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+		doc.setParagraphAttributes(0, doc.getLength(), center, false);
 		add(careerInfo);
 		
-		salaryInfo = new JTextArea();
+		salaryInfo = new JTextPane();
 		salaryInfo.setEditable(false);
-		salaryInfo.setForeground(new Color(255, 255, 255));
+		salaryInfo.setForeground(secondaryColor);
 		salaryInfo.setFont(new Font("Courier New", Font.PLAIN, 12));
-		salaryInfo.setBackground(new Color(190, 178, 167));
-		salaryInfo.setBounds(154, 101, 154, 59);
+		salaryInfo.setBackground(primaryColor);
+		salaryInfo.setBounds(162, 112, 144, 59);
+		doc = salaryInfo.getStyledDocument();
+		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+		doc.setParagraphAttributes(0, doc.getLength(), center, false);
 		add(salaryInfo);
 		
-		houseInfo = new JTextArea();
+		houseInfo = new JTextPane();
 		houseInfo.setEditable(false);
-		houseInfo.setForeground(new Color(255, 255, 255));
+		houseInfo.setForeground(secondaryColor);
 		houseInfo.setFont(new Font("Courier New", Font.PLAIN, 12));
-		houseInfo.setBackground(new Color(168, 173, 180));
-		houseInfo.setBounds(308, 101, 154, 59);
+		houseInfo.setBackground(primaryColor);
+		houseInfo.setBounds(313, 112, 144, 59);
+		doc = houseInfo.getStyledDocument();
+		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+		doc.setParagraphAttributes(0, doc.getLength(), center, false);
 		add(houseInfo);
 		
 	}
@@ -104,28 +122,28 @@ public class PlayerInfoUI extends JPanel{
 		
 		if(job != NULL) {
 			careerInfo.setText("CAREER" + newLine +  job.getPosition() + newLine
-							 + "RAISES  : " + job.getCtr() + " / " + job.getMax());
+							 + "RAISES" + newLine +  job.getCtr() + " / " + job.getMax());
 			
 			salaryInfo.setText("SALARY" + newLine  + job.getSalary() + newLine
-					         + "TAX     : " + job.getTax());
+					         + "TAX" + newLine + job.getTax());
 		}
 		else {
 			careerInfo.setText("CAREER" + newLine +  "N/A" + newLine
-					 + "RAISES  : " + "N/A");
+					 + "RAISES" + newLine + "N/A");
 	
 			salaryInfo.setText("SALARY" + newLine  + "N/A" + newLine
-			         + "TAX     : " + "N/A");
+			         + "TAX" + newLine + "N/A");
 }
 		House h = player.getHouse();
 		
 		if(h != null) {
-			houseInfo.setText("HOUSE : " + newLine + h.getName() + newLine
-							+ "VALUE : " + h.getValue());
+			houseInfo.setText("HOUSE" + newLine + h.getName() + newLine
+							+ "VALUE" + newLine + h.getValue());
 		}
 		
 		else {
-			houseInfo.setText("HOUSE : " + newLine + "N/A" + newLine
-					+ "VALUE : " + "N/A");
+			houseInfo.setText("HOUSE" + newLine + "N/A" + newLine
+					+ "VALUE" + newLine + "N/A");
 		}
 		
 	}

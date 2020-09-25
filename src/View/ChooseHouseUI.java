@@ -80,13 +80,6 @@ public class ChooseHouseUI {
     	btnProperty6.setBackground(new Color (74, 78, 77));
     	btnProperty6.setFont(new Font("Courier New", Font.PLAIN, 14));
     	btnProperty6.setBounds(358, 200, 158, 88);
-    	
-    	main.getContentPane().add(btnProperty1);
-    	main.getContentPane().add(btnProperty2);
-    	main.getContentPane().add(btnProperty3);
-    	main.getContentPane().add(btnProperty4);
-    	main.getContentPane().add(btnProperty5);
-    	main.getContentPane().add(btnProperty6);
     	   	
     	JLabel lblInstructions = new JLabel("BUY A HOUSE");
     	lblInstructions.setForeground(Color.BLACK);
@@ -131,13 +124,6 @@ public class ChooseHouseUI {
     	lblPropertyPrice6.setHorizontalAlignment(SwingConstants.CENTER);
     	lblPropertyPrice6.setFont(new Font("Courier New", Font.PLAIN, 18));
     	lblPropertyPrice6.setBounds(358, 294, 158, 33);
-    	
-    	main.getContentPane().add(lblPropertyPrice1);
-    	main.getContentPane().add(lblPropertyPrice2);
-    	main.getContentPane().add(lblPropertyPrice3);
-    	main.getContentPane().add(lblPropertyPrice4);
-    	main.getContentPane().add(lblPropertyPrice5);
-    	main.getContentPane().add(lblPropertyPrice6);
 	}
 	
 	public void chooseHouse (ArrayList <HouseCard> houses) {

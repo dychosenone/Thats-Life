@@ -60,15 +60,15 @@ public class GUI extends JFrame{;
     	getContentPane().add(board);
     	
     	playerOneInfo = new PlayerInfoUI (new Color(41, 40, 38), new Color (249, 211, 66));
-    	playerOneInfo.setBounds(790, 38, 462, 160);
+    	playerOneInfo.setBounds(790, 20, 470, 181);
     	playerOneInfo.setVisible(true);
     	
     	playerTwoInfo = new PlayerInfoUI (new Color(74, 39, 79), new Color (240, 160, 124));
-    	playerTwoInfo.setBounds(790, 209, 462, 160);
+    	playerTwoInfo.setBounds(790, 205, 470, 181);
     	playerTwoInfo.setVisible(true);
     	
     	playerThreeInfo = new PlayerInfoUI (new Color(47, 60, 126), new Color (251, 234, 235));
-    	playerThreeInfo.setBounds(790, 380, 462, 160);
+    	playerThreeInfo.setBounds(790, 391, 470, 181);
     	playerThreeInfo.setVisible(true);
     	
     	getContentPane().add(playerOneInfo);
@@ -127,16 +127,9 @@ public class GUI extends JFrame{;
     	caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
     	scroll = new JScrollPane (taConsole);
-    	scroll.setBounds(792, 565, 462, 75);
+    	scroll.setBounds(792, 575, 462, 75);
 
     	getContentPane().add(scroll);
-
-    	JLabel lblPlayerData = new JLabel("PLAYER DATA");
-    	lblPlayerData.setForeground(new Color(69, 69, 69));
-    	lblPlayerData.setFont(new Font("Times New Roman", Font.BOLD, 19));
-    	lblPlayerData.setHorizontalAlignment(SwingConstants.CENTER);
-    	lblPlayerData.setBounds(901, 11, 250, 16);
-    	getContentPane().add(lblPlayerData);
     	
     	
     }

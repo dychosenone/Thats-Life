@@ -24,6 +24,7 @@ public class ChoosePlayerUI{
     	situation = s;
     	
     	main = new JDialog ();
+    	main.setBackground(Color.WHITE);
     	main.getContentPane().setBackground(Color.GRAY);
     	
     	init();
@@ -71,6 +72,7 @@ public class ChoosePlayerUI{
         lblQuestion.setHorizontalAlignment(SwingConstants.CENTER);
         lblQuestion.setFont(new Font("Courier New", Font.PLAIN, 18));
         lblQuestion.setBounds(49, 22, 247, 14);
+        lblQuestion.setForeground(Color.black);
         main.getContentPane().add(lblQuestion);
         main.setVisible (true);
     }

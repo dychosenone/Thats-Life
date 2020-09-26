@@ -33,13 +33,14 @@ public class GUI{;
     private JTextPane tpWheel;
 
     private BoardGUI board;
+
     
     private boolean done = false;
 
     //GridBagConstraints c = new GridBagConstraints ();
 
     public GUI () {
-        
+
         System.out.println("GUI START");
         
         main = new JFrame ("That's Life");
@@ -158,8 +159,11 @@ public class GUI{;
 
     public BoardGUI getBoard () {
     	return this.board;
-
     }
+
+    public void movePlayer (int player, int x, int y){
+    	board.setPlayer (player, x, y);
+	}
     
     public void dispose () {
     	main.dispose();

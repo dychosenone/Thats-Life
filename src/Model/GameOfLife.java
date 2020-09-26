@@ -220,6 +220,10 @@ public class GameOfLife {
 		return check;
 	}
 	
+	public void jobSearch() {
+
+	}
+
 	public void getMarried (int tempWheel) {
 		if (tempWheel % 2 == 0) {
 			collectFromEveryone(10000);

@@ -80,6 +80,10 @@ public class Player {
 		return baby;
 	}
 	
+	public boolean getDegree() {
+		return degree;
+	}
+	
 	public void setPosition (int p) {
 		position = p;
 	}

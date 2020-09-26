@@ -2,7 +2,7 @@ package View;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.Graphics;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -43,13 +43,13 @@ public class BoardGUI extends JPanel {
 		for (int i = 1; i <= 3; i++) {
 
 			if (i == 1) {
-				g.setColor(Color.WHITE);
+				g.setColor(new Color (249, 211, 66));
 				g.fillOval(x1, y1, radius, radius);
 			} else if (i == 2) {
-				g.setColor(Color.BLACK);
+				g.setColor(new Color (240, 160, 124));
 				g.fillOval(x2, y2, radius, radius);
 			} else if (i == 3) {
-				g.setColor(Color.MAGENTA);
+				g.setColor(new Color (251, 234, 235));
 				g.fillOval(x3, y3, radius, radius);
 			}
 		}

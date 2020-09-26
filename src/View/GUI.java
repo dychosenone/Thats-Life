@@ -68,15 +68,15 @@ public class GUI{;
     	board.setVisible(true);
     	main.getContentPane().add(board);
     	
-    	playerOneInfo = new PlayerInfoUI (new Color(41, 40, 38), new Color (249, 211, 66));
+    	playerOneInfo = new PlayerInfoUI (new Color(219, 146, 0), new Color (255, 255, 255));
     	playerOneInfo.setBounds(790, 20, 469, 181);
     	playerOneInfo.setVisible(true);
     	
-    	playerTwoInfo = new PlayerInfoUI (new Color(74, 39, 79), new Color (240, 160, 124));
+    	playerTwoInfo = new PlayerInfoUI (new Color(0, 100, 0), new Color (255, 255, 255));
     	playerTwoInfo.setBounds(790, 205, 469, 181);
     	playerTwoInfo.setVisible(true);
     	
-    	playerThreeInfo = new PlayerInfoUI (new Color(47, 60, 126), new Color (251, 234, 235));
+    	playerThreeInfo = new PlayerInfoUI (new Color(47, 60, 126), new Color (255, 255, 255));
     	playerThreeInfo.setBounds(790, 391, 469, 181);
     	playerThreeInfo.setVisible(true);
     	

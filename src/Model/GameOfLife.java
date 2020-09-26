@@ -99,13 +99,6 @@ public class GameOfLife {
 
 	public void processTurn (){
 		turn = true;
-		
-		/*
-		if(currentPlayer.getJob() == NULL) {
-			jobSearch();
-		}*/
-		
-		
 	}
 	
 	public Space getSpace() {
@@ -220,10 +213,6 @@ public class GameOfLife {
 		return check;
 	}
 	
-	public void jobSearch() {
-
-	}
-
 	public void getMarried (int tempWheel) {
 		if (tempWheel % 2 == 0) {
 			collectFromEveryone(10000);

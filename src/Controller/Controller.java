@@ -190,7 +190,7 @@ public class Controller implements ActionListener, KeyListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-				//gml.wheel = 11; //FOR TESTING
+				gml.wheel = 1; //FOR TESTING
 				gml.processTurn();
 				gui.displayDice(gml.getWheel());
 				
@@ -226,9 +226,6 @@ public class Controller implements ActionListener, KeyListener{
 					
 					//CHECK IF SPACE HAS JUMP
 					if(gml.isJump()){
-						/*int spaceType = gml.interactSpace(currentPlayer.getPosition());
-						gui.interactSpace(spaceType);
-						interactSpace(spaceType);*/
 						if (i != gml.getWheel()) 
 							currentPlayer.jumpTo(gml.getJump() - 1);
 					}
@@ -262,7 +259,9 @@ public class Controller implements ActionListener, KeyListener{
 	
 	public void interactSpace (int spaceType) {
 		//ORANGESPACES
+		System.out.println(spaceType);
 		gui.updatePlayerInfo(gml.getPlayers());
+		movePlayer(this.currentPlayerID, currentPlayer.getPosition());
 		switch (spaceType) {
 		case 0: //COLLECT ACTION CARD
 			ActionCard card = gml.takeActionCard();
@@ -306,6 +305,7 @@ public class Controller implements ActionListener, KeyListener{
 			greenSpaceEffect ();
 			break;
 		}
+		gui.updatePlayerInfo(gml.getPlayers());
 	}
 	
 	public int endGame () {
@@ -475,17 +475,17 @@ public class Controller implements ActionListener, KeyListener{
 			int raise = gml.payRaise();
 			switch (raise) {
 			case -1:
-				gui.displayText("REACHED MAXIMUM NUMBER OF PAY RAISES");
+				displayConsole("REACHED MAXIMUM NUMBER OF PAY RAISES");
 				gml.payDay();
 				break;
 			default:
-				gui.displayText("SALARY IS INCREASED BY " + raise);
+				displayConsole("SALARY IS INCREASED BY " + raise);
 				break;
 			}
 		}
 		else {
+			displayConsole("PAYDAY! : +" + (currentPlayer.getJob().getSalary() - currentPlayer.getJob().getTax()));
 			gml.payDay();
-			gui.displayText("PAYDAY! : +" + (currentPlayer.getJob().getSalary() - currentPlayer.getJob().getTax()));
 		}
 	}
 //MAGENTA SPACES

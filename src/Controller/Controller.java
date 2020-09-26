@@ -71,7 +71,8 @@ public class Controller implements ActionListener, KeyListener{
 
 		// Function sets position of Player to 0
 		setStartDraw();
-		
+
+
 		do {
 			closeLoan ();
 			finish = false;
@@ -188,6 +189,7 @@ public class Controller implements ActionListener, KeyListener{
 		
 		do {
 			System.out.print("");
+			movePlayer(currentPlayerID, currentPlayer.getPosition());
 			if (spin) {
 				gml.wheel = tempWheel;
 				gml.wheel = 1; //FOR TESTING

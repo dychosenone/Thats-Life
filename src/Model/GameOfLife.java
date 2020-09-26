@@ -212,7 +212,15 @@ public class GameOfLife {
 		
 		return check;
 	}
+<<<<<<< HEAD
 	
+=======
+
+	public void jobSearch() {
+
+	}
+
+>>>>>>> 2a2f054aaa8ed57d71c7c99d5953e2396a22f488
 	public void getMarried (int tempWheel) {
 		if (tempWheel % 2 == 0) {
 			collectFromEveryone(10000);

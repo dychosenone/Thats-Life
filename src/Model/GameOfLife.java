@@ -195,6 +195,15 @@ public class GameOfLife {
 			return amount;
 		} 
 		else {
+
+			for(int i = 0; i < players.getSize(); i++){
+				Player p = players.getPlayers().get(i);
+				if(p != currentPlayer){
+					if(card.checkPlayerCareer(p.getJob()) == true)
+						addBalance(p, amount);
+				}
+			}
+
 			subtractBalance (currentPlayer, amount);
 			return amount;
 		}

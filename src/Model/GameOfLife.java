@@ -219,7 +219,7 @@ public class GameOfLife {
 		
 		return check;
 	}
-	
+
 	public void jobSearch() {
 
 	}

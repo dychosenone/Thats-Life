@@ -21,6 +21,7 @@ public class CareerUI {
 		main = new JDialog ();
 		main.getContentPane().setLayout(null);
 		main.setBackground(Color.WHITE);
+		main.setLocationRelativeTo(null);
 		
 		init();
 		

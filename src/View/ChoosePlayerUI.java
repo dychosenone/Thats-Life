@@ -32,6 +32,7 @@ public class ChoosePlayerUI{
         main.setVisible (true);
         
         main.setModal(true);
+        main.setLocationRelativeTo(null);
 
     }
     

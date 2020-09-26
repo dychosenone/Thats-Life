@@ -109,9 +109,9 @@ public class PlayerInfoUI extends JPanel{
 		String gap = "           ";
 		playerName.setText(player.getName());
 		
-		playerInfo1.setText("BALANCE  : " + player.getBalance() + newLine
-				          + "MARRIED  : " + player.isMarried() + newLine
-				          + "BABIBES  : " + player.getBabies());
+		playerInfo1.setText("  BALANCE  : " + player.getBalance() + newLine
+				          + "  MARRIED  : " + player.isMarried() + newLine
+				          + "  BABIBES  : " + player.getBabies());
 		
 		playerInfo2.setText("DEBT     : " + player.getDebt() + newLine
 				          + "RETIRED  : " + player.isFinish() + newLine

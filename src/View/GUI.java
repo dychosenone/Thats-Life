@@ -24,8 +24,6 @@ public class GUI{;
     private PlayerInfoUI playerOneInfo;
     private PlayerInfoUI playerTwoInfo;
     private PlayerInfoUI playerThreeInfo;
-    
-    private JTextField tfInput;
 
     private JScrollPane scroll;
     private JTextPane taConsole;
@@ -50,6 +48,7 @@ public class GUI{;
         
         main.getContentPane().setBackground(new Color (42, 54, 59));
         main.getContentPane().setForeground(new Color(119, 136, 153));
+        main.setLocation(20, 50);
 
         init();
 
@@ -73,11 +72,11 @@ public class GUI{;
     	playerOneInfo.setVisible(true);
     	
     	playerTwoInfo = new PlayerInfoUI (new Color(0, 100, 0), new Color (255, 255, 255));
-    	playerTwoInfo.setBounds(790, 205, 469, 181);
+    	playerTwoInfo.setBounds(790, 222, 469, 181);
     	playerTwoInfo.setVisible(true);
     	
     	playerThreeInfo = new PlayerInfoUI (new Color(47, 60, 126), new Color (255, 255, 255));
-    	playerThreeInfo.setBounds(790, 391, 469, 181);
+    	playerThreeInfo.setBounds(790, 419, 469, 181);
     	playerThreeInfo.setVisible(true);
     	
     	main.getContentPane().add(playerOneInfo);
@@ -115,15 +114,6 @@ public class GUI{;
     	btnEndTurn.setBounds(592, 627, 180, 54);
 
     	main.getContentPane().add (btnEndTurn);
-
-    	tfInput = new JTextField();
-    	tfInput.setForeground(new Color (42, 54, 59));
-    	tfInput.setBackground(Color.WHITE);
-    	tfInput.setBounds(790, 649, 469, 31);
-    	tfInput.setEditable(true);
-    	main.getContentPane().add(tfInput);
-
-    	tfInput.setColumns(10);
     	
     	StyledDocument doc;
 		SimpleAttributeSet center = new SimpleAttributeSet();
@@ -141,14 +131,14 @@ public class GUI{;
     	caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
     	scroll = new JScrollPane (taConsole);
-    	scroll.setBounds(790, 575, 369, 70);
+    	scroll.setBounds(790, 611, 369, 70);
 
     	main.getContentPane().add(scroll);
     	
     	tpWheel = new JTextPane();
     	tpWheel.setFont(new Font("Quicksand Light", Font.PLAIN, 24));
     	tpWheel.setBackground(Color.WHITE);
-    	tpWheel.setBounds(1169, 575, 90, 70);
+    	tpWheel.setBounds(1169, 611, 90, 70);
     	doc = tpWheel.getStyledDocument();
     	StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, doc.getLength(), center, false);
@@ -176,10 +166,6 @@ public class GUI{;
     	btnEndTurn.addActionListener(listener);
     }
 
-    public void setKeyListener (KeyListener listener) {
-    	tfInput.addKeyListener(listener);
-    }
-
     public void displayText (String text) {
     	taConsole.setText(text + "\n");
     }
@@ -187,17 +173,6 @@ public class GUI{;
     public void nextTurn () {
     	taConsole.setText("");
     }
-
-    public String getInput (){
-
-		String text = tfInput.getText();
-		tfInput.selectAll();
-		//displayText(text);
-		tfInput.setText("");
-		done = true;
-		//closeInput();
-		return text;
-	}
 
     public void updatePlayerInfo (ArrayList<Player> players) {
 
@@ -238,18 +213,6 @@ public class GUI{;
 
     public boolean isDone () {
     	return done;
-    }
-
-    public void enableInputs () {
-    	tfInput.setEditable(true);
-    }
-
-    public void disableInputs () {
-    	tfInput.setEditable(false);
-    }
-    
-    public void decideWinner (Player winner) {
-    	
     }
 
     public void interactSpace (int spaceType) {                       //INDEX

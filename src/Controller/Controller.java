@@ -18,8 +18,9 @@ import View.ChoosePathUI;
 import View.ChoosePlayerUI;
 import View.ConsoleUI;
 import View.GUI;
+import View.InputDialog;
 
-public class Controller implements ActionListener, KeyListener{
+public class Controller implements ActionListener{
 	
 	private GameOfLife gml;
 	private GUI gui;
@@ -46,7 +47,6 @@ public class Controller implements ActionListener, KeyListener{
 		this.gml = gml;
 		
 		gui.setListener(this);
-		gui.setKeyListener(this);
 		
 		input ="";
 		currentPlayer = new Player ();
@@ -64,7 +64,6 @@ public class Controller implements ActionListener, KeyListener{
 		pauseGUI();
 		getPlayers();
 		
-		gui.disableInputs();
 		gml.getStarter();
 		currentPlayer = gml.getCurrentPlayer();
 		gui.updatePlayerInfo(gml.getPlayers());
@@ -116,62 +115,102 @@ public class Controller implements ActionListener, KeyListener{
 	
 	public void getNumberOfPlayers () {
 		int temp;
-		gui.getNumberOfPlayers();
+		boolean run = true;
+
+		//enter number of players in game		
+		InputDialog inputUI = new InputDialog ();
+		InputController inputCont = new InputController(inputUI, "ENTER NUMBER OF PLAYERS");
 		
-		//enter number of players in game
-		while (!done) {
+		do {
 			System.out.print("");
-			if (done) {
-				
+			
+			switch (inputCont.getStatus()) {
+			case -1:
+				inputUI = new InputDialog ();
+				inputCont = new InputController(inputUI, "ENTER NUMBER OF PLAYERS");
+				break;
+			case 1:
 				try {
+					temp = Integer.parseInt(inputCont.getInput());
 					
-					temp = Integer.parseInt(input);
 					if(temp >= 2 && temp <= 3) {
 						maxPlayers = temp;
 						gml.getNumberOfPlayers(maxPlayers);
+						run = false;
 					}
-					
 					else {
-						gui.displayText("INVALID INPUT, ONLY 2 TO 3 PLAYERS ARE ALLOWED");
-						gui.getNumberOfPlayers();
-						pauseGUI();
+						inputUI = new InputDialog ();
+						inputCont = new InputController(inputUI, "ENTER NUMBER OF PLAYERS");
 					}
 				}
-				
-				catch(Exception e){
-					done = false;
-					gui.displayText("INVALID INPUT");
+				catch (Exception e) {
+					displayConsole ("INVALID INPUT!");
+					inputUI = new InputDialog ();
+					inputCont = new InputController(inputUI, "ENTER NUMBER OF PLAYERS");
 				}
-				
+				break;
 			}
-		}
+			
+		}while (run);
 	}
 	
 	public void getPlayers () {
+		String input;
+		boolean run = true;
+		InputDialog inputUI;
+		InputController inputCont;
+
+		//enter number of players in game
 		
-		for (int i = 0; i < maxPlayers; i++) {
-				
-			gui.inputPlayers(i);
-			//enters players in game
+		int i;
+		
+		for (i = 0; i < maxPlayers; i++) {
+			run = true;
+			inputUI = new InputDialog ();
+			inputCont = new InputController(inputUI, "ENTER NAME OF PLAYER " + (i+1));
+			
 			do {
 				System.out.print("");
-				if(done) {
+				
+				switch (inputCont.getStatus()) {
+				case -1:
+					inputUI = new InputDialog ();
+					inputCont = new InputController(inputUI, "ENTER NAME OF PLAYER " + (i+1));
+					break;
+				case 1:
+					input = inputCont.getInput();
+					System.out.print(input);
 					
-					if (!input.equalsIgnoreCase("")) {
+					if (!input.equalsIgnoreCase("") && !checkSameName (input)) {
+						System.out.print(input);
 						gml.enterPlayers(input);
 						gui.updatePlayerInfo(gml.getPlayers());
+						
+						run = false;
 					}
 					
 					else {
-						gui.displayText("INVALID INPUT");
-						done = false;
+						displayConsole("INVALID INPUT");
+						inputUI = new InputDialog ();
+						inputCont = new InputController(inputUI, "ENTER NAME OF PLAYER " + (i+1));
 					}
 				}
 				
-			}while (!done);
-			
-			pauseGUI();
+			}while (run);
 		}
+	}
+	
+	public boolean checkSameName (String name) {
+		int i;
+		System.out.print(name);
+		
+		for (i = 0; i < gml.getPlayers().size(); i++) {
+			if(name.equalsIgnoreCase(gml.getPlayers().get(i).getName())) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 //MAIN GAME METHODS
@@ -192,7 +231,7 @@ public class Controller implements ActionListener, KeyListener{
 			movePlayer(currentPlayerID, currentPlayer.getPosition());
 			if (spin) {
 				gml.wheel = tempWheel;
-				gml.wheel = 1; //FOR TESTING
+				//gml.wheel = 1; //FOR TESTING
 				gml.processTurn();
 				gui.displayDice(gml.getWheel());
 				
@@ -313,7 +352,7 @@ public class Controller implements ActionListener, KeyListener{
 	
 	public int endGame () {
 		gui.dispose();
-		return 1;
+		return 0;
 	}
 	
 	public void decideWinner (Player winner) {
@@ -416,8 +455,6 @@ public class Controller implements ActionListener, KeyListener{
 			}
 			break;
 		}
-		
-		gui.disableInputs();
 	}
 	
 	public Player choosePlayer(int situation) {
@@ -767,27 +804,6 @@ public class Controller implements ActionListener, KeyListener{
 			break;
 		}
 	}
-	
-	
-//KEY LISTENERS
-    @Override
-	public void keyPressed(KeyEvent e) {
-    	int code = e.getKeyCode();
-    	
-    	if (code == 10) {
-    		input = gui.getInput();
-    		done = true;
-    	}
-	}
-    
-    public void keyTyped (KeyEvent e) {
-    	
-    }
-    
-    public void keyReleased (KeyEvent e) {
-    	
-    }
-    
  
 //GUI METHODS
     public void pauseGUI() {

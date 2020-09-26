@@ -32,6 +32,7 @@ public class ChooseCareerUI {
 		
     	main.getContentPane().setLayout(null);
     	main.setBackground(Color.WHITE);
+    	main.setLocationRelativeTo(null);
     	
     	init();
     	

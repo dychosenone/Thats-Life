@@ -13,11 +13,9 @@ import Model.Player.Players;
 
 import Model.SalaryCard.SalaryCard;
 import Model.SalaryCard.SalaryCardDeck;
-import View.ChoosePathUI;
 
 import java.util.ArrayList;
 
-import Controller.ChoosePathController;
 
 public class GameOfLife {
 	
@@ -77,6 +75,7 @@ public class GameOfLife {
 	
 	public void enterPlayers (String name) {
 		System.out.println("enterPlayers Function entered");
+		System.out.print(name);
 		players.AddPlayer(name);
 			
 	}

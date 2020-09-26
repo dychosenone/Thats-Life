@@ -17,6 +17,7 @@ public class ChoosePathUI{
 		main = new JDialog ();
 		main.getContentPane().setBackground(new Color (42, 54, 59));
 		main.getContentPane().setForeground(Color.WHITE);
+		main.setLocationRelativeTo(null);
 			
 		initialize ();
 		

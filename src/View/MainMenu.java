@@ -16,6 +16,7 @@ public class MainMenu{
 		mainFrame = new JFrame ("Game Of Life");
 		mainFrame.getContentPane().setBackground(new Color (42, 54, 59));
 		mainFrame.getContentPane().setLayout(null);
+		mainFrame.setLocationRelativeTo(null);
 		
 		init ();
 		

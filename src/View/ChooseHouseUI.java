@@ -35,6 +35,7 @@ public class ChooseHouseUI {
 		main = new JDialog ();
     	main.getContentPane().setBackground(Color.WHITE);
     	main.getContentPane().setLayout(null);
+    	main.setLocationRelativeTo(null);
     	
     	init();
     	

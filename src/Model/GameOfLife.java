@@ -139,15 +139,17 @@ public class GameOfLife {
 					return 4;
 				case "buyHouse":
 					return 5;
+				case "graduation":
+					return 6;
 			}
 		}
 		//BLUE SPACE
 		else if(space.getName().equalsIgnoreCase("Blue")) {
-			return 6;
+			return 7;
 		}
 		
 		else if (space.getName().equalsIgnoreCase("Green")) {
-			return 7;
+			return 8;
 		}
 		
 		return -1;
@@ -218,17 +220,9 @@ public class GameOfLife {
 	}
 	
 	public void jobSearch() {
-		CareerCard career1 = careerDeck.takeCard();
-		SalaryCard salary1 = salaryDeck.takeCard();
 
-		CareerCard career2 = careerDeck.takeCard();
-		SalaryCard salary2 = salaryDeck.takeCard();
-
-		//Choose which career
-
-		currentPlayer.setNewCareer(career1, salary1);
 	}
-	
+
 	public void getMarried (int tempWheel) {
 		if (tempWheel % 2 == 0) {
 			collectFromEveryone(10000);
@@ -258,6 +252,13 @@ public class GameOfLife {
 	public ArrayList <HouseCard> getHouseCards () {
 		return houseCardDeck.getHouseCards();
 	}
+	
+	public void jobSearch() {
+		CareerCard career = careerDeck.takeCard();
+		SalaryCard salary = salaryDeck.takeCard();
+		
+		currentPlayer.setNewCareer(career, salary);
+	}
 
 	public void collegeCareerChoice () {
 		CareerCard careerChoiceOne = careerDeck.takeCard();
@@ -266,7 +267,10 @@ public class GameOfLife {
 		SalaryCard salaryChoiceOne = salaryDeck.takeCard();
 		SalaryCard salaryChoiceTwo = salaryDeck.takeCard();
 
-
+	}
+	
+	public void graduate () {
+		currentPlayer.graduate();
 	}
 	
 	public void choosePath (int path) {

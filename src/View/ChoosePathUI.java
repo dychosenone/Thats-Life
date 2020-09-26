@@ -15,7 +15,7 @@ public class ChoosePathUI{
 	public ChoosePathUI () {
 		
 		main = new JDialog ();
-		main.getContentPane().setBackground(Color.WHITE);
+		main.getContentPane().setBackground(new Color (42, 54, 59));
 		main.getContentPane().setForeground(Color.WHITE);
 			
 		initialize ();
@@ -23,26 +23,27 @@ public class ChoosePathUI{
 		main.setSize (400, 200);
 		main.setResizable(false);
 		main.getContentPane().setLayout(null);
+		main.setModal(true);
 		
 	}
 	
 	public void initialize () {
 		
 		btnPath1 = new JButton("1");
-		btnPath1.setBackground(new Color (0, 0, 128));
-		btnPath1.setForeground(new Color (244, 159, 28));
-		btnPath1.setFont(new Font("Courier New", Font.PLAIN, 14));
+		btnPath1.setBackground(new Color (254, 206, 168));
+		btnPath1.setForeground(new Color (42, 54, 59));
+		btnPath1.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
 		btnPath1.setBounds(31, 71, 161, 74);
 		
 		btnPath2 = new JButton("2");
-		btnPath2.setBackground(new Color (244, 159, 28));
-		btnPath2.setForeground(new Color (0, 0, 128));
-		btnPath2.setFont(new Font("Courier New", Font.PLAIN, 14));
+		btnPath2.setBackground(new Color (255, 132, 124));
+		btnPath2.setForeground(new Color (42, 54, 59));
+		btnPath2.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
 		btnPath2.setBounds(202, 71, 161, 74);
 		
 		lblChoose = new JLabel("WHICH PATH WILL YOU TAKE");
-		lblChoose.setForeground(Color.BLACK);
-		lblChoose.setFont(new Font("Courier New", Font.PLAIN, 20));
+		lblChoose.setForeground(Color.WHITE);
+		lblChoose.setFont(new Font("Quicksand Light", Font.PLAIN, 20));
 		lblChoose.setBounds(54, 11, 298, 49);
 		main.setVisible (true);
 	}

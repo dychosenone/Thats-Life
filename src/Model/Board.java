@@ -46,7 +46,7 @@ public class Board {
 		
 					switch(boardNumber) {
 						case 9:
-							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "Graduation"));
+							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "graduation"));
 							break;
 						case 11:
 							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "collegeCareerChoice"));

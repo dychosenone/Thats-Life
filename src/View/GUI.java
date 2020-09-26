@@ -1,6 +1,9 @@
 package View;
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import Model.Player.Career;
 import Model.Player.Player;
@@ -25,7 +28,7 @@ public class GUI{;
     private JTextField tfInput;
 
     private JScrollPane scroll;
-    private JTextArea taConsole;
+    private JTextPane taConsole;
 
     private BoardGUI board;
 
@@ -43,7 +46,7 @@ public class GUI{;
         main.revalidate();
         main.repaint();
         
-        main.getContentPane().setBackground(Color.white);
+        main.getContentPane().setBackground(new Color (42, 54, 59));
         main.getContentPane().setForeground(new Color(119, 136, 153));
         main.getContentPane().setFont(new Font("Times New Roman", Font.BOLD, 18));
 
@@ -67,15 +70,15 @@ public class GUI{;
     	main.getContentPane().add(board);
     	
     	playerOneInfo = new PlayerInfoUI (new Color(41, 40, 38), new Color (249, 211, 66));
-    	playerOneInfo.setBounds(790, 20, 470, 181);
+    	playerOneInfo.setBounds(790, 20, 469, 181);
     	playerOneInfo.setVisible(true);
     	
     	playerTwoInfo = new PlayerInfoUI (new Color(74, 39, 79), new Color (240, 160, 124));
-    	playerTwoInfo.setBounds(790, 205, 470, 181);
+    	playerTwoInfo.setBounds(790, 205, 469, 181);
     	playerTwoInfo.setVisible(true);
     	
     	playerThreeInfo = new PlayerInfoUI (new Color(47, 60, 126), new Color (251, 234, 235));
-    	playerThreeInfo.setBounds(790, 391, 470, 181);
+    	playerThreeInfo.setBounds(790, 391, 469, 181);
     	playerThreeInfo.setVisible(true);
     	
     	main.getContentPane().add(playerOneInfo);
@@ -83,58 +86,63 @@ public class GUI{;
     	main.getContentPane().add(playerThreeInfo);
 
     	btnWheel = new JButton ("SPIN WHEEL");
-    	btnWheel.setForeground(new Color(105, 105, 105));
-    	btnWheel.setBackground(new Color(255, 235, 205));
+    	btnWheel.setForeground(new Color (42, 54, 59));
+    	btnWheel.setBackground(new Color(153,184,152));
     	btnWheel.setFont(new Font("Courier New", Font.PLAIN, 18));
     	btnWheel.setBounds(22, 627, 180, 54);
-
+    	
     	main.getContentPane().add (btnWheel);
 
     	btnPayLoan = new JButton ("PAY LOAN");
-    	btnPayLoan.setForeground(new Color(105, 105, 105));
-    	btnPayLoan.setBackground(new Color(255, 235, 205));
+    	btnPayLoan.setForeground(new Color (42, 54, 59));
+    	btnPayLoan.setBackground(new Color(255, 132, 124));
     	btnPayLoan.setFont(new Font("Courier New", Font.PLAIN, 18));
     	btnPayLoan.setBounds(402, 627, 180, 54);
 
     	main.getContentPane().add (btnPayLoan);
 
     	btnGetLoan = new JButton ("GET LOAN");
-    	btnGetLoan.setForeground(new Color(105, 105, 105));
-    	btnGetLoan.setBackground(new Color(255, 235, 205));
+    	btnGetLoan.setForeground(new Color (42, 54, 59));
+    	btnGetLoan.setBackground(new Color(254, 206, 168));
     	btnGetLoan.setFont(new Font("Courier New", Font.PLAIN, 18));
     	btnGetLoan.setBounds(212, 627, 180, 54);
 
     	main.getContentPane().add (btnGetLoan);
 
     	btnEndTurn = new JButton ("END TURN");
-    	btnEndTurn.setForeground(new Color(105, 105, 105));
-    	btnEndTurn.setBackground(new Color(255, 235, 205));
+    	btnEndTurn.setForeground(new Color (42, 54, 59));
+    	btnEndTurn.setBackground(new Color(232,72,95));
     	btnEndTurn.setFont(new Font("Courier New", Font.PLAIN, 18));
     	btnEndTurn.setBounds(592, 627, 180, 54);
 
     	main.getContentPane().add (btnEndTurn);
 
     	tfInput = new JTextField();
-    	tfInput.setForeground(new Color(248, 248, 255));
-    	tfInput.setBackground(new Color(69, 69, 69));
-    	tfInput.setBounds(792, 649, 462, 31);
+    	tfInput.setForeground(new Color (42, 54, 59));
+    	tfInput.setBackground(Color.WHITE);
+    	tfInput.setBounds(790, 649, 469, 31);
     	tfInput.setEditable(true);
     	main.getContentPane().add(tfInput);
 
     	tfInput.setColumns(10);
+    	
+    	StyledDocument doc;
+		SimpleAttributeSet center = new SimpleAttributeSet();
 
-    	taConsole = new JTextArea();
+    	taConsole = new JTextPane();
     	taConsole.setFont(new Font("Courier New", Font.PLAIN, 16));
-    	taConsole.setForeground(new Color(255, 255, 255));
-    	taConsole.setBackground(new Color(92, 64, 51));
-    	taConsole.setWrapStyleWord(true);
+    	taConsole.setForeground(new Color (42, 54, 59));
+    	taConsole.setBackground(Color.WHITE);
     	taConsole.setEditable(false);
+    	doc = taConsole.getStyledDocument();
+		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+		doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
     	DefaultCaret caret = (DefaultCaret)taConsole.getCaret();
     	caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
     	scroll = new JScrollPane (taConsole);
-    	scroll.setBounds(792, 575, 462, 75);
+    	scroll.setBounds(790, 575, 469, 70);
 
     	main.getContentPane().add(scroll);
     	
@@ -165,7 +173,7 @@ public class GUI{;
     }
 
     public void displayText (String text) {
-    	taConsole.append(text + "\n");
+    	taConsole.setText(text + "\n");
     }
 
     public void nextTurn () {
@@ -238,8 +246,9 @@ public class GUI{;
     					   "YOU LANDED ON CHOOSE PATH TILE",	   //3
     					   "YOU LANDED ON HAVE CHILD TILE",		   //4
     					   "YOU LANDED ON BUY A HOUSE TILE",	   //5
-    					   "YOU LANDED ON BLUE CARD TILE",		   //6
-    					   "YOU LANDED ON GREEN TILE"};            //7
+    					   "YOU LANDED ON GRADUATION TILE",		   //6
+    					   "YOU LANDED ON BLUE CARD TILE",		   //7
+    					   "YOU LANDED ON GREEN TILE"};            //8
 
     	if (spaceType != -1) {
 	    	System.out.println(spaceType);

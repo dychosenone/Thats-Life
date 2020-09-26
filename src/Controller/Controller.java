@@ -264,6 +264,7 @@ public class Controller implements ActionListener, KeyListener{
 		System.out.println(spaceType);
 		gui.updatePlayerInfo(gml.getPlayers());
 		movePlayer(this.currentPlayerID, currentPlayer.getPosition());
+		
 		switch (spaceType) {
 		case 0: //COLLECT ACTION CARD
 			ActionCard card = gml.takeActionCard();

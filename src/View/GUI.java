@@ -85,32 +85,32 @@ public class GUI{;
     	main.getContentPane().add(playerThreeInfo);
 
     	btnWheel = new JButton ("SPIN WHEEL");
-    	btnWheel.setForeground(new Color (42, 54, 59));
-    	btnWheel.setBackground(new Color(153,184,152));
+    	btnWheel.setForeground(new Color (255, 255, 255));
+    	btnWheel.setBackground(new Color(219, 146, 0));
     	btnWheel.setFont(new Font("Quicksand Light", Font.PLAIN, 18));
     	btnWheel.setBounds(22, 627, 180, 54);
     	
     	main.getContentPane().add (btnWheel);
 
     	btnPayLoan = new JButton ("PAY LOAN");
-    	btnPayLoan.setForeground(new Color (42, 54, 59));
-    	btnPayLoan.setBackground(new Color(255, 132, 124));
+    	btnPayLoan.setForeground(new Color (255,255, 255));
+    	btnPayLoan.setBackground(new Color(0, 100, 0));
     	btnPayLoan.setFont(new Font("Quicksand Light", Font.PLAIN, 18));
     	btnPayLoan.setBounds(402, 627, 180, 54);
 
     	main.getContentPane().add (btnPayLoan);
 
     	btnGetLoan = new JButton ("GET LOAN");
-    	btnGetLoan.setForeground(new Color (42, 54, 59));
-    	btnGetLoan.setBackground(new Color(254, 206, 168));
+    	btnGetLoan.setForeground(new Color (255,255, 255));
+    	btnGetLoan.setBackground(new Color(47, 60, 126));
     	btnGetLoan.setFont(new Font("Quicksand Light", Font.PLAIN, 18));
     	btnGetLoan.setBounds(212, 627, 180, 54);
 
     	main.getContentPane().add (btnGetLoan);
 
     	btnEndTurn = new JButton ("END TURN");
-    	btnEndTurn.setForeground(new Color (42, 54, 59));
-    	btnEndTurn.setBackground(new Color(232,72,95));
+    	btnEndTurn.setForeground(new Color (255, 255, 255));
+    	btnEndTurn.setBackground(Color.BLACK);
     	btnEndTurn.setFont(new Font("Quicksand Light", Font.PLAIN, 18));
     	btnEndTurn.setBounds(592, 627, 180, 54);
 

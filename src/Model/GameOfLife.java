@@ -212,15 +212,12 @@ public class GameOfLife {
 		
 		return check;
 	}
-<<<<<<< HEAD
-	
-=======
 
-	public void jobSearch() {
-
+	public void jobSearch(CareerCard c, SalaryCard s) {
+		currentPlayer.setNewCareer(c, s);
 	}
+	
 
->>>>>>> 2a2f054aaa8ed57d71c7c99d5953e2396a22f488
 	public void getMarried (int tempWheel) {
 		if (tempWheel % 2 == 0) {
 			collectFromEveryone(10000);
@@ -250,11 +247,7 @@ public class GameOfLife {
 	public ArrayList <HouseCard> getHouseCards () {
 		return houseCardDeck.getHouseCards();
 	}
-	
-	public void jobSearch(CareerCard c, SalaryCard s) {
-		currentPlayer.setNewCareer(c, s);
-	}
-	
+
 	public CareerCard takeCareerCard () {
 		CareerCard c = careerDeck.takeCard();
 		return c;

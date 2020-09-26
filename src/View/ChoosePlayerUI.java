@@ -40,13 +40,13 @@ public class ChoosePlayerUI{
     	main.getContentPane().setLayout(null);
     	
         btnPlayer1 = new JButton("1");
-        btnPlayer1.setBackground(new Color(41, 40, 38));
+        btnPlayer1.setBackground(new Color(219, 146, 0));
         btnPlayer1.setForeground(new Color (249, 211, 66));
         btnPlayer1.setBounds(17, 57, 100, 53);
         btnPlayer1.setFont(new Font("Courier New", Font.PLAIN, 14));
         
         btnPlayer2 = new JButton("2");
-        btnPlayer2.setBackground(new Color(74, 39, 79));
+        btnPlayer2.setBackground(new Color(0, 100, 0));
         btnPlayer2.setForeground(new Color (240, 160, 124));
         btnPlayer2.setBounds(120, 57, 100, 53);
         btnPlayer2.setFont(new Font("Courier New", Font.PLAIN, 14));

@@ -226,11 +226,7 @@ public class Controller implements ActionListener{
 			movePlayer(currentPlayerID, currentPlayer.getPosition());
 			if (spin) {
 				gml.wheel = tempWheel;
-<<<<<<< HEAD
 				//gml.wheel = 1; //FOR TESTING
-=======
-				gml.wheel = 2; //FOR TESTING
->>>>>>> bde2db265b4b08ab522bbfa50abed8634bfcd3ee
 				gml.processTurn();
 				gui.displayDice(gml.getWheel());
 				
@@ -306,11 +302,8 @@ public class Controller implements ActionListener{
 		//ORANGESPACES
 		System.out.println(spaceType);
 		gui.updatePlayerInfo(gml.getPlayers());
-<<<<<<< HEAD
 		movePlayer(this.currentPlayerID, currentPlayer.getPosition());
 		
-=======
->>>>>>> bde2db265b4b08ab522bbfa50abed8634bfcd3ee
 		switch (spaceType) {
 		case 0: //COLLECT ACTION CARD
 			ActionCard card = gml.takeActionCard();

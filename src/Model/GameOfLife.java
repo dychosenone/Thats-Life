@@ -219,11 +219,6 @@ public class GameOfLife {
 		
 		return check;
 	}
-<<<<<<< HEAD
-=======
-
-	public void jobSearch() {
->>>>>>> bde2db265b4b08ab522bbfa50abed8634bfcd3ee
 
 	public void jobSearch(CareerCard c, SalaryCard s) {
 		currentPlayer.setNewCareer(c, s);

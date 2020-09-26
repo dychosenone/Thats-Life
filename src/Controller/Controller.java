@@ -71,7 +71,6 @@ public class Controller implements ActionListener{
 		// Function sets position of Player to 0
 		setStartDraw();
 
-
 		do {
 			closeLoan ();
 			finish = false;
@@ -222,22 +221,27 @@ public class Controller implements ActionListener{
 		gui.displayText("IT IS " + currentPlayer.getName() +"'S TURN" + "\n" + 
 		"SPIN THE WHEEL");
 		
-		if (currentPlayer.getPosition() == 0) {
-			choosePath();
-		}
-		
 		do {
 			System.out.print("");
 			movePlayer(currentPlayerID, currentPlayer.getPosition());
 			if (spin) {
 				gml.wheel = tempWheel;
+<<<<<<< HEAD
 				//gml.wheel = 1; //FOR TESTING
+=======
+				gml.wheel = 2; //FOR TESTING
+>>>>>>> bde2db265b4b08ab522bbfa50abed8634bfcd3ee
 				gml.processTurn();
 				gui.displayDice(gml.getWheel());
 				
 				for (i = 1; i <= gml.getWheel(); i++) {
-					
-					
+					// check if first tile
+					if (currentPlayer.getPosition() == 0) {
+						int position = choosePath();
+						currentPlayer.setPosition(position);
+					}
+
+
 					//CHECK IF LAST TILE
 					if (gml.isEnd() && i != gml.getWheel()) {
 						gui.displayText (currentPlayer.getName() + " is now RETIRED");
@@ -263,7 +267,7 @@ public class Controller implements ActionListener{
 						gui.interactSpace(spaceType);
 						interactSpace (spaceType);
 					}
-					
+
 					
 					//CHECK IF SPACE HAS JUMP
 					if(gml.isJump()){
@@ -302,8 +306,11 @@ public class Controller implements ActionListener{
 		//ORANGESPACES
 		System.out.println(spaceType);
 		gui.updatePlayerInfo(gml.getPlayers());
+<<<<<<< HEAD
 		movePlayer(this.currentPlayerID, currentPlayer.getPosition());
 		
+=======
+>>>>>>> bde2db265b4b08ab522bbfa50abed8634bfcd3ee
 		switch (spaceType) {
 		case 0: //COLLECT ACTION CARD
 			ActionCard card = gml.takeActionCard();
@@ -497,21 +504,22 @@ public class Controller implements ActionListener{
 	public void takeBlueCard(){
 		BlueCard card = gml.takeBlueCard();
 		int amount = gml.blueCardEffect(card);
-		
-		
+
 		if(card.checkPlayerCareer(currentPlayer.getJob()) == true) {
-			gml.addBalance(currentPlayer, amount);
+			System.out.println("Hello");
 			gui.displayText("YOU GOT " + card.getCardName() + ": +" + amount);
 		} 
 		else {
+			System.out.println("Hello1");
 			gui.displayText("YOU GOT " + card.getCardName() + ": -" + amount);
 		}
 	}
 //GREEN SPACES
 	public void greenSpaceEffect() {
 		int temp = 1 + (int)(Math.random() * 10);
+		System.out.println("YOW");
 		
-		if (temp > 6) {
+		if (temp % 2 == 0) {
 			int raise = gml.payRaise();
 			switch (raise) {
 			case -1:
@@ -552,7 +560,7 @@ public class Controller implements ActionListener{
 		currentPlayer.getMarried();
 	}
 	
-	public void choosePath () {
+	public int choosePath () {
 		int path = 0;
 		ChoosePathController cCont;
 		
@@ -608,7 +616,7 @@ public class Controller implements ActionListener{
 			
 		}
 		System.out.println(path);
-		gml.choosePath(path);
+		return gml.choosePath(path);
 	}
 	
 	public void haveChild () {

@@ -194,6 +194,14 @@ public class GameOfLife {
 			return amount;
 		} 
 		else {
+
+			for(int i = 0; i < players.getSize(); i++){
+				Player p = players.getPlayers().get(i);
+				if(p.equals(currentPlayer) == true){
+					if(card.checkPlayerCareer(p.getJob()) == true)
+						addBalance(p, amount);
+				}
+			}
 			subtractBalance (currentPlayer, amount);
 			return amount;
 		}
@@ -211,6 +219,11 @@ public class GameOfLife {
 		
 		return check;
 	}
+<<<<<<< HEAD
+=======
+
+	public void jobSearch() {
+>>>>>>> bde2db265b4b08ab522bbfa50abed8634bfcd3ee
 
 	public void jobSearch(CareerCard c, SalaryCard s) {
 		currentPlayer.setNewCareer(c, s);
@@ -273,30 +286,29 @@ public class GameOfLife {
 		currentPlayer.graduate();
 	}
 	
-	public void choosePath (int path) {
-		
-		
+	public int choosePath (int path) {
+
+
 		if (currentPlayer.getPosition() == 0) {		
 			switch (path) {
 			case 1: //START CAREER
-				currentPlayer.setPosition(11);
-				break;
+				return 11;
 			case 2://START COLLEGE
-				break;
+				return 0;
 			}
 		}
 		
 		else if (currentPlayer.getPosition() == 46) {
 			switch (path) {
 			case 1://FAMILY PATH
-				break;
+				return 46;
 			case 2://CAREER PATH
-				currentPlayer.setPosition(54);
-				break;
+				return 53;
 			}
 		}
-		
 		System.out.println(currentPlayer.getPosition());
+		return -1;
+
 	}
 
 	// Checks if Space has a jump

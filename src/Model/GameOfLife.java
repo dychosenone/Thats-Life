@@ -218,10 +218,15 @@ public class GameOfLife {
 	}
 	
 	public void jobSearch() {
-		CareerCard career = careerDeck.takeCard();
-		SalaryCard salary = salaryDeck.takeCard();
-		
-		currentPlayer.setNewCareer(career, salary);
+		CareerCard career1 = careerDeck.takeCard();
+		SalaryCard salary1 = salaryDeck.takeCard();
+
+		CareerCard career2 = careerDeck.takeCard();
+		SalaryCard salary2 = salaryDeck.takeCard();
+
+		//Choose which career
+
+		currentPlayer.setNewCareer(career1, salary1);
 	}
 	
 	public void getMarried (int tempWheel) {

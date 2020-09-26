@@ -30,6 +30,8 @@ public class Controller implements ActionListener, KeyListener{
 	
 	private int path = 0;
 	private int tempWheel;
+
+	private int currentPlayerID;
 	
 	private BoardController board;
 	
@@ -44,6 +46,7 @@ public class Controller implements ActionListener, KeyListener{
 		
 		input ="";
 		currentPlayer = new Player ();
+		currentPlayerID = 1;
 	}
 	
 	
@@ -64,8 +67,6 @@ public class Controller implements ActionListener, KeyListener{
 
 		// Function sets position of Player to 0
 		setStartDraw();
-		movePlayer(1, 5);
-		movePlayer(2, 5);
 		
 		do {
 			closeLoan ();
@@ -233,13 +234,22 @@ public class Controller implements ActionListener, KeyListener{
 					gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
 					interactSpace (gml.interactSpace(currentPlayer.getPosition()));
 				}
-				
-				
 			}
 			
 			//currentPlayer.position = 0; //FOR TESTING
+
 			
 		}while (!spin);
+
+		System.out.println(currentPlayer.getPosition());
+		movePlayer(this.currentPlayerID, currentPlayer.getPosition());
+
+
+		if(currentPlayerID == gml.getPlayers().size()){
+			currentPlayerID = 1;
+		} else {
+			currentPlayerID++;
+		}
 
 	}
 	

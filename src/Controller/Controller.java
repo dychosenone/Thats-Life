@@ -187,7 +187,7 @@ public class Controller implements ActionListener, KeyListener{
 			movePlayer(currentPlayerID, currentPlayer.getPosition());
 			if (spin) {
 				gml.wheel = tempWheel;
-				gml.wheel = 1; //FOR TESTING
+				gml.wheel = 2; //FOR TESTING
 				gml.processTurn();
 				gui.displayDice(gml.getWheel());
 				
@@ -224,7 +224,7 @@ public class Controller implements ActionListener, KeyListener{
 						gui.interactSpace(spaceType);
 						interactSpace (spaceType);
 					}
-					
+
 					
 					//CHECK IF SPACE HAS JUMP
 					if(gml.isJump()){
@@ -458,21 +458,22 @@ public class Controller implements ActionListener, KeyListener{
 	public void takeBlueCard(){
 		BlueCard card = gml.takeBlueCard();
 		int amount = gml.blueCardEffect(card);
-		
-		
+
 		if(card.checkPlayerCareer(currentPlayer.getJob()) == true) {
-			gml.addBalance(currentPlayer, amount);
+			System.out.println("Hello");
 			gui.displayText("YOU GOT " + card.getCardName() + ": +" + amount);
 		} 
 		else {
+			System.out.println("Hello1");
 			gui.displayText("YOU GOT " + card.getCardName() + ": -" + amount);
 		}
 	}
 //GREEN SPACES
 	public void greenSpaceEffect() {
 		int temp = 1 + (int)(Math.random() * 10);
+		System.out.println("YOW");
 		
-		if (temp > 6) {
+		if (temp % 2 == 0) {
 			int raise = gml.payRaise();
 			switch (raise) {
 			case -1:

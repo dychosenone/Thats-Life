@@ -35,6 +35,8 @@ public class Controller implements ActionListener{
 	private boolean access = false;
 	private boolean finish = false;
 	
+	private boolean over = false;
+	
 	private int tempWheel;
 
 	private int currentPlayerID;
@@ -227,18 +229,19 @@ public class Controller implements ActionListener{
 			movePlayer(currentPlayerID, currentPlayer.getPosition());
 			if (spin) {
 				gml.wheel = tempWheel;
-				gml.wheel = 130; //FOR TESTING
+				gml.wheel = 132; //FOR TESTING
 				gml.processTurn();
 				gui.displayDice(gml.getWheel());
 				
 				for (i = 1; i <= gml.getWheel(); i++) {
+					
 					// check if first tile
 					if (currentPlayer.getPosition() == 0) {
 						int position = choosePath();
 						currentPlayer.setPosition(position);
 					}
 
-
+					
 					//CHECK IF LAST TILE
 					if (gml.isEnd() && i != gml.getWheel()) {
 						gui.displayText (currentPlayer.getName() + " is now RETIRED");
@@ -250,7 +253,7 @@ public class Controller implements ActionListener{
 					if (!currentPlayer.isFinish())
 						currentPlayer.move();
 					
-					
+					/*
 					//DOUBLE CHECKING IF PLAYER LANDED ON HAS JUMP BUT SPACE IS LAST SPOT INTERACTED ON
 					if (i == 1 && currentPlayer.getPosition() != 0) {
 						if (gml.isJump())
@@ -270,7 +273,7 @@ public class Controller implements ActionListener{
 					if(gml.isJump()){
 						if (i != gml.getWheel()) 
 							currentPlayer.jumpTo(gml.getJump() - 1);
-					}
+					}*/
 
 				}
 				
@@ -359,6 +362,7 @@ public class Controller implements ActionListener{
 		
 		displayConsole ("WINNER IS " + winner.getName());
 		
+		over = true;
 		gui.dispose();
 	}
 	
@@ -798,6 +802,7 @@ public class Controller implements ActionListener{
 			System.out.print("");		
 		}while (!careerCont.isClosed());
 	}
+	
 // BOARD GUI DRAW
 	public void setStartDraw () {
 		int numPlayers = gml.getPlayers().size();
@@ -807,6 +812,7 @@ public class Controller implements ActionListener{
 		}
 		
 	}
+	
 	public void movePlayer (int player, int position){
 		SpaceController space = board.getPlayerSpacePosition(player, position);
 		int x = space.getX();
@@ -855,6 +861,10 @@ public class Controller implements ActionListener{
 				turn = false;
 			break;
 		}
+	}
+	
+	public boolean isOver() {
+		return over;
 	}
  
 //GUI METHODS

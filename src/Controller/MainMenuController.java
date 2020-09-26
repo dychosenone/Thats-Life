@@ -44,9 +44,9 @@ public class MainMenuController implements ActionListener{
 	}
 	
 	public void startGame () {
-		int run = 0;
+		boolean run = true;
 		
-		while (run == 0) {
+		while (run) {
 			ui.dispose();
 			GameOfLife game = new GameOfLife ();	
 			GUI gui = new GUI();
@@ -54,6 +54,12 @@ public class MainMenuController implements ActionListener{
 			Controller cont = new Controller (gui, game);
 			System.out.println("MAIN GAME START");
 			cont.startGame();
+			
+			if(cont.isOver()) {
+				run = false;
+				ui = new MainMenu ();
+				MainMenuController main = new MainMenuController(ui);
+			}			
 		}
 	}
 	

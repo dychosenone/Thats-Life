@@ -71,7 +71,7 @@ public class Controller implements ActionListener, KeyListener{
 
 		// Function sets position of Player to 0
 		setStartDraw();
-
+		movePlayer(1, 17);
 
 		do {
 			closeLoan ();
@@ -263,7 +263,6 @@ public class Controller implements ActionListener, KeyListener{
 		//ORANGESPACES
 		System.out.println(spaceType);
 		gui.updatePlayerInfo(gml.getPlayers());
-		movePlayer(this.currentPlayerID, currentPlayer.getPosition());
 		switch (spaceType) {
 		case 0: //COLLECT ACTION CARD
 			ActionCard card = gml.takeActionCard();
@@ -721,6 +720,7 @@ public class Controller implements ActionListener, KeyListener{
 		SpaceController space = board.getPlayerSpacePosition(player, position);
 		int x = space.getX();
 		int y = space.getY();
+		System.out.println(x + " " + y);
 		gui.movePlayer(player, x, y);
 	}
 	

@@ -7,11 +7,13 @@ public class SalaryCard {
 
     private int salary;
     private int taxDue;
+    private boolean available;
 
     public SalaryCard () {
 
         this.salary = generateSalary();
         this.taxDue = generateTaxDue();
+        available = true;
 
     }
 
@@ -20,6 +22,18 @@ public class SalaryCard {
     }
     public int getTaxDue (){
         return taxDue;
+    }
+    
+    public boolean getAvailability () {
+    	return available;
+    }
+    
+    public void takeCard () {
+    	available = false;
+    }
+    
+    public void returnCard () {
+    	available = true;
     }
 
     public int generateSalary () {

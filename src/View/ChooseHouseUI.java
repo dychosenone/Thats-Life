@@ -5,7 +5,6 @@ import java.awt.Color;
 import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JRootPane;
 import javax.swing.SwingConstants;
 
 import Model.HouseCard.HouseCard;

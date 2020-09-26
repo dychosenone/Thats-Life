@@ -29,6 +29,8 @@ public class GUI{;
 
     private JScrollPane scroll;
     private JTextPane taConsole;
+    
+    private JTextPane tpWheel;
 
     private BoardGUI board;
     
@@ -47,7 +49,6 @@ public class GUI{;
         
         main.getContentPane().setBackground(new Color (42, 54, 59));
         main.getContentPane().setForeground(new Color(119, 136, 153));
-        main.getContentPane().setFont(new Font("Times New Roman", Font.BOLD, 18));
 
         init();
 
@@ -55,8 +56,6 @@ public class GUI{;
         main.setSize (1280, 720);
         main.setResizable(false);
         main.setVisible (true);
-        
-        System.out.println("GUI LOADED");
     }
 
     private void init () {
@@ -87,7 +86,7 @@ public class GUI{;
     	btnWheel = new JButton ("SPIN WHEEL");
     	btnWheel.setForeground(new Color (42, 54, 59));
     	btnWheel.setBackground(new Color(153,184,152));
-    	btnWheel.setFont(new Font("Courier New", Font.PLAIN, 18));
+    	btnWheel.setFont(new Font("Quicksand Light", Font.PLAIN, 18));
     	btnWheel.setBounds(22, 627, 180, 54);
     	
     	main.getContentPane().add (btnWheel);
@@ -95,7 +94,7 @@ public class GUI{;
     	btnPayLoan = new JButton ("PAY LOAN");
     	btnPayLoan.setForeground(new Color (42, 54, 59));
     	btnPayLoan.setBackground(new Color(255, 132, 124));
-    	btnPayLoan.setFont(new Font("Courier New", Font.PLAIN, 18));
+    	btnPayLoan.setFont(new Font("Quicksand Light", Font.PLAIN, 18));
     	btnPayLoan.setBounds(402, 627, 180, 54);
 
     	main.getContentPane().add (btnPayLoan);
@@ -103,7 +102,7 @@ public class GUI{;
     	btnGetLoan = new JButton ("GET LOAN");
     	btnGetLoan.setForeground(new Color (42, 54, 59));
     	btnGetLoan.setBackground(new Color(254, 206, 168));
-    	btnGetLoan.setFont(new Font("Courier New", Font.PLAIN, 18));
+    	btnGetLoan.setFont(new Font("Quicksand Light", Font.PLAIN, 18));
     	btnGetLoan.setBounds(212, 627, 180, 54);
 
     	main.getContentPane().add (btnGetLoan);
@@ -111,7 +110,7 @@ public class GUI{;
     	btnEndTurn = new JButton ("END TURN");
     	btnEndTurn.setForeground(new Color (42, 54, 59));
     	btnEndTurn.setBackground(new Color(232,72,95));
-    	btnEndTurn.setFont(new Font("Courier New", Font.PLAIN, 18));
+    	btnEndTurn.setFont(new Font("Quicksand Light", Font.PLAIN, 18));
     	btnEndTurn.setBounds(592, 627, 180, 54);
 
     	main.getContentPane().add (btnEndTurn);
@@ -129,7 +128,7 @@ public class GUI{;
 		SimpleAttributeSet center = new SimpleAttributeSet();
 
     	taConsole = new JTextPane();
-    	taConsole.setFont(new Font("Courier New", Font.PLAIN, 16));
+    	taConsole.setFont(new Font("Quicksand Light", Font.PLAIN, 18));
     	taConsole.setForeground(new Color (42, 54, 59));
     	taConsole.setBackground(Color.WHITE);
     	taConsole.setEditable(false);
@@ -141,9 +140,18 @@ public class GUI{;
     	caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
     	scroll = new JScrollPane (taConsole);
-    	scroll.setBounds(790, 575, 469, 70);
+    	scroll.setBounds(790, 575, 369, 70);
 
     	main.getContentPane().add(scroll);
+    	
+    	tpWheel = new JTextPane();
+    	tpWheel.setFont(new Font("Quicksand Light", Font.PLAIN, 24));
+    	tpWheel.setBackground(Color.WHITE);
+    	tpWheel.setBounds(1169, 575, 90, 70);
+    	doc = tpWheel.getStyledDocument();
+    	StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+		doc.setParagraphAttributes(0, doc.getLength(), center, false);
+    	main.getContentPane().add(tpWheel);
     	
     	
     }
@@ -206,6 +214,11 @@ public class GUI{;
     		}
     	}
     }
+    
+    public void displayDice (int dice) {
+    	String d = Integer.toString(dice);
+    	tpWheel.setText("DICE\n" + d);
+    }
 
     public void getNumberOfPlayers () {
 
@@ -235,16 +248,17 @@ public class GUI{;
     	
     }
 
-    public void interactSpace (int spaceType) {                    //INDEX
-    	String text[] = {  "YOU LANDED ON ACTION CARD TILE",       //0
-    					   "YOU LANDED ON JOB SEARCH TILE",        //1
-    					   "YOU LANDED ON GET MARRIED TILE",	   //2
-    					   "YOU LANDED ON CHOOSE PATH TILE",	   //3
-    					   "YOU LANDED ON HAVE CHILD TILE",		   //4
-    					   "YOU LANDED ON BUY A HOUSE TILE",	   //5
-    					   "YOU LANDED ON GRADUATION TILE",		   //6
-    					   "YOU LANDED ON BLUE CARD TILE",		   //7
-    					   "YOU LANDED ON GREEN TILE"};            //8
+    public void interactSpace (int spaceType) {                       //INDEX
+    	String text[] = {  "YOU LANDED ON ACTION CARD TILE",          //0
+    					   "YOU LANDED ON JOB SEARCH TILE",           //1
+    					   "YOU LANDED ON GET MARRIED TILE",	      //2
+    					   "YOU LANDED ON CHOOSE PATH TILE",	      //3
+    					   "YOU LANDED ON HAVE CHILD TILE",		      //4
+    					   "YOU LANDED ON BUY A HOUSE TILE",	      //5
+    					   "YOU LANDED ON GRADUATION TILE",		      //6
+    					   "YOU LANDED ON COLLEGE CAREER CHOICE TILE",//7
+    					   "YOU LANDED ON BLUE CARD TILE",		      //8
+    					   "YOU LANDED ON GREEN TILE"};               //9
 
     	if (spaceType != -1) {
 	    	System.out.println(spaceType);
@@ -252,16 +266,6 @@ public class GUI{;
     	}
     	else {
     		displayText("YOU LANDED ON NA");
-    	}
-    }
-
-    public void choosePlayer (ArrayList<Player> players, Player currentPlayer) {
-    	taConsole.append("CHOOSE A PLAYER: " + "\n");
-    	for (int i = 0; i < players.size(); i++) {
-
-    		if (!players.get(i).equals(currentPlayer))
-    			taConsole.append("[" + (i+1) + "] " + players.get(i).getName() + "\n");
-
     	}
     }
 }

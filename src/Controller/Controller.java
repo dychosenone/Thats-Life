@@ -5,10 +5,14 @@ import java.util.ArrayList;
 
 import Model.GameOfLife;
 import Model.Player.Player;
+import Model.SalaryCard.SalaryCard;
 import Model.ActionCard.ActionCard;
 import Model.BlueCard.BlueCard;
+import Model.Career.CareerCard;
 import View.ActionCardUI;
 import View.BoardGUI;
+import View.CareerUI;
+import View.ChooseCareerUI;
 import View.ChooseHouseUI;
 import View.ChoosePathUI;
 import View.ChoosePlayerUI;
@@ -29,7 +33,6 @@ public class Controller implements ActionListener, KeyListener{
 	private boolean access = false;
 	private boolean finish = false;
 	
-	private int path = 0;
 	private int tempWheel;
 	
 	private BoardController board;
@@ -153,8 +156,8 @@ public class Controller implements ActionListener, KeyListener{
 				if(done) {
 					
 					if (!input.equalsIgnoreCase("")) {
-						gui.displayText(input + " has Entered the Game");
 						gml.enterPlayers(input);
+						gui.updatePlayerInfo(gml.getPlayers());
 					}
 					
 					else {
@@ -186,19 +189,21 @@ public class Controller implements ActionListener, KeyListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-				//gml.wheel = 1; //FOR TESTING
+				//gml.wheel = 11; //FOR TESTING
 				gml.processTurn();
-				gui.displayText("You Rolled a " + gml.getWheel());
+				gui.displayDice(gml.getWheel());
 				
 				for (i = 1; i <= gml.getWheel(); i++) {
+					
 					
 					//CHECK IF LAST TILE
 					if (gml.isEnd() && i != gml.getWheel()) {
 						gui.displayText (currentPlayer.getName() + " is now RETIRED");
 						
 						i = gml.getWheel();
-					}	
+					}
 					
+					//MOVE
 					if (!currentPlayer.isFinish())
 						currentPlayer.move();
 					
@@ -220,9 +225,9 @@ public class Controller implements ActionListener, KeyListener{
 					
 					//CHECK IF SPACE HAS JUMP
 					if(gml.isJump()){
-						int spaceType = gml.interactSpace(currentPlayer.getPosition());
+						/*int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						gui.interactSpace(spaceType);
-						interactSpace(spaceType);
+						interactSpace(spaceType);*/
 						if (i != gml.getWheel()) 
 							currentPlayer.jumpTo(gml.getJump() - 1);
 					}
@@ -254,7 +259,8 @@ public class Controller implements ActionListener, KeyListener{
 			
 			break;
 		case 1:
-			gml.jobSearch();
+			jobSearch();
+			displayConsole ("YOU ARE NOW HIRED");
 			break;
 		case 2:
 			if (!currentPlayer.isMarried()) {
@@ -280,9 +286,12 @@ public class Controller implements ActionListener, KeyListener{
 			graduate ();
 			break;
 		case 7:
-			takeBlueCard();
+			collegeCareerChoice ();
 			break;
 		case 8:
+			takeBlueCard();
+			break;
+		case 9:
 			greenSpaceEffect ();
 			break;
 		}
@@ -367,9 +376,10 @@ public class Controller implements ActionListener, KeyListener{
 		case 4:
 			if (card.getCardName().equalsIgnoreCase("FileLawsuit")) {
 				
+				displayCard(card, "COLLECT FROM A PLAYER");
+				
 				Player target = choosePlayer(2);
 				
-				displayCard(card, "COLLECT FROM A PLAYER");
 				
 				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
 						 + currentPlayer.getName() + ": +" + card.getValue() + "\n"
@@ -506,7 +516,10 @@ public class Controller implements ActionListener, KeyListener{
 				System.out.print("");
 				
 				switch (cCont.getChoice()) {
-				case 1: case 2:
+				case 1: case 2:			
+					if(cCont.getChoice() == 1) 
+						jobSearch();
+					
 					path = cCont.getChoice();
 					run = false;
 					break;
@@ -543,7 +556,7 @@ public class Controller implements ActionListener, KeyListener{
 			}while(run);
 			
 		}
-		
+		System.out.println(path);
 		gml.choosePath(path);
 	}
 	
@@ -615,8 +628,73 @@ public class Controller implements ActionListener, KeyListener{
 		
 		displayConsole(currentPlayer.getName() + " GRADUATED");
 	}
-
-
+	
+	public void collegeCareerChoice () {
+		
+		boolean run = true;
+		int index;
+		
+		CareerCard c1 = gml.takeCareerCard();
+		SalaryCard s1 = gml.takeSalaryCard();
+		CareerCard c2 = gml.takeCareerCard();
+		SalaryCard s2 = gml.takeSalaryCard();		
+		
+		ChooseCareerUI careerUI = new ChooseCareerUI ();
+		ChooseCareerController careerCont = new ChooseCareerController (careerUI, c1, s1, c2, s2);
+		
+		do {
+			System.out.print("");
+			
+			switch (careerCont.getChoice()) {
+			case 1: case 2:
+				index = careerCont.getChoice();
+				run = false;
+				
+				if(index == 1) {
+					displayConsole ("YOU ARE HIRED!");
+					gml.setCareer (c1, s1);
+					gml.returnCareerCard(c2);
+					gml.returnSalaryCard(s2);
+				}
+				else {
+					displayConsole ("YOU ARE HIRED!");
+					gml.setCareer(c2, s2);
+					gml.returnCareerCard(c1);
+					gml.returnSalaryCard(s1);
+				}
+				break;
+			case -1 :
+				careerUI = new ChooseCareerUI ();
+				careerCont = new ChooseCareerController (careerUI, c1, s1, c2, s2);
+				break;
+			}
+			
+			
+		}while (run);
+	}
+	
+	public void jobSearch () {
+		
+		CareerCard career;
+		
+		do {
+			career = gml.takeCareerCard();
+		}while(career.getNeedDegree());
+		
+		SalaryCard salary =	gml.takeSalaryCard();
+		
+		gml.jobSearch(career, salary);
+		displayCareer (career, salary);
+	}
+	
+	public void displayCareer (CareerCard c, SalaryCard s) {
+		CareerUI careerUI = new CareerUI ();
+		CareerController careerCont = new CareerController (careerUI, c, s);
+		
+		do {
+			System.out.print("");		
+		}while (!careerCont.isClosed());
+	}
 // BOARD GUI DRAW
 	public void setStartDraw () {
 		

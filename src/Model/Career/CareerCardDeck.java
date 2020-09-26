@@ -51,13 +51,23 @@ public class CareerCardDeck {
     }
     
     public CareerCard takeCard (){
-   
-        CareerCard card = careerCard.get(counter);
-        reshuffleCards ();
-        
-        this.counter++;
-
-        return card;
+    	reshuffleCards ();
+    	CareerCard card;
+    	int index = 0;
+    	
+    	for (index = 0; index < careerCard.size(); index ++) {
+    		if (careerCard.get(index).getAvailability()) {
+    			careerCard.get(index).takeCard();
+    			card = careerCard.get(index);
+    			return card;
+    		}
+    	}
+    	
+    	return null;
+    }
+    
+    public void returnCard (CareerCard c) {
+    	c.returnCard();
     }
 
     public void reshuffleCards () {

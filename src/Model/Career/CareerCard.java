@@ -6,6 +6,7 @@ public class CareerCard {
     private int minRaise;
     private int maxRaise;
     private int payRaise;
+    private boolean available;
     private boolean needsCollegeDegree;
 
     public CareerCard (String name, int min, int max, boolean college) {
@@ -13,6 +14,7 @@ public class CareerCard {
         this.minRaise = min;
         this.maxRaise = max;
         this.needsCollegeDegree = college;
+        available = true;
 
         this.payRaise = generatePayRaise();
     }
@@ -28,7 +30,19 @@ public class CareerCard {
     
     public int getPayRaise () { 
     	return this.payRaise; 
-    	}
+    }
+    
+    public boolean getAvailability () {
+    	return available;
+    }
+    
+    public void takeCard () {
+    	available = false;
+    }
+    
+    public void returnCard () {
+    	available = true;
+    }
     
     private int generatePayRaise () {
         return this.minRaise + (int)(Math.random() * this.maxRaise);

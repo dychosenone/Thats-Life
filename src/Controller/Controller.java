@@ -71,7 +71,6 @@ public class Controller implements ActionListener, KeyListener{
 
 		// Function sets position of Player to 0
 		setStartDraw();
-		movePlayer(1, 17);
 
 		do {
 			closeLoan ();

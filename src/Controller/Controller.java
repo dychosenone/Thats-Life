@@ -182,10 +182,6 @@ public class Controller implements ActionListener, KeyListener{
 		gui.displayText("IT IS " + currentPlayer.getName() +"'S TURN" + "\n" + 
 		"SPIN THE WHEEL");
 		
-		if (currentPlayer.getPosition() == 0) {
-			choosePath();
-		}
-		
 		do {
 			System.out.print("");
 			movePlayer(currentPlayerID, currentPlayer.getPosition());
@@ -196,8 +192,13 @@ public class Controller implements ActionListener, KeyListener{
 				gui.displayDice(gml.getWheel());
 				
 				for (i = 1; i <= gml.getWheel(); i++) {
-					
-					
+					// check if first tile
+					if (currentPlayer.getPosition() == 0) {
+						int position = choosePath();
+						currentPlayer.setPosition(position);
+					}
+
+
 					//CHECK IF LAST TILE
 					if (gml.isEnd() && i != gml.getWheel()) {
 						gui.displayText (currentPlayer.getName() + " is now RETIRED");
@@ -512,7 +513,7 @@ public class Controller implements ActionListener, KeyListener{
 		currentPlayer.getMarried();
 	}
 	
-	public void choosePath () {
+	public int choosePath () {
 		int path = 0;
 		ChoosePathController cCont;
 		
@@ -568,7 +569,7 @@ public class Controller implements ActionListener, KeyListener{
 			
 		}
 		System.out.println(path);
-		gml.choosePath(path);
+		return gml.choosePath(path);
 	}
 	
 	public void haveChild () {
@@ -719,7 +720,6 @@ public class Controller implements ActionListener, KeyListener{
 		SpaceController space = board.getPlayerSpacePosition(player, position);
 		int x = space.getX();
 		int y = space.getY();
-		System.out.println(x + " " + y);
 		gui.movePlayer(player, x, y);
 	}
 	

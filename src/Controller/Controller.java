@@ -19,6 +19,7 @@ import View.ChoosePlayerUI;
 import View.ConsoleUI;
 import View.GUI;
 import View.InputDialog;
+import View.JobSearchUI;
 
 public class Controller implements ActionListener{
 	
@@ -226,7 +227,7 @@ public class Controller implements ActionListener{
 			movePlayer(currentPlayerID, currentPlayer.getPosition());
 			if (spin) {
 				gml.wheel = tempWheel;
-				//gml.wheel = 1; //FOR TESTING
+				gml.wheel = 130; //FOR TESTING
 				gml.processTurn();
 				gui.displayDice(gml.getWheel());
 				
@@ -241,7 +242,7 @@ public class Controller implements ActionListener{
 					//CHECK IF LAST TILE
 					if (gml.isEnd() && i != gml.getWheel()) {
 						gui.displayText (currentPlayer.getName() + " is now RETIRED");
-						
+						//currentPlayer.move();
 						i = gml.getWheel();
 					}
 					
@@ -312,7 +313,6 @@ public class Controller implements ActionListener{
 			break;
 		case 1:
 			jobSearch();
-			displayConsole ("YOU ARE NOW HIRED");
 			break;
 		case 2:
 			if (!currentPlayer.isMarried()) {
@@ -499,12 +499,10 @@ public class Controller implements ActionListener{
 		int amount = gml.blueCardEffect(card);
 
 		if(card.checkPlayerCareer(currentPlayer.getJob()) == true) {
-			System.out.println("Hello");
-			gui.displayText("YOU GOT " + card.getCardName() + ": +" + amount);
+			displayConsole("YOU GOT " + card.getCardName() + ": +" + amount);
 		} 
 		else {
-			System.out.println("Hello1");
-			gui.displayText("YOU GOT " + card.getCardName() + ": -" + amount);
+			displayConsole("YOU GOT " + card.getCardName() + ": -" + amount);
 		}
 	}
 //GREEN SPACES
@@ -614,7 +612,7 @@ public class Controller implements ActionListener{
 	
 	public void haveChild () {
 		int tempChance = GameOfLife.spinWheel();
-		if (!currentPlayer.isMarried()) {
+		if (currentPlayer.isMarried()) {
 			if (tempChance > 6) {// have twins
 				if(currentPlayer.haveBabies(2)) {
 					
@@ -725,18 +723,71 @@ public class Controller implements ActionListener{
 		}while (run);
 	}
 	
+	@SuppressWarnings("unused")
 	public void jobSearch () {
-		
+		boolean find = false;
 		CareerCard career;
 		
 		do {
+			
 			career = gml.takeCareerCard();
-		}while(career.getNeedDegree());
+			
+			if(career.getNeedDegree() && !currentPlayer.hasDegree()) {
+				gml.returnCareerCard(career);
+			}	
+			else 
+				find =true;
+			
+			if (career == null) 
+				break;
+			
+		}while(!find);
 		
-		SalaryCard salary =	gml.takeSalaryCard();
 		
-		gml.jobSearch(career, salary);
-		displayCareer (career, salary);
+		
+		if(career != null){
+			int choice;
+			boolean run = true;
+			SalaryCard salary =	gml.takeSalaryCard();
+			
+			if(currentPlayer.hasCareer()) {
+				
+				JobSearchUI jobUI = new JobSearchUI();
+				JobSearchController jobCont = new JobSearchController(jobUI, career, salary);
+				do {
+					System.out.print("");
+					
+					switch(jobCont.getChoice()) {
+					case 1: 
+						displayConsole("LOYALTY IS PRIORITY");
+						gml.returnCareerCard(career);
+						gml.returnSalaryCard(salary);
+						run = false;
+						break;
+					case 2:
+						gml.returnCareerCard();
+						gml.jobSearch(career, salary);
+						displayConsole("YOU HAVE A NEW CAREER!");
+						displayCareer (career, salary);
+						run = false;
+						break;
+					case -1:
+						jobUI = new JobSearchUI();
+						jobCont = new JobSearchController(jobUI, career, salary);
+						break;
+					}
+					
+				}while (run);
+			}
+			
+			else {
+				gml.jobSearch(career, salary);
+				displayConsole("YOU ARE HIRED!");
+				displayCareer (career, salary);
+			}
+		}
+		else
+			displayConsole ("NO ACTIVE JOBS FOUND");		
 	}
 	
 	public void displayCareer (CareerCard c, SalaryCard s) {

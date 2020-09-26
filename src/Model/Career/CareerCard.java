@@ -47,5 +47,10 @@ public class CareerCard {
     private int generatePayRaise () {
         return this.minRaise + (int)(Math.random() * this.maxRaise);
     }
+    
+    @Override 
+    public String toString() {
+    	return careerName +":"+available;
+    }
 }
 

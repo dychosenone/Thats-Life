@@ -115,7 +115,7 @@ public class PlayerInfoUI extends JPanel{
 		
 		playerInfo2.setText("DEBT     : " + player.getDebt() + newLine
 				          + "RETIRED  : " + player.isFinish() + newLine
-				          + "DEGREE   : " + player.getDegree());
+				          + "DEGREE   : " + player.getPosition());
 		
 		
 		Career job = player.getJob();

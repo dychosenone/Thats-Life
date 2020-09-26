@@ -123,6 +123,10 @@ public class Player {
 		job = new Career(c, s);
 	}
 	
+	public boolean hasCareer () {
+		return job != null;
+	}
+	
 	public void buyHouse (HouseCard h) {
 		house = new House (h);
 		balance -= h.getValue();
@@ -154,7 +158,9 @@ public class Player {
 	}
 
 	public boolean haveBabies (int num) {
-		if (isMarried() || baby < MAX_BABIES) {
+		System.out.println(isMarried());
+		System.out.println(baby < MAX_BABIES);
+		if (isMarried() && baby < MAX_BABIES) {
 			baby += num;
 			return true;
 		}

@@ -119,11 +119,9 @@ public class GameOfLife {
 			
 			switch (((MagentaSpace) space).getMagentaType()){
 				case "jobSearch":
-					return 1;
-					
+					return 1;		
 				case "getMarried":
 					return 2;
-				
 				case "choosePath":
 					return 3;
 				case "haveChild" :
@@ -257,10 +255,19 @@ public class GameOfLife {
 
 	public CareerCard takeCareerCard () {
 		CareerCard c = careerDeck.takeCard();
-		return c;
+		
+		if(c != null)
+			return c;
+		else
+			return null;
 	}
 	
 	public void returnCareerCard (CareerCard c) {
+		careerDeck.returnCard(c);
+	}
+	
+	public void returnCareerCard() {
+		CareerCard c = careerDeck.findCard(currentPlayer.getJob());
 		careerDeck.returnCard(c);
 	}
 	
@@ -296,9 +303,9 @@ public class GameOfLife {
 		else if (currentPlayer.getPosition() == 46) {
 			switch (path) {
 			case 1://FAMILY PATH
-				return 46;
-			case 2://CAREER PATH
 				return 53;
+			case 2://CAREER PATH
+				return 46;
 			}
 		}
 		System.out.println(currentPlayer.getPosition());

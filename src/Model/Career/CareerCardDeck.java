@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import Model.ActionCard.ActionCard;
+import Model.Player.Career;
 
 public class CareerCardDeck {
 
@@ -52,6 +53,7 @@ public class CareerCardDeck {
     
     public CareerCard takeCard (){
     	reshuffleCards ();
+    	printCards();
     	CareerCard card;
     	int index = 0;
     	
@@ -67,11 +69,30 @@ public class CareerCardDeck {
     }
     
     public void returnCard (CareerCard c) {
-    	c.returnCard();
+    	careerCard.get(careerCard.indexOf(c)).returnCard();
+    }
+    
+    public CareerCard findCard(Career c) {
+    	int i;
+    	
+    	for (i = 0; i <careerCard.size(); i++) {
+    		if(careerCard.get(i).getCareerName().equalsIgnoreCase(c.getPosition())) {
+    			return careerCard.get(i);
+    		}
+    	}
+    	
+    	return null;
     }
 
     public void reshuffleCards () {
         Collections.shuffle (careerCard);
+    }
+    
+    public void printCards () {
+    	int i;
+    	for (i = 0; i < careerCard.size(); i++) {
+    		System.out.println(careerCard.get(i).toString());
+    	}
     }
 
 }

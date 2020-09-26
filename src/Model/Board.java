@@ -66,7 +66,7 @@ public class Board {
 						case 52: case 95:
 							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "buyHouse"));
 							break;
-						case 42: case 54:
+						case 42: case 54: case 90: case 110:
 							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "haveChild"));
 							break;
 					}
@@ -104,7 +104,7 @@ public class Board {
 	public boolean isEnd(int position) {
 		if (position == 0) {
 			return false;
-		}
+		}		
 		return getSpace(position).getSpaceNumber() == SPACES;
 	}
 }

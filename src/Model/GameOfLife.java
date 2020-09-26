@@ -493,28 +493,20 @@ public class GameOfLife {
 	public Player decideWinner () {
 
 		ArrayList <Player> temp = getPlayers();
-
-		Player a = temp.get(0);
-		Player b = temp.get(1);
-		Player c = temp.get(2);
+		int i;
+		Player winner = null;
 		
-		if (a.getBalance() > b.getBalance()) {
+		for(i = 0; i < temp.size(); i++) {
 			
-		    if (a.getBalance() > c.getBalance())
-		      return a;
-		    
-		    else
-		      return c;
-		    
-		  } 
+			if(winner == null) {
+				winner = temp.get(i);
+			}
+			
+			if (winner.getBalance() < temp.get(i).getBalance())
+				winner = temp.get(i);
+		}
+			
+		return winner;
 		
-		else {
-			
-		    if (b.getBalance() > c.getBalance())
-		      return b;
-		    
-		    else
-		      return c;
-		  }
 	}
 }

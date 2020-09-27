@@ -289,8 +289,6 @@ public class GameOfLife {
 	}
 	
 	public int choosePath (int path) {
-
-
 		if (currentPlayer.getPosition() == 0) {		
 			switch (path) {
 			case 1: //START CAREER
@@ -299,17 +297,16 @@ public class GameOfLife {
 				return 0;
 			}
 		}
-		
 		else if (currentPlayer.getPosition() == 46) {
 			switch (path) {
 			case 1://FAMILY PATH
-				return 53;
-			case 2://CAREER PATH
 				return 46;
+			case 2://CAREER PATH
+				return 54;
 			}
 		}
-		System.out.println(currentPlayer.getPosition());
-		return -1;
+		System.out.println(currentPlayer.position);
+		return 0;
 
 	}
 

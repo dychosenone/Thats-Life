@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Board {
 	
-	private final int SPACES = 132;
+	private final int SPACES = 133;
 	private ArrayList <Space> spaces;
 	
 	public Board () {
@@ -26,7 +26,7 @@ public class Board {
 			file.close();
 			
 		} catch (Exception e) {
-			System.out.println("An Error Occured.");
+			System.out.println("An Error Occurred.");
 			e.printStackTrace();
 		}
 		

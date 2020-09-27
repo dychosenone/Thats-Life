@@ -15,7 +15,7 @@ public class BoardGUI extends JPanel {
     private int x2, y2;
     private int x3, y3;
 
-    private final int radius = 7;
+    private final int radius = 8;
 
     public BoardGUI() {
 

@@ -10,18 +10,7 @@ public class MagentaSpace extends Space {
 		this.magentaType = magentaType;
 
 	}
-	/*
-	public void changeChildTo () {
-		
-		int value = (int) (Math.random() * (2 - 1 + 1) + 1);
-		
-		if(value == 1)
-			this.magentaType = "haveBaby";
-		else if(value == 2)
-			this.magentaType = "haveTwin";
-		
-	}
-	*/
+
 	public String getMagentaType () {
 		return this.magentaType;
 	}

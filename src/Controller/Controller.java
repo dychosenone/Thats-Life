@@ -109,8 +109,7 @@ public class Controller implements ActionListener{
 			}
 			
 		}while (!gml.gameOver());
-		
-		
+
 		gui.displayText("GAME OVER");
 		decideWinner (gml.decideWinner());
 	}
@@ -226,14 +225,13 @@ public class Controller implements ActionListener{
 		
 		do {
 			System.out.print("");
-			movePlayer(currentPlayerID, currentPlayer.getPosition());
 			if (spin) {
 				gml.wheel = tempWheel;
-				gml.wheel = 132; //FOR TESTING
+				// gml.wheel = 1; //FOR TESTING
 				gml.processTurn();
 				gui.displayDice(gml.getWheel());
 				
-				for (i = 1; i <= gml.getWheel(); i++) {
+				for (i = 0; i < gml.getWheel(); i++) {
 					
 					// check if first tile
 					if (currentPlayer.getPosition() == 0) {
@@ -241,26 +239,25 @@ public class Controller implements ActionListener{
 						currentPlayer.setPosition(position);
 					}
 
-					
 					//CHECK IF LAST TILE
 					if (gml.isEnd() && i != gml.getWheel()) {
 						gui.displayText (currentPlayer.getName() + " is now RETIRED");
 						//currentPlayer.move();
 						i = gml.getWheel();
 					}
-					
-					//MOVE
-					if (!currentPlayer.isFinish())
-						currentPlayer.move();
-					
-					/*
+
 					//DOUBLE CHECKING IF PLAYER LANDED ON HAS JUMP BUT SPACE IS LAST SPOT INTERACTED ON
 					if (i == 1 && currentPlayer.getPosition() != 0) {
 						if (gml.isJump())
-							currentPlayer.jumpTo(gml.getJump() - 1);
+							currentPlayer.setPosition(gml.getJump()-1);
 					}
-					
-					
+
+					//MOVE
+					if (!currentPlayer.isFinish())
+						currentPlayer.move();
+
+				}
+
 					//CHECK IF CURRENT SPACE IS MAGENTA
 					if (gml.isMagenta() && i != gml.getWheel() ) {
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
@@ -268,14 +265,18 @@ public class Controller implements ActionListener{
 						interactSpace (spaceType);
 					}
 
-					
+					//Check if Choose Path 46
+					if(currentPlayer.getPosition() == 46){
+						int position = choosePath();
+						currentPlayer.setPosition(position);
+					}
+
 					//CHECK IF SPACE HAS JUMP
 					if(gml.isJump()){
 						if (i != gml.getWheel()) 
 							currentPlayer.jumpTo(gml.getJump() - 1);
-					}*/
+					}
 
-				}
 				
 				//CHECK IF LAST TILE
 				if(!currentPlayer.isFinish()) {
@@ -290,7 +291,7 @@ public class Controller implements ActionListener{
 		}while (!spin);
 
 		System.out.println(currentPlayer.getPosition());
-		movePlayer(this.currentPlayerID, currentPlayer.getPosition());
+		movePlayer(this.currentPlayerID, currentPlayer.position);
 
 
 		if(currentPlayerID == gml.getPlayers().size()){
@@ -318,7 +319,7 @@ public class Controller implements ActionListener{
 			jobSearch();
 			break;
 		case 2:
-			if (!currentPlayer.isMarried()) {
+			if (currentPlayer.isMarried() == false) {
 				getMarried ();				
 				displayConsole ("YOU ARE NOW MARRIED");
 				
@@ -512,7 +513,6 @@ public class Controller implements ActionListener{
 //GREEN SPACES
 	public void greenSpaceEffect() {
 		int temp = 1 + (int)(Math.random() * 10);
-		System.out.println("YOW");
 		
 		if (temp % 2 == 0) {
 			int raise = gml.payRaise();
@@ -570,10 +570,9 @@ public class Controller implements ActionListener{
 				System.out.print("");
 				
 				switch (cCont.getChoice()) {
-				case 1: case 2:			
-					if(cCont.getChoice() == 1) 
-						jobSearch();
-					
+				case 1:
+					jobSearch();
+				case 2:
 					path = cCont.getChoice();
 					run = false;
 					break;
@@ -747,8 +746,6 @@ public class Controller implements ActionListener{
 			
 		}while(!find);
 		
-		
-		
 		if(career != null){
 			int choice;
 			boolean run = true;
@@ -810,7 +807,6 @@ public class Controller implements ActionListener{
 		for(int i = 1; i <= numPlayers; i++) {
 			movePlayer(i, 0);
 		}
-		
 	}
 	
 	public void movePlayer (int player, int position){

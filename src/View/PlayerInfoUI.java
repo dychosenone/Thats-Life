@@ -4,7 +4,6 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import Model.SalaryCard.SalaryCard;
 import Model.Player.Career;
 import Model.Player.House;
 import Model.Player.Player;
@@ -106,7 +105,7 @@ public class PlayerInfoUI extends JPanel{
 	
 	public void updateUserInfo (Player player){
 		String newLine = "\n";
-		String gap = "           ";
+		
 		playerName.setText(player.getName());
 		
 		playerInfo1.setText("  BALANCE  : " + player.getBalance() + newLine

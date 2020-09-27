@@ -1,16 +1,10 @@
 package View;
 
 import java.awt.Color;
-import java.awt.Dialog;
 import java.awt.Font;
-import java.awt.event.WindowListener;
-
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-import Model.ActionCard.ActionCard;
 import Model.Career.CareerCard;
 
 

@@ -11,8 +11,6 @@ public class InputController implements KeyListener, WindowListener {
 	
 	private String input;
 	
-	private boolean done;
-	
 	private InputDialog gui;
 	private int status;
 	

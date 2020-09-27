@@ -5,14 +5,12 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import Model.Player.Career;
 import Model.Player.Player;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
 public class GUI{;
-    private static final Career NULL = null;
     
     private JFrame main;
     

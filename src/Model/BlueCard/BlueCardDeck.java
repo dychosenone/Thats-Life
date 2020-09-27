@@ -58,10 +58,6 @@ public class BlueCardDeck {
     }
     
     public void reShuffleCards() {
-        for (int i = 0; i < this.numCards; i++) {
-
-            deck.get(i).changeAvailability(true);
-        }
         Collections.shuffle(deck);
     }
 

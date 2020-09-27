@@ -6,8 +6,6 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-import Model.Career.CareerCard;
 import Model.SalaryCard.SalaryCard;
 
 public class SalaryCardPanel extends JPanel{

@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-import Model.ActionCard.ActionCard;
 import Model.Player.Career;
 
 public class CareerCardDeck {
 
     private final int NUM_CAREER = 7;
     private ArrayList <CareerCard> careerCard;
-    private int counter = 0;
 
     public CareerCardDeck () {
 

@@ -7,13 +7,11 @@ import Model.Player.Player;
 public class BlueCard {
 
     private String cardName;
-    private boolean cardOpen;
     private String career;
 
     public BlueCard (String cardName, String career){
 
         this.cardName = cardName;
-        this.cardOpen = true;
         this.career = career;
 
     }
@@ -60,9 +58,10 @@ public class BlueCard {
     
     }
     
+    /*
     public void changeAvailability (Boolean b) {
     	this.cardOpen = b;
-    }
+    }*/
     
     public String getCardName () {
     	return cardName;

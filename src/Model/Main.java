@@ -1,7 +1,5 @@
 package Model;
-import Controller.Controller;
 import Controller.MainMenuController;
-import View.GUI;
 import View.MainMenu;
 /**
  * @author Jacob Miguel Dy

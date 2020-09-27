@@ -7,7 +7,6 @@ import java.awt.event.WindowListener;
 
 import Model.Career.CareerCard;
 import Model.SalaryCard.SalaryCard;
-import View.ChooseCareerUI;
 import View.JobSearchUI;
 
 public class JobSearchController implements ActionListener, WindowListener{

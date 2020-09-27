@@ -5,7 +5,6 @@ import java.awt.event.WindowListener;
 
 import Model.ActionCard.ActionCard;
 import View.ActionCardUI;
-import View.ConsoleUI;
 
 public class ActionCardController implements WindowListener{
 		

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.event.WindowListener;
 
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 
 import Model.Career.CareerCard;
 import Model.SalaryCard.SalaryCard;

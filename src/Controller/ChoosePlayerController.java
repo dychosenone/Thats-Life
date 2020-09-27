@@ -21,6 +21,7 @@ public class ChoosePlayerController implements ActionListener, WindowListener {
 		
 		ui.choosePlayer(players, currentPlayer);
 		ui.setActionListeners(this);
+		ui.setWindowListeners(this);
 	}
 	
 	public int getChoice () {

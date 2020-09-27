@@ -3,10 +3,8 @@ package Controller;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import Model.ActionCard.ActionCard;
 import Model.Career.CareerCard;
 import Model.SalaryCard.SalaryCard;
-import View.ActionCardUI;
 import View.CareerUI;
 
 public class CareerController implements WindowListener{

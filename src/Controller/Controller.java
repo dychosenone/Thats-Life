@@ -10,7 +10,6 @@ import Model.ActionCard.ActionCard;
 import Model.BlueCard.BlueCard;
 import Model.Career.CareerCard;
 import View.ActionCardUI;
-import View.BoardGUI;
 import View.CareerUI;
 import View.ChooseCareerUI;
 import View.ChooseHouseUI;
@@ -25,11 +24,9 @@ public class Controller implements ActionListener{
 	
 	private GameOfLife gml;
 	private GUI gui;
-	private String input;
 	private int maxPlayers;
 	private Player currentPlayer;
 	
-	private boolean done = false;
 	private boolean spin = false;
 	private boolean turn = true;
 	private boolean access = false;
@@ -51,7 +48,6 @@ public class Controller implements ActionListener{
 		
 		gui.setListener(this);
 		
-		input ="";
 		currentPlayer = new Player ();
 		currentPlayerID = 1;
 	}
@@ -64,7 +60,6 @@ public class Controller implements ActionListener{
 		gml.printSpaces();
 		getNumberOfPlayers();
 		
-		pauseGUI();
 		getPlayers();
 		
 		gml.getStarter();
@@ -224,20 +219,22 @@ public class Controller implements ActionListener{
 		"SPIN THE WHEEL");
 		
 		do {
+			boolean didJump = false;
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-				// gml.wheel = 1; //FOR TESTING
-				gml.processTurn();
+				gml.wheel = 1; //FOR TESTING
 				gui.displayDice(gml.getWheel());
 				
 				for (i = 0; i < gml.getWheel(); i++) {
 					System.out.println("Current Position: " + currentPlayer.getPosition());
+					
 					// check if first tile
 					if (currentPlayer.getPosition() == 0) {
 						int position = choosePath();
 						currentPlayer.setPosition(position);
 					}
+					
 					//MOVE
 					else if (!currentPlayer.isFinish())
 						currentPlayer.move();
@@ -248,7 +245,7 @@ public class Controller implements ActionListener{
 						//currentPlayer.move();
 						i = gml.getWheel();
 					}
-
+					
 					//CHECK IF CURRENT SPACE IS MAGENTA
 					if (gml.isMagenta() &&  i != gml.getWheel()) {
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
@@ -270,16 +267,18 @@ public class Controller implements ActionListener{
 
 					//CHECK IF SPACE HAS JUMP
 					if(gml.isJump() == true){
-						if (i != gml.getWheel())
+						if (i != gml.getWheel()) {
+							didJump = true;
 							currentPlayer.jumpTo(gml.getJump()-1);
+						}
 					}
-
 				}
 
 				//CHECK IF LAST TILE
-				if(!currentPlayer.isFinish()) {
+				if(!currentPlayer.isFinish() && !didJump) {
 					gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
 					interactSpace (gml.interactSpace(currentPlayer.getPosition()));
+					movePlayer(this.currentPlayerID, currentPlayer.position);
 				}
 			}
 			
@@ -287,9 +286,6 @@ public class Controller implements ActionListener{
 
 			
 		}while (!spin);
-
-		System.out.println(currentPlayer.getPosition());
-		movePlayer(this.currentPlayerID, currentPlayer.position);
 
 
 		if(currentPlayerID == gml.getPlayers().size()){
@@ -467,7 +463,7 @@ public class Controller implements ActionListener{
 		
 		do {
 			System.out.print("");
-			
+			System.out.print(chooseCont.getChoice());
 			switch (chooseCont.getChoice()) {
 			case 0: case 1: case 2:
 				index = chooseCont.getChoice();
@@ -477,7 +473,6 @@ public class Controller implements ActionListener{
 				chooseUI = new ChoosePlayerUI(situation);
 				chooseCont = new ChoosePlayerController (chooseUI, gml.getPlayers(), currentPlayer);
 				break;
-				
 			}
 		}while (run);
 		
@@ -860,9 +855,6 @@ public class Controller implements ActionListener{
 	}
  
 //GUI METHODS
-    public void pauseGUI() {
-    	done = false;
-    }
     
     public void startTurn () {
     	spin = false;

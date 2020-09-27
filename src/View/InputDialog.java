@@ -1,7 +1,6 @@
 package View;
 
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Color;

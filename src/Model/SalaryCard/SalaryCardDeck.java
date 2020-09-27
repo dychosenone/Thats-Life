@@ -1,7 +1,6 @@
 package Model.SalaryCard;
 import java.util.*;
 
-import Model.Career.CareerCard;
 
 public class SalaryCardDeck {
 

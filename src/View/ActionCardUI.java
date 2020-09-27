@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import Model.ActionCard.ActionCard;
-import javax.swing.JInternalFrame;
 
 public class ActionCardUI {
 	

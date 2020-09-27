@@ -7,7 +7,6 @@ import Model.Career.CareerCard;
 import Model.Career.CareerCardDeck;
 import Model.HouseCard.HouseCard;
 import Model.HouseCard.HouseCardDeck;
-import Model.Player.Career;
 import Model.Player.Player;
 import Model.Player.Players;
 
@@ -19,17 +18,12 @@ import java.util.ArrayList;
 
 public class GameOfLife {
 	
-	private static final int MINPLAYERS = 2;
-	private static final int MAXPLAYERS = 3;
-	
 	private final int FIRST_PLACE = 1000000;
 	private final int SECOND_PLACE = 500000;
 	private final int THIRD_PLACE = 200000;
 	private int place = 1;
 	
 	private final int RETIRE_BABY_MULTIPLE = 100000;
-	
-	private static final Career NULL = null;
 	
 	private ActionCardDeck actionDeck;
 	private CareerCardDeck careerDeck;
@@ -40,8 +34,6 @@ public class GameOfLife {
 	private Players players;
 	private Player currentPlayer;
 	public int wheel;
-	
-	private boolean turn = false;
 	
 	private Board board;
 	private Bank bank;
@@ -98,10 +90,6 @@ public class GameOfLife {
 		Space space = board.getSpace(currentPlayer.getPosition());
 		
 		return space;
-	}
-	
-	public void processTurn () {
-		turn = true;
 	}
 
 	public int interactSpace (int position) {

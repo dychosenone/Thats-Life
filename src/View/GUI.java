@@ -67,7 +67,7 @@ public class GUI{;
     	board.setVisible(true);
     	main.getContentPane().add(board);
     	
-    	playerOneInfo = new PlayerInfoUI (new Color(219, 146, 0), new Color (255, 255, 255));
+    	playerOneInfo = new PlayerInfoUI (new Color(128,0,0), new Color (255, 255, 255));
     	playerOneInfo.setBounds(790, 20, 469, 181);
     	playerOneInfo.setVisible(true);
     	
@@ -85,7 +85,7 @@ public class GUI{;
 
     	btnWheel = new JButton ("SPIN WHEEL");
     	btnWheel.setForeground(new Color (255, 255, 255));
-    	btnWheel.setBackground(new Color(219, 146, 0));
+    	btnWheel.setBackground(new Color(128,0,0));
     	btnWheel.setFont(new Font("Quicksand Light", Font.PLAIN, 18));
     	btnWheel.setBounds(22, 627, 180, 54);
     	

@@ -10,7 +10,11 @@ public class BlueCardDeck {
     private ArrayList<BlueCard> deck;
     private int numCards;
     private int counter = 0;
-    
+
+    /**
+     * Takes the blueCard config file and generates BlueCards based on the configuration settings.
+     * Generates blueCards and stores it in a BlueCard ArrayList.
+     */
     public BlueCardDeck () {
         deck = new ArrayList<BlueCard>();
         String cardTemp[] = new String[7];

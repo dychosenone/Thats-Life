@@ -20,9 +20,13 @@ public class BlueCard {
         this.career = career;
 
     }
-    
-    
-    public boolean checkPlayerCareer (Career career) {
+
+	/**
+	 * Checks the player career if its the same with the career of the BlueCard.
+	 * @param career Career of Player
+	 * @return a true or false value. True if the same as Card career, otherwise return false.
+	 */
+	public boolean checkPlayerCareer (Career career) {
     	return career.getPosition().equalsIgnoreCase(this.career);
     }
 

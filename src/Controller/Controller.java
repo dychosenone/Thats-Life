@@ -238,6 +238,10 @@ public class Controller implements ActionListener{
 						int position = choosePath();
 						currentPlayer.setPosition(position);
 					}
+					else if(currentPlayer.getPosition() == 46){
+						int position = choosePath();
+						currentPlayer.setPosition(position);
+					}
 					//MOVE
 					else if (!currentPlayer.isFinish())
 						currentPlayer.move();
@@ -263,10 +267,7 @@ public class Controller implements ActionListener{
 					}
 
 					//Check if Choose Path 46
-					if(currentPlayer.getPosition() == 46){
-						int position = choosePath();
-						currentPlayer.setPosition(position);
-					}
+
 
 					//CHECK IF SPACE HAS JUMP
 					if(gml.isJump() == true){

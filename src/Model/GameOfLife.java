@@ -44,7 +44,11 @@ public class GameOfLife {
 	
 	
 	/**
-	 * When a new Model.GameOfLife object is created, it generates a new Model.ActionCard.ActionCardDeck.
+	 * When the gameOfLife is created, it generates:
+	 * - ActionCard, CareerCard, salaryCard, blueCard, houseCard decks
+	 * - the game backend board
+	 * - the bank
+	 * - and an arrayList of Players
 	 */
 	
 	public GameOfLife (){
@@ -85,7 +89,11 @@ public class GameOfLife {
 	}
 
 //PLAYER TURN FUNCTIONS
-	
+
+	/**
+	 * This function gets the type of space the currentPlayer is currently in.
+	 * @return Space
+	 */
 	public Space getSpace() {
 		Space space = board.getSpace(currentPlayer.getPosition());
 		
@@ -162,13 +170,23 @@ public class GameOfLife {
 
 	
 //BLUE SPACES FUNCTIONS
+
+	/**
+	 * Thus function takes a blueCard from the blueCardDeck
+	 * @return Blue Card
+	 */
 	public BlueCard takeBlueCard () {
 		
 		BlueCard card = blueCardDeck.takeCard();
 		return card;
 		
 	}
-	
+
+	/**
+	 * This function determines the effect of the blue card on the player.
+	 * @param card BlueCard
+	 * @return amount to be subtracted or added on the player/s
+	 */
 	public int blueCardEffect (BlueCard card) {
 		int amount = card.cardAction(currentPlayer, currentPlayer.getJob(), players.getSize());
 		System.out.println(card.getCardName());
@@ -195,6 +213,11 @@ public class GameOfLife {
 	
 	
 //MAGENTA SPACES FUNCTIONS
+
+	/**
+	 * Checks if the position of the current player is in is a magenta space.
+	 * @return isMagenta (true if tile is magenta, false otherwise)
+	 */
 	public boolean isMagenta () {
 		Space space = board.getSpace(currentPlayer.getPosition());
 		boolean check = false;
@@ -206,10 +229,19 @@ public class GameOfLife {
 		return check;
 	}
 
+	/**
+	 * When a player lands on a jobSearch tile, it sets the career and salary of the current player
+	 * @param c Career Card
+	 * @param s Salary Card
+	 */
 	public void jobSearch(CareerCard c, SalaryCard s) {
 		currentPlayer.setNewCareer(c, s);
 	}
-	
+
+	/**
+	 * When the player gets married, if they spin an even number, they collct 10000, if odd, collect 5000.
+	 * @param tempWheel Wheel Value
+	 */
 
 	public void getMarried (int tempWheel) {
 		if (tempWheel % 2 == 0) {
@@ -496,11 +528,19 @@ public class GameOfLife {
 		return winner;
 		
 	}
-	
+
+	/**
+	 * Gets the number of retired players in the game.
+	 * @return Number of Retired Players
+	 */
 	public int getNumOfRetiredPlayers () {
-		return retiredPlayers;
+		return this.retiredPlayers;
 	}
-	
+
+	/**
+	 * Gets the number of players playing.
+	 * @return Size of the Players ArrayList (Number of Players)
+	 */
 	public int getPlayersSize () {
 		return players.getSize();
 	}

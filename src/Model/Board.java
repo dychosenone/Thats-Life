@@ -82,6 +82,8 @@ public class Board {
 				case "Orange":
 					spaces.add(new Space(boardNumber, cardName, hasJump, cardJumpSpace));
 					break;
+				case "End":
+					spaces.add(new Space(boardNumber, cardName, hasJump, cardJumpSpace));
 			
 			}
 
@@ -124,6 +126,6 @@ public class Board {
 		if (position == 0) {
 			return false;
 		}		
-		return getSpace(position).getSpaceNumber() == SPACES;
+		return getSpace(position).getSpaceNumber() == SPACES-1;
 	}
 }

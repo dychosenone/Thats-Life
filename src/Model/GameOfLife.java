@@ -140,7 +140,6 @@ public class GameOfLife {
 		else if (space.getName().equalsIgnoreCase("Green")) {
 			return 9;
 		}
-		
 		return -1;
 	}
 	
@@ -212,7 +211,7 @@ public class GameOfLife {
 		if (space instanceof MagentaSpace) {
 			check = true;
 		}
-		
+
 		return check;
 	}
 
@@ -290,9 +289,9 @@ public class GameOfLife {
 		if (currentPlayer.getPosition() == 0) {		
 			switch (path) {
 			case 1: //START CAREER
-				return 11;
+				return 12;
 			case 2://START COLLEGE
-				return 0;
+				return 1;
 			}
 		}
 		else if (currentPlayer.getPosition() == 46) {

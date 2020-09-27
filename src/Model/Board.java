@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Board {
 	
-	private final int SPACES = 133;
+	private final int SPACES = 134;
 	private ArrayList <Space> spaces;
 	
 	public Board () {
@@ -60,6 +60,7 @@ public class Board {
 						case 26:
 							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "jobSearch"));
 							break;
+						case 0:
 						case 46:
 							spaces.add(new MagentaSpace(boardNumber, cardName, hasJump, cardJumpSpace, "choosePath"));
 							break;
@@ -84,7 +85,7 @@ public class Board {
 	}
 
 	public Space getSpace (int index) {
-		return spaces.get(index-1);
+		return spaces.get(index);
 	}
 	
 	public void printSpaces () {
@@ -93,7 +94,7 @@ public class Board {
 		for (i = 0; i < spaces.size(); i++) {
 			if (spaces.get(i).getName().equalsIgnoreCase("Magenta")) {
 				MagentaSpace temp = (MagentaSpace) spaces.get(i);
-				System.out.println(temp.getSpaceNumber() + temp.getMagentaType());
+				System.out.println(temp.getSpaceNumber() + " " +temp.getMagentaType());
 			}
 			else {
 				System.out.println(spaces.get(i).getSpaceNumber() + " " + spaces.get(i).getName());

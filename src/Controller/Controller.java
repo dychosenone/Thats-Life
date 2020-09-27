@@ -232,37 +232,34 @@ public class Controller implements ActionListener{
 				gui.displayDice(gml.getWheel());
 				
 				for (i = 0; i < gml.getWheel(); i++) {
-					
+					System.out.println("Current Position: " + currentPlayer.getPosition());
 					// check if first tile
 					if (currentPlayer.getPosition() == 0) {
 						int position = choosePath();
 						currentPlayer.setPosition(position);
 					}
+					//MOVE
+					else if (!currentPlayer.isFinish())
+						currentPlayer.move();
 
 					//CHECK IF LAST TILE
-					if (gml.isEnd() && i != gml.getWheel()) {
+					else if (gml.isEnd() && i != gml.getWheel()) {
 						gui.displayText (currentPlayer.getName() + " is now RETIRED");
 						//currentPlayer.move();
 						i = gml.getWheel();
+					}
+
+					//CHECK IF CURRENT SPACE IS MAGENTA
+					if (gml.isMagenta() &&  i != gml.getWheel()) {
+						int spaceType = gml.interactSpace(currentPlayer.getPosition());
+						gui.interactSpace(spaceType);
+						interactSpace (spaceType);
 					}
 
 					//DOUBLE CHECKING IF PLAYER LANDED ON HAS JUMP BUT SPACE IS LAST SPOT INTERACTED ON
 					if (i == 1 && currentPlayer.getPosition() != 0) {
 						if (gml.isJump())
 							currentPlayer.setPosition(gml.getJump()-1);
-					}
-
-					//MOVE
-					if (!currentPlayer.isFinish())
-						currentPlayer.move();
-
-				}
-
-					//CHECK IF CURRENT SPACE IS MAGENTA
-					if (gml.isMagenta() && i != gml.getWheel() ) {
-						int spaceType = gml.interactSpace(currentPlayer.getPosition());
-						gui.interactSpace(spaceType);
-						interactSpace (spaceType);
 					}
 
 					//Check if Choose Path 46
@@ -272,12 +269,13 @@ public class Controller implements ActionListener{
 					}
 
 					//CHECK IF SPACE HAS JUMP
-					if(gml.isJump()){
-						if (i != gml.getWheel()) 
-							currentPlayer.jumpTo(gml.getJump() - 1);
+					if(gml.isJump() == true){
+						if (i != gml.getWheel())
+							currentPlayer.jumpTo(gml.getJump()-1);
 					}
 
-				
+				}
+
 				//CHECK IF LAST TILE
 				if(!currentPlayer.isFinish()) {
 					gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
@@ -308,12 +306,10 @@ public class Controller implements ActionListener{
 		System.out.println(spaceType);
 		gui.updatePlayerInfo(gml.getPlayers());
 		movePlayer(this.currentPlayerID, currentPlayer.getPosition());
-		
 		switch (spaceType) {
 		case 0: //COLLECT ACTION CARD
 			ActionCard card = gml.takeActionCard();
 			takeActionCard (card);
-			
 			break;
 		case 1:
 			jobSearch();

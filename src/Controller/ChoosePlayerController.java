@@ -35,11 +35,11 @@ public class ChoosePlayerController implements ActionListener, WindowListener {
 			choice = 0;
 			ui.dispose();
 		}
-		if (e.getActionCommand().equalsIgnoreCase(players.get(1).getName())) {
+		else if (e.getActionCommand().equalsIgnoreCase(players.get(1).getName())) {
 			choice = 1;
 			ui.dispose();
 		}
-		if (e.getActionCommand().equalsIgnoreCase(players.get(2).getName())) {
+		else if (e.getActionCommand().equalsIgnoreCase(players.get(2).getName())) {
 			choice = 2;
 			ui.dispose();
 		}

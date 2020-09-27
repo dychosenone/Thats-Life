@@ -66,7 +66,7 @@ public class Controller implements ActionListener{
 		currentPlayer = gml.getCurrentPlayer();
 		gui.updatePlayerInfo(gml.getPlayers());
 
-		// Function sets position of Player to 0
+		// Function sets position of Player to 0 (GUI)
 		setStartDraw();
 
 		do {
@@ -223,7 +223,7 @@ public class Controller implements ActionListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-				gml.wheel = 1; //FOR TESTING
+				 gml.wheel = 20; //FOR TESTING
 				gui.displayDice(gml.getWheel());
 				
 				for (i = 0; i < gml.getWheel(); i++) {
@@ -495,10 +495,19 @@ public class Controller implements ActionListener{
 		BlueCard card = gml.takeBlueCard();
 		int amount = gml.blueCardEffect(card);
 
-		if(card.checkPlayerCareer(currentPlayer.getJob()) == true) {
+		if(card.checkPlayerCareer(currentPlayer.getJob())) {
 			displayConsole("YOU GOT " + card.getCardName() + ": +" + amount);
 		} 
 		else {
+			for(int i = 0; i < gml.getPlayers().size(); i++){
+				Player p = gml.getPlayers().get(i);
+				if(p.getJob() != null) {
+					if(card.checkPlayerCareer(p.getJob())) {
+						System.out.println("Added");
+						displayConsole("YOU PAID " + p.getName() + " " + amount);
+					}
+				}
+			}
 			displayConsole("YOU GOT " + card.getCardName() + ": -" + amount);
 		}
 	}

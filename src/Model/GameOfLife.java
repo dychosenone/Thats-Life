@@ -171,23 +171,26 @@ public class GameOfLife {
 	
 	public int blueCardEffect (BlueCard card) {
 		int amount = card.cardAction(currentPlayer, currentPlayer.getJob(), players.getSize());
+		System.out.println(card.getCardName());
 		
-		if(card.checkPlayerCareer(currentPlayer.getJob()) == true) {
+		if(card.checkPlayerCareer(currentPlayer.getJob())) {
+			System.out.println("Checked");
 			addBalance (currentPlayer, amount);
-			return amount;
-		} 
+		}
 		else {
-
 			for(int i = 0; i < players.getSize(); i++){
 				Player p = players.getPlayers().get(i);
-				if(p.equals(currentPlayer) == true){
-					if(card.checkPlayerCareer(p.getJob()) == true)
+				if(p.getJob() != null) {
+					if(card.checkPlayerCareer(p.getJob())) {
+						System.out.println("Added");
 						addBalance(p, amount);
+					}
 				}
 			}
 			subtractBalance (currentPlayer, amount);
-			return amount;
+			System.out.println("Minus");
 		}
+		return amount;
 	}
 	
 	

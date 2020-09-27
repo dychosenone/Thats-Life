@@ -9,7 +9,12 @@ public class BlueCard {
     private String cardName;
     private String career;
 
-    public BlueCard (String cardName, String career){
+	/**
+	 * This sets the cardName and the given career set to the Blue Card.
+	 * @param cardName Name of the Card
+	 * @param career Career related to the Card
+	 */
+	public BlueCard (String cardName, String career){
 
         this.cardName = cardName;
         this.career = career;
@@ -20,8 +25,15 @@ public class BlueCard {
     public boolean checkPlayerCareer (Career career) {
     	return career.getPosition().equalsIgnoreCase(this.career);
     }
-    
-    public int cardAction(Player p, Career career, int numPlayers) {
+
+	/**
+	 * This function dictates the different cardActions it will take depending on the CardName.
+	 * @param p Current Player
+	 * @param career Career of current Player
+	 * @param numPlayers Total number of Players playing
+	 * @return the value to be added or subtracted
+	 */
+	public int cardAction(Player p, Career career, int numPlayers) {
     	int cardAmount = 0;
     	
     	if(checkPlayerCareer(career) == true) {
@@ -57,15 +69,17 @@ public class BlueCard {
     	return cardAmount;
     
     }
+
+	/**
+	 * This function returns the name of the BlueCard.
+	 * @return BlueCard name
+	 */
+	public String getCardName () {
+    	return cardName;
+    }
     
     /*
     public void changeAvailability (Boolean b) {
     	this.cardOpen = b;
     }*/
-    
-    public String getCardName () {
-    	return cardName;
-    }
-    
-
 }

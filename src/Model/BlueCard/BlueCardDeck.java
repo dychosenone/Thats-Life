@@ -44,6 +44,12 @@ public class BlueCardDeck {
         Collections.shuffle(deck);
 
     }
+
+    /**
+     * This function takes a blue card from the deck and returns it to the player. The function checks to make sure
+     * that there are still available cards. If there are no available cards, the reshuffle function is called.
+     * @return Blue Card
+     */
     public BlueCard takeCard (){
 
         if(counter == numCards) {
@@ -56,7 +62,10 @@ public class BlueCardDeck {
 
         return card;
     }
-    
+
+    /**
+     * This function reshuffles the Blue Card deck.
+     */
     public void reShuffleCards() {
         Collections.shuffle(deck);
     }

@@ -36,15 +36,27 @@ public class Career {
 	public int getSalary () {
 		return salary;
 	}
-	
+
+	/**
+	 * Returns the tax value of the player
+	 * @return Tax of Player
+	 */
 	public int getTax () {
 		return tax;
 	}
-	
+
+	/**
+	 * Returns the counter of Player. Counter to check if player has exceeded the number of raises.
+	 * @return Counter of Raises
+	 */
 	public int getCtr () {
 		return ctr;
 	}
-	
+
+	/**
+	 * Returns the max raises of the player.
+	 * @return Max Raises of Player
+	 */
 	public int getMax () {
 		return max;
 	}
@@ -56,7 +68,12 @@ public class Career {
 	public String getPosition () {
 		return position;
 	}
-	
+
+	/**
+	 * Raises the salary of the player
+	 * @param raise The value of Raise
+	 * @return true of raise successful (within max raise range), false (above max raise range)
+	 */
 	public boolean raiseSalary (int raise) {
 		System.out.println(ctr + ":" + max);
 		if (ctr <= max) {

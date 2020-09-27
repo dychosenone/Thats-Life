@@ -2,10 +2,10 @@ package Model;
 
 public class 	Space {
 	
-	private int spaceNumber;
-	private String spaceName;
-	private boolean isChoosePath;
-	private int pathJump;
+		private int spaceNumber;
+		private String spaceName;
+		private boolean isChoosePath;
+		private int pathJump;
 	
 	
 	
@@ -23,10 +23,7 @@ public class 	Space {
 	public int getSpaceNumber () {
 		return this.spaceNumber;
 	}
-	
-	public boolean isChoosePath () {
-		return this.isChoosePath;
-	}
+
 	public int pathJump () {
 		return this.pathJump;
 	}

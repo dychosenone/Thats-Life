@@ -285,9 +285,9 @@ public class GameOfLife {
 		else if (currentPlayer.getPosition() == 46) {
 			switch (path) {
 			case 1://FAMILY PATH
-				return 46;
+				return 47;
 			case 2://CAREER PATH
-				return 54;
+				return 55;
 			}
 		}
 		System.out.println(currentPlayer.position);

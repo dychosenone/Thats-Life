@@ -10,10 +10,12 @@ public class Player {
 	private static final int MAX_BABIES = 4;
 	
 	private String name;
-	private int balance;
-	private int debt;
 	private boolean degree;
 	private boolean married;
+	
+	private int balance;
+	private int debt;
+	
 	private int baby;
 	private Career job;
 	private House house;
@@ -76,7 +78,7 @@ public class Player {
 	}
 
 	/**
-	 * returns the current position of the playerr
+	 * returns the current position of the player
 	 * @return current position
 	 */
 	public int getPosition () {
@@ -124,7 +126,7 @@ public class Player {
 	}
 
 	/**
-	 * When player gets loan, it is added to the debt varible.
+	 * When player gets loan, it is added to the debt variable.
 	 * @param num amount of loan to be added
 	 */
 	public void getLoan (int num) {
@@ -132,7 +134,7 @@ public class Player {
 	}
 
 	/**
-	 * When player gets loan, it is subtracted to the debt varible.
+	 * When player gets loan, it is subtracted to the debt variable.
 	 * @param num amount of loan to be subtracted
 	 */
 	public void payLoan (int num) {

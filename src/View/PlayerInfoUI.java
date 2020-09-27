@@ -142,7 +142,7 @@ public class PlayerInfoUI extends JPanel{
 		
 		else {
 			houseInfo.setText("HOUSE" + newLine + "N/A" + newLine
-					+ "VALUE" + newLine + "N/A");
+					        + "VALUE" + newLine + "N/A");
 		}
 		
 	}

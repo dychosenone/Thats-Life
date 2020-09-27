@@ -72,8 +72,7 @@ public class GameOfLife {
 	 */
 	
 	public void enterPlayers (String name) {
-		System.out.println("enterPlayers Function entered");
-		System.out.print(name);
+		System.out.println("enterPlayers");
 		players.AddPlayer(name);
 			
 	}
@@ -83,8 +82,7 @@ public class GameOfLife {
 	 * @return num - number of players
 	 */
 	public int getNumberOfPlayers(int numOfPlayers) {
-		System.out.println("getNumberOfPlayers Function entered");
-		
+		System.out.println("getNumberOfPlayers");
 		return numOfPlayers;
 	}
 

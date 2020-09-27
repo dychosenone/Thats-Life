@@ -10,7 +10,11 @@ public class HouseCardDeck {
 	private ArrayList<HouseCard> deck;
 	private final int NUM_HOUSES = 6;
 	private int counter = 0;
-	
+
+
+	/**
+	 * Gets houses from house text file in config. Sets the arrayList of HouseCards based on the config file.
+	 */
 	public HouseCardDeck () {
 		
 		deck = new ArrayList<HouseCard> ();
@@ -47,10 +51,13 @@ public class HouseCardDeck {
 			
 		}
 		
-		//Collections.shuffle(deck);
-		
 	}
-	
+
+	/**
+	 * Gets a houseCard from the deck. sets the card to false avvailability so no other player can have the same house.
+	 * @param option states which house in the deck
+	 * @return chosen HouseCard based on option
+	 */
 	public HouseCard getCard (int option) {
 		
 		/*
@@ -63,21 +70,36 @@ public class HouseCardDeck {
 		//counter++;
 		return card;
 	}
-	
+
+	/**
+	 * Returns the entire houseCard deck
+	 * @return HouseCard Deck
+	 */
 	public ArrayList <HouseCard> getHouseCards (){
 		return deck;
 	}
+
+	/**
+	 * Checks the number of houses available
+	 * @return Number of Houses Available
+	 */
     public int checkCardsAvail () {
 
         return (NUM_HOUSES - this.counter - 1);
 
     }
-    
-    public void returnCard (int index) {
+
+	/**
+	 * Return the card to the deck. When returned, the availability is again set to true.
+	 * @param index HouseCard Number
+	 */
+	public void returnCard (int index) {
     	deck.get(index).setAvailable(true);
     }
 
-	
+	/**
+	 * Reshuffles the entire deck
+	 */
     public void reShuffleCards () {
         for (int i = 0; i < this.NUM_HOUSES; i++) {
 

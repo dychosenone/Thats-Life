@@ -223,7 +223,7 @@ public class Controller implements ActionListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-				gml.wheel = 1; //FOR TESTING
+				gml.wheel = 132; //FOR TESTING
 				gui.displayDice(gml.getWheel());
 				
 				for (i = 0; i < gml.getWheel(); i++) {

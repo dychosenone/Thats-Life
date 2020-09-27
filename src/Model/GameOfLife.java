@@ -40,13 +40,13 @@ public class GameOfLife {
 	private Players players;
 	private Player currentPlayer;
 	public int wheel;
-	private Player target = new Player();
-
-	private boolean turn = false;	
-	private boolean gameOver = false;
+	
+	private boolean turn = false;
 	
 	private Board board;
 	private Bank bank;
+	
+	private int retiredPlayers;
 
 //INITIALIZING FUNCTIONS / GAME STARTING FUNCTIONS
 	
@@ -65,6 +65,8 @@ public class GameOfLife {
 		
 		board = new Board();
 		bank = new Bank();
+		
+		retiredPlayers = 0;
 	}
 	
 	/**
@@ -92,18 +94,14 @@ public class GameOfLife {
 
 //PLAYER TURN FUNCTIONS
 	
-	/**
-	 * Function sets all actions of players.
-	 */
-
-	public void processTurn (){
-		turn = true;
-	}
-	
 	public Space getSpace() {
 		Space space = board.getSpace(currentPlayer.getPosition());
 		
 		return space;
+	}
+	
+	public void processTurn () {
+		turn = true;
 	}
 
 	public int interactSpace (int position) {
@@ -400,20 +398,21 @@ public class GameOfLife {
 		int i;
 		
 		for (i = 0; i < temp.size(); i++){     
-			if (!temp.get(i).equals(currentPlayer)) {
+			if (!temp.get(i).equals(currentPlayer) && !temp.get(i).isFinish()) {
 				temp.get(i).subtractBalance(amt);
+				currentPlayer.addBalance(amt);
 			}
     	}
  
 	}
 	public void payEveryone (int amt) {
 		ArrayList <Player> temp = players.getPlayers();
-		currentPlayer.subtractBalance(amt * (players.getSize() - 1));
 		int i;
 		
 		for (i = 0; i < temp.size(); i++){     
-			if (!temp.get(i).equals(currentPlayer)) {
+			if (!temp.get(i).equals(currentPlayer) && !temp.get(i).isFinish()) {
 				temp.get(i).addBalance(amt);
+				currentPlayer.subtractBalance(amt);
 			}
     	}
  
@@ -484,9 +483,10 @@ public class GameOfLife {
 		for (i = 0; i < getPlayers().size(); i++) {
 			
 			if(getPlayers().get(i).isFinish())
-				ctr++;
+				ctr ++;
 		}
-		
+		System.out.println(retiredPlayers);
+		retiredPlayers = ctr;
 		return ctr == getPlayers().size();
 	}
 	
@@ -508,5 +508,13 @@ public class GameOfLife {
 			
 		return winner;
 		
+	}
+	
+	public int getNumOfRetiredPlayers () {
+		return retiredPlayers;
+	}
+	
+	public int getPlayersSize () {
+		return players.getSize();
 	}
 }

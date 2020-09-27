@@ -41,20 +41,20 @@ public class ChoosePlayerUI{
     	main.getContentPane().setLayout(null);
     	
         btnPlayer1 = new JButton("1");
-        btnPlayer1.setBackground(new Color(219, 146, 0));
-        btnPlayer1.setForeground(new Color (249, 211, 66));
+        btnPlayer1.setBackground(new Color(128,0,0));
+        btnPlayer1.setForeground(new Color (255, 255, 255));
         btnPlayer1.setBounds(17, 57, 100, 53);
         btnPlayer1.setFont(new Font("Courier New", Font.PLAIN, 14));
         
         btnPlayer2 = new JButton("2");
         btnPlayer2.setBackground(new Color(0, 100, 0));
-        btnPlayer2.setForeground(new Color (240, 160, 124));
+        btnPlayer2.setForeground(new Color (255, 255, 255));
         btnPlayer2.setBounds(120, 57, 100, 53);
         btnPlayer2.setFont(new Font("Courier New", Font.PLAIN, 14));
         
         btnPlayer3 = new JButton("3");
         btnPlayer3.setBackground(new Color(47, 60, 126));
-        btnPlayer3.setForeground(new Color (251, 234, 235));
+        btnPlayer3.setForeground(new Color (255, 255, 255));
         btnPlayer3.setBounds(222, 57, 100, 53);
         btnPlayer3.setFont(new Font("Courier New", Font.PLAIN, 14));
         
@@ -81,7 +81,7 @@ public class ChoosePlayerUI{
     	for(i = 1; i <= players.size(); i++) {
     		switch (i) {
     		case 1:
-    			if(!currentPlayer.equals(players.get(i-1))) {
+    			if(!currentPlayer.equals(players.get(i-1)) && !players.get(i-1).isFinish()) {
     				main.revalidate();
     				main.repaint();
     				btnPlayer1.setText(players.get(i-1).getName());
@@ -89,7 +89,7 @@ public class ChoosePlayerUI{
     			}
     			break;
     		case 2:
-    			if(!currentPlayer.equals(players.get(i-1))) {
+    			if(!currentPlayer.equals(players.get(i-1)) && !players.get(i-1).isFinish()) {
     				main.revalidate();
     				main.repaint();
 	    			btnPlayer2.setText(players.get(i-1).getName());
@@ -97,7 +97,7 @@ public class ChoosePlayerUI{
     			}
     			break;
     		case 3:
-    			if(!currentPlayer.equals(players.get(i-1))) {
+    			if(!currentPlayer.equals(players.get(i-1)) && !players.get(i-1).isFinish()) {
     				main.revalidate();
     				main.repaint();
 	    			btnPlayer3.setText(players.get(i-1).getName());

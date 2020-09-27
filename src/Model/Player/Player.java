@@ -205,6 +205,10 @@ public class Player {
 		if(house != null) {
 			sellHouse();
 		}
+		
+		while(hasDebt()) {
+			payLoan(LOAN_PAYMENT_MULTIPLE);
+		}
 	}
 	
 	public boolean isFinish () {

@@ -229,7 +229,7 @@ public class Controller implements ActionListener{
 			movePlayer(currentPlayerID, currentPlayer.getPosition());
 			if (spin) {
 				gml.wheel = tempWheel;
-				gml.wheel = 132; //FOR TESTING
+				//gml.wheel = 132; //FOR TESTING
 				gml.processTurn();
 				gui.displayDice(gml.getWheel());
 				
@@ -253,7 +253,7 @@ public class Controller implements ActionListener{
 					if (!currentPlayer.isFinish())
 						currentPlayer.move();
 					
-					/*
+					
 					//DOUBLE CHECKING IF PLAYER LANDED ON HAS JUMP BUT SPACE IS LAST SPOT INTERACTED ON
 					if (i == 1 && currentPlayer.getPosition() != 0) {
 						if (gml.isJump())
@@ -273,7 +273,7 @@ public class Controller implements ActionListener{
 					if(gml.isJump()){
 						if (i != gml.getWheel()) 
 							currentPlayer.jumpTo(gml.getJump() - 1);
-					}*/
+					}
 
 				}
 				
@@ -283,8 +283,7 @@ public class Controller implements ActionListener{
 					interactSpace (gml.interactSpace(currentPlayer.getPosition()));
 				}
 			}
-			
-			//currentPlayer.position = 0; //FOR TESTING
+				//currentPlayer.position = 0; //FOR TESTING
 
 			
 		}while (!spin);
@@ -384,20 +383,12 @@ public class Controller implements ActionListener{
 		case 1: //COLLECT MONEY FROM THE BANK
 			
 			displayCard(card, "COLLECT FROM THE BANK");
-			
-			gui.displayText("YOU GOT " + card.getCardName() + "\n" 
-							+ currentPlayer.getName() + ": +" + card.getValue());
-			
 			gml.addBalance(currentPlayer, card.getValue());
 			
 			break;
 		case 2: //PAY BANK
 			
 			displayCard(card, "PAY THE BANK");
-			
-			gui.displayText("YOU GOT " + card.getCardName() + "\n" 
-							+ currentPlayer.getName() + ": -" + card.getValue());
-			
 			gml.subtractBalance(currentPlayer, card.getValue());
 			
 			break;
@@ -407,26 +398,17 @@ public class Controller implements ActionListener{
 				
 				displayCard(card, "PAY TO A PLAYER");
 				
-				Player target = choosePlayer(1);
-				
-				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
-						+	currentPlayer.getName() + ": -" + card.getValue() + "\n"
-						+ target.getName() + ": + " + card.getValue());
-				
-				currentPlayer.subtractBalance(card.getValue());					
-				target.addBalance(card.getValue());				
+				if (gml.getNumOfRetiredPlayers() != (gml.getPlayersSize() - 1)) {
+					Player target = choosePlayer(1);				
+					target.addBalance(card.getValue());			
+					currentPlayer.subtractBalance(card.getValue());		
+				}						
 			}
 			
 			else if(card.getCardName().equalsIgnoreCase("Bonus")) {
-				ArrayList<Player> players = gml.getPlayers();
-				
 				displayCard(card, "PAY TO EVERYONE");
 
 				gml.payEveryone(card.getValue());
-				
-				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
-						+ currentPlayer.getName() + ": -" + (card.getValue() * players.size()) + "\n"
-						+ "Everyone : +" + card.getValue());
 			}
 				break;
 		
@@ -435,27 +417,17 @@ public class Controller implements ActionListener{
 				
 				displayCard(card, "COLLECT FROM A PLAYER");
 				
-				Player target = choosePlayer(2);
-				
-				
-				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
-						 + currentPlayer.getName() + ": +" + card.getValue() + "\n"
-						 + target.getName() + ": - " + card.getValue());
-				
-				currentPlayer.addBalance(card.getValue());					
-				target.subtractBalance(card.getValue());				
+				if (gml.getNumOfRetiredPlayers() != (gml.getPlayersSize() - 1)) {
+					Player target = choosePlayer(2);
+					target.subtractBalance(card.getValue());	
+					currentPlayer.addBalance(card.getValue());		
+				}											
 			}
 			
 			else if(card.getCardName().equalsIgnoreCase("Birthday")) {
-				ArrayList<Player> players = gml.getPlayers();
-				
 				displayCard(card, "COLLECT FROM EVERYONE");
 				
 				gml.collectFromEveryone(10000);
-				
-				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
-						+ currentPlayer.getName() + ": +" + (card.getValue() * players.size()) + "\n"
-						+ "Everyone : -" + card.getValue());
 			}
 			break;
 		}
@@ -571,8 +543,15 @@ public class Controller implements ActionListener{
 				
 				switch (cCont.getChoice()) {
 				case 1: case 2:			
-					if(cCont.getChoice() == 1) 
-						jobSearch();
+					if(cCont.getChoice() == 1) 					
+						jobSearch();						
+					
+					else {
+						for(int ctr = 0; ctr < 2; ctr++) {
+							System.out.print(ctr);
+							gml.getLoan();
+						}	
+					}
 					
 					path = cCont.getChoice();
 					run = false;

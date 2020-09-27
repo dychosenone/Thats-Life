@@ -8,7 +8,14 @@ public class Board {
 	
 	private final int SPACES = 134;
 	private ArrayList <Space> spaces;
-	
+
+
+	/**
+	 * When the board is created, an ArrayList of spaces is created to store all the spaces of the board.
+	 * A board config file is then used to generate all the tiles and their details.
+	 * For the magentaTypes, a switch statement is used to determine what type of magenta tile it is.
+	 *
+	 */
 	public Board () {
 		spaces = new ArrayList <Space>();
 		
@@ -29,8 +36,7 @@ public class Board {
 			System.out.println("An Error Occurred.");
 			e.printStackTrace();
 		}
-		
-		
+
 		for (i = 0; i < SPACES; i++) {
 			
 			String split[] = input[i].split(" ");
@@ -82,10 +88,19 @@ public class Board {
 		}
 	}
 
+	/**
+	 * Returns the space given a position. The position is used to search of the space in the ArrayList.
+	 * @param index Space position
+	 * @return Space class
+	 */
 	public Space getSpace (int index) {
 		return spaces.get(index);
 	}
-	
+
+
+	/**
+	 * Prints all the spaces (Space Position and type) to the console.
+	 */
 	public void printSpaces () {
 		int i;
 		
@@ -99,7 +114,12 @@ public class Board {
 			}
 		}
 	}
-	
+
+	/**
+	 * Checks if the tile is that the last space.
+	 * @param position position of player
+	 * @return true if end, false if not end.
+	 */
 	public boolean isEnd(int position) {
 		if (position == 0) {
 			return false;

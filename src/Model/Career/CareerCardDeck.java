@@ -12,6 +12,10 @@ public class CareerCardDeck {
     private final int NUM_CAREER = 7;
     private ArrayList <CareerCard> careerCard;
 
+    /**
+     * This constructor gets the career card text config file and generates career cards to be placed in an ArrayList of
+     * Career Cards. The Career cards are then shuffled.
+     */
     public CareerCardDeck () {
 
         careerCard = new ArrayList<CareerCard>();
@@ -48,6 +52,12 @@ public class CareerCardDeck {
         Collections.shuffle(careerCard);
 
     }
+
+    /**
+     * This function takes a career card and returns the CareerCard. When a careerCard is taken, the cards are looped and
+     * it is checked if the career Card is available before returning the card.
+     * @return CareerCard
+     */
     
     public CareerCard takeCard (){
     	reshuffleCards ();
@@ -69,7 +79,13 @@ public class CareerCardDeck {
     public void returnCard (CareerCard c) {
     	careerCard.get(careerCard.indexOf(c)).returnCard();
     }
-    
+
+    /**
+     * This function finds a careerCard given the Career C. It then returns the CareerCard when it finds a match, if not
+     * it returns null.
+     * @param c Career class
+     * @return CareerCard
+     */
     public CareerCard findCard(Career c) {
     	int i;
     	
@@ -82,10 +98,16 @@ public class CareerCardDeck {
     	return null;
     }
 
+    /**
+     * This function reshuffles the deck of Career Cards.
+     */
     public void reshuffleCards () {
         Collections.shuffle (careerCard);
     }
-    
+
+    /**
+     * This function prints out all of the careerCards in the console.
+     */
     public void printCards () {
     	int i;
     	for (i = 0; i < careerCard.size(); i++) {

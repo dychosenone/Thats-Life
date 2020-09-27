@@ -67,7 +67,7 @@ public class GUI{;
     	board.setVisible(true);
     	main.getContentPane().add(board);
     	
-    	playerOneInfo = new PlayerInfoUI (new Color(219, 146, 0), new Color (255, 255, 255));
+    	playerOneInfo = new PlayerInfoUI (new Color(128,0,0), new Color (255, 255, 255));
     	playerOneInfo.setBounds(790, 20, 469, 181);
     	playerOneInfo.setVisible(true);
     	

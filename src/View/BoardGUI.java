@@ -46,7 +46,7 @@ public class BoardGUI extends JPanel {
 				g.setColor(new Color (255,0,0));
 				g.fillOval(x1, y1, radius, radius);
 			} else if (i == 2) {
-				g.setColor(new Color (0, 150, 0));
+				g.setColor(new Color (0, 140, 0));
 				g.fillOval(x2, y2, radius, radius);
 			} else if (i == 3) {
 				g.setColor(new Color (47, 60, 180));

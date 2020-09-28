@@ -308,6 +308,7 @@ public class Controller implements ActionListener{
 		System.out.println("INTERACTING SPACE");
 		movePlayer(this.currentPlayerID, currentPlayer.getPosition());
 		switch (spaceType) {
+		
 		case 0: //COLLECT ACTION CARD
 			ActionCard card = gml.takeActionCard();
 			takeActionCard (card);
@@ -347,6 +348,7 @@ public class Controller implements ActionListener{
 			greenSpaceEffect ();
 			break;
 		}
+		
 		gui.updatePlayerInfo(gml.getPlayers());
 	}
 	
@@ -868,7 +870,7 @@ public class Controller implements ActionListener{
 			}
 			break;
 		case "PAY LOAN":
-			if (access) {
+			if (access && currentPlayer.getBalance() >= 25000) {
 				if (gml.payLoan()) {
 					gui.displayText("YOU PAID DEBT!");
 					gui.updatePlayerInfo(players);
@@ -884,7 +886,7 @@ public class Controller implements ActionListener{
 			break;
 		case "END TURN":
 			if (finish) {
-				if(currentPlayer.getBalance() > 0)
+				if(currentPlayer.getBalance() >= 0)
 					turn = false;
 				else {
 					ExecutorService exec = Executors.newSingleThreadExecutor();

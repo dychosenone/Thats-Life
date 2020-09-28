@@ -227,6 +227,8 @@ public class Controller implements ActionListener{
 			if (spin) {
 				gml.wheel = tempWheel;
 
+				// gml.wheel = 100; //FOR TESTING
+
 				gui.displayDice(gml.getWheel());
 				
 				for (i = 0; i < gml.getWheel(); i++) {
@@ -256,6 +258,7 @@ public class Controller implements ActionListener{
 					
 					//CHECK IF CURRENT SPACE IS MAGENTA
 					if (gml.isMagenta() &&  i != gml.getWheel()) {
+						movePlayer(this.currentPlayerID, currentPlayer.position);
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						gui.interactSpace(spaceType);
 						interactSpace (spaceType);
@@ -278,9 +281,9 @@ public class Controller implements ActionListener{
 
 				//CHECK IF LAST TILE
 				if(!currentPlayer.isFinish() && !didJump) {
+					movePlayer(this.currentPlayerID, currentPlayer.position);
 					gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
 					interactSpace (gml.interactSpace(currentPlayer.getPosition()));
-					movePlayer(this.currentPlayerID, currentPlayer.position);
 				}
 			}
 			
@@ -289,7 +292,7 @@ public class Controller implements ActionListener{
 			
 		}while (!spin);
 
-		movePlayer(this.currentPlayerID, currentPlayer.position);
+		//movePlayer(this.currentPlayerID, currentPlayer.position);
 		if(currentPlayerID == gml.getPlayers().size()){
 			currentPlayerID = 1;
 		} else {
@@ -302,7 +305,6 @@ public class Controller implements ActionListener{
 	public void interactSpace (int spaceType) {
 		//ORANGESPACES
 		System.out.println(spaceType);
-		gui.updatePlayerInfo(gml.getPlayers());
 		movePlayer(this.currentPlayerID, currentPlayer.getPosition());
 		switch (spaceType) {
 		case 0: //COLLECT ACTION CARD
@@ -319,8 +321,7 @@ public class Controller implements ActionListener{
 				
 			}
 			else {
-				displayConsole ("YOU ARE CURRENTLY MARRIED");
-				
+				displayConsole ("YOU ARE CURRENTLY MARRIED");		
 			}
 			break;
 		case 3:
@@ -554,7 +555,6 @@ public class Controller implements ActionListener{
 			
 		}while (!spin);
 		gml.getMarried(tempWheel);
-		currentPlayer.getMarried();
 	}
 	
 	public int choosePath () {
@@ -573,7 +573,10 @@ public class Controller implements ActionListener{
 				
 				switch (cCont.getChoice()) {
 				case 1:
+					path = cCont.getChoice();
 					jobSearch();
+					run = false;
+					break;
 				case 2:
 					currentPlayer.getLoan(50000);
 					path = cCont.getChoice();

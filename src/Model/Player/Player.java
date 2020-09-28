@@ -217,6 +217,12 @@ public class Player {
 		married = true;
 	}
 
+	/**
+	 * This function checks if the player is married and determines if it has exceeded the maximum number of babies,
+	 * it then adds babies to the baby variable.
+	 * @param num number of Babies
+	 * @return if true, babies added, false if not added
+	 */
 	public boolean haveBabies (int num) {
 		System.out.println(isMarried());
 		System.out.println(baby < MAX_BABIES);
@@ -247,11 +253,18 @@ public class Player {
 	public Career getJob () {
 		return job; 
 	}
-	
+
+	/**
+	 * When player graduates, the degree is set to true to signify the player has a degree.
+	 */
 	public void graduate () {
 		degree = true;
 	}
-	
+
+	/**
+	 * Checks and returns if player has degree
+	 * @return true if ahs degree, false otherwise
+	 */
 	public boolean hasDegree () {
 		return degree;
 	}
@@ -303,12 +316,21 @@ public class Player {
 	public boolean isFinish () {
 		return finish;
 	}
-	
+
+	/**
+	 * Sets Name Balance and Position to a String
+	 * @return Name Balance Position String format
+	 */
 	@Override
 	public String toString() {
 		return name + ":" + balance + ": POSITION: " + position;
 	}
-	
+
+	/**
+	 * Checks if specific object has same name as current player
+	 * @param obj Player
+	 * @return True if yes, false if no
+	 */
 	@Override
 	public boolean equals (Object obj) {
 		

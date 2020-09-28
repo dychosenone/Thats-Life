@@ -281,7 +281,6 @@ public class Controller implements ActionListener{
 
 				//CHECK IF LAST TILE
 				if(!currentPlayer.isFinish() && !didJump) {
-					movePlayer(this.currentPlayerID, currentPlayer.position);
 					gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
 					interactSpace (gml.interactSpace(currentPlayer.getPosition()));
 				}
@@ -292,7 +291,9 @@ public class Controller implements ActionListener{
 			
 		}while (!spin);
 
-		//movePlayer(this.currentPlayerID, currentPlayer.position);
+		if(currentPlayer.position != 133)
+			movePlayer(this.currentPlayerID, currentPlayer.position);
+		
 		if(currentPlayerID == gml.getPlayers().size()){
 			currentPlayerID = 1;
 		} else {

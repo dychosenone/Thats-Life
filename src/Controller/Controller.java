@@ -227,7 +227,7 @@ public class Controller implements ActionListener{
 			if (spin) {
 				gml.wheel = tempWheel;
 
-				gml.wheel = 100; //FOR TESTING
+				// gml.wheel = 100; //FOR TESTING
 
 				gui.displayDice(gml.getWheel());
 				

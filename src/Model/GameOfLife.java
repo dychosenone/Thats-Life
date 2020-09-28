@@ -64,11 +64,10 @@ public class GameOfLife {
 		
 		retiredPlayers = 0;
 	}
-	
+
 	/**
-	 * This function gets the number of players who will be playing then does a loop to add a new Player class to the
-	 * Model.Player.Players collection.
-	 * @param numofPlayers number of players playing That's Life
+	 *
+	 * @param name
 	 */
 	
 	public void enterPlayers (String name) {
@@ -249,7 +248,7 @@ public class GameOfLife {
 	}
 
 	/**
-	 * When the player gets married, if they spin an even number, they collct 10000, if odd, collect 5000.
+	 * When the player gets married, if they spin an even number, they collect 10000, if odd, collect 5000.
 	 * @param tempWheel Wheel Value
 	 */
 	public void getMarried (int tempWheel) {
@@ -337,21 +336,17 @@ public class GameOfLife {
 	public void returnSalaryCard (SalaryCard s) {
 		salaryDeck.returnCard(s);
 	}
-<<<<<<< Updated upstream
 	
 	public void returnSalaryCard () {
 		SalaryCard s = salaryDeck.findCard(currentPlayer.getJob());
 		salaryDeck.returnCard(s);
 	}
-	
-=======
 
 	/**
 	 * This function sets the current Player a new career given a Salary Card and Career Card
 	 * @param c
 	 * @param s
 	 */
->>>>>>> Stashed changes
 	public void setCareer (CareerCard c, SalaryCard s) {
 		currentPlayer.setNewCareer(c, s);
 	}
@@ -546,7 +541,7 @@ public class GameOfLife {
 	/**
 	 * Checks if the current position of the player is at the end,
 	 * if true, determines the place of the player and calls the retire function.
-	 * @return
+	 * @return returns if player is at end (true), otherwise return false
 	 */
 	public boolean isEnd () {
 		if(board.isEnd(currentPlayer.getPosition())) {

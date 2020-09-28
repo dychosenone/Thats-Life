@@ -64,6 +64,7 @@ public class Controller implements ActionListener{
 		getNumberOfPlayers();
 		
 		getPlayers();
+		currentPlayerID = 1;
 		
 		gml.getStarter();
 		currentPlayer = gml.getCurrentPlayer();
@@ -96,10 +97,20 @@ public class Controller implements ActionListener{
 			
 			
 			if(!gml.gameOver()) {
+				
 				do {
 					
 					gml.nextTurn();
 					currentPlayer = gml.getCurrentPlayer();
+					System.out.println(currentPlayer.getName());
+					
+					if(currentPlayerID == gml.getPlayers().size()){
+						currentPlayerID = 1;
+					} else {
+						currentPlayerID++;
+					}
+					
+					
 					
 				}while(currentPlayer.isFinish());
 				
@@ -292,13 +303,6 @@ public class Controller implements ActionListener{
 
 		if(currentPlayer.position != 133)
 			movePlayer(this.currentPlayerID, currentPlayer.position);
-
-		if(currentPlayerID == gml.getPlayers().size()){
-			currentPlayerID = 1;
-		} else {
-			currentPlayerID++;
-		}
-
 	}
 	
 	
@@ -412,7 +416,7 @@ public class Controller implements ActionListener{
 				
 				displayCard(card, "PAY TO A PLAYER");
 				
-				if (gml.getNumOfRetiredPlayers() == gml.getPlayersSize() -1) {
+				if (gml.getNumOfRetiredPlayers() != (gml.getPlayersSize() -1)) {
 					Player target = choosePlayer(1);
 					
 					currentPlayer.subtractBalance(card.getValue());					
@@ -438,8 +442,7 @@ public class Controller implements ActionListener{
 				
 				displayCard(card, "COLLECT FROM A PLAYER");
 				
-				
-				if (gml.getNumOfRetiredPlayers() == gml.getPlayersSize() -1) {
+				if (gml.getNumOfRetiredPlayers() != (gml.getPlayersSize() - 1)) {
 					Player target = choosePlayer(2);
 					
 					currentPlayer.addBalance(card.getValue());					

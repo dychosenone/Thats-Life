@@ -61,7 +61,6 @@ public class CareerCardDeck {
     
     public CareerCard takeCard (){
     	reshuffleCards ();
-    	printCards();
     	CareerCard card;
 
     	for (int index = 0; index < careerCard.size(); index ++) {

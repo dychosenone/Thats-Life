@@ -18,9 +18,8 @@ public class Career {
 
 	/**
 	 * Function returns name of the player
-	 * @param position is the title of the job
-	 * @param salary is the salary of the job
-	 * @param tax is the tax of the job
+	 * @param c is the Career Card
+	 * @param s is the Salary Card
 	 */
 	
 	public Career (CareerCard c, SalaryCard s) {

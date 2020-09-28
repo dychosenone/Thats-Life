@@ -45,12 +45,17 @@ public class SalaryCardDeck {
 
     /**
      * The Salary Card return function is returned.
-     * @param c The Salary Card to be returned
+     * @param s The Salary Card to be returned
      */
     public void returnCard (SalaryCard s) {
     	cards.get(cards.indexOf(s)).returnCard();
     }
-    
+
+    /**
+     * Finds the card given career c and returns the card.
+     * @param c Career
+     * @return Salary Card
+     */
     public SalaryCard findCard(Career c) {
     	int i;
     	

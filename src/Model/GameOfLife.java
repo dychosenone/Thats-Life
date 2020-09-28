@@ -66,8 +66,8 @@ public class GameOfLife {
 	}
 
 	/**
-	 *
-	 * @param name
+	 * Add player name to the Players class.
+	 * @param name Name of Player
 	 */
 	
 	public void enterPlayers (String name) {
@@ -78,6 +78,7 @@ public class GameOfLife {
 	
 	/**
 	 * This function enables players to specify the number of players through a System.in
+	 * @param numOfPlayers number of Players
 	 * @return num - number of players
 	 */
 	public int getNumberOfPlayers(int numOfPlayers) {
@@ -146,6 +147,7 @@ public class GameOfLife {
 	
 	/**
 	 * Function takes an Action Card if current player lands on Orange Space.
+	 * @return Action Card
 	 */
 	public ActionCard takeActionCard () {
 		ActionCard card = actionDeck.takeCard();
@@ -337,7 +339,10 @@ public class GameOfLife {
 	public void returnSalaryCard (SalaryCard s) {
 		salaryDeck.returnCard(s);
 	}
-	
+
+	/**
+	 * Returns the salary card.
+	 */
 	public void returnSalaryCard () {
 		SalaryCard s = salaryDeck.findCard(currentPlayer.getJob());
 		salaryDeck.returnCard(s);
@@ -345,8 +350,8 @@ public class GameOfLife {
 
 	/**
 	 * This function sets the current Player a new career given a Salary Card and Career Card
-	 * @param c
-	 * @param s
+	 * @param c Career Card
+	 * @param s Salary Card
 	 */
 	public void setCareer (CareerCard c, SalaryCard s) {
 		currentPlayer.setNewCareer(c, s);
@@ -434,6 +439,7 @@ public class GameOfLife {
 	
 	/**
 	 * Function gets specific player entered by current player
+	 * @param option Player Option
 	 * @return Player
 	 */
 	public int choosePlayer(int option) {
@@ -570,6 +576,7 @@ public class GameOfLife {
 	}
 	/**
 	 * Returns the current place.
+	 * @return the current place (standing)
 	 */
 	public int getPlace () {
 		return place;

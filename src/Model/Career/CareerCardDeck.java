@@ -74,7 +74,11 @@ public class CareerCardDeck {
     	
     	return null;
     }
-    
+
+    /**
+     * Function returns the career card c.
+     * @param c Career Card
+     */
     public void returnCard (CareerCard c) {
     	careerCard.get(careerCard.indexOf(c)).returnCard();
     }

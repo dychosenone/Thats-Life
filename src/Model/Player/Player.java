@@ -290,8 +290,9 @@ public class Player {
 	 * The price and baby multiplied by the multiplier is then added to the player.
 	 * Adds the house to its total balance by selling it.
 	 * Pays all loan remaining.
-	 * @param prize
-	 * @param babyMultiple
+	 * @param prize prize balance
+	 * @param babyMultiple the baby Multiple for price
+	 * @param p is the place
 	 */
 	public void retire (int prize, int babyMultiple, int p) {
 		finish = true;

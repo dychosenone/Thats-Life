@@ -1,6 +1,6 @@
 package Model;
 
-public class 	Space {
+public class Space {
 	
 		private int spaceNumber;
 		private String spaceName;

@@ -240,7 +240,6 @@ public class GameOfLife {
 	 * When the player gets married, if they spin an even number, they collct 10000, if odd, collect 5000.
 	 * @param tempWheel Wheel Value
 	 */
-
 	public void getMarried (int tempWheel) {
 		if (tempWheel % 2 == 0) {
 			collectFromEveryone(10000);
@@ -266,11 +265,16 @@ public class GameOfLife {
 		
 		
 	}
-	
+
+	/**
+	 * This function returns the entire deck of HouseCards.
+	 * @return HouseCard deck
+	 */
 	public ArrayList <HouseCard> getHouseCards () {
 		return houseCardDeck.getHouseCards();
 	}
 
+	
 	public CareerCard takeCareerCard () {
 		CareerCard c = careerDeck.takeCard();
 		
@@ -329,6 +333,11 @@ public class GameOfLife {
 	}
 
 	// Checks if Space has a jump
+
+	/**
+	 * This function checks if the space has a jump value.
+	 * @return true if value is not -1, false if -1 (-1 denotes no jump)
+	 */
 	public boolean isJump (){
 		Space s = getSpace();
 		if(s.pathJump() != -1)
@@ -337,6 +346,11 @@ public class GameOfLife {
 	}
 
 	// Gets the jump
+
+	/**
+	 * This function gets the jump of the selected space.
+	 * @return Path Jump Position
+	 */
 	public int getJump (){
 
 		Space s = getSpace();
@@ -400,15 +414,30 @@ public class GameOfLife {
 		return -1;
 		
 	}
-	
+
+	/**
+	 * The function takes a player and adds value to the selected player's balance
+	 * @param player player to have balance added
+	 * @param value the amount to be added
+	 */
 	public void addBalance (Player player, int value) {
 		player.addBalance(value);
 	}
-	
+
+	/**
+	 * The function takes a player and subtracts value to the selected player's balance
+	 * @param player player to have balance subtracted
+	 * @param value the amount to be subtracted
+	 */
 	public void subtractBalance (Player player, int value) {
 		player.subtractBalance(value);
 	}
-	
+
+	/**
+	 * This function loops through the ArrayList of players and take the amount and subtracts balance to all players except currentPlayer.
+	 * After adding balance, it adds the balance of the CurrentPlayer.
+	 * @param amt Amount to be taken
+	 */
 	public void collectFromEveryone (int amt) {
 		ArrayList <Player> temp = players.getPlayers();
 		currentPlayer.addBalance(amt * (players.getSize() - 1));
@@ -422,6 +451,12 @@ public class GameOfLife {
     	}
  
 	}
+
+	/**
+	 * This function loops through the ArrayList of players and take the amount and adds balance to all players except currentPlayer.
+	 * After adding balance, it subtracts the balance of the CurrentPlayer.
+	 * @param amt Amount to be paid
+	 */
 	public void payEveryone (int amt) {
 		ArrayList <Player> temp = players.getPlayers();
 		int i;
@@ -434,11 +469,18 @@ public class GameOfLife {
     	}
  
 	}
-	
+
+	/**
+	 * This function calls the Bank class' takeLoan function and applies it to the currentPlayer.
+	 */
 	public void getLoan (){
 		bank.takeLoan (currentPlayer);
 	}
-	
+
+	/**
+	 * This function checks if the player has an existing loan, if true, pays back the loan, if false returns false
+	 * @return true if loan pay successful (has loan), false otherwise
+	 */
 	public boolean payLoan() {
 		if (currentPlayer.hasDebt()) {		
 			bank.payLoan(currentPlayer);
@@ -447,7 +489,12 @@ public class GameOfLife {
 		
 		return false;
 	}
-	
+
+	/**
+	 * Checks if the current position of the player is at the end,
+	 * if true, determines the place of the player and calls the retire function.
+	 * @return
+	 */
 	public boolean isEnd () {
 		if(board.isEnd(currentPlayer.getPosition())) {
 			switch (place) {
@@ -467,28 +514,47 @@ public class GameOfLife {
 		else
 			return false;
 	}
-	
+	/**
+	 * Returns the current place.
+	 */
 	public int getPlace () {
 		return place;
 	}
-	
-	
+
+	/**
+	 * Returns the current player taking a turn.
+	 * @return Current Player
+	 */
 	public Player getCurrentPlayer () {
 		return currentPlayer;
 	}
-	
+
+	/**
+	 * Returns all the players currently playing.
+	 * @return ArrayList of Players
+	 */
 	public ArrayList <Player> getPlayers(){
 		return players.getPlayers();
 	}
-	
+
+	/**
+	 * Calls the PrintSpaces function of the board class.
+	 */
 	public void printSpaces () {
 		board.printSpaces();
 	}
-	
+
+	/**
+	 * Gets the Spin Wheel Value
+	 * @return Spin Wheel Value
+	 */
 	public int getWheel () {
 		return wheel;
 	}
-	
+
+	/**
+	 * Sets the first player to make a move.
+	 */
 	public void getStarter() {
 		currentPlayer = players.getPlayers().get(0);
 	}
@@ -506,7 +572,11 @@ public class GameOfLife {
 		retiredPlayers = ctr;
 		return ctr == getPlayers().size();
 	}
-	
+
+	/**
+	 * This function decides the winner given the total amount of money earned during the game.
+	 * @return Player winner
+	 */
 	public Player decideWinner () {
 
 		ArrayList <Player> temp = getPlayers();

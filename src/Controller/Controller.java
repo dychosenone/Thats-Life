@@ -246,7 +246,7 @@ public class Controller implements ActionListener{
 						currentPlayer.move();
 
 					//CHECK IF LAST TILE
-					else if (gml.isEnd() && i != gml.getWheel()) {
+					if (gml.isEnd() && i != gml.getWheel()) {
 						gui.displayText (currentPlayer.getName() + " is now RETIRED");
 						//currentPlayer.move();
 						i = gml.getWheel();
@@ -290,7 +290,7 @@ public class Controller implements ActionListener{
 			
 		}while (!spin);
 
-
+		movePlayer(this.currentPlayerID, currentPlayer.position);
 		if(currentPlayerID == gml.getPlayers().size()){
 			currentPlayerID = 1;
 		} else {
@@ -325,7 +325,7 @@ public class Controller implements ActionListener{
 			}
 			break;
 		case 3:
-			choosePath();
+			// choosePath();
 			break;
 		case 4:
 			haveChild ();

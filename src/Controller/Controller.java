@@ -97,7 +97,7 @@ public class Controller implements ActionListener{
 			
 			if(!gml.gameOver()) {
 				do {
-					a
+					
 					gml.nextTurn();
 					currentPlayer = gml.getCurrentPlayer();
 					

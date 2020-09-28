@@ -23,7 +23,7 @@ public class CareerCardDeck {
         int i = 0;
         
         try {
-            Scanner file = new Scanner(new File ("../Thats-Life/src/Config/CareerCards.txt"));
+            Scanner file = new Scanner(new File ("./src/Config/CareerCards.txt"));
             
             while (file.hasNextLine()) {
                 input[i] = file.nextLine();
@@ -63,6 +63,7 @@ public class CareerCardDeck {
     	reshuffleCards ();
     	printCards();
     	CareerCard card;
+
     	for (int index = 0; index < careerCard.size(); index ++) {
     		if (careerCard.get(index).getAvailability()) {
     			careerCard.get(index).takeCard();

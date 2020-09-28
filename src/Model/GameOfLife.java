@@ -548,13 +548,13 @@ public class GameOfLife {
 		if(board.isEnd(currentPlayer.getPosition())) {
 			switch (place) {
 			case 1:
-				currentPlayer.retire (FIRST_PLACE, RETIRE_BABY_MULTIPLE);
+				currentPlayer.retire (FIRST_PLACE, RETIRE_BABY_MULTIPLE, 1);
 				break;
 			case 2:
-				currentPlayer.retire (SECOND_PLACE, RETIRE_BABY_MULTIPLE);
+				currentPlayer.retire (SECOND_PLACE, RETIRE_BABY_MULTIPLE, 2);
 				break;
 			case 3:
-				currentPlayer.retire (THIRD_PLACE, RETIRE_BABY_MULTIPLE);
+				currentPlayer.retire (THIRD_PLACE, RETIRE_BABY_MULTIPLE, 3);
 				break;
 			}
 			place ++;
@@ -642,8 +642,16 @@ public class GameOfLife {
 				winner = temp.get(i);
 			}
 			
-			if (winner.getBalance() < temp.get(i).getBalance())
-				winner = temp.get(i);
+			if (winner.getBalance() <= temp.get(i).getBalance()){
+				if (winner.getBalance() == temp.get(i).getBalance()) {
+					if(winner.getPlace() < temp.get(i).getPlace()) {
+						winner = temp.get(i);
+					}
+				}
+					
+				else
+					winner = temp.get(i);
+			}
 		}
 			
 		return winner;

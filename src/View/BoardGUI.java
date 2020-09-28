@@ -9,7 +9,7 @@ import java.io.*;
 
 public class BoardGUI extends JPanel {
 
-    private BufferedImage boardPhoto;
+	private BufferedImage boardPhoto;
 
     private int x1, y1;
     private int x2, y2;

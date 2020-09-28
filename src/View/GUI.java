@@ -54,6 +54,9 @@ public class GUI{;
         main.setSize (1280, 720);
         main.setResizable(false);
         main.setVisible (true);
+        
+        main.revalidate();
+        main.repaint();
     }
 
     private void init () {

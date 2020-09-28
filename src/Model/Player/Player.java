@@ -9,6 +9,8 @@ public class Player {
 	private static final int LOAN_PAYMENT_MULTIPLE = 25000;
 	private static final int MAX_BABIES = 4;
 	
+	private int place;
+	
 	private String name;
 	private boolean degree;
 	private boolean married;
@@ -58,7 +60,14 @@ public class Player {
 	public void jumpTo (int position){
 
 		this.position = position;
-
+	}
+	
+	/**
+	 * Function gets place of player
+	 * @return place
+	 */
+	public int getPlace () {
+		return place;
 	}
 	
 	/**
@@ -271,10 +280,11 @@ public class Player {
 	 * @param prize
 	 * @param babyMultiple
 	 */
-	public void retire (int prize, int babyMultiple) {
+	public void retire (int prize, int babyMultiple, int p) {
 		finish = true;
 		addBalance (prize);
 		addBalance (baby * babyMultiple);
+		place = p;
 		
 		if(house != null) {
 			sellHouse();

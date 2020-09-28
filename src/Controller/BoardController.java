@@ -26,9 +26,9 @@ public class BoardController {
 		String tempThree[] = new String[NUM_SPACES];
 		
 		try {
-			Scanner fileOne = new Scanner (new File("../Config/PlayerOne.txt"));
-			Scanner fileTwo = new Scanner (new File("../Config/PlayerTwo.txt"));
-			Scanner fileThree = new Scanner (new File("../Config/PlayerThree.txt"));
+			Scanner fileOne = new Scanner (new File("./Config/PlayerOne.txt"));
+			Scanner fileTwo = new Scanner (new File("./Config/PlayerTwo.txt"));
+			Scanner fileThree = new Scanner (new File("./Config/PlayerThree.txt"));
 			
 			for(int i = 0; i < NUM_SPACES; i++) {
 				

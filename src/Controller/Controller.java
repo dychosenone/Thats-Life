@@ -293,7 +293,7 @@ public class Controller implements ActionListener{
 
 		if(currentPlayer.position != 133)
 			movePlayer(this.currentPlayerID, currentPlayer.position);
-		
+
 		if(currentPlayerID == gml.getPlayers().size()){
 			currentPlayerID = 1;
 		} else {

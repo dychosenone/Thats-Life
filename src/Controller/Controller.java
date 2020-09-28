@@ -305,6 +305,7 @@ public class Controller implements ActionListener{
 	public void interactSpace (int spaceType) {
 		//ORANGESPACES
 		System.out.println(spaceType);
+		System.out.println("INTERACTING SPACE");
 		movePlayer(this.currentPlayerID, currentPlayer.getPosition());
 		switch (spaceType) {
 		case 0: //COLLECT ACTION CARD
@@ -366,10 +367,17 @@ public class Controller implements ActionListener{
 		
 		ConsoleUI tempUI = new ConsoleUI ();
 		ConsoleController tempCont = new ConsoleController (tempUI, message);
+		boolean run = true;
 		
 		do {
-			System.out.print("");		
-		}while (!tempCont.isClosed());
+			System.out.print("");
+			
+			switch (tempCont.getStatus()) {
+			case 1:
+				run = false;
+				break;
+			}
+		}while (run);
 	}
 
 //ORANGE SPACES
@@ -744,6 +752,7 @@ public class Controller implements ActionListener{
 	public void jobSearch () {
 		boolean find = false;
 		CareerCard career;
+		int ctr = 0;
 		
 		do {
 			
@@ -751,9 +760,15 @@ public class Controller implements ActionListener{
 			
 			if(career.getNeedDegree() && !currentPlayer.hasDegree()) {
 				gml.returnCareerCard(career);
+				ctr ++;
 			}	
 			else 
 				find =true;
+			
+			if (ctr > 14) {
+				career = null;
+				find = true;
+			}
 			
 			if (career == null) 
 				break;

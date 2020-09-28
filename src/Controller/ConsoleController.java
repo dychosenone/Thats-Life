@@ -7,7 +7,7 @@ import View.ConsoleUI;
 
 public class ConsoleController implements WindowListener{
 	
-	int option = 0;
+	int status = 0;
 	ConsoleUI gui;
 	
 	public ConsoleController (ConsoleUI ui, String message) {
@@ -21,7 +21,11 @@ public class ConsoleController implements WindowListener{
 	}
 	
 	public boolean isClosed () {
-		return option == 1;
+		return status == 1;
+	}
+	
+	public int getStatus () {
+		return status;
 	}
 	
 	@Override
@@ -32,7 +36,7 @@ public class ConsoleController implements WindowListener{
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		option = 1;
+		status = 1;
 		
 	}
 

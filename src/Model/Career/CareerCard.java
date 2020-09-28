@@ -77,7 +77,8 @@ public class CareerCard {
      * @return Pay Raise
      */
     private int generatePayRaise () {
-        return this.minRaise + (int)(Math.random() * this.maxRaise);
+        int raises = (int)(Math.random() * (this.maxRaise - this.minRaise + 1) + this.minRaise);
+        return raises;
     }
 
     /**

@@ -97,7 +97,7 @@ public class Controller implements ActionListener{
 			
 			if(!gml.gameOver()) {
 				do {
-					
+					a
 					gml.nextTurn();
 					currentPlayer = gml.getCurrentPlayer();
 					
@@ -414,14 +414,12 @@ public class Controller implements ActionListener{
 				
 				displayCard(card, "PAY TO A PLAYER");
 				
-				Player target = choosePlayer(1);
-				
-				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
-						+	currentPlayer.getName() + ": -" + card.getValue() + "\n"
-						+ target.getName() + ": + " + card.getValue());
-				
-				currentPlayer.subtractBalance(card.getValue());					
-				target.addBalance(card.getValue());				
+				if (gml.getNumOfRetiredPlayers() == gml.getPlayersSize() -1) {
+					Player target = choosePlayer(1);
+					
+					currentPlayer.subtractBalance(card.getValue());					
+					target.addBalance(card.getValue());				
+				}		
 			}
 			
 			else if(card.getCardName().equalsIgnoreCase("Bonus")) {
@@ -442,15 +440,13 @@ public class Controller implements ActionListener{
 				
 				displayCard(card, "COLLECT FROM A PLAYER");
 				
-				Player target = choosePlayer(2);
 				
-				
-				gui.displayText("YOU GOT " + card.getCardName() + "\n" 
-						 + currentPlayer.getName() + ": +" + card.getValue() + "\n"
-						 + target.getName() + ": - " + card.getValue());
-				
-				currentPlayer.addBalance(card.getValue());					
-				target.subtractBalance(card.getValue());				
+				if (gml.getNumOfRetiredPlayers() == gml.getPlayersSize() -1) {
+					Player target = choosePlayer(2);
+					
+					currentPlayer.addBalance(card.getValue());					
+					target.subtractBalance(card.getValue());	
+				}		
 			}
 			
 			else if(card.getCardName().equalsIgnoreCase("Birthday")) {

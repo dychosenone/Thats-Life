@@ -227,7 +227,7 @@ public class Controller implements ActionListener{
 			if (spin) {
 				gml.wheel = tempWheel;
 
-				gml.wheel = 100; //FOR TESTING
+				//gml.wheel = 100; //FOR TESTING
 
 				gui.displayDice(gml.getWheel());
 				
@@ -474,7 +474,7 @@ public class Controller implements ActionListener{
 		
 		do {
 			System.out.print("");
-			System.out.print(chooseCont.getChoice());
+
 			switch (chooseCont.getChoice()) {
 			case 0: case 1: case 2:
 				index = chooseCont.getChoice();

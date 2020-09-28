@@ -98,6 +98,12 @@ public class GameOfLife {
 		return space;
 	}
 
+	/**
+	 * This function interacts with the given space position. It checks the tile type and returns an integer value indicating the space type.
+	 * @param position Position of player
+	 * @return spaceType
+	 */
+
 	public int interactSpace (int position) {
 		
 		Space space =board.getSpace(position);
@@ -149,7 +155,11 @@ public class GameOfLife {
 	}
 	
 //GREEN SPACES FUNCTION
-	
+
+	/**
+	 * Raises the Salary of the Current Player
+	 * @return the playerRaise
+	 */
 	public int payRaise () {
 		int raise = 1 + (int)(Math.random() * 10);
 		raise *= 10000;
@@ -161,7 +171,9 @@ public class GameOfLife {
 			return -1;
 		}
 	}
-	
+	/**
+	 * Adds the salary of the current player minus tax
+	 */
 	public void payDay () {
 		currentPlayer.addBalance(currentPlayer.getJob().getSalary() - currentPlayer.getJob().getTax());
 	}
@@ -249,7 +261,12 @@ public class GameOfLife {
 			collectFromEveryone(5000);
 		}
 	}
-	
+
+	/**
+	 * THis function takes in the choice of the player, checks if the balance is sufficient to purchase the house.
+	 * @param option House Option
+	 * @return Successful Purchase (true is successful, false otherwise (insufficient funds)
+	 */
 	public boolean buyHouse (int option) {
 		HouseCard house = houseCardDeck.getCard(option);
 		
@@ -274,7 +291,10 @@ public class GameOfLife {
 		return houseCardDeck.getHouseCards();
 	}
 
-	
+	/**
+	 * This function takes a career card, makes sure the card is not null and returns it to the player.
+	 * @return Career Card
+	 */
 	public CareerCard takeCareerCard () {
 		CareerCard c = careerDeck.takeCard();
 		
@@ -283,33 +303,62 @@ public class GameOfLife {
 		else
 			return null;
 	}
-	
+
+	/**
+	 * This function is called to return a specific career card to the deck. Calls the returnCard function which
+	 * sets availability to true.
+	 * @param c Career Card
+	 */
 	public void returnCareerCard (CareerCard c) {
 		careerDeck.returnCard(c);
 	}
-	
+
+	/**
+	 * Returns career card by finding the card of the current player's career card.
+	 * Calls the return card function of Career Card Deck
+	 */
 	public void returnCareerCard() {
 		CareerCard c = careerDeck.findCard(currentPlayer.getJob());
 		careerDeck.returnCard(c);
 	}
-	
+
+	/**
+	 * Calls the takeCard function of Salary Card Deck. This then returns the SalaryCard taken
+	 * @return Salary Card
+	 */
 	public SalaryCard takeSalaryCard () {
 		return salaryDeck.takeCard();
 	}
-	
+
+	/**
+	 * This function returns the salary card to the deck.
+	 * @param s Salary Card to be returned
+	 */
 	public void returnSalaryCard (SalaryCard s) {
 		salaryDeck.returnCard(s);
 	}
+<<<<<<< Updated upstream
 	
 	public void returnSalaryCard () {
 		SalaryCard s = salaryDeck.findCard(currentPlayer.getJob());
 		salaryDeck.returnCard(s);
 	}
 	
+=======
+
+	/**
+	 * This function sets the current Player a new career given a Salary Card and Career Card
+	 * @param c
+	 * @param s
+	 */
+>>>>>>> Stashed changes
 	public void setCareer (CareerCard c, SalaryCard s) {
 		currentPlayer.setNewCareer(c, s);
 	}
-	
+
+	/**
+	 * This function sets the current players graduate boolean to true.
+	 */
 	public void graduate () {
 		currentPlayer.graduate();
 	}
@@ -562,7 +611,11 @@ public class GameOfLife {
 	public void getStarter() {
 		currentPlayer = players.getPlayers().get(0);
 	}
-	
+
+	/**
+	 * Checks if all players have finished the game
+	 * @return true if the game is finished, false if not
+	 */
 	public boolean gameOver () {
 		int ctr = 0;
 		int i;

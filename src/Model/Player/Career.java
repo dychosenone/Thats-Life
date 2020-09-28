@@ -7,6 +7,8 @@ public class Career {
 	
 	private final int TAX_MULTIPLE = 2000;
 	
+	private int salaryCardNumber;
+	
 	private String position;
 	private int salary;
 	private int tax;
@@ -67,6 +69,15 @@ public class Career {
 	 */
 	public String getPosition () {
 		return position;
+	}
+	
+	
+	/**
+	 * Function returns salary card number
+	 * @return salary Card number
+	 */
+	public int getSalaryCardNumber () {
+		return salaryCardNumber;
 	}
 
 	/**

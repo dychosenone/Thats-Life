@@ -2,6 +2,9 @@ package Controller;
 import java.awt.event.*;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import Model.GameOfLife;
 import Model.Player.Player;
@@ -236,7 +239,7 @@ public class Controller implements ActionListener{
 						int position = choosePath();
 						currentPlayer.setPosition(position);
 					}
-					
+					//Check if Choose Path 46
 					else if(currentPlayer.getPosition() == 46){
 						int position = choosePath();
 						currentPlayer.setPosition(position);
@@ -265,9 +268,6 @@ public class Controller implements ActionListener{
 						if (gml.isJump())
 							currentPlayer.setPosition(gml.getJump()-1);
 					}
-
-					//Check if Choose Path 46
-
 
 					//CHECK IF SPACE HAS JUMP
 					if(gml.isJump() == true){
@@ -577,6 +577,7 @@ public class Controller implements ActionListener{
 				case 1:
 					jobSearch();
 				case 2:
+					currentPlayer.getLoan(50000);
 					path = cCont.getChoice();
 					run = false;
 					break;
@@ -647,43 +648,51 @@ public class Controller implements ActionListener{
 	}
 	
 	public void buyHouse () {
-		accessLoan();
-		ChooseHouseUI houseUI = new ChooseHouseUI ();
-		ChooseHouseController houseCont = new ChooseHouseController (houseUI, gml.getHouseCards());
-		
-		boolean run = true;
-		int index = -1;
-		
-		do {
-			System.out.print("");
+		if (!currentPlayer.hasHouse()) {
+			accessLoan();
+			ChooseHouseUI houseUI = new ChooseHouseUI ();
+			ChooseHouseController houseCont = new ChooseHouseController (houseUI, gml.getHouseCards());
 			
-			switch (houseCont.getOption()){
-				case 0: case 1: case 2: case 3: case 4: case 5:
-					index = houseCont.getOption();
-					if (gml.buyHouse(index)) {
-						run = false;
-					}
-					else {
-						gui.displayText("NOT ENOUGH MONEY");
+			boolean run = true;
+			int index = -1;
+			
+			do {
+				System.out.print("");
+				
+				switch (houseCont.getOption()){
+					case 0: case 1: case 2: case 3: case 4: case 5:
+						index = houseCont.getOption();
+						if (gml.buyHouse(index)) {
+							run = false;
+						}
+						else {
+							gui.displayText("NOT ENOUGH MONEY");
+							houseUI = new ChooseHouseUI ();
+							houseCont = new ChooseHouseController (houseUI, gml.getHouseCards());
+						}
+						break;
+					
+					case -2:
 						houseUI = new ChooseHouseUI ();
 						houseCont = new ChooseHouseController (houseUI, gml.getHouseCards());
-					}
-					break;
-				
-				case -2:
-					houseUI = new ChooseHouseUI ();
-					houseCont = new ChooseHouseController (houseUI, gml.getHouseCards());
-					break;
-			}
-		}while (run);
-		
-		closeLoan();
+						break;
+				}
+			}while (run);
+			
+			closeLoan();
+		}
+		else {
+			displayConsole("YOU ALREADY HAVE A HOUSE");
+		}
 	}
 	
 	public void graduate () {
-		gml.graduate();
-		
-		displayConsole(currentPlayer.getName() + " GRADUATED");
+		if(!currentPlayer.hasDegree()) {
+			gml.graduate();
+			displayConsole(currentPlayer.getName() + " GRADUATED");
+		}
+		else
+			displayConsole("YOU ALREADY HAVE A DEGREE");
 	}
 	
 	public void collegeCareerChoice () {
@@ -771,6 +780,7 @@ public class Controller implements ActionListener{
 						break;
 					case 2:
 						gml.returnCareerCard();
+						gml.returnSalaryCard();
 						gml.jobSearch(career, salary);
 						displayConsole("YOU HAVE A NEW CAREER!");
 						displayCareer (career, salary);
@@ -857,8 +867,24 @@ public class Controller implements ActionListener{
 			}
 			break;
 		case "END TURN":
-			if (finish)
-				turn = false;
+			if (finish) {
+				if(currentPlayer.getBalance() > 0)
+					turn = false;
+				else {
+					ExecutorService exec = Executors.newSingleThreadExecutor();
+					Future<?> task = null;
+					
+					if (task != null)
+						task.cancel(true);
+					
+					task = exec.submit(new Runnable (){
+						@Override
+						public void run() {
+							displayConsole ("GET LOAN FIRST!");
+						}
+					});
+				}
+			}
 			break;
 		}
 	}

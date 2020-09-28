@@ -69,8 +69,6 @@ public class MainMenuController implements ActionListener{
 		case "START GAME":
 			runGame();
 			break;
-		case "INSTRUCTIONS":
-			break;
 		case "EXIT":
 			System.exit(0);
 			break;

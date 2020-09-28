@@ -301,6 +301,10 @@ public class GameOfLife {
 		salaryDeck.returnCard(s);
 	}
 	
+	public void returnSalaryCard () {
+		SalaryCard s = salaryDeck.findCard(currentPlayer.getJob());
+		salaryDeck.returnCard(s);
+	}
 	
 	public void setCareer (CareerCard c, SalaryCard s) {
 		currentPlayer.setNewCareer(c, s);
@@ -568,7 +572,7 @@ public class GameOfLife {
 			if(getPlayers().get(i).isFinish())
 				ctr ++;
 		}
-		System.out.println(retiredPlayers);
+
 		retiredPlayers = ctr;
 		return ctr == getPlayers().size();
 	}

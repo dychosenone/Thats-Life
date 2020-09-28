@@ -211,12 +211,24 @@ public class Player {
 	public boolean haveBabies (int num) {
 		System.out.println(isMarried());
 		System.out.println(baby < MAX_BABIES);
-		if (isMarried() && baby < MAX_BABIES) {
-			baby += num;
-			return true;
+		if (num == 1) {
+			if (isMarried() && baby < MAX_BABIES) {
+				baby += num;
+				return true;
+			}
+			else
+				return false;
 		}
-		else
-			return false;
+		else if (num == 2) {
+			if (isMarried() && baby < (MAX_BABIES - 1)) {
+				baby += num;
+				return true;
+			}
+			else
+				return false;
+		}
+		
+		return false;
 	}
 
 	/**
@@ -270,6 +282,7 @@ public class Player {
 		
 		while(hasDebt()) {
 			payLoan(LOAN_PAYMENT_MULTIPLE);
+			subtractBalance (LOAN_PAYMENT_MULTIPLE);
 		}
 	}
 

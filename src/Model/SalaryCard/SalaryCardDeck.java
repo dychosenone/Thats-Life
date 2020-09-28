@@ -1,6 +1,9 @@
 package Model.SalaryCard;
 import java.util.*;
 
+import Model.Career.CareerCard;
+import Model.Player.Career;
+
 
 public class SalaryCardDeck {
 
@@ -15,7 +18,7 @@ public class SalaryCardDeck {
         cards = new ArrayList<SalaryCard>();
 
         for(int i = 0; i < NUM_CARDS; i++){
-            cards.add(new SalaryCard());
+            cards.add(new SalaryCard(i));
         }
         Collections.shuffle(cards);
     }
@@ -45,8 +48,20 @@ public class SalaryCardDeck {
      * The Salary Card return function is returned.
      * @param c The Salary Card to be returned
      */
-    public void returnCard (SalaryCard c) {
-    	c.returnCard();
+    public void returnCard (SalaryCard s) {
+    	cards.get(cards.indexOf(s)).returnCard();
+    }
+    
+    public SalaryCard findCard(Career c) {
+    	int i;
+    	
+    	for (i = 0; i < cards.size(); i++) {
+    		if(cards.get(i).getCardNumber() == c.getSalaryCardNumber ()) {
+    			return cards.get(i);
+    		}
+    	}
+    	
+    	return null;
     }
 
     /**

@@ -8,7 +8,6 @@ public class MainMenu{
 	
 	private JFrame mainFrame;
 	private JButton btnStart;
-	private JButton btnInstructions;
 	private JButton btnExit;
 	
 	public MainMenu () {
@@ -21,7 +20,7 @@ public class MainMenu{
 		init ();
 		
 		mainFrame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-		mainFrame.setSize (400, 300);
+		mainFrame.setSize (400, 252);
 		mainFrame.setVisible (true);
 		mainFrame.setResizable (false);
 	}
@@ -33,16 +32,10 @@ public class MainMenu{
 		btnStart.setBounds(104, 85, 182, 50);
 		mainFrame.getContentPane().add(btnStart);
 		
-		btnInstructions = new JButton("INSTRUCTIONS");
-		btnInstructions.setForeground(Color.WHITE);
-		btnInstructions.setBackground(new Color (255, 132, 124));
-		btnInstructions.setBounds(104, 141, 182, 50);
-		mainFrame.getContentPane().add(btnInstructions);
-		
 		btnExit = new JButton("EXIT");
 		btnExit.setForeground(Color.WHITE);
 		btnExit.setBackground(new Color (153, 184, 152));
-		btnExit.setBounds(104, 202, 182, 50);
+		btnExit.setBounds(104, 146, 182, 50);
 		mainFrame.getContentPane().add(btnExit);
 		
 		JLabel lblNewLabel = new JLabel("That's Life");
@@ -56,7 +49,6 @@ public class MainMenu{
 	public void setActionListener (ActionListener l) {
 		
 		btnStart.addActionListener(l);
-		btnInstructions.addActionListener(l);
 		btnExit.addActionListener(l);
 	}
 	

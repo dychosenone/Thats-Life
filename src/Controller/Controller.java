@@ -224,7 +224,7 @@ public class Controller implements ActionListener{
 			if (spin) {
 				gml.wheel = tempWheel;
 
-				gml.wheel = 132; //FOR TESTING
+				gml.wheel = 100; //FOR TESTING
 
 				gui.displayDice(gml.getWheel());
 				
@@ -251,6 +251,7 @@ public class Controller implements ActionListener{
 						//currentPlayer.move();
 						i = gml.getWheel();
 					}
+					
 					
 					//CHECK IF CURRENT SPACE IS MAGENTA
 					if (gml.isMagenta() &&  i != gml.getWheel()) {

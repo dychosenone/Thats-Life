@@ -227,7 +227,7 @@ public class Controller implements ActionListener{
 			if (spin) {
 				gml.wheel = tempWheel;
 
-				// gml.wheel = 100; //FOR TESTING
+				gml.wheel = 100; //FOR TESTING
 
 				gui.displayDice(gml.getWheel());
 				
@@ -250,8 +250,8 @@ public class Controller implements ActionListener{
 
 					//CHECK IF LAST TILE
 					if (gml.isEnd() && i != gml.getWheel()) {
-						gui.displayText (currentPlayer.getName() + " is now RETIRED");
-						//currentPlayer.move();
+						displayConsole (currentPlayer.getName() + " IS NOW RETIRED");
+						movePlayer(this.currentPlayerID, currentPlayer.position);
 						i = gml.getWheel();
 					}
 					

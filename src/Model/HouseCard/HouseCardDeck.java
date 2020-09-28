@@ -24,7 +24,7 @@ public class HouseCardDeck {
 		
 		try {
 			
-			Scanner file = new Scanner (new File ("../Config/HouseCard.txt"));
+			Scanner file = new Scanner (new File ("./Config/HouseCard.txt"));
 			
 			while(file.hasNextLine()) {
 				

@@ -23,7 +23,7 @@ public class CareerCardDeck {
         int i = 0;
         
         try {
-            Scanner file = new Scanner(new File ("../Config/CareerCards.txt"));
+            Scanner file = new Scanner(new File ("./Config/CareerCards.txt"));
             
             while (file.hasNextLine()) {
                 input[i] = file.nextLine();

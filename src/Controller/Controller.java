@@ -226,7 +226,6 @@ public class Controller implements ActionListener{
 			System.out.print("");
 			if (spin) {
 				gml.wheel = tempWheel;
-
 				//gml.wheel = 100; //FOR TESTING
 
 				gui.displayDice(gml.getWheel());
@@ -307,7 +306,6 @@ public class Controller implements ActionListener{
 		//ORANGESPACES
 		System.out.println(spaceType);
 		System.out.println("INTERACTING SPACE");
-		movePlayer(this.currentPlayerID, currentPlayer.getPosition());
 		switch (spaceType) {
 		
 		case 0: //COLLECT ACTION CARD

@@ -254,10 +254,11 @@ public class GameOfLife {
 	public void getMarried (int tempWheel) {
 		if (tempWheel % 2 == 0) {
 			collectFromEveryone(10000);
-			
+			currentPlayer.getMarried();
 		}
 		else {
 			collectFromEveryone(5000);
+			currentPlayer.getMarried();
 		}
 	}
 

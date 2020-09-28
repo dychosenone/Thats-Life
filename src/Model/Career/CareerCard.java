@@ -18,9 +18,9 @@ public class CareerCard {
      */
     public CareerCard (String name, int min, int max, boolean college) {
         this.careerName = name;
+        this.needsCollegeDegree = college;
         this.minRaise = min;
         this.maxRaise = max;
-        this.needsCollegeDegree = college;
         available = true;
 
         this.payRaise = generatePayRaise();
@@ -87,7 +87,7 @@ public class CareerCard {
      */
     @Override 
     public String toString() {
-    	return careerName +":"+available;
+    	return careerName +":"+available + minRaise + ":" + maxRaise;
     }
 }
 

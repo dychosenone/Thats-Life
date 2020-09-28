@@ -258,6 +258,7 @@ public class Controller implements ActionListener{
 					
 					//CHECK IF CURRENT SPACE IS MAGENTA
 					if (gml.isMagenta() &&  i != gml.getWheel()) {
+						movePlayer(this.currentPlayerID, currentPlayer.position);
 						int spaceType = gml.interactSpace(currentPlayer.getPosition());
 						gui.interactSpace(spaceType);
 						interactSpace (spaceType);
@@ -280,9 +281,9 @@ public class Controller implements ActionListener{
 
 				//CHECK IF LAST TILE
 				if(!currentPlayer.isFinish() && !didJump) {
+					movePlayer(this.currentPlayerID, currentPlayer.position);
 					gui.interactSpace(gml.interactSpace(currentPlayer.getPosition()));
 					interactSpace (gml.interactSpace(currentPlayer.getPosition()));
-					movePlayer(this.currentPlayerID, currentPlayer.position);
 				}
 			}
 			
@@ -291,7 +292,7 @@ public class Controller implements ActionListener{
 			
 		}while (!spin);
 
-		movePlayer(this.currentPlayerID, currentPlayer.position);
+		//movePlayer(this.currentPlayerID, currentPlayer.position);
 		if(currentPlayerID == gml.getPlayers().size()){
 			currentPlayerID = 1;
 		} else {
@@ -304,7 +305,7 @@ public class Controller implements ActionListener{
 	public void interactSpace (int spaceType) {
 		//ORANGESPACES
 		System.out.println(spaceType);
-		gui.updatePlayerInfo(gml.getPlayers());
+		System.out.println("INTERACTING SPACE");
 		movePlayer(this.currentPlayerID, currentPlayer.getPosition());
 		switch (spaceType) {
 		case 0: //COLLECT ACTION CARD
@@ -321,8 +322,7 @@ public class Controller implements ActionListener{
 				
 			}
 			else {
-				displayConsole ("YOU ARE CURRENTLY MARRIED");
-				
+				displayConsole ("YOU ARE CURRENTLY MARRIED");		
 			}
 			break;
 		case 3:
@@ -367,10 +367,17 @@ public class Controller implements ActionListener{
 		
 		ConsoleUI tempUI = new ConsoleUI ();
 		ConsoleController tempCont = new ConsoleController (tempUI, message);
+		boolean run = true;
 		
 		do {
-			System.out.print("");		
-		}while (!tempCont.isClosed());
+			System.out.print("");
+			
+			switch (tempCont.getStatus()) {
+			case 1:
+				run = false;
+				break;
+			}
+		}while (run);
 	}
 
 //ORANGE SPACES
@@ -556,7 +563,6 @@ public class Controller implements ActionListener{
 			
 		}while (!spin);
 		gml.getMarried(tempWheel);
-		currentPlayer.getMarried();
 	}
 	
 	public int choosePath () {
@@ -575,7 +581,10 @@ public class Controller implements ActionListener{
 				
 				switch (cCont.getChoice()) {
 				case 1:
+					path = cCont.getChoice();
 					jobSearch();
+					run = false;
+					break;
 				case 2:
 					currentPlayer.getLoan(50000);
 					path = cCont.getChoice();
@@ -743,6 +752,7 @@ public class Controller implements ActionListener{
 	public void jobSearch () {
 		boolean find = false;
 		CareerCard career;
+		int ctr = 0;
 		
 		do {
 			
@@ -750,9 +760,15 @@ public class Controller implements ActionListener{
 			
 			if(career.getNeedDegree() && !currentPlayer.hasDegree()) {
 				gml.returnCareerCard(career);
+				ctr ++;
 			}	
 			else 
 				find =true;
+			
+			if (ctr > 14) {
+				career = null;
+				find = true;
+			}
 			
 			if (career == null) 
 				break;

@@ -1,4 +1,3 @@
-package Model;
 import Controller.MainMenuController;
 import View.MainMenu;
 /**

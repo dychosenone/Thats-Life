@@ -23,7 +23,7 @@ public class Board {
 		int i = 0;
 		
 		try {
-			Scanner file = new Scanner (new File("./src/Config/board.txt"));
+			Scanner file = new Scanner (new File("../Config/board.txt"));
 			
 			while(file.hasNextLine()) {
 				input[i] = file.nextLine();

@@ -21,7 +21,7 @@ public class BlueCardDeck {
         int i = 0;
 
         try {
-            Scanner file = new Scanner (new File ("./src/Config/BlueCard.txt"));
+            Scanner file = new Scanner (new File ("../Config/BlueCard.txt"));
             
             this.numCards = Integer.parseInt(file.nextLine());
 

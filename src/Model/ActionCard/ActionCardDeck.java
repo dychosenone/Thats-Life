@@ -32,7 +32,7 @@ public class ActionCardDeck {
         
 
         try {
-            Scanner file = new Scanner(new File("../Thats-Life/src/Config/ActionCard.txt"));
+            Scanner file = new Scanner(new File("../Config/ActionCard.txt"));
             String firstLine = file.nextLine();
             configSplit = firstLine.split(" ");
             

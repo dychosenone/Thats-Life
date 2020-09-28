@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Thats-Life:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Thats_Life_jar</output-path>
+    <root id="archive" name="Thats-Life.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/Model/main/resources/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="Thats-Life" />
+    </root>
+  </artifact>
+</component>

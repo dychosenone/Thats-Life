@@ -28,7 +28,7 @@ public class BoardGUI extends JPanel {
     	y3 = 0;
 
     	try {
-    	this.boardPhoto = ImageIO.read(new File("../Thats-Life/src/Config/board-01.jpg"));
+    	this.boardPhoto = ImageIO.read(new File("../Config/board-01.jpg"));
     	
     	boardPhoto.getScaledInstance(16, 20, Image.SCALE_SMOOTH);
     	

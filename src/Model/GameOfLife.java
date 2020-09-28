@@ -358,7 +358,12 @@ public class GameOfLife {
 	public void graduate () {
 		currentPlayer.graduate();
 	}
-	
+
+	/**
+	 * This checks which path the current player is taking and which tile the designated path starts.
+	 * @param path Path Number
+	 * @return Tile number to jump to Path
+	 */
 	public int choosePath (int path) {
 		if (currentPlayer.getPosition() == 0) {		
 			switch (path) {

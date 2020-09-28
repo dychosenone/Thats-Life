@@ -8,7 +8,7 @@ BuyItem 2
 VisitPlace 2
 Hiking 2
 WatchShow 2
-WinCompetition 2
+JoinCompetition 2
 TrafficViolation 2
 Lawsuit 3
 Bonus 3

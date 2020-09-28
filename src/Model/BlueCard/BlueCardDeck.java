@@ -72,6 +72,7 @@ public class BlueCardDeck {
      */
     public void reShuffleCards() {
         Collections.shuffle(deck);
+        counter = 0;
     }
 
 }

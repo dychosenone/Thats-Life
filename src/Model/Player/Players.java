@@ -16,8 +16,8 @@ public class Players {
 	}
 	
 	/**
-	 * Function adds players then sets the player's career.
-	 * @param i - index of player
+	 * Function adds players then sets the player's name and adds it to the ArrayList.
+	 * @param name - name of the player
 	 */
 	public void AddPlayer (String name) {
 		players.add(new Player (name));

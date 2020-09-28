@@ -63,9 +63,7 @@ public class CareerCardDeck {
     	reshuffleCards ();
     	printCards();
     	CareerCard card;
-    	int index = 0;
-    	
-    	for (index = 0; index < careerCard.size(); index ++) {
+    	for (int index = 0; index < careerCard.size(); index ++) {
     		if (careerCard.get(index).getAvailability()) {
     			careerCard.get(index).takeCard();
     			card = careerCard.get(index);

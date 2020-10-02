@@ -884,7 +884,7 @@ public class Controller implements ActionListener{
 			break;
 		case "END TURN":
 			if (finish) {
-				if(currentPlayer.getBalance() >= 0)
+				if(currentPlayer.getBalance() >= 0 || currentPlayer.isFinish())
 					turn = false;
 				else {
 					ExecutorService exec = Executors.newSingleThreadExecutor();
